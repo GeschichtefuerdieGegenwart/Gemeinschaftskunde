@@ -1,17 +1,16 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Station 1 · Grundlagen</title>
 <link rel="stylesheet" href="../assets/css/werkstatt.css">
 </head>
-<body>
+<body data-ton="warm">
 <header class="kopf"><div class="kopf-innen"></div></header>
 <main id="inhalt">
+  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">1</span><h1>Was Parteien tun</h1><p class="leitfrage">Warum braucht eine Demokratie Parteien, und was genau leisten sie?</p><p class="klein" style="margin:0">Verfassungstext lesen · vier Aufgaben ordnen · elf Funktionen durchblättern · Selbsttest. Der Merkzettel oben rechts fasst alles zusammen.</p><div class="kz"><div><b>Art. 21</b><span>Grundgesetz</span></div><div><b>4</b><span>Aufgaben</span></div><div><b>11</b><span>Funktionen</span></div></div></div></div>
   <ol class="fort" aria-label="Fortschritt"></ol>
-  <h1>Was Parteien tun</h1>
-  <p>Leitfrage: <strong>Warum braucht eine Demokratie Parteien, und was genau leisten sie?</strong> Lies den Verfassungstext, ordne die vier Aufgaben, dann die elf Funktionen. Zum Schluss prüfst du dich selbst.</p>
 
   <section class="karte">
     <h2>1. Das Grundgesetz</h2>
@@ -30,8 +29,8 @@
 
   <section class="karte">
     <h2>3. Elf Funktionen von Parteien</h2>
-    <p>Parteien erfüllen diese Aufgaben über Funktionen. Lies jede Karte und tippe sie an, wenn du sie in einem Satz erklären kannst. Die Zahl der angetippten Karten ist nur für dich.</p>
-    <div id="funktionen" class="raster raster--2"></div>
+    <p>Parteien erfüllen diese Aufgaben über Funktionen. Blättere durch den Fächer; tippe »Kann ich erklären«, wenn du die Funktion in einem Satz erklären kannst. Das zählt niemand mit.</p>
+    <div class="faecher" data-label="Elf Funktionen von Parteien" id="funktionen-faecher" data-manuell><ul class="faecher-spur" id="funktionen"></ul></div>
   </section>
 
   <section class="karte">
@@ -50,8 +49,10 @@
 <script src="../assets/js/daten.js"></script>
 <script src="../assets/js/werkstatt.js"></script>
 <script src="../assets/js/motion.js"></script>
+<script src="../assets/js/faecher.js"></script>
+<script src="../assets/js/merkzettel.js"></script>
 <script>
-PW.rahmen('st1', '../');
+PW.rahmen('st1', '../'); PW.merkzettel('../');
 (function () {
   /* Aufgaben zuordnen */
   var box = document.getElementById('aufgaben');
@@ -74,17 +75,19 @@ PW.rahmen('st1', '../');
     box.appendChild(f);
   });
 
-  /* Funktionskarten */
+  /* Funktionskarten im Fächer */
   var fk = document.getElementById('funktionen');
   var gelesen = PW.lies('st1-karten', {});
-  PW.funktionen.forEach(function (fn) {
+  PW.funktionen.forEach(function (fn, i) {
     var aufg = PW.aufgaben.filter(function (a) { return a.id === fn.aufgabe; })[0];
-    var b = PW.el('button', { type: 'button', 'class': 'karte', 'aria-pressed': gelesen[fn.id] ? 'true' : 'false', style: 'text-align:left;cursor:pointer;font:inherit' }, [
-      PW.el('h3', { text: fn.name }), PW.el('p', { text: fn.kurz }), PW.el('p', { 'class': 'klein', html: '<strong>Beispiel:</strong> ' + fn.beispiel }), PW.el('p', { 'class': 'klein', style: 'color:var(--leise);margin:0', text: 'Aufgabe: ' + aufg.name })]);
-    if (gelesen[fn.id]) b.style.background = 'var(--blau-zart)';
-    b.addEventListener('click', function () { var an = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', an ? 'true' : 'false'); b.style.background = an ? 'var(--blau-zart)' : ''; gelesen[fn.id] = an; PW.merke('st1-karten', gelesen); });
-    fk.appendChild(b);
+    var b = PW.el('button', { type: 'button', 'class': 'knopf', 'aria-pressed': gelesen[fn.id] ? 'true' : 'false', text: gelesen[fn.id] ? 'Erklärt: ja' : 'Kann ich erklären' });
+    b.addEventListener('click', function () { var an = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', an ? 'true' : 'false'); b.textContent = an ? 'Erklärt: ja' : 'Kann ich erklären'; b.classList.toggle('knopf--voll', an); gelesen[fn.id] = an; PW.merke('st1-karten', gelesen); });
+    if (gelesen[fn.id]) b.classList.add('knopf--voll');
+    fk.appendChild(PW.el('li', {}, [PW.el('div', { 'class': 'karte' }, [
+      PW.el('p', { 'class': 'klein', style: 'color:var(--leise);margin:0 0 4px', text: (i + 1) + ' von 11 · Aufgabe: ' + aufg.name }),
+      PW.el('h3', { text: fn.name }), PW.el('p', { text: fn.kurz }), PW.el('p', { html: '<strong>Beispiel:</strong> ' + fn.beispiel }), b])]));
   });
+  PW.faecher(document.getElementById('funktionen-faecher'));
 
   /* Selbsttest */
   var fragen = [

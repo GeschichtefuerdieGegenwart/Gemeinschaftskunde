@@ -1,19 +1,18 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Station 2 · Erkennen</title>
 <link rel="stylesheet" href="../assets/css/werkstatt.css">
 </head>
-<body>
+<body data-ton="blau">
 <header class="kopf"><div class="kopf-innen"></div></header>
 <main id="inhalt">
+  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">2</span><h1>Funktionen erkennen</h1><p class="leitfrage">Welche Funktion erfüllt eine Partei hier gerade?</p><p class="klein" style="margin:0">Zwölf Beispiele aus dem Wahljahr 2025 im Fächer, zufällige Reihenfolge. Oft passt mehr als eine Funktion; du bekommst eine Begründung, keine Punkte. Die Funktionen stehen im Merkzettel oben rechts.</p><div class="kz"><div><b>12</b><span>Beispiele</span></div><div><b>11</b><span>Funktionen zur Wahl</span></div><div><b>0</b><span>Punkte – nur Begründungen</span></div></div></div></div>
   <ol class="fort" aria-label="Fortschritt"></ol>
-  <h1>Funktionen erkennen</h1>
-  <p>Leitfrage: <strong>Welche Funktion erfüllt eine Partei hier gerade?</strong> Zwölf Beispiele aus dem Wahljahr 2025, in zufälliger Reihenfolge. Oft passt mehr als eine Funktion: Du bekommst eine Begründung, keine Punkte. Operator <em>erläutern</em> (AFB II): Nenne die Funktion und erkläre am Beispiel, warum sie passt.</p>
-  <p class="hinweis">Die Beispiele sind vereinfacht, aber nicht erfunden: Die Programmaussagen stehen in Station 3 wörtlich mit Seitenzahl. Die Reihenfolge der Parteien ist zufällig.</p>
-  <div id="beispiele"></div>
+  <p class="hinweis">Operator <em>erläutern</em> (AFB II): Nenne die Funktion und erkläre am Beispiel, warum sie passt. Die Beispiele sind vereinfacht, aber nicht erfunden: Die Programmaussagen stehen in Station 3 wörtlich mit Seitenzahl.</p>
+  <div class="faecher" data-label="Zwölf Beispiele" id="beispiele-faecher" data-manuell><ul class="faecher-spur" id="beispiele"></ul></div>
   <section class="karte karte--leise">
     <h2>Sicherung</h2>
     <p>Welche Funktion kam am häufigsten vor? Welche fällt dir im Alltag am seltensten auf, und woran könnte das liegen? Notiere zwei Sätze.</p>
@@ -24,21 +23,23 @@
 <script src="../assets/js/daten.js"></script>
 <script src="../assets/js/werkstatt.js"></script>
 <script src="../assets/js/motion.js"></script>
+<script src="../assets/js/faecher.js"></script>
+<script src="../assets/js/merkzettel.js"></script>
 <script>
-PW.rahmen('st2', '../');
+PW.rahmen('st2', '../'); PW.merkzettel('../');
 (function () {
   var box = document.getElementById('beispiele');
   var name = function (id) { return PW.funktionen.filter(function (f) { return f.id === id; })[0].name; };
   PW.mischen(PW.beispiele).forEach(function (b, i) {
-    var f = PW.el('fieldset', { 'class': 'karte', style: 'margin-bottom:24px' });
-    f.appendChild(PW.el('legend', { style: 'padding:0 8px;font-family:var(--schrift-titel);font-weight:700;font-size:1.25rem', text: 'Beispiel ' + (i + 1) }));
+    var li = PW.el('li'); var f = PW.el('fieldset', { 'class': 'karte', style: 'margin:0;height:100%' }); li.appendChild(f);
+    f.appendChild(PW.el('legend', { style: 'padding:0 8px;font-family:var(--schrift-titel);font-weight:700;font-size:1.25rem', text: 'Beispiel ' + (i + 1) + ' von 12' }));
     f.appendChild(PW.el('p', { text: b.text }));
     f.appendChild(PW.el('p', { 'class': 'klein', text: 'Wähle eine Funktion. Danach kannst du eine zweite prüfen.' }));
-    var ul = PW.el('ul', { 'class': 'optionen', style: 'grid-template-columns:repeat(auto-fill,minmax(240px,1fr))' });
+    var ul = PW.el('ul', { 'class': 'optionen', style: 'grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px' });
     var r = PW.el('div', { 'class': 'rueck', 'aria-live': 'polite' });
     PW.funktionen.forEach(function (fn) {
       var inp = PW.el('input', { type: 'checkbox', name: 'b' + i, value: fn.id });
-      var lab = PW.el('label', { 'class': 'opt' }, [inp, PW.el('span', { 'class': 'kreis', 'aria-hidden': 'true' }), PW.el('span', { text: fn.name })]);
+      var lab = PW.el('label', { 'class': 'opt', style: 'min-height:46px;grid-template-columns:32px 1fr;padding:4px 10px' }, [inp, PW.el('span', { 'class': 'kreis', 'aria-hidden': 'true', style: 'width:26px;height:26px' }), PW.el('span', { 'class': 'klein', text: fn.name })]);
       inp.addEventListener('change', function () {
         if (!inp.checked) { lab.classList.remove('ist-richtig', 'ist-falsch'); return; }
         if (b.richtig.indexOf(fn.id) >= 0) { lab.classList.add('ist-richtig'); r.className = 'rueck rueck--gut'; r.innerHTML = '<strong>Passt.</strong> ' + b.warum + (b.richtig.length > 1 ? ' Hier passen zwei Funktionen: ' + b.richtig.map(name).join(' und ') + '.' : ''); }
@@ -48,8 +49,9 @@ PW.rahmen('st2', '../');
       ul.appendChild(lab);
     });
     f.appendChild(ul); f.appendChild(r);
-    box.appendChild(f);
+    box.appendChild(li);
   });
+  PW.faecher(document.getElementById('beispiele-faecher'));
 })();
 </script>
 </body>

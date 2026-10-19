@@ -133,5 +133,25 @@
       fuss.appendChild(b);
     }
   };
+  /* Reiter (Muster J): <ul class="reiter" data-fuer="a,b,c"> + Abschnitte mit id. Hash öffnet den passenden Reiter. */
+  PW.reiter = function (liste, namen) {
+    var ids = Object.keys(namen), knoepfe = {};
+    liste.setAttribute('role', 'tablist');
+    ids.forEach(function (id) {
+      var b = PW.el('button', { type: 'button', role: 'tab', id: 'tab-' + id, 'aria-controls': id, 'aria-selected': 'false', text: namen[id] });
+      b.addEventListener('click', function () { zeige(id); });
+      b.addEventListener('keydown', function (e) { var i = ids.indexOf(id); if (e.key === 'ArrowRight') { knoepfe[ids[(i + 1) % ids.length]].focus(); zeige(ids[(i + 1) % ids.length]); } if (e.key === 'ArrowLeft') { knoepfe[ids[(i + ids.length - 1) % ids.length]].focus(); zeige(ids[(i + ids.length - 1) % ids.length]); } });
+      knoepfe[id] = b; liste.appendChild(PW.el('li', { role: 'presentation' }, [b]));
+      var sec = document.getElementById(id); if (sec) { sec.setAttribute('role', 'tabpanel'); sec.setAttribute('aria-labelledby', 'tab-' + id); sec.classList.add('reiter-blatt'); }
+    });
+    function zeige(id, still) {
+      ids.forEach(function (x) { var sec = document.getElementById(x); if (sec) sec.hidden = x !== id; knoepfe[x].setAttribute('aria-selected', x === id ? 'true' : 'false'); knoepfe[x].setAttribute('tabindex', x === id ? '0' : '-1'); });
+      if (!still) { try { history.replaceState(null, '', '#' + id); } catch (e) {} }
+      liste.dispatchEvent(new CustomEvent('reiter:wechsel', { detail: { id: id } }));
+    }
+    var start = (location.hash || '').replace('#', ''); zeige(ids.indexOf(start) >= 0 ? start : ids[0], true);
+    window.addEventListener('hashchange', function () { var h = location.hash.replace('#', ''); if (ids.indexOf(h) >= 0) zeige(h); });
+    return { zeige: zeige };
+  };
   PW.stationFertig = function (n) { var f = PW.lies('fertig', {}); f['st' + n] = true; PW.merke('fertig', f); };
 })();

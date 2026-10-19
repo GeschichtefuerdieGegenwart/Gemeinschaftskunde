@@ -8,7 +8,10 @@
     "shadow",
     "heavy-shadow",
     "heavy-borders",
-    "app-title-size"
+    "app-title-size",
+    "edge-text",
+    "covered-text",
+    "palette-cream"
   ],
   "reasons": {
     "still-page": "Unterricht mit iPads: Aufmerksamkeit ist knapp, kein Autoplay, keine Scroll-Einblendungen. Bewegung nur bei Tippen (Kreuz, Aufdecken, Halbrund) und mit Schalter »Weniger Bewegung«.",
@@ -18,7 +21,10 @@
     "focal-point": "App-Bildschirm: Beamer-Startseite muss in 720 px passen, keine Display-Überschrift mit 8 vw.",
     "heavy-shadow": "Versetzte Platte 6px 6px 0 0 in Karton auf Grund, kein Weichzeichner; Signatur der Route »Stimmzettel«.",
     "heavy-borders": "2-px-Rahmen in Druckfarbe wie der amtliche Stimmzettel (Two-Inks Rule).",
-    "app-title-size": "h1 44px Desktop, 30px Telefon: Beamer-Lesbarkeit aus 8 m."
+    "app-title-size": "h1 44px Desktop, 30px Telefon: Beamer-Lesbarkeit aus 8 m.",
+    "edge-text": "Fächer: Randkarten sind absichtlich angeschnitten sichtbar (zeigen, dass es weitergeht).",
+    "covered-text": "Fächer im Musterbuch: Randkarten liegen teilweise hinter dem Bühnenrand (overflow clip).",
+    "palette-cream": "Warmer Stationston #F6E3D5 (Akzent 5,4:1), kein Creme-Grund; der Seitengrund bleibt #F1F0ED."
   },
   "kind": "app"
 }

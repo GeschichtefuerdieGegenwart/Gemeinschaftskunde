@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +17,7 @@
 <header class="kopf"><div class="kopf-innen"></div></header>
 <main id="inhalt" class="zus">
   <h1>Parteien und Wahlen: das Wichtigste</h1>
-  <p class="kein-druck">Zum Ausdrucken (höchstens zwei Seiten): <button class="knopf" type="button" onclick="window.print()">Drucken</button> &nbsp; Für die Klausur gelten die Operatoren des Bildungsplans; die Beispiele unten sind die aus der Einheit.</p>
+  <p class="kein-druck"><a class="knopf knopf--akzent" href="docs/Zusammenfassung_Parteien_und_Wahlen.pdf">Zusammenfassung als PDF (2 Seiten)</a> <button class="knopf" type="button" onclick="window.print()">Diese Seite drucken</button> &nbsp; Für die Klausur gelten die Operatoren des Bildungsplans; die Beispiele unten sind die aus der Einheit.</p>
   <div class="raster raster--2">
     <section class="karte">
       <h2>1 · Parteien im Grundgesetz</h2>
@@ -80,8 +80,10 @@
 <script src="assets/js/daten.js"></script>
 <script src="assets/js/werkstatt.js"></script>
 <script src="assets/js/motion.js"></script>
+<script src="assets/js/faecher.js"></script>
+<script src="assets/js/merkzettel.js"></script>
 <script>
-PW.rahmen('zus', '');
+PW.rahmen('zus', ''); PW.merkzettel('');
 var q = document.getElementById('quellen'); PW.quellen.forEach(function (s) { q.appendChild(PW.el('li', {}, [s[1] ? PW.el('a', { href: s[1], text: s[0] }) : PW.el('span', { text: s[0] })])); });
 </script>
 </body>

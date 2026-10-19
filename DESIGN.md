@@ -243,3 +243,13 @@ Ecken 4 px für Karten, Knöpfe, Felder; Kreise (50 %) nur für Stimmzettelkreis
 - **Don't** Autoplay, Endlosbewegung, Konfetti.
 - **Don't** Zitate, Zahlen oder Positionen ohne Quelle; Unbekanntes heißt »noch offen«.
 - **Don't** einen Übereinstimmungswert zwischen Lernenden und Parteien berechnen.
+
+## v2 (19.10.2026): Farbe, Fächer, Merkzettel, Reiter
+
+- **Akzent** `#A8411A` (Grund 5,36:1; Weiß auf Akzent 6,1:1) für Prolog-Grundfrage, Stationsnummern, Empfehlungsmarke, einen Hauptknopf je Seite. Zart: `#F6E3D5`.
+- **Stationstöne** (Kopfband je Station, immer mit Wort und Zahl): warm `#F6E3D5`, blau `#DCE6F3`, grün `#E3EEE4`, lila `#ECE4F2`. Text darauf ≥ 13:1.
+- **Ballot-Colour Rule, erweitert:** Parteifarbe zusätzlich als Kante und Marke auf Kurzprofilen – stets neben dem Parteinamen, nie als einziger Träger.
+- **Fächer** (Muster I): Scroll-Snap, Randkarten 55 % Deckkraft und 0,96 Skalierung, Mitte voll; Pfeile 48 px, Punkte, Stand »x / n«; ohne JavaScript Liste.
+- **Merkzettel** (Muster K): Seitenleiste 440 px, Split-Screen ab 1024 px; Inhalt = Klausur-PDF.
+- **Reiter** (Muster J): Ordnerblätter, aktives Blatt weiß, inaktive Karton; Adresse #id.
+- **Kopfband** je Station: Nummer, H1, Leitfrage (Bricolage 600), drei Kennzahlkacheln.

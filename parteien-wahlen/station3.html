@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,26 +8,34 @@
 <style>
 .pz{border-top:2px solid var(--linie);padding:12px 0 4px}
 .pz h4{margin:0 0 8px;font-size:1.125rem}
-.pz-opt{grid-template-columns:repeat(3,1fr);margin:0}
+.pz-opt{grid-template-columns:repeat(3,1fr);margin:0;gap:6px}
+.faecher-spur .pz h4{padding-top:8px}
+@media (min-width:1024px){#fragen-faecher .faecher-spur{padding-inline:11%}}
 @media (max-width:600px){.pz-opt{grid-template-columns:1fr}dl dd{margin-left:0!important}}
-@media (min-width:768px){.pz{display:grid;grid-template-columns:140px 1fr;gap:4px 16px;align-items:start}.pz h4{padding-top:12px}.pz .rueck{grid-column:2}}
+@media (min-width:768px){.pz{display:grid;grid-template-columns:110px 1fr;gap:4px 16px;align-items:start}.pz h4{padding-top:12px}.pz .rueck{grid-column:2}}
 </style>
 </head>
-<body>
+<body data-ton="gruen">
 <header class="kopf"><div class="kopf-innen"></div></header>
 <main id="inhalt">
+  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">3</span><h1>Wofür stehen die Parteien?</h1><p class="leitfrage">Wie würde Partei X entscheiden, und woher weiß man das?</p><p class="klein" style="margin:0">Acht Kurzprofile im Fächer · ein kurzer Selbsttest, welche drei Streitfragen zu dir passen · tippen, dann die wörtliche Programmstelle lesen.</p><div class="kz"><div><b>8</b><span>Parteien</span></div><div><b>8</b><span>Streitfragen</span></div><div><b>3</b><span>passen zu dir</span></div></div></div></div>
   <ol class="fort" aria-label="Fortschritt"></ol>
-  <h1>Wofür stehen die Parteien?</h1>
-  <p>Leitfrage: <strong>Wie würde Partei X entscheiden, und woher weiß man das?</strong> Zuerst acht Kurzprofile, dann acht Streitfragen. Du tippst deine Vermutung, danach erscheint die wörtliche Stelle aus dem Wahlprogramm 2025 mit Seitenzahl. So lernst du, Positionen zu <em>belegen</em> statt zu raten.</p>
-  <p class="hinweis"><strong>Zwei Ebenen, getrennt:</strong> Was eine Partei über sich sagt (Programm) und was andere über sie feststellen (Gerichte, Verfassungsschutz, Recherchen). Beides steht hier, aber nie vermischt und immer mit Datum und Quelle. Die Seite sagt dir nicht, was du wählen sollst.</p>
+  <p class="hinweis"><strong>Zwei Ebenen, getrennt:</strong> Was eine Partei über sich sagt (Programm) und was andere über sie feststellen (Gerichte, Verfassungsschutz, Recherchen). Beides steht hier, aber nie vermischt und immer mit Datum und Quelle. Die Seite sagt dir nicht, was du wählen sollst, und rechnet keine Übereinstimmung aus.</p>
 
   <h2>Kurzprofile</h2>
-  <p class="klein">Reihenfolge wie auf dem Stimmzettel 2025 (Listenplatz). Sitze: Bundestag seit 2025, 630 Sitze.</p>
-  <div id="profile" class="raster raster--2"></div>
+  <p class="klein">Reihenfolge wie auf dem Stimmzettel 2025 (Listenplatz). Blättere durch; die Farbe ist die Parteifarbe und steht immer mit dem Namen.</p>
+  <div class="faecher" data-label="Acht Kurzprofile" id="profile-faecher" data-manuell><ul class="faecher-spur" id="profile"></ul></div>
+
+  <section class="karte" id="selbsttest" style="margin-top:28px">
+    <h2>Was ist dir wichtig?</h2>
+    <p>Fünf schnelle Fragen. Daraus ergeben sich drei Streitfragen, die zu dir passen. Es geht um Themen, nicht um Parteien: Die Seite merkt sich keine Antworten und rechnet nichts über dich aus. Du kannst danach jede der acht Fragen öffnen.</p>
+    <div id="selbsttest-fragen"></div>
+    <div class="rueck" id="selbsttest-rueck" aria-live="polite"></div>
+  </section>
 
   <h2 style="margin-top:36px">Acht Streitfragen</h2>
-  <p>Die Fragen werden schwieriger: zuerst klare Ja/Nein-Themen, dann Fragen, bei denen Parteien ähnliche Worte für verschiedene Dinge benutzen. <strong>Vorgehen:</strong> Für jede Partei tippen, dann »Programm aufdecken«. Lies die Stelle ganz, nicht nur die Kategorie.</p>
-  <div id="fragen"></div>
+  <p>Von leicht nach schwer: zuerst klare Ja/Nein-Themen, dann Fragen, bei denen Parteien ähnliche Worte für verschiedene Dinge benutzen. <strong>Vorgehen:</strong> Für jede Partei tippen, dann »Alle Programmstellen aufdecken«. Lies die Stelle ganz, nicht nur die Kategorie. Drei Fragen reichen für die Sicherung.</p>
+  <div class="faecher" data-label="Acht Streitfragen" id="fragen-faecher" data-manuell><ul class="faecher-spur" id="fragen"></ul></div>
 
   <section class="karte karte--leise">
     <h2>Sicherung: Analyse mit Beleg</h2>
@@ -39,27 +47,66 @@
 <script src="../assets/js/daten.js"></script>
 <script src="../assets/js/werkstatt.js"></script>
 <script src="../assets/js/motion.js"></script>
+<script src="../assets/js/faecher.js"></script>
+<script src="../assets/js/merkzettel.js"></script>
 <script>
-PW.rahmen('st3', '../');
+PW.rahmen('st3', '../'); PW.merkzettel('../');
 (function () {
   var reihenfolge = ['cdu', 'csu', 'spd', 'gruene', 'fdp', 'afd', 'linke', 'bsw'];
   var prof = document.getElementById('profile');
-  reihenfolge.forEach(function (id) {
+  reihenfolge.forEach(function (id, i) {
     var p = PW.partei(id);
-    var k = PW.el('article', { 'class': 'karte' }, [
-      PW.el('h3', { text: p.name }), PW.el('p', { 'class': 'klein', style: 'color:var(--leise)', text: p.lang }),
-      PW.el('dl', { 'class': 'klein', html: '<dt><strong>Gegründet</strong></dt><dd>' + p.gruendung + '</dd><dt><strong>Vorsitz</strong></dt><dd>' + p.vorsitz + '</dd><dt><strong>Bundestagswahl 2025</strong></dt><dd>' + PW.fmt(p.btw, p.id === 'bsw' ? 2 : 1) + ' % der Zweitstimmen · ' + p.sitze + ' Sitze</dd><dt><strong>Rolle</strong></dt><dd>' + p.rolle + '</dd><dt><strong>Programm 2025</strong></dt><dd>»' + p.programm + '«</dd>' })
+    var k = PW.el('article', { 'class': 'karte profil', style: '--pf:' + p.farbe }, [
+      PW.el('p', { 'class': 'klein', style: 'color:var(--leise);margin:0', text: 'Listenplatz ' + (i + 1) + ' · ' + p.lang }),
+      PW.el('p', { 'class': 'pf-marke', style: 'margin:0' }, [PW.el('i', { 'aria-hidden': 'true' }), p.name]),
+      PW.el('div', { 'class': 'kennzahlen' }, [
+        PW.el('div', {}, [PW.el('strong', { 'class': 'kennzahl', text: PW.fmt(p.btw) + ' %' }), PW.el('span', { text: 'Zweitstimmen 2025' })]),
+        PW.el('div', {}, [PW.el('strong', { 'class': 'kennzahl', text: String(p.sitze) }), PW.el('span', { text: 'von 630 Sitzen' })])]),
+      PW.el('p', { 'class': 'klein', style: 'margin:0', html: '<strong>Gegründet:</strong> ' + p.gruendung + '<br><strong>Vorsitz:</strong> ' + p.vorsitz + '<br><strong>Rolle:</strong> ' + p.rolle + '<br><strong>Programm 2025:</strong> »' + p.programm + '«' })
     ]);
     var d = PW.el('details'); d.appendChild(PW.el('summary', { text: 'Einordnungen Dritter' }));
     (PW.einordnungen[id] || []).forEach(function (e) { d.appendChild(PW.el('p', { 'class': 'klein', html: e.text + ' <span style="color:var(--leise)">(' + e.stand + ')</span>' })); });
-    k.appendChild(d); prof.appendChild(k);
+    k.appendChild(d); prof.appendChild(PW.el('li', {}, [k]));
   });
-  var style = document.createElement('style'); style.textContent = 'dl dt{float:left;clear:left;width:9em;margin:0}dl dd{margin:0 0 4px 9.5em}'; document.head.appendChild(style);
+  PW.faecher(document.getElementById('profile-faecher'));
 
-  var fb = document.getElementById('fragen');
+  /* Selbsttest: Themenrelevanz, keine Parteien */
+  var st = [
+    { f: 'Was beschäftigt dich beim Blick auf die nächsten Jahre am meisten?', o: [['Wohnen und Geld', ['miete', 'mindestlohn']], ['Sicherheit und Frieden', ['wehrpflicht', 'grenze']], ['Klima und Energie', ['kernkraft', 'tempolimit']], ['Mitbestimmung', ['wahlalter', 'eu']]] },
+    { f: 'Worüber hast du zuletzt mit Freunden oder Familie gestritten?', o: [['Autos, Tempo, Verkehr', ['tempolimit']], ['Zuwanderung', ['grenze']], ['Jobs und Löhne', ['mindestlohn']], ['Europa und Welt', ['eu']]] },
+    { f: 'Was betrifft dich persönlich in den nächsten fünf Jahren wahrscheinlich?', o: [['Eine Wohnung suchen', ['miete']], ['Ein Pflichtjahr oder Wehrdienst', ['wehrpflicht']], ['Mein erstes Gehalt', ['mindestlohn']], ['Selbst wählen dürfen', ['wahlalter']]] },
+    { f: 'Welche Schlagzeile würdest du zuerst anklicken?', o: [['»Strompreise: Atomkraft zurück?«', ['kernkraft']], ['»Grenzkontrollen verlängert«', ['grenze']], ['»Mietendeckel beschlossen«', ['miete']], ['»EU-Gipfel ohne Einigung«', ['eu']]] },
+    { f: 'Welche Rolle sollte der Staat haben?', o: [['Eher viel regeln', ['mindestlohn', 'miete', 'tempolimit']], ['Eher wenig regeln', ['tempolimit', 'miete', 'kernkraft']], ['Vor allem schützen', ['grenze', 'wehrpflicht']], ['Vor allem beteiligen', ['wahlalter', 'eu']]] }
+  ];
+  var stBox = document.getElementById('selbsttest-fragen'), stAntworten = {};
+  st.forEach(function (q, i) {
+    var f = PW.el('fieldset', { style: 'border:0;padding:0;margin:0 0 16px' }); f.appendChild(PW.el('legend', { html: '<strong>' + (i + 1) + '. ' + q.f + '</strong>' }));
+    var ul = PW.el('ul', { 'class': 'optionen', style: 'grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px' });
+    q.o.forEach(function (o, j) {
+      var inp = PW.el('input', { type: 'radio', name: 'st' + i, value: j });
+      inp.addEventListener('change', function () { stAntworten[i] = o[1]; werte(); });
+      ul.appendChild(PW.el('label', { 'class': 'opt', style: 'min-height:48px' }, [inp, PW.el('span', { 'class': 'kreis', 'aria-hidden': 'true', style: 'width:28px;height:28px' }), PW.el('span', { text: o[0] })]));
+    });
+    f.appendChild(ul); stBox.appendChild(f);
+  });
+  var empfohlen = [];
+  function werte() {
+    var zaehl = {}; Object.keys(stAntworten).forEach(function (k) { stAntworten[k].forEach(function (t) { zaehl[t] = (zaehl[t] || 0) + 1; }); });
+    var n = Object.keys(stAntworten).length; var r = document.getElementById('selbsttest-rueck');
+    if (n < st.length) { r.className = 'rueck'; r.textContent = 'Noch ' + (st.length - n) + ' von ' + st.length + ' Fragen.'; return; }
+    empfohlen = Object.keys(zaehl).sort(function (a, b) { return zaehl[b] - zaehl[a]; }).slice(0, 3);
+    var namen = empfohlen.map(function (id) { return PW.fragen.filter(function (q) { return q.id === id; })[0].frage; });
+    r.className = 'rueck rueck--gut'; r.innerHTML = '<strong>Deine drei Streitfragen:</strong> ' + namen.join(' · ') + ' <span class="beleg">Sie sind im Fächer unten markiert. Du kannst auch alle anderen öffnen.</span>';
+    fragenKarten.forEach(function (li, i) { li.classList.toggle('ist-empfohlen', empfohlen.indexOf(PW.fragen[i].id) >= 0); var m = li.querySelector('.marke-empfohlen'); if (m) m.hidden = empfohlen.indexOf(PW.fragen[i].id) < 0; });
+    var erste = PW.fragen.map(function (q) { return q.id; }).indexOf(empfohlen[0]); if (fragenFaecher && erste >= 0) { fragenFaecher.zeige(erste); document.getElementById('fragen-faecher').scrollIntoView({ behavior: PW.wenigerBewegung() ? 'auto' : 'smooth', block: 'start' }); }
+  }
+
+  var fb = document.getElementById('fragen'), fragenKarten = [], fragenFaecher = null;
   var gespeichert = PW.lies('st3', {});
   PW.fragen.forEach(function (q, qi) {
-    var sec = PW.el('section', { 'class': 'karte' });
+    var li = PW.el('li'); fragenKarten.push(li);
+    var sec = PW.el('section', { 'class': 'karte', style: 'margin:0' }); li.appendChild(sec);
+    sec.appendChild(PW.el('span', { 'class': 'marke-empfohlen', text: 'Passt zu deinen Antworten', hidden: '' }));
     sec.appendChild(PW.el('h3', { text: (qi + 1) + '. ' + q.frage }));
     sec.appendChild(PW.el('p', { 'class': 'klein', style: 'color:var(--leise)', text: 'Stufe ' + q.stufe + ' von 3 · Tippe für jede Partei' }));
     var tab = PW.el('div', { 'class': 'parteien' });
@@ -92,8 +139,9 @@ PW.rahmen('st3', '../');
     reihenfolge.forEach(function (id) { var p = PW.partei(id); var pos = q.pos[id]; liste.appendChild(PW.el('dt', { html: '<strong>' + p.name + '</strong> – ' + pos[0] })); liste.appendChild(PW.el('dd', { html: pos[1] + (pos[2] !== '–' ? ' <span style="color:var(--leise)">(' + pos[2] + ')</span>' : '') })); });
     deck.appendChild(liste); deck.querySelector('button').addEventListener('click', function (ev) { PW.aufdecken(deck, ev); });
     sec.appendChild(deck);
-    fb.appendChild(sec);
+    fb.appendChild(li);
   });
+  fragenFaecher = PW.faecher(document.getElementById('fragen-faecher'));
 })();
 </script>
 </body>

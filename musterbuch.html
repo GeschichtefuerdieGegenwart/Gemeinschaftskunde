@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,9 +53,20 @@
   <section class="band" id="H"><div class="buehne"><span class="buchstabe">H</span><h2>Die Hürde hebt sich</h2><p>Schalter 5-%-Hürde: Balken unter 5 % wechseln von Parteifarbe zu Grau, die Linie erscheint. Nichts springt.</p><div id="balkenH"></div><p><label class="schalter"><input type="checkbox" id="huerdeH" checked> 5-%-Hürde</label></p></div>
     <dl class="steck"><dt>Worum</dt><dd>Die Wirkung der Hürde wird als Farbwechsel sichtbar, nicht als Verschwinden. Die Zahlen bleiben stehen.</dd><dt>Wo</dt><dd>Station 4 Sitzrechner.</dd><dt>Zweck</dt><dd>Erklärung durch Form (Vorher-nachher).</dd><dt>Häufigkeit · Dauer</dt><dd>beim Umschalten · 160 ms</dd><dt>Technik</dt><dd>CSS background-color Transition, Linie per opacity.</dd><dt>Aufwand · Risiko</dt><dd>gering · keines</dd><dt>Weniger Bewegung</dt><dd>identisch (Farbwechsel ≤ 150 ms erlaubt).</dd></dl></section>
 
+
+  <section class="band" id="I"><div class="buehne"><span class="buchstabe">I</span><h2>Fächer</h2><p>Karten liegen nebeneinander wie ein Kartenfächer: die Mitte gerade und voll sichtbar, die Ränder zurückgenommen. Wischen, Pfeile oder Tastatur; nichts läuft von allein.</p>
+    <div class="faecher" data-label="Beispiel-Fächer"><ul class="faecher-spur"><li><div class="karte"><h3>Interessenartikulation</h3><p>Wünsche und Bedürfnisse ausdrücken.</p></div></li><li><div class="karte"><h3>Interessenaggregation</h3><p>Interessen bündeln und gewichten.</p></div></li><li><div class="karte"><h3>Rekrutierung</h3><p>Personal für Ämter auswählen.</p></div></li></ul></div></div>
+    <dl class="steck"><dt>Worum</dt><dd>Statt nach unten zu scrollen, blättern die Lernenden seitwärts durch gleichartige Inhalte und holen sich eine Karte in die Mitte.</dd><dt>Wo</dt><dd>Prolog, Funktionskarten, Beispiele, Kurzprofile, Streitfragen.</dd><dt>Zweck</dt><dd>Stöbern und Entdecken; Orientierung (x von n).</dd><dt>Häufigkeit · Dauer</dt><dd>oft · Gleiten 220 ms, Scroll-Snap des Browsers</dd><dt>Technik</dt><dd>CSS scroll-snap, opacity/scale der Randkarten; ohne JavaScript eine Liste untereinander.</dd><dt>Aufwand · Risiko</dt><dd>mittel · Tastatur und Screenreader brauchen die Liste (vorhanden).</dd><dt>Weniger Bewegung</dt><dd>Springen statt Gleiten.</dd></dl></section>
+
+  <section class="band" id="J"><div class="buehne"><span class="buchstabe">J</span><h2>Reiter</h2><p>Vier Blätter eines Ordners: Stimmzettel, Sitzrechner, Koalition, Abgleich. Das gewählte Blatt rückt nach vorn.</p><ul class="reiter" id="reiterJ"></ul><section id="jA"><p>Blatt A: Der Stimmzettel.</p></section><section id="jB"><p>Blatt B: Der Sitzrechner.</p></section></div>
+    <dl class="steck"><dt>Worum</dt><dd>Lange Stationen werden in Blätter geteilt; die Adresse (#rechner) öffnet das Blatt direkt, auch vom Lehrkraft-Modus aus.</dd><dt>Wo</dt><dd>Station 4.</dd><dt>Zweck</dt><dd>Orientierung.</dd><dt>Häufigkeit · Dauer</dt><dd>gelegentlich · 160 ms Farbwechsel</dd><dt>Technik</dt><dd>role=tablist, hidden-Attribut, Hash.</dd><dt>Aufwand · Risiko</dt><dd>gering · ohne JavaScript alle Blätter untereinander.</dd><dt>Weniger Bewegung</dt><dd>identisch.</dd></dl></section>
+
+  <section class="band" id="K"><div class="buehne"><span class="buchstabe">K</span><h2>Merkzettel</h2><p>Oben rechts auf jeder Seite. Die Seitenleiste schiebt sich herein und bleibt neben den Aufgaben offen (Split-Screen ab 1024 px). Probiere den Knopf im Kopf dieser Seite.</p></div>
+    <dl class="steck"><dt>Worum</dt><dd>Die Kurzsicherung ist immer griffbereit; dieselbe Fassung ist die Klausur-PDF.</dd><dt>Wo</dt><dd>Jede Seite.</dd><dt>Zweck</dt><dd>Orientierung, Sicherung.</dd><dt>Häufigkeit · Dauer</dt><dd>gelegentlich · 300 ms hinein, 150 ms hinaus</dd><dt>Technik</dt><dd>transform translateX, Zustand im localStorage.</dd><dt>Aufwand · Risiko</dt><dd>gering · verdeckt auf schmalen Bildschirmen die Seite (dann Vollbild mit Schließen).</dd><dt>Weniger Bewegung</dt><dd>Einblenden 150 ms.</dd></dl></section>
+
   <section class="karte" style="margin-top:28px">
     <h2>Empfehlung</h2>
-    <p>Oft, billig und wirksam zuerst: <strong>A, B, C, E, H</strong>. Dazu <strong>D</strong> für den Beamer-Moment der Auszählung und <strong>F</strong> für die Orientierung. <strong>G</strong> ist Schmuck mit Bedeutung; er lohnt sich nur, wenn die Klasse den Stimmzettel wirklich auf der Seite übt, sonst weglassen.</p>
+    <p>Oft, billig und wirksam zuerst: <strong>A, B, C, E, H</strong>. Dazu <strong>D</strong> für den Beamer-Moment der Auszählung und <strong>F</strong> für die Orientierung. <strong>G</strong> ist Schmuck mit Bedeutung. Neu seit v2 und eingebaut: <strong>I</strong> Fächer, <strong>J</strong> Reiter, <strong>K</strong> Merkzettel.</p>
     <p><strong>Sag mir die Buchstaben.</strong></p>
   </section>
 </main>
@@ -63,8 +74,10 @@
 <script src="assets/js/daten.js"></script>
 <script src="assets/js/werkstatt.js"></script>
 <script src="assets/js/motion.js"></script>
+<script src="assets/js/faecher.js"></script>
+<script src="assets/js/merkzettel.js"></script>
 <script>
-PW.rahmen('must', '');
+PW.rahmen('must', ''); PW.merkzettel('');
 (function () {
   var w = document.getElementById('weniger'); w.checked = PW.wenigerBewegung(); w.addEventListener('change', function () { PW.schalteBewegung(!w.checked); });
   var ids = ['cdu', 'csu', 'spd', 'gruene', 'fdp', 'afd', 'linke', 'bsw'];
@@ -86,6 +99,7 @@ PW.rahmen('must', '');
   var zG = document.getElementById('zettelG');
   document.getElementById('knopfG').addEventListener('click', function () { PW.inDieUrne(zG, function () { zG.style.visibility = 'hidden'; }); });
   document.getElementById('resetG').addEventListener('click', function () { zG.style.cssText = ''; });
+  PW.reiter(document.getElementById('reiterJ'), { jA: 'Stimmzettel', jB: 'Sitzrechner' });
 })();
 </script>
 </body>

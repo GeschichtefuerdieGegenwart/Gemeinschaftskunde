@@ -54,3 +54,16 @@ Design 30/40 (konsequent, aber karg; die Platte ist die einzige Tiefe), Usabilit
 - Gründungsjahre mit Erläuterung: Linke 2007 (Zusammenschluss Linkspartei.PDS + WASG, 16.06.2007; PDS seit 1989/90), CDU 1945 (Bundespartei 1950), SPD 1863 (ADAV), Grüne 1980 (mit Bündnis 90 seit 1993), BSW 08.01.2024.
 - Bundesergebnis gegen Bundeswahlleiterin geprüft: alle Prozentwerte, Sitze und BSW 4,98 % (2.472.947 Stimmen, 9.529 unter der Hürde) korrekt.
 - Brexit-Tabelle korrigiert: jetzt Lord Ashcroft (6 Altersgruppen, 73/27 … 40/60) statt der Werte aus der alten Präsentation.
+
+## v2 (19.10.2026): Dramaturgie, Fächer, Merkzettel, Reiter, Farbe
+
+Umgesetzt nach `claude/04_Prompt_Website_v2.md`:
+- **Prolog** auf der Startseite: drei wischbare Bilder (»Wozu Parteien?« → Art. 21 GG → vier Aufgaben), danach die fünf Stationen. Passt bei 1280 × 720 als erster Bildschirm (die Stationen liegen darunter, gewollt).
+- **Fächer** (`assets/js/faecher.js`, Muster I): Scroll-Snap, Pfeile 48 px, Punkte, Stand »x / n«, Tastatur (Pfeile, Pos1/Ende), Randkarten 55 % Deckkraft; ohne JavaScript Liste. Eingesetzt für Prolog, Funktionskarten (St. 1), Beispiele (St. 2), Kurzprofile und Streitfragen (St. 3).
+- **Merkzettel** (`assets/js/merkzettel.js`, Muster K): Knopf oben rechts auf jeder Seite, Seitenleiste 440 px als Split-Screen ab 1024 px, darunter Vollbild; Inhalt aus `daten.js` (Art. 21, vier Aufgaben, elf Funktionen mit Beispiel, acht Kurzprofile, Wahlrecht in fünf Zeilen, Urteilen); Escape schließt; Zustand im localStorage.
+- **Station 3**: Selbsttest »Was ist dir wichtig?« (5 Fragen, nur Themen, keine Parteien, nichts wird gespeichert oder verrechnet) → drei empfohlene Streitfragen, alle acht im Fächer; Kurzprofile mit Parteifarbe als Kante und Marke, Kennzahlen groß; Einordnungen Dritter getrennt.
+- **Station 4** als Reiter (Muster J): Stimmzettel · Sitzrechner · Koalition · Abgleich; Bundesergebnis 2025 vorgeladen; Adresse `#rechner` usw. bleibt verlinkbar.
+- **PDF** `docs/Zusammenfassung_Parteien_und_Wahlen.pdf` (2 Seiten A4, aus `tools/pdf-vorlage.html` mit Chromium gedruckt): Seite 1 Art. 21, Aufgaben, Funktionen mit Beispiel; Seite 2 acht Kurzprofile, Wahlrecht 2025, Urteilen. Über den Merkzettel verlinkt.
+- **Farbe**: Akzent `#A8411A` (Grund 5,36:1) für Grundfrage, Stationsnummern, Empfehlung; Kopfband je Station in getöntem Ton (warm, blau, grün, lila; Text ≥ 13:1); Parteifarben in Profilen stets mit Namen.
+
+Prüfkette v2: taste-skill lint **0 FAIL, 0 WARN**; inspect (App-Modus, 1440/1280/1024/768/390) **alle 10 Seiten 0 FAIL** (neue begründete Allowances: edge-text, covered-text, palette-cream – Fächer-Randkarten und Stationston); eigene Prüfung: keine Konsolenfehler, kein waagerechtes Scrollen, kein Text < 16 px, keine Tippziele < 44 px; Funktionstest: Fächer, Selbsttest → Empfehlung, Reiter, Merkzettel (1280 und 390), Sitzrechner, Koalition. Nicht gelaufen: Impeccable audit/polish, Test auf echtem iPad.

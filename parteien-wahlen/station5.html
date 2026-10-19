@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,12 +14,11 @@
 @media (min-width:768px){.urteil{grid-template-columns:1fr 1fr}}
 </style>
 </head>
-<body>
+<body data-ton="lila">
 <header class="kopf"><div class="kopf-innen"></div></header>
 <main id="inhalt">
+  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">5</span><h1>Warum wählen Menschen so?</h1><p class="leitfrage">Wählen Junge anders als Alte, Frauen anders als Männer – und was folgt daraus?</p><p class="klein" style="margin:0">Erst vermuten, dann die amtliche Wahlstatistik 2025 aufdecken. Zum Schluss beurteilst du die 5-%-Hürde.</p><div class="kz"><div><b>27,3 %</b><span>stärkste Partei bei 18–24</span></div><div><b>41,4 %</b><span>stärkste Partei bei 70+</span></div><div><b>?</b><span>Erst vermuten</span></div></div></div></div>
   <ol class="fort" aria-label="Fortschritt"></ol>
-  <h1>Warum wählen Menschen so?</h1>
-  <p>Leitfrage: <strong>Wählen Junge anders als Alte, Frauen anders als Männer, und was folgt daraus?</strong> Erst vermutest du, dann deckst du die amtliche Repräsentative Wahlstatistik zur Bundestagswahl 2025 auf. Zum Schluss beurteilst du die 5-%-Hürde.</p>
 
   <section class="karte">
     <h2>1. Vermuten: Die 18- bis 24-Jährigen</h2>
@@ -77,8 +76,10 @@
 <script src="../assets/js/daten.js"></script>
 <script src="../assets/js/werkstatt.js"></script>
 <script src="../assets/js/motion.js"></script>
+<script src="../assets/js/faecher.js"></script>
+<script src="../assets/js/merkzettel.js"></script>
 <script>
-PW.rahmen('st5', '../');
+PW.rahmen('st5', '../'); PW.merkzettel('../');
 (function () {
   var namen = Object.keys(PW.alter.werte);
   /* 1. Vermutung */
