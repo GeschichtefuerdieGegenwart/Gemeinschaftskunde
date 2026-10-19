@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vertiefung · Vertrauen und Mitglieder</title>
+<link rel="stylesheet" href="assets/css/werkstatt.css">
+</head>
+<body>
+<header class="kopf"><div class="kopf-innen"></div></header>
+<main id="inhalt">
+  <h1>Vertiefung: Vertrauen und Mitglieder</h1>
+  <p><strong>Zwei Befunde, die nicht zusammenpassen?</strong></p>
+  <p>Optional, für schnelle Gruppen oder als Hausaufgabe. Leitfrage: <strong>Wie kann es sein, dass Parteien so wenig Vertrauen genießen und gleichzeitig so viele neue Mitglieder gewinnen?</strong></p>
+  <div class="raster raster--2">
+    <section class="karte">
+      <h2>Befund 1: Vertrauen</h2>
+      <p class="klein">forsa, Institutionen-Vertrauensranking, Erhebung 3.–12.12.2025, 4.025 Befragte. Anteil »großes Vertrauen«:</p>
+      <div id="vertrauen"></div>
+    </section>
+    <section class="karte">
+      <h2>Befund 2: Mitglieder</h2>
+      <p class="klein">Entwicklung 2025 nach Parteienforscher Oskar Niedermayer (zitiert in Medienberichten vom 22.08.2026):</p>
+      <table><thead><tr><th>Partei</th><th class="zahl">Mitglieder Ende 2025</th><th class="zahl">Veränderung</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Die Linke</th><td class="zahl">ca. 123.000</td><td class="zahl">+111 %</td></tr>
+        <tr><th scope="row">AfD</th><td class="zahl">ca. 73.250</td><td class="zahl">+43 %</td></tr>
+        <tr><th scope="row">Grüne</th><td class="zahl">183.761</td><td class="zahl">+18 %</td></tr>
+        <tr><th scope="row">CDU</th><td class="zahl">356.769</td><td class="zahl">−2,0 %</td></tr>
+        <tr><th scope="row">SPD</th><td class="zahl">348.451</td><td class="zahl">−2,4 %</td></tr>
+        <tr><th scope="row">FDP</th><td class="zahl">noch offen</td><td class="zahl">−3,9 %</td></tr>
+      </tbody></table>
+      <p class="klein">Durchschnittsalter der Mitglieder: SPD 62, CDU 61, Linke 39 Jahre (2024 noch 45). Rund 1,2 Millionen Menschen sind Mitglied einer Bundestagspartei, etwa 2 % der Wahlberechtigten.</p>
+    </section>
+  </div>
+  <section class="karte">
+    <h2>Aufgaben</h2>
+    <ol>
+      <li><strong>Beschreiben (AFB I):</strong> Fasse beide Befunde in je zwei Sätzen mit Zahlen zusammen.</li>
+      <li><strong>Analysieren (AFB II):</strong> Zwei Deutungen konkurrieren: (a) »Revitalisierung« – die Parteiendemokratie lebt wieder auf; (b) »Polarisierung« – vor allem die Ränder wachsen, die Mitte verliert. Prüfe beide an den Daten. Welche Funktion aus Station 1 ist bei den wachsenden Parteien besonders sichtbar?</li>
+      <li><strong>Gedankenexperiment:</strong> Im Bundestag sitzen 630 Abgeordnete, aber keine Partei. Alle sind unabhängig. Was würde fehlen, was würde besser? Ordne deine Antworten den elf Funktionen zu.</li>
+      <li><strong>Stellung nehmen (AFB III):</strong> »Wer Parteien misstraut, sollte eintreten statt wegzubleiben.« Nimm begründet Stellung.</li>
+    </ol>
+  </section>
+  <p class="knopfzeile"><a class="knopf" href="zusammenfassung.html">Zur Zusammenfassung</a> <a class="knopf knopf--leise" href="index.html">Zur Startseite</a></p>
+</main>
+<footer class="fuss"><div class="fuss-innen"></div></footer>
+<script src="assets/js/daten.js"></script>
+<script src="assets/js/werkstatt.js"></script>
+<script src="assets/js/motion.js"></script>
+<script>
+PW.rahmen('vert', '');
+(function () {
+  var v = [['Polizei', 81], ['Bundesverfassungsgericht', 76], ['Bundestag', 34], ['Bundesregierung', 22], ['Politische Parteien', 15]];
+  var box = document.getElementById('vertrauen');
+  v.forEach(function (x) { box.appendChild(PW.el('div', { 'class': 'balken' }, [PW.el('span', { text: x[0] }), PW.el('div', { 'class': 'spur' }, [PW.el('div', { 'class': 'fuellung', 'data-wert': (x[1] / 100).toFixed(2), style: 'background:' + (x[0] === 'Politische Parteien' ? 'var(--blau)' : 'var(--stahl)') })]), PW.el('span', { 'class': 'zahl', text: x[1] + ' %' })])); });
+  PW.balkenWachsen(box);
+})();
+</script>
+</body>
+</html>

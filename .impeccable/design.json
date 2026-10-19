@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 2,
+  "name": "Politik-Werkstatt",
+  "extensions": {
+    "colorMeta": {
+      "blau": {
+        "role": "Zweitstimme, Belege, Hinweise, aktiver Fortschritt",
+        "tonalRamp": ["#EEF3FA", "#DCE6F3", "#9DB8DC", "#5A82B8", "#1F4E8C", "#1A4376", "#163A69", "#0E2545"]
+      },
+      "neutral": {
+        "tonalRamp": ["#FFFFFD", "#F1F0ED", "#E7E5E0", "#DDD9D2", "#75706A", "#5B5751", "#1F1D1A", "#17140F"]
+      },
+      "parteien": {
+        "role": "nur Halbrund und Ergebnisbalken, immer mit Name und Zahl",
+        "CDU": "#1F1D1A", "CSU": "#0C6DB3", "SPD": "#C8102E", "GRÜNE": "#2E7D32", "FDP": "#E8C300", "AfD": "#1A8FD6", "Linke": "#B5176B", "BSW": "#6B2D8B", "FW": "#D97706", "Sonstige": "#9A948C"
+      }
+    },
+    "typographyMeta": {
+      "fonts": {
+        "display": "Bricolage Grotesque (OFL), lokal woff2, 700/600",
+        "body": "Atkinson Hyperlegible Next (OFL), lokal woff2, 400/700"
+      },
+      "minSize": "16px",
+      "bodyRange": "18–20px",
+      "measure": "68ch"
+    },
+    "shadows": {
+      "policy": "keine weichen Schatten",
+      "plate": "6px 6px 0 0 var(--plate-color)",
+      "plateHover": "8px 8px 0 0",
+      "platePress": "2px 2px 0 0"
+    },
+    "focus": {
+      "outer": "3px solid #1F1D1A",
+      "inner": "2px solid #FFFFFD",
+      "css": "outline:3px solid #1F1D1A;outline-offset:2px;box-shadow:0 0 0 5px #FFFFFD"
+    },
+    "motion": {
+      "durations": {
+        "press": "100ms",
+        "fast": "160ms",
+        "medium": "220ms",
+        "slow": "300ms",
+        "exit": "150ms",
+        "reveal": "360ms (Aufdecken, einmal je Frage)",
+        "seats": "440ms (Halbrund füllt sich, einmal je Ergebnis)"
+      },
+      "easing": {
+        "out": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "inOut": "cubic-bezier(0.77, 0, 0.175, 1)",
+        "forbidden": "ease-in"
+      },
+      "stagger": "30ms, max. 8 Elemente",
+      "rules": [
+        "kein Autoplay",
+        "Hover nur unter @media (hover:hover) and (pointer:fine)",
+        "Tastaturaktionen nicht animieren (event.detail === 0)",
+        "prefers-reduced-motion: nur Deckkraft/Farbe <= 150ms",
+        "nur transform und opacity",
+        "Schließen kürzer als Öffnen",
+        "touch-action: manipulation"
+      ]
+    },
+    "breakpoints": { "sm": "600px", "md": "768px", "lg": "1024px", "xl": "1280px", "beamer": "(max-height: 760px)", "beamerTarget": "1280x720 ohne Scrollen" },
+    "tasteSkill": {
+      "gate": ["node <skill>/scripts/lint.mjs <dateien>", "node <skill>/scripts/inspect.mjs <seite.html> --widths 1440,1280,1024,768,390"],
+      "allow": ["still-page", "no-footage"],
+      "liveThing": "Sitzrechner mit Schalter 5-%-Hürde (Station 4)",
+      "idea": "Auf dieser Seite wird der Stimmzettel – zwei Spalten, zwei Druckfarben, Kreis und Kreuz – zur Grundform jeder Aufgabe."
+    }
+  },
+  "components": {
+    "button-primary": {
+      "html": "<button class=\"ds-btn ds-btn--primary\">Station starten</button>",
+      "css": ".ds-btn{font:700 1.125rem/1.2 'Atkinson Hyperlegible Next',system-ui,sans-serif;min-height:48px;padding:12px 20px;border-radius:4px;border:2px solid #1F1D1A;cursor:pointer;touch-action:manipulation;transition:transform 100ms cubic-bezier(.23,1,.32,1),box-shadow 160ms cubic-bezier(.23,1,.32,1)}.ds-btn--primary{background:#1F1D1A;color:#FFFFFD}.ds-btn:active{transform:translate(2px,2px)}@media (hover:hover) and (pointer:fine){.ds-btn:hover{box-shadow:4px 4px 0 0 #DDD9D2}}.ds-btn:focus-visible{outline:3px solid #1F1D1A;outline-offset:2px;box-shadow:0 0 0 5px #FFFFFD}"
+    },
+    "option": {
+      "html": "<label class=\"ds-opt\"><input type=\"radio\" name=\"q\"><span class=\"ds-kreis\" aria-hidden=\"true\"></span><span>SPD</span></label>",
+      "css": ".ds-opt{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;min-height:56px;padding:6px 14px;border:2px solid #75706A;border-radius:4px;background:#FFFFFD;cursor:pointer}.ds-opt input{position:absolute;opacity:0}.ds-kreis{width:36px;height:36px;border:2px solid #1F1D1A;border-radius:50%;position:relative}.ds-opt:has(input:checked){border-color:#1F1D1A}.ds-opt:has(input:checked) .ds-kreis::before,.ds-opt:has(input:checked) .ds-kreis::after{content:'';position:absolute;left:50%;top:50%;width:3px;height:24px;background:#1F1D1A;transform:translate(-50%,-50%) rotate(45deg)}.ds-opt:has(input:checked) .ds-kreis::after{transform:translate(-50%,-50%) rotate(-45deg)}"
+    },
+    "feedback": {
+      "html": "<div class=\"ds-rueck\" aria-live=\"polite\"><strong>Passt.</strong> Begründung … <span class=\"ds-beleg\">Beleg: Wahlprogramm 2025, S. 12</span></div>",
+      "css": ".ds-rueck{background:#DCE6F3;color:#163A69;padding:16px 20px;border-radius:4px;font:400 1.125rem/1.5 'Atkinson Hyperlegible Next',system-ui,sans-serif}.ds-beleg{display:block;margin-top:8px;font-size:1rem}"
+    },
+    "progress": {
+      "html": "<ol class=\"ds-fort\" aria-label=\"Fortschritt\"><li class=\"ist-fertig\">Grundlagen</li><li aria-current=\"step\">Erkennen</li><li>Positionen</li><li>Wählen</li><li>Warum so?</li></ol>",
+      "css": ".ds-fort{display:flex;gap:16px;list-style:none;margin:0;padding:0;font-size:1rem}.ds-fort li{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:center}.ds-fort li::before{content:'';width:24px;height:24px;border:2px solid #1F1D1A;border-radius:50%}.ds-fort li[aria-current=step]::before{background:#1F4E8C;border-color:#1F4E8C}"
+    }
+  },
+  "narrative": {
+    "northStar": "Der Stimmzettel",
+    "overview": "Zwei Spalten, zwei Druckfarben, Kreis und Kreuz; Ergebnisse im Halbrund. Flach, gedruckt, ohne Hochglanz.",
+    "keyCharacteristics": ["Schwarz und Blau als einzige Gestaltungsfarben", "Kreis und Kreuz als Rückmeldung", "Halbrund als einziges farbiges Diagramm", "Bricolage + Atkinson", "iPad und Beamer"],
+    "rules": ["The Two-Inks Rule", "The Ballot-Colour Rule", "The Neutral Action Rule", "The 16-Pixel Floor", "The Display-Only-Bricolage Rule", "The Two-Line Rule", "The First-Action Rule", "The Beamer Rule", "The One-Task Rule", "The Static Grid Rule", "The No-Blur Rule"],
+    "dos": ["Rückmeldung begründen", "Belege mit Seitenzahl", "Farbe nur mit Wort und Zahl", "Bewegung nur auf Tippen"],
+    "donts": ["Parteilogos und -fotos", "Punkte, Abzeichen, Ampeln", "weiche Schatten, Verläufe", "Text < 16px", "Übereinstimmungswert", "Erfundenes"]
+  }
+}

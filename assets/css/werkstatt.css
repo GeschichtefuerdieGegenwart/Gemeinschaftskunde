@@ -1,0 +1,180 @@
+/* Politik-Werkstatt · Route A »Der Stimmzettel« · siehe DESIGN.md */
+@font-face{font-family:'Atkinson Hyperlegible Next';src:url('../fonts/AtkinsonHyperlegibleNext-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Atkinson Hyperlegible Next';src:url('../fonts/AtkinsonHyperlegibleNext-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Bricolage Grotesque';src:url('../fonts/BricolageGrotesque-SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Bricolage Grotesque';src:url('../fonts/BricolageGrotesque96pt-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+
+:root{
+  --grund:#F1F0ED;--flaeche:#FFFFFD;--karton:#E7E5E0;--text:#1F1D1A;--leise:#5B5751;--stahl:#75706A;--linie:#DDD9D2;
+  --blau:#1F4E8C;--blau-zart:#DCE6F3;--blau-tief:#163A69;--erfolg:#2E6B34;--erfolg-zart:#E3EEE4;--fehler:#B0281C;--fehler-zart:#F6E2DF;
+  --schrift-text:'Atkinson Hyperlegible Next',system-ui,sans-serif;--schrift-titel:'Bricolage Grotesque','Atkinson Hyperlegible Next',system-ui,sans-serif;
+  --radius:4px;--platte:6px 6px 0 0 var(--karton);
+  --dauer-druck:100ms;--dauer-schnell:160ms;--dauer-mittel:220ms;--dauer-langsam:300ms;--dauer-aus:150ms;--dauer-aufdecken:360ms;--dauer-sitze:440ms;
+  --ease-out:cubic-bezier(.23,1,.32,1);--ease-inout:cubic-bezier(.77,0,.175,1);
+  --mass:68ch;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:auto}
+body{margin:0;background:var(--grund);color:var(--text);font:400 1.125rem/1.55 var(--schrift-text);min-height:100svh;display:flex;flex-direction:column}
+@media (min-width:1024px){body{font-size:1.25rem}}
+h1,h2,h3{font-family:var(--schrift-titel);font-weight:700;line-height:1.1;margin:0 0 .5em;letter-spacing:-.01em;text-wrap:balance}
+h1{font-size:clamp(1.875rem,4vw,2.75rem)}
+h2{font-size:clamp(1.5rem,3vw,2.125rem)}
+h3{font-size:clamp(1.25rem,2vw,1.5rem);font-weight:600}
+p,li{max-width:var(--mass)}
+p{margin:0 0 1em}
+a{color:var(--blau);text-underline-offset:.15em}
+strong{font-weight:700}
+small,.klein{font-size:1rem}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--text);outline-offset:2px;box-shadow:0 0 0 5px var(--flaeche)} /* taste-skill-ignore: Fokusring, zweiter Ring ohne Weichzeichner (WCAG 2.4.11) */
+button,input,select{font:inherit;color:inherit}
+button{touch-action:manipulation}
+img,svg{max-width:100%;height:auto}
+
+/* Kopf, Fuß, Rahmen */
+.kopf{background:var(--flaeche);border-bottom:2px solid var(--text)}
+.kopf-innen{max-width:1180px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.marke{font-family:var(--schrift-titel);font-weight:700;font-size:1.25rem;text-decoration:none;color:var(--text);display:inline-flex;align-items:center;gap:10px;min-height:44px}
+.marke .kreuz{width:28px;height:28px;border:2px solid var(--text);border-radius:50%;position:relative;flex:none}
+.marke .kreuz::before,.marke .kreuz::after{content:'';position:absolute;left:50%;top:50%;width:2px;height:18px;background:var(--text);transform:translate(-50%,-50%) rotate(45deg)}
+.marke .kreuz::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:var(--radius);text-decoration:none;color:var(--text);font-weight:700}
+.nav a[aria-current=page]{background:var(--text);color:var(--flaeche)}
+main{flex:1;width:100%;max-width:1180px;margin:0 auto;padding:24px 16px 48px}
+@media (min-width:768px){main{padding:40px 24px 64px}}
+.fuss{border-top:2px solid var(--linie);background:var(--grund);color:var(--leise);font-size:1rem}
+.fuss-innen{max-width:1180px;margin:0 auto;padding:16px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.fuss button{margin-left:auto}
+
+/* Fortschritt: fünf Kreise */
+.fort{display:flex;gap:4px 20px;list-style:none;margin:0 0 24px;padding:0;font-size:1rem;flex-wrap:wrap}
+.fort li{display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:center;min-height:36px}
+.fort li a{color:inherit;text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.fort li::before{content:'';width:22px;height:22px;border:2px solid var(--text);border-radius:50%;background:var(--flaeche);position:relative}
+.fort li.ist-fertig::before{background:var(--text)}
+.fort li[aria-current=step]{font-weight:700}
+.fort li[aria-current=step]::before{background:var(--blau);border-color:var(--blau)}
+
+/* Knöpfe */
+.knopf{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 20px;border:2px solid var(--text);border-radius:var(--radius);background:var(--flaeche);color:var(--text);font-weight:700;font-size:1.125rem;cursor:pointer;text-decoration:none;transition:transform var(--dauer-druck) var(--ease-out),box-shadow var(--dauer-schnell) var(--ease-out)}
+.knopf--voll{background:var(--text);color:var(--flaeche)}
+.knopf--leise{border-color:var(--stahl);font-weight:400}
+.knopf:active{transform:translate(2px,2px)}
+.knopf[disabled],.knopf[aria-disabled=true]{opacity:.5;cursor:not-allowed}
+@media (hover:hover) and (pointer:fine){.knopf:not([disabled]):hover{box-shadow:4px 4px 0 0 var(--linie)}} /* taste-skill-ignore: versetzte Platte, harte Kante, kein Weichzeichner (DESIGN.md No-Blur) */
+.knopfzeile{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
+.knopfzeile--rechts{justify-content:flex-end}
+
+/* Karten mit versetzter Platte */
+.karte{background:var(--flaeche);border:2px solid var(--text);border-radius:var(--radius);padding:20px;box-shadow:var(--platte);margin:0 0 28px} /* taste-skill-ignore: versetzte Platte 6px 6px 0 0, kein Weichzeichner */
+.karte--leise{border-color:var(--linie);box-shadow:none}
+.karte h2:first-child,.karte h3:first-child{margin-top:0}
+.raster{display:grid;gap:24px 28px;grid-template-columns:1fr}
+@media (min-width:768px){.raster--2{grid-template-columns:1fr 1fr}.raster--3{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:1024px){.raster--4{grid-template-columns:repeat(4,1fr)}}
+.raster>.karte{margin:0}
+
+/* Stimmzettel-Optionen */
+.optionen{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:10px}
+.opt{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;min-height:56px;padding:8px 14px;border:2px solid var(--stahl);border-radius:var(--radius);background:var(--flaeche);cursor:pointer;position:relative;transition:border-color var(--dauer-schnell) var(--ease-out)}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.kreis{width:36px;height:36px;border:2px solid var(--text);border-radius:50%;position:relative;background:var(--flaeche);flex:none}
+.kreis::before,.kreis::after{content:'';position:absolute;left:50%;top:50%;width:3px;height:24px;background:var(--text);transform:translate(-50%,-50%) rotate(45deg) scaleY(0);transform-origin:center;transition:transform var(--dauer-schnell) var(--ease-out)}
+.kreis::after{transform:translate(-50%,-50%) rotate(-45deg) scaleY(0)}
+.opt:has(input:checked){border-color:var(--text);border-width:2px}
+.opt:has(input:checked) .kreis::before{transform:translate(-50%,-50%) rotate(45deg) scaleY(1)}
+.opt:has(input:checked) .kreis::after{transform:translate(-50%,-50%) rotate(-45deg) scaleY(1)}
+.opt:has(input:focus-visible){outline:3px solid var(--text);outline-offset:2px;box-shadow:0 0 0 5px var(--flaeche)} /* taste-skill-ignore: Fokusring */
+.opt.ist-richtig{border-color:var(--erfolg);background:var(--erfolg-zart)}
+.opt.ist-falsch{border-color:var(--fehler);background:var(--fehler-zart)}
+.opt .klein{color:var(--leise);display:block}
+@media (hover:hover) and (pointer:fine){.opt:hover{border-color:var(--text)}}
+
+/* Rückmeldung */
+.rueck{background:var(--blau-zart);color:var(--blau-tief);padding:16px 20px;border-radius:var(--radius);margin:12px 0 20px;border-left:6px solid var(--blau)}
+.rueck:empty{display:none}
+.rueck--gut{background:var(--erfolg-zart);color:#1F4A24;border-left-color:var(--erfolg)}
+.rueck--nein{background:var(--fehler-zart);color:#6E1710;border-left-color:var(--fehler)}
+.beleg{display:block;margin-top:8px;font-size:1rem}
+.zitat{font-style:normal;border-left:4px solid var(--text);padding:8px 16px;margin:12px 0;background:var(--flaeche)}
+.zitat footer{font-size:1rem;color:var(--leise);margin-top:6px}
+
+/* Tabellen */
+table{border-collapse:collapse;width:100%;font-size:1rem;margin:0 0 20px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:8px 10px;border-bottom:2px solid var(--linie);vertical-align:top}
+th{font-weight:700;border-bottom-color:var(--text)}
+td.zahl,th.zahl{text-align:right;font-variant-numeric:tabular-nums}
+.tab-roll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* Balken (nur Ergebnisse, immer mit Name und Zahl) */
+.balken{display:grid;grid-template-columns:minmax(100px,160px) 1fr 64px;gap:8px 12px;align-items:center;margin:0 0 8px;font-size:1rem}
+.balken .spur{height:22px;background:var(--karton);border-radius:2px;overflow:hidden}
+.balken .fuellung{height:100%;background:var(--stahl);transform-origin:left;transition:transform var(--dauer-sitze) var(--ease-out)}
+.balken .zahl{text-align:right;font-variant-numeric:tabular-nums}
+.balken .huerde{position:relative}
+.huerde-linie{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--text)}
+
+/* Halbrund */
+.halbrund{width:100%;max-width:720px;margin:0 auto 12px;display:block}
+.halbrund circle{transition:fill var(--dauer-schnell) var(--ease-out)}
+.legende{list-style:none;padding:0;margin:0 0 20px;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:1rem}
+.legende li{display:inline-flex;align-items:center;gap:8px}
+.legende .punkt{width:16px;height:16px;border-radius:50%;border:1px solid var(--text);flex:none}
+
+/* Schalter */
+.schalter{display:inline-flex;align-items:center;gap:12px;min-height:48px;cursor:pointer;font-weight:700}
+.schalter input{width:52px;height:30px;appearance:none;-webkit-appearance:none;border:2px solid var(--text);border-radius:16px;background:var(--flaeche);position:relative;margin:0;cursor:pointer;flex:none}
+.schalter input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--text);transition:transform var(--dauer-schnell) var(--ease-out)}
+.schalter input:checked{background:var(--blau);border-color:var(--blau)}
+.schalter input:checked::after{transform:translateX(22px);background:var(--flaeche)}
+
+/* Aufdecken (Muster C) */
+.deck{position:relative}
+.deck .decke{position:absolute;inset:0;background:var(--karton);border-radius:var(--radius);transform-origin:top;transition:transform var(--dauer-aufdecken) var(--ease-inout),opacity var(--dauer-aufdecken) var(--ease-out);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--leise)}
+.deck.ist-offen .decke{transform:scaleY(0);opacity:0;pointer-events:none}
+.deck .decke button{width:100%;height:100%;border:0;background:transparent;cursor:pointer;font-weight:700;font-size:1.125rem;min-height:56px}
+
+/* Hinweis, Zusammenfassung, Druck */
+.hinweis{border:2px dashed var(--stahl);padding:12px 16px;border-radius:var(--radius);color:var(--leise);font-size:1rem;margin:0 0 20px}
+.hinweis strong{color:var(--text)}
+details{margin:0 0 16px}
+summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center;gap:8px}
+summary::marker{content:''}
+summary::before{content:'';width:12px;height:12px;border-right:2px solid var(--text);border-bottom:2px solid var(--text);transform:rotate(-45deg);transition:transform var(--dauer-schnell) var(--ease-out);flex:none;margin-right:4px}
+details[open]>summary::before{transform:rotate(45deg)}
+.zwei-spalten{columns:1;gap:32px}
+@media (min-width:768px){.zwei-spalten{columns:2}}
+.zwei-spalten>*{break-inside:avoid}
+.druck-nur{display:none}
+@media print{
+  body{background:#fff;color:#000;font-size:11pt;line-height:1.35}
+  .kopf,.fuss,.fort,.knopf,.knopfzeile,.kein-druck{display:none!important}
+  main{padding:0;max-width:none}
+  .karte{box-shadow:none;border:1px solid #000;padding:8pt;margin:0 0 8pt;break-inside:avoid}
+  h1{font-size:18pt}h2{font-size:14pt}h3{font-size:12pt}
+  .druck-nur{display:block}
+  a{color:#000;text-decoration:none}
+  @page{margin:14mm}
+}
+
+/* Beamer: 1280×720 ohne Scrollen für Übersichtsseiten */
+@media (max-height:760px) and (min-width:1024px){
+  body{font-size:1.0625rem}
+  .start .intro{display:grid;grid-template-columns:1fr 1.4fr;gap:24px;align-items:start}.start .intro p{font-size:1rem;margin-bottom:.5em}.start .raster--3{gap:12px}.start .karte .knopf{display:none}.start .karte p{font-size:1rem}.start .karte p{margin-bottom:8px}.start .karte h2{font-size:1.25rem;margin-bottom:4px}.start .hinweis{display:none}.start>p:not(.knopfzeile){margin-bottom:.5em}.start .knopfzeile{margin:8px 0}
+  main{padding:20px 24px}
+  h1{font-size:2.25rem;margin-bottom:.3em}
+  .karte{padding:14px;margin-bottom:16px}
+  .fort{margin-bottom:12px}
+}
+
+/* Weniger Bewegung: Endzustand bleibt, Bewegung entfällt */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:150ms!important;transition-property:opacity,color,background-color,border-color!important;animation:none!important}
+  .deck .decke{transition:opacity 150ms!important}
+}
+html[data-bewegung=weniger] *,html[data-bewegung=weniger] *::before,html[data-bewegung=weniger] *::after{transition-duration:150ms!important;transition-property:opacity,color,background-color,border-color!important;animation:none!important}
+
+/* Quellenlisten: Links als Tippziele */
+.quellen li{margin:0 0 4px}.quellen a,main li>a{display:inline-block;padding:11px 0;line-height:1.3}

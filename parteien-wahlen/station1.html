@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Station 1 · Grundlagen</title>
+<link rel="stylesheet" href="../assets/css/werkstatt.css">
+</head>
+<body>
+<header class="kopf"><div class="kopf-innen"></div></header>
+<main id="inhalt">
+  <ol class="fort" aria-label="Fortschritt"></ol>
+  <h1>Was Parteien tun</h1>
+  <p>Leitfrage: <strong>Warum braucht eine Demokratie Parteien, und was genau leisten sie?</strong> Lies den Verfassungstext, ordne die vier Aufgaben, dann die elf Funktionen. Zum Schluss prüfst du dich selbst.</p>
+
+  <section class="karte">
+    <h2>1. Das Grundgesetz</h2>
+    <blockquote class="zitat"><p>»(1) Die Parteien wirken bei der politischen Willensbildung des Volkes mit. Ihre Gründung ist frei. Ihre innere Ordnung muß demokratischen Grundsätzen entsprechen. Sie müssen über die Herkunft und Verwendung ihrer Mittel sowie über ihr Vermögen öffentlich Rechenschaft geben.</p><p>(2) Parteien, die nach ihren Zielen oder nach dem Verhalten ihrer Anhänger darauf ausgehen, die freiheitliche demokratische Grundordnung zu beeinträchtigen oder zu beseitigen oder den Bestand der Bundesrepublik Deutschland zu gefährden, sind verfassungswidrig.«</p><footer>Artikel 21 Absatz 1 und 2 Grundgesetz</footer></blockquote>
+    <p><strong>Aufgabe 1:</strong> Markiere im Kopf drei Dinge, die Artikel 21 von Parteien verlangt, und eine Sache, die er ihnen garantiert. Tippe dann auf »Aufdecken« und vergleiche.</p>
+    <div class="deck"><div class="decke"><button type="button" onclick="PW.aufdecken(this.closest('.deck'), event)">Aufdecken</button></div>
+      <ul><li><strong>Garantie:</strong> Gründungsfreiheit (»Ihre Gründung ist frei«).</li><li><strong>Verlangt:</strong> innerparteiliche Demokratie, Rechenschaft über Geld, Verfassungstreue (sonst verfassungswidrig; das entscheidet allein das Bundesverfassungsgericht, Art. 21 Abs. 4).</li><li><strong>Auftrag:</strong> Mitwirkung an der politischen Willensbildung, also kein Monopol: Auch Verbände, Medien und Bürgerinitiativen wirken mit.</li></ul>
+    </div>
+  </section>
+
+  <section class="karte">
+    <h2>2. Vier Aufgaben der Politik</h2>
+    <p>Politik heißt: Entscheidungen müssen diskutiert, getroffen, umgesetzt und kontrolliert werden, und dafür braucht es Personal. Ordne jede Beschreibung der passenden Aufgabe zu.</p>
+    <div id="aufgaben"></div>
+  </section>
+
+  <section class="karte">
+    <h2>3. Elf Funktionen von Parteien</h2>
+    <p>Parteien erfüllen diese Aufgaben über Funktionen. Lies jede Karte und tippe sie an, wenn du sie in einem Satz erklären kannst. Die Zahl der angetippten Karten ist nur für dich.</p>
+    <div id="funktionen" class="raster raster--2"></div>
+  </section>
+
+  <section class="karte">
+    <h2>4. Selbsttest</h2>
+    <p>Sechs Fragen. Es wird nichts gezählt; jede Antwort bekommt eine Begründung.</p>
+    <div id="test"></div>
+  </section>
+
+  <section class="karte karte--leise">
+    <h2>Sicherung in einem Satz</h2>
+    <p>Schreib in dein Heft: <em>Parteien sind …, weil sie … (nenne zwei Funktionen mit je einem Beispiel).</em></p>
+    <p class="knopfzeile knopfzeile--rechts"><a class="knopf knopf--voll" href="station2.html" onclick="PW.stationFertig(1)">Weiter zu Station 2: Erkennen</a></p>
+  </section>
+</main>
+<footer class="fuss"><div class="fuss-innen"></div></footer>
+<script src="../assets/js/daten.js"></script>
+<script src="../assets/js/werkstatt.js"></script>
+<script src="../assets/js/motion.js"></script>
+<script>
+PW.rahmen('st1', '../');
+(function () {
+  /* Aufgaben zuordnen */
+  var box = document.getElementById('aufgaben');
+  PW.mischen(PW.aufgaben).forEach(function (a, i) {
+    var f = PW.el('fieldset', { style: 'border:0;padding:0;margin:0 0 20px' });
+    f.appendChild(PW.el('legend', { html: '<strong>' + a.text + '</strong>' }));
+    var ul = PW.el('ul', { 'class': 'optionen' });
+    PW.mischen(PW.aufgaben).forEach(function (o) {
+      var inp = PW.el('input', { type: 'radio', name: 'aufg' + i, value: o.id });
+      var lab = PW.el('label', { 'class': 'opt' }, [inp, PW.el('span', { 'class': 'kreis', 'aria-hidden': 'true' }), PW.el('span', { text: o.name })]);
+      inp.addEventListener('change', function () {
+        ul.querySelectorAll('.opt').forEach(function (l) { l.classList.remove('ist-richtig', 'ist-falsch'); });
+        var r = f.querySelector('.rueck');
+        if (o.id === a.id) { lab.classList.add('ist-richtig'); r.className = 'rueck rueck--gut'; r.textContent = 'Passt. »' + a.text + '« ist ' + a.name + '.'; }
+        else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.textContent = 'Noch nicht. ' + o.name + ' heißt: ' + PW.aufgaben.filter(function (x) { return x.id === o.id; })[0].text + ' Lies die Beschreibung noch einmal.'; }
+      });
+      ul.appendChild(lab);
+    });
+    f.appendChild(ul); f.appendChild(PW.el('div', { 'class': 'rueck', 'aria-live': 'polite' }));
+    box.appendChild(f);
+  });
+
+  /* Funktionskarten */
+  var fk = document.getElementById('funktionen');
+  var gelesen = PW.lies('st1-karten', {});
+  PW.funktionen.forEach(function (fn) {
+    var aufg = PW.aufgaben.filter(function (a) { return a.id === fn.aufgabe; })[0];
+    var b = PW.el('button', { type: 'button', 'class': 'karte', 'aria-pressed': gelesen[fn.id] ? 'true' : 'false', style: 'text-align:left;cursor:pointer;font:inherit' }, [
+      PW.el('h3', { text: fn.name }), PW.el('p', { text: fn.kurz }), PW.el('p', { 'class': 'klein', html: '<strong>Beispiel:</strong> ' + fn.beispiel }), PW.el('p', { 'class': 'klein', style: 'color:var(--leise);margin:0', text: 'Aufgabe: ' + aufg.name })]);
+    if (gelesen[fn.id]) b.style.background = 'var(--blau-zart)';
+    b.addEventListener('click', function () { var an = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', an ? 'true' : 'false'); b.style.background = an ? 'var(--blau-zart)' : ''; gelesen[fn.id] = an; PW.merke('st1-karten', gelesen); });
+    fk.appendChild(b);
+  });
+
+  /* Selbsttest */
+  var fragen = [
+    { f: 'Wer darf eine Partei verbieten?', o: ['Der Bundestag mit Zweidrittelmehrheit', 'Das Bundesverfassungsgericht', 'Der Bundespräsident', 'Das Bundesamt für Verfassungsschutz'], r: 1, w: 'Nur das Bundesverfassungsgericht entscheidet über die Verfassungswidrigkeit (Art. 21 Abs. 4 GG). Der Verfassungsschutz beobachtet und stuft ein, verbietet aber nicht.' },
+    { f: 'Eine Partei nominiert ihre Kandidatin für das Direktmandat. Welche Funktion?', o: ['Interessenartikulation', 'Rekrutierung', 'Sozialisation', 'Kontrollfunktion'], r: 1, w: 'Personal für Ämter und Mandate auszuwählen ist Rekrutierung.' },
+    { f: 'Zwei Parteiflügel einigen sich auf eine gemeinsame Linie beim Wahlalter. Welche Funktion?', o: ['Interessenaggregation', 'Mobilisierung', 'Herrschaftsfunktion', 'Legitimation'], r: 0, w: 'Verschiedene Interessen bündeln und gewichten ist Interessenaggregation.' },
+    { f: 'Die Opposition stellt eine Kleine Anfrage an die Regierung. Welche Aufgabe?', o: ['Politikformulierung', 'Politikimplementation', 'Politikkontrolle', 'Personalrekrutierung'], r: 2, w: 'Der politische Prozess wird kontrolliert: Politikkontrolle, meist durch die Opposition.' },
+    { f: 'Was verlangt Art. 21 GG von der inneren Ordnung einer Partei?', o: ['Sie muss einen Vorsitzenden haben', 'Sie muss demokratischen Grundsätzen entsprechen', 'Sie muss in allen Ländern antreten', 'Sie muss ein Wahlprogramm beschließen'], r: 1, w: '»Ihre innere Ordnung muß demokratischen Grundsätzen entsprechen.« Alles andere steht nicht im Grundgesetz.' },
+    { f: 'Parteien »wirken bei der politischen Willensbildung des Volkes mit«. Was folgt daraus?', o: ['Nur Parteien dürfen politisch werben', 'Parteien haben kein Monopol; Verbände und Medien wirken ebenfalls mit', 'Parteien entscheiden Gesetze allein', 'Das Volk muss Parteien folgen'], r: 1, w: '»Mitwirken« heißt: Sie sind ein wichtiger Akteur neben anderen, nicht der einzige.' }
+  ];
+  var t = document.getElementById('test');
+  fragen.forEach(function (q, i) {
+    var f = PW.el('fieldset', { style: 'border:0;padding:0;margin:0 0 20px' });
+    f.appendChild(PW.el('legend', { html: '<strong>' + (i + 1) + '. ' + q.f + '</strong>' }));
+    var ul = PW.el('ul', { 'class': 'optionen' });
+    q.o.forEach(function (txt, j) {
+      var inp = PW.el('input', { type: 'radio', name: 'test' + i, value: j });
+      var lab = PW.el('label', { 'class': 'opt' }, [inp, PW.el('span', { 'class': 'kreis', 'aria-hidden': 'true' }), PW.el('span', { text: txt })]);
+      inp.addEventListener('change', function () {
+        ul.querySelectorAll('.opt').forEach(function (l) { l.classList.remove('ist-richtig', 'ist-falsch'); });
+        var r = f.querySelector('.rueck');
+        if (j === q.r) { lab.classList.add('ist-richtig'); r.className = 'rueck rueck--gut'; r.textContent = 'Passt. ' + q.w; }
+        else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.textContent = 'Noch nicht. ' + q.w; }
+      });
+      ul.appendChild(lab);
+    });
+    f.appendChild(ul); f.appendChild(PW.el('div', { 'class': 'rueck', 'aria-live': 'polite' }));
+    t.appendChild(f);
+  });
+})();
+</script>
+</body>
+</html>

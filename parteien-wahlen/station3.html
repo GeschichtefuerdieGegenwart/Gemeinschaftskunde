@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Station 3 · Positionen</title>
+<link rel="stylesheet" href="../assets/css/werkstatt.css">
+<style>
+.pz{border-top:2px solid var(--linie);padding:12px 0 4px}
+.pz h4{margin:0 0 8px;font-size:1.125rem}
+.pz-opt{grid-template-columns:repeat(3,1fr);margin:0}
+@media (max-width:600px){.pz-opt{grid-template-columns:1fr}dl dd{margin-left:0!important}}
+@media (min-width:768px){.pz{display:grid;grid-template-columns:140px 1fr;gap:4px 16px;align-items:start}.pz h4{padding-top:12px}.pz .rueck{grid-column:2}}
+</style>
+</head>
+<body>
+<header class="kopf"><div class="kopf-innen"></div></header>
+<main id="inhalt">
+  <ol class="fort" aria-label="Fortschritt"></ol>
+  <h1>Wofür stehen die Parteien?</h1>
+  <p>Leitfrage: <strong>Wie würde Partei X entscheiden, und woher weiß man das?</strong> Zuerst acht Kurzprofile, dann acht Streitfragen. Du tippst deine Vermutung, danach erscheint die wörtliche Stelle aus dem Wahlprogramm 2025 mit Seitenzahl. So lernst du, Positionen zu <em>belegen</em> statt zu raten.</p>
+  <p class="hinweis"><strong>Zwei Ebenen, getrennt:</strong> Was eine Partei über sich sagt (Programm) und was andere über sie feststellen (Gerichte, Verfassungsschutz, Recherchen). Beides steht hier, aber nie vermischt und immer mit Datum und Quelle. Die Seite sagt dir nicht, was du wählen sollst.</p>
+
+  <h2>Kurzprofile</h2>
+  <p class="klein">Reihenfolge wie auf dem Stimmzettel 2025 (Listenplatz). Sitze: Bundestag seit 2025, 630 Sitze.</p>
+  <div id="profile" class="raster raster--2"></div>
+
+  <h2 style="margin-top:36px">Acht Streitfragen</h2>
+  <p>Die Fragen werden schwieriger: zuerst klare Ja/Nein-Themen, dann Fragen, bei denen Parteien ähnliche Worte für verschiedene Dinge benutzen. <strong>Vorgehen:</strong> Für jede Partei tippen, dann »Programm aufdecken«. Lies die Stelle ganz, nicht nur die Kategorie.</p>
+  <div id="fragen"></div>
+
+  <section class="karte karte--leise">
+    <h2>Sicherung: Analyse mit Beleg</h2>
+    <p>Wähle eine Frage und zwei Parteien mit gegensätzlicher Position. Schreib fünf Sätze nach diesem Muster: <em>Partei A fordert … (Beleg: Programm, S. …). Partei B lehnt das ab, weil … (Beleg). Der Unterschied liegt in … (z. B. Rolle des Staates, Freiheit vs. Gleichheit, Sicherheit vs. Offenheit).</em> Das ist der Operator <strong>vergleichen</strong> (AFB III).</p>
+    <p class="knopfzeile knopfzeile--rechts"><a class="knopf" href="station2.html">Zurück</a> <a class="knopf knopf--voll" href="station4.html" onclick="PW.stationFertig(3)">Weiter zu Station 4: Wählen</a></p>
+  </section>
+</main>
+<footer class="fuss"><div class="fuss-innen"></div></footer>
+<script src="../assets/js/daten.js"></script>
+<script src="../assets/js/werkstatt.js"></script>
+<script src="../assets/js/motion.js"></script>
+<script>
+PW.rahmen('st3', '../');
+(function () {
+  var reihenfolge = ['cdu', 'csu', 'spd', 'gruene', 'fdp', 'afd', 'linke', 'bsw'];
+  var prof = document.getElementById('profile');
+  reihenfolge.forEach(function (id) {
+    var p = PW.partei(id);
+    var k = PW.el('article', { 'class': 'karte' }, [
+      PW.el('h3', { text: p.name }), PW.el('p', { 'class': 'klein', style: 'color:var(--leise)', text: p.lang }),
+      PW.el('dl', { 'class': 'klein', html: '<dt><strong>Gegründet</strong></dt><dd>' + p.gruendung + '</dd><dt><strong>Vorsitz</strong></dt><dd>' + p.vorsitz + '</dd><dt><strong>Bundestagswahl 2025</strong></dt><dd>' + PW.fmt(p.btw, p.id === 'bsw' ? 2 : 1) + ' % der Zweitstimmen · ' + p.sitze + ' Sitze</dd><dt><strong>Rolle</strong></dt><dd>' + p.rolle + '</dd><dt><strong>Programm 2025</strong></dt><dd>»' + p.programm + '«</dd>' })
+    ]);
+    var d = PW.el('details'); d.appendChild(PW.el('summary', { text: 'Einordnungen Dritter' }));
+    (PW.einordnungen[id] || []).forEach(function (e) { d.appendChild(PW.el('p', { 'class': 'klein', html: e.text + ' <span style="color:var(--leise)">(' + e.stand + ')</span>' })); });
+    k.appendChild(d); prof.appendChild(k);
+  });
+  var style = document.createElement('style'); style.textContent = 'dl dt{float:left;clear:left;width:9em;margin:0}dl dd{margin:0 0 4px 9.5em}'; document.head.appendChild(style);
+
+  var fb = document.getElementById('fragen');
+  var gespeichert = PW.lies('st3', {});
+  PW.fragen.forEach(function (q, qi) {
+    var sec = PW.el('section', { 'class': 'karte' });
+    sec.appendChild(PW.el('h3', { text: (qi + 1) + '. ' + q.frage }));
+    sec.appendChild(PW.el('p', { 'class': 'klein', style: 'color:var(--leise)', text: 'Stufe ' + q.stufe + ' von 3 · Tippe für jede Partei' }));
+    var tab = PW.el('div', { 'class': 'parteien' });
+    var ord = PW.mischen(reihenfolge);
+    ord.forEach(function (id) {
+      var p = PW.partei(id); var pos = q.pos[id];
+      var zeile = PW.el('div', { 'class': 'pz' });
+      zeile.appendChild(PW.el('h4', { text: p.name }));
+      var ul = PW.el('ul', { 'class': 'optionen pz-opt', role: 'radiogroup', 'aria-label': p.name });
+      var r = PW.el('div', { 'class': 'rueck', 'aria-live': 'polite', style: 'margin:8px 0 4px' });
+      q.kategorien.forEach(function (k) {
+        var inp = PW.el('input', { type: 'radio', name: 'q' + qi + id, value: k });
+        var lab = PW.el('label', { 'class': 'opt', style: 'min-height:48px;grid-template-columns:34px 1fr' }, [inp, PW.el('span', { 'class': 'kreis', 'aria-hidden': 'true', style: 'width:28px;height:28px' }), PW.el('span', { text: k })]);
+        if (gespeichert[qi + id] === k) inp.checked = true;
+        inp.addEventListener('change', function () {
+          gespeichert[qi + id] = k; PW.merke('st3', gespeichert);
+          ul.querySelectorAll('.opt').forEach(function (l) { l.classList.remove('ist-richtig', 'ist-falsch'); });
+          var beleg = '<span class="beleg">Beleg: Wahlprogramm 2025 der ' + p.name + (pos[2] !== '–' ? ', ' + pos[2] + ' der PDF-Datei' : '') + '</span>';
+          if (k === pos[0]) { lab.classList.add('ist-richtig'); r.className = 'rueck rueck--gut'; r.innerHTML = '<strong>Passt.</strong> ' + pos[1] + beleg; }
+          else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.innerHTML = '<strong>Das Programm sagt etwas anderes:</strong> ' + pos[1] + beleg; }
+        });
+        ul.appendChild(lab);
+      });
+      zeile.appendChild(ul); zeile.appendChild(r); tab.appendChild(zeile);
+    });
+    sec.appendChild(tab);
+    var deck = PW.el('div', { 'class': 'deck' });
+    deck.appendChild(PW.el('div', { 'class': 'decke' }, [PW.el('button', { type: 'button', text: 'Alle Programmstellen aufdecken' })]));
+    var liste = PW.el('dl', { 'class': 'klein' });
+    reihenfolge.forEach(function (id) { var p = PW.partei(id); var pos = q.pos[id]; liste.appendChild(PW.el('dt', { html: '<strong>' + p.name + '</strong> – ' + pos[0] })); liste.appendChild(PW.el('dd', { html: pos[1] + (pos[2] !== '–' ? ' <span style="color:var(--leise)">(' + pos[2] + ')</span>' : '') })); });
+    deck.appendChild(liste); deck.querySelector('button').addEventListener('click', function (ev) { PW.aufdecken(deck, ev); });
+    sec.appendChild(deck);
+    fb.appendChild(sec);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Musterbuch · Bewegung</title>
+<link rel="stylesheet" href="assets/css/werkstatt.css">
+<style>
+.band{display:grid;gap:20px;grid-template-columns:1fr;border-top:2px solid var(--text);padding:28px 0}
+@media (min-width:1024px){.band{grid-template-columns:3fr 2fr}}
+.buehne{background:var(--flaeche);border:2px solid var(--text);border-radius:4px;padding:20px;min-height:200px;overflow:clip}
+.steck{font-size:1rem}
+.steck dt{font-weight:700;margin-top:8px}
+.steck dd{margin:0}
+.buchstabe{font-family:var(--schrift-titel);font-size:2.5rem;font-weight:700;line-height:1;color:var(--blau)}
+.mini-fort{display:flex;gap:16px;list-style:none;padding:0;margin:12px 0}
+.mini-fort li{width:28px;height:28px;border:2px solid var(--text);border-radius:50%;background:var(--flaeche)}
+.mini-fort li.ist-fertig{background:var(--text)}
+.urne{width:120px;height:60px;border:2px solid var(--text);border-top:0;margin:8px auto 0;border-radius:0 0 6px 6px}
+</style>
+</head>
+<body>
+<header class="kopf"><div class="kopf-innen"></div></header>
+<main id="inhalt">
+  <h1>Musterbuch: Bewegung aus dem Stimmzettel</h1>
+  <p>Acht Bewegungsideen, alle aus der Metapher »Stimmzettel und Auszählung«. Jede startet nur auf Tippen, nichts läuft in Schleife, alles ist im Ruhezustand vollständig sichtbar. <label class="schalter" style="margin-left:8px"><input type="checkbox" id="weniger"> Weniger Bewegung</label></p>
+  <p class="hinweis">Lies die Steckbriefe, probiere die Bühnen aus, und sag mir die Buchstaben, die in die Einheit sollen. Empfehlung am Ende.</p>
+
+  <section class="band" id="A"><div class="buehne"><span class="buchstabe">A</span><h2>Das Kreuz</h2><p>Tippe eine Option: Das Kreuz zeichnet sich in zwei Strichen in den Kreis, wie mit dem Stift.</p>
+    <ul class="optionen"><li><label class="opt"><input type="radio" name="a"><span class="kreis" aria-hidden="true"></span><span>Marc Biadacz · CDU</span></label></li><li><label class="opt"><input type="radio" name="a"><span class="kreis" aria-hidden="true"></span><span>Jasmina Hostert · SPD</span></label></li></ul></div>
+    <dl class="steck"><dt>Worum</dt><dd>Die Rückmeldung auf jede Auswahl ist das Kreuz selbst. Kein Häkchen, keine Farbfüllung.</dd><dt>Wo</dt><dd>Alle Stationen, jede Auswahl.</dd><dt>Zweck</dt><dd>Rückmeldung.</dd><dt>Häufigkeit · Dauer</dt><dd>sehr oft · 160 ms</dd><dt>Technik</dt><dd>CSS, scaleY an zwei Pseudoelementen.</dd><dt>Aufwand · Risiko</dt><dd>gering · keines</dd><dt>Weniger Bewegung</dt><dd>Kreuz erscheint sofort.</dd></dl></section>
+
+  <section class="band" id="B"><div class="buehne"><span class="buchstabe">B</span><h2>Druck auf die Platte</h2><p>Drücke den Knopf: Er rutscht 2 px auf seine Platte, als würde ein Stempel aufsetzen.</p><p><button class="knopf knopf--voll" type="button">Stimmzettel abgeben</button> <button class="knopf" type="button">Aufdecken</button></p></div>
+    <dl class="steck"><dt>Worum</dt><dd>Jeder Knopf bestätigt den Druck körperlich. Beim Überfahren mit der Maus hebt sich eine Platte, am iPad nicht.</dd><dt>Wo</dt><dd>Alle Knöpfe.</dd><dt>Zweck</dt><dd>Rückmeldung.</dd><dt>Häufigkeit · Dauer</dt><dd>oft · 100 ms</dd><dt>Technik</dt><dd>CSS :active, transform.</dd><dt>Aufwand · Risiko</dt><dd>gering · keines</dd><dt>Weniger Bewegung</dt><dd>Nur Farbwechsel.</dd></dl></section>
+
+  <section class="band" id="C"><div class="buehne"><span class="buchstabe">C</span><h2>Aufdecken</h2><p>Erst tippen, dann sehen: Das Deckblatt klappt nach oben weg und gibt die Programmstelle frei.</p>
+    <div class="deck" id="deckC"><div class="decke"><button type="button" onclick="PW.aufdecken(document.getElementById('deckC'), event)">Programm aufdecken</button></div><blockquote class="zitat"><p>»Wir wollen ein Tempolimit von 130 km/h auf Bundesautobahnen einführen.«</p><footer>SPD, Regierungsprogramm 2025, S. 36</footer></blockquote></div>
+    <p><button class="knopf knopf--leise" type="button" onclick="var d=document.getElementById('deckC');d.classList.remove('ist-offen');d.querySelector('.decke').removeAttribute('aria-hidden')">Zurücksetzen</button></p></div>
+    <dl class="steck"><dt>Worum</dt><dd>Der Statuswechsel von Vermutung zu Beleg bekommt eine Richtung: Die Decke geht hoch, der Text bleibt an Ort und Stelle.</dd><dt>Wo</dt><dd>Station 1 (GG), 3 (Programme), 5 (Statistik).</dd><dt>Zweck</dt><dd>Statuswechsel.</dd><dt>Häufigkeit · Dauer</dt><dd>einmal je Frage · 360 ms (Begründung in DESIGN.md: über 300 ms, weil einmalig)</dd><dt>Technik</dt><dd>CSS scaleY + opacity, inOut-Kurve.</dd><dt>Aufwand · Risiko</dt><dd>gering · Inhalt muss ohne JS sichtbar sein (ist er: Decke liegt nur darüber).</dd><dt>Weniger Bewegung</dt><dd>Decke blendet in 150 ms aus.</dd></dl></section>
+
+  <section class="band" id="D"><div class="buehne"><span class="buchstabe">D</span><h2>Das Halbrund füllt sich</h2><p>Die Auszählung: 630 Punkte färben sich von links nach rechts in Parteifarbe, 440 ms, einmal je Ergebnis.</p><div id="halbD"></div><p><button class="knopf" type="button" id="knopfD">Bundesergebnis 2025 auszählen</button></p></div>
+    <dl class="steck"><dt>Worum</dt><dd>Die einzige farbige Grafik der Einheit. Farbe nur mit Name und Zahl in der Legende; Tabelle als Rückfall.</dd><dt>Wo</dt><dd>Station 4, Lehrkraft-Modus am Beamer.</dd><dt>Zweck</dt><dd>Erklärung durch Form (Mengen).</dd><dt>Häufigkeit · Dauer</dt><dd>bei Ergebnis · 440 ms (Ausnahme über 300 ms, begründet: einmal je Ergebnis, Beamer-Moment)</dd><dt>Technik</dt><dd>SVG, fill-Transition, gestaffelt per Timeout.</dd><dt>Aufwand · Risiko</dt><dd>mittel · Headless-Fotos zeigen den Endzustand, weil der Ruhezustand voll gefärbt ist.</dd><dt>Weniger Bewegung</dt><dd>Sofort gefärbt.</dd></dl></section>
+
+  <section class="band" id="E"><div class="buehne"><span class="buchstabe">E</span><h2>Balken wachsen</h2><p>Ergebnisbalken wachsen vom Nullpunkt, gestaffelt um 30 ms, Hürdenlinie steht fest.</p><div id="balkenE"></div><p><button class="knopf" type="button" id="knopfE">Wahlkreis 260 anzeigen</button></p></div>
+    <dl class="steck"><dt>Worum</dt><dd>Man sieht, wer über die Hürde kommt und wer nicht: Balken unter der Linie bleiben grau.</dd><dt>Wo</dt><dd>Station 4, Vertiefung.</dd><dt>Zweck</dt><dd>Erklärung durch Form.</dd><dt>Häufigkeit · Dauer</dt><dd>bei Ergebnis · 440 ms + 30 ms Staffel (max. 8)</dd><dt>Technik</dt><dd>CSS transform scaleX, transition-delay.</dd><dt>Aufwand · Risiko</dt><dd>gering · keines</dd><dt>Weniger Bewegung</dt><dd>Endwert sofort.</dd></dl></section>
+
+  <section class="band" id="F"><div class="buehne"><span class="buchstabe">F</span><h2>Stempel: Station erledigt</h2><p>Wenn eine Station abgeschlossen ist, füllt sich ihr Kreis im Fortschritt mit kurzem Nachdruck.</p><ul class="mini-fort" id="fortF"><li class="ist-fertig"></li><li class="ist-fertig"></li><li></li><li></li><li></li></ul><p><button class="knopf" type="button" id="knopfF">Station 3 abschließen</button></p></div>
+    <dl class="steck"><dt>Worum</dt><dd>Orientierung: Wo stehe ich? Der Fortschritt zählt Stationen, keine Klicks und keine Punkte.</dd><dt>Wo</dt><dd>Fortschrittsleiste oben auf jeder Station.</dd><dt>Zweck</dt><dd>Orientierung.</dd><dt>Häufigkeit · Dauer</dt><dd>fünfmal je Einheit · 220 ms</dd><dt>Technik</dt><dd>scale 1,12 → 1, Klasse ist-fertig.</dd><dt>Aufwand · Risiko</dt><dd>gering · keines</dd><dt>Weniger Bewegung</dt><dd>Kreis wird sofort voll.</dd></dl></section>
+
+  <section class="band" id="G"><div class="buehne"><span class="buchstabe">G</span><h2>In die Urne</h2><p>Nach »Abgeben« rutscht der Stimmzettel nach unten und wird kleiner, als fiele er in die Urne. Danach erscheint die Bestätigung.</p><div id="zettelG" style="border:2px solid var(--text);padding:12px;background:var(--flaeche);max-width:320px"><strong>Stimmzettel</strong><br><span class="klein">Erststimme: Thomas Walz · Zweitstimme: GRÜNE</span></div><div class="urne" aria-hidden="true"></div><p><button class="knopf knopf--voll" type="button" id="knopfG">Abgeben</button> <button class="knopf knopf--leise" type="button" id="resetG">Zurück</button></p></div>
+    <dl class="steck"><dt>Worum</dt><dd>Der Übergang von »ausfüllen« zu »abgegeben« bekommt ein Bild. Es ist das einzige Muster mit Bewegung über den Bildschirm.</dd><dt>Wo</dt><dd>Station 4, einmal.</dd><dt>Zweck</dt><dd>Statuswechsel.</dd><dt>Häufigkeit · Dauer</dt><dd>einmal je Wahl · 300 ms</dd><dt>Technik</dt><dd>translateY + scale, inOut-Kurve, overflow clip.</dd><dt>Aufwand · Risiko</dt><dd>gering · kurz waagerechtes Scrollen, wenn ohne clip (ist gesetzt).</dd><dt>Weniger Bewegung</dt><dd>Zettel blendet aus.</dd></dl></section>
+
+  <section class="band" id="H"><div class="buehne"><span class="buchstabe">H</span><h2>Die Hürde hebt sich</h2><p>Schalter 5-%-Hürde: Balken unter 5 % wechseln von Parteifarbe zu Grau, die Linie erscheint. Nichts springt.</p><div id="balkenH"></div><p><label class="schalter"><input type="checkbox" id="huerdeH" checked> 5-%-Hürde</label></p></div>
+    <dl class="steck"><dt>Worum</dt><dd>Die Wirkung der Hürde wird als Farbwechsel sichtbar, nicht als Verschwinden. Die Zahlen bleiben stehen.</dd><dt>Wo</dt><dd>Station 4 Sitzrechner.</dd><dt>Zweck</dt><dd>Erklärung durch Form (Vorher-nachher).</dd><dt>Häufigkeit · Dauer</dt><dd>beim Umschalten · 160 ms</dd><dt>Technik</dt><dd>CSS background-color Transition, Linie per opacity.</dd><dt>Aufwand · Risiko</dt><dd>gering · keines</dd><dt>Weniger Bewegung</dt><dd>identisch (Farbwechsel ≤ 150 ms erlaubt).</dd></dl></section>
+
+  <section class="karte" style="margin-top:28px">
+    <h2>Empfehlung</h2>
+    <p>Oft, billig und wirksam zuerst: <strong>A, B, C, E, H</strong>. Dazu <strong>D</strong> für den Beamer-Moment der Auszählung und <strong>F</strong> für die Orientierung. <strong>G</strong> ist Schmuck mit Bedeutung; er lohnt sich nur, wenn die Klasse den Stimmzettel wirklich auf der Seite übt, sonst weglassen.</p>
+    <p><strong>Sag mir die Buchstaben.</strong></p>
+  </section>
+</main>
+<footer class="fuss"><div class="fuss-innen"></div></footer>
+<script src="assets/js/daten.js"></script>
+<script src="assets/js/werkstatt.js"></script>
+<script src="assets/js/motion.js"></script>
+<script>
+PW.rahmen('must', '');
+(function () {
+  var w = document.getElementById('weniger'); w.checked = PW.wenigerBewegung(); w.addEventListener('change', function () { PW.schalteBewegung(!w.checked); });
+  var ids = ['cdu', 'csu', 'spd', 'gruene', 'fdp', 'afd', 'linke', 'bsw'];
+  var farben = ids.map(function (id) { var p = PW.partei(id); return { id: id, name: p.name, farbe: p.farbe }; }); farben.push({ id: 'ssw', name: 'SSW', farbe: '#2A6F97' });
+  var sitze = PW.sitze(PW.ergebnisse.bund.werte, { huerde: 5, ssw: true });
+  PW.halbrund(document.getElementById('halbD'), sitze, farben, false);
+  document.getElementById('knopfD').addEventListener('click', function () { PW.halbrund(document.getElementById('halbD'), sitze, farben, true); });
+  function balken(box, werte, huerde) {
+    box.innerHTML = '';
+    ids.forEach(function (id) { var v = werte[id]; if (v === null || v === undefined) return; var p = PW.partei(id); var drin = !huerde || v >= 5;
+      box.appendChild(PW.el('div', { 'class': 'balken' }, [PW.el('span', { text: p.name }), PW.el('div', { 'class': 'spur huerde' }, [PW.el('div', { 'class': 'fuellung', 'data-wert': (Math.min(v, 50) / 50).toFixed(3), style: 'background:' + (drin ? p.farbe : '#9A948C') + ';transition:transform 440ms cubic-bezier(.23,1,.32,1),background-color 160ms' }), PW.el('div', { 'class': 'huerde-linie', style: 'left:10%;opacity:' + (huerde ? 1 : 0) + ';transition:opacity 160ms' })]), PW.el('span', { 'class': 'zahl', text: PW.fmt(v) + ' %' })])); });
+  }
+  var bE = document.getElementById('balkenE'); balken(bE, PW.ergebnisse.wahlkreis.werte, true); bE.querySelectorAll('.fuellung').forEach(function (f) { f.style.transform = 'scaleX(' + f.getAttribute('data-wert') + ')'; });
+  document.getElementById('knopfE').addEventListener('click', function () { balken(bE, PW.ergebnisse.wahlkreis.werte, true); PW.balkenWachsen(bE); });
+  var bH = document.getElementById('balkenH'), hH = document.getElementById('huerdeH');
+  function zeichneH() { balken(bH, PW.ergebnisse.bund.werte, hH.checked); bH.querySelectorAll('.fuellung').forEach(function (f) { f.style.transform = 'scaleX(' + f.getAttribute('data-wert') + ')'; }); }
+  zeichneH(); hH.addEventListener('change', function () { var alt = {}; bH.querySelectorAll('.fuellung').forEach(function (f, i) { alt[i] = f.style.background; }); var drin = hH.checked; ids.forEach(function (id, i) { var f = bH.querySelectorAll('.fuellung')[i]; if (!f) return; var v = PW.ergebnisse.bund.werte[id]; f.style.background = (!drin || v >= 5) ? PW.partei(id).farbe : '#9A948C'; }); bH.querySelectorAll('.huerde-linie').forEach(function (l) { l.style.opacity = drin ? 1 : 0; }); });
+  document.getElementById('knopfF').addEventListener('click', function () { PW.stempel(document.querySelectorAll('#fortF li')[2]); });
+  var zG = document.getElementById('zettelG');
+  document.getElementById('knopfG').addEventListener('click', function () { PW.inDieUrne(zG, function () { zG.style.visibility = 'hidden'; }); });
+  document.getElementById('resetG').addEventListener('click', function () { zG.style.cssText = ''; });
+})();
+</script>
+</body>
+</html>

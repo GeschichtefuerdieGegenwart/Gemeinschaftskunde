@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Station 2 · Erkennen</title>
+<link rel="stylesheet" href="../assets/css/werkstatt.css">
+</head>
+<body>
+<header class="kopf"><div class="kopf-innen"></div></header>
+<main id="inhalt">
+  <ol class="fort" aria-label="Fortschritt"></ol>
+  <h1>Funktionen erkennen</h1>
+  <p>Leitfrage: <strong>Welche Funktion erfüllt eine Partei hier gerade?</strong> Zwölf Beispiele aus dem Wahljahr 2025, in zufälliger Reihenfolge. Oft passt mehr als eine Funktion: Du bekommst eine Begründung, keine Punkte. Operator <em>erläutern</em> (AFB II): Nenne die Funktion und erkläre am Beispiel, warum sie passt.</p>
+  <p class="hinweis">Die Beispiele sind vereinfacht, aber nicht erfunden: Die Programmaussagen stehen in Station 3 wörtlich mit Seitenzahl. Die Reihenfolge der Parteien ist zufällig.</p>
+  <div id="beispiele"></div>
+  <section class="karte karte--leise">
+    <h2>Sicherung</h2>
+    <p>Welche Funktion kam am häufigsten vor? Welche fällt dir im Alltag am seltensten auf, und woran könnte das liegen? Notiere zwei Sätze.</p>
+    <p class="knopfzeile knopfzeile--rechts"><a class="knopf" href="station1.html">Zurück</a> <a class="knopf knopf--voll" href="station3.html" onclick="PW.stationFertig(2)">Weiter zu Station 3: Positionen</a></p>
+  </section>
+</main>
+<footer class="fuss"><div class="fuss-innen"></div></footer>
+<script src="../assets/js/daten.js"></script>
+<script src="../assets/js/werkstatt.js"></script>
+<script src="../assets/js/motion.js"></script>
+<script>
+PW.rahmen('st2', '../');
+(function () {
+  var box = document.getElementById('beispiele');
+  var name = function (id) { return PW.funktionen.filter(function (f) { return f.id === id; })[0].name; };
+  PW.mischen(PW.beispiele).forEach(function (b, i) {
+    var f = PW.el('fieldset', { 'class': 'karte', style: 'margin-bottom:24px' });
+    f.appendChild(PW.el('legend', { style: 'padding:0 8px;font-family:var(--schrift-titel);font-weight:700;font-size:1.25rem', text: 'Beispiel ' + (i + 1) }));
+    f.appendChild(PW.el('p', { text: b.text }));
+    f.appendChild(PW.el('p', { 'class': 'klein', text: 'Wähle eine Funktion. Danach kannst du eine zweite prüfen.' }));
+    var ul = PW.el('ul', { 'class': 'optionen', style: 'grid-template-columns:repeat(auto-fill,minmax(240px,1fr))' });
+    var r = PW.el('div', { 'class': 'rueck', 'aria-live': 'polite' });
+    PW.funktionen.forEach(function (fn) {
+      var inp = PW.el('input', { type: 'checkbox', name: 'b' + i, value: fn.id });
+      var lab = PW.el('label', { 'class': 'opt' }, [inp, PW.el('span', { 'class': 'kreis', 'aria-hidden': 'true' }), PW.el('span', { text: fn.name })]);
+      inp.addEventListener('change', function () {
+        if (!inp.checked) { lab.classList.remove('ist-richtig', 'ist-falsch'); return; }
+        if (b.richtig.indexOf(fn.id) >= 0) { lab.classList.add('ist-richtig'); r.className = 'rueck rueck--gut'; r.innerHTML = '<strong>Passt.</strong> ' + b.warum + (b.richtig.length > 1 ? ' Hier passen zwei Funktionen: ' + b.richtig.map(name).join(' und ') + '.' : ''); }
+        else if (b.auch.indexOf(fn.id) >= 0) { lab.classList.add('ist-richtig'); r.className = 'rueck'; r.innerHTML = '<strong>Vertretbar.</strong> ' + fn.name + ' lässt sich begründen. Am deutlichsten ist aber: ' + b.warum; }
+        else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.innerHTML = '<strong>Eher nicht.</strong> ' + fn.name + ' heißt: ' + fn.kurz + ' Frag dich: Wer tut hier was, und wozu?'; }
+      });
+      ul.appendChild(lab);
+    });
+    f.appendChild(ul); f.appendChild(r);
+    box.appendChild(f);
+  });
+})();
+</script>
+</body>
+</html>

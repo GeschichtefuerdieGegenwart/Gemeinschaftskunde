@@ -1,0 +1,24 @@
+{
+  "note": "Politik-Werkstatt ist eine Lernumgebung (App-Bildschirme), keine Werbeseite. DESIGN.md entscheidet; der Taste-Prüfer gibt Hinweise.",
+  "allow": [
+    "still-page",
+    "no-footage",
+    "few-pictures",
+    "focal-point",
+    "shadow",
+    "heavy-shadow",
+    "heavy-borders",
+    "app-title-size"
+  ],
+  "reasons": {
+    "still-page": "Unterricht mit iPads: Aufmerksamkeit ist knapp, kein Autoplay, keine Scroll-Einblendungen. Bewegung nur bei Tippen (Kreuz, Aufdecken, Halbrund) und mit Schalter »Weniger Bewegung«.",
+    "no-footage": "Es gibt keine ehrlichen Aufnahmen aus dem Unterricht und keine Bilder von Politikerinnen und Politikern (Überwältigungsverbot, Persönlichkeitsrechte).",
+    "shadow": "Versetzte Platte 6px 6px 0 0 ohne Weichzeichner (DESIGN.md, No-Blur Rule); keine schwebenden Flächen.",
+    "few-pictures": "Lernwerkzeug ohne Bildmaterial: keine Fotos von Politikerinnen und Politikern, keine Logos (Überwältigungsverbot).",
+    "focal-point": "App-Bildschirm: Beamer-Startseite muss in 720 px passen, keine Display-Überschrift mit 8 vw.",
+    "heavy-shadow": "Versetzte Platte 6px 6px 0 0 in Karton auf Grund, kein Weichzeichner; Signatur der Route »Stimmzettel«.",
+    "heavy-borders": "2-px-Rahmen in Druckfarbe wie der amtliche Stimmzettel (Two-Inks Rule).",
+    "app-title-size": "h1 44px Desktop, 30px Telefon: Beamer-Lesbarkeit aus 8 m."
+  },
+  "kind": "app"
+}

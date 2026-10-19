@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Station 5 · Warum so?</title>
+<link rel="stylesheet" href="../assets/css/werkstatt.css">
+<style>
+.vermutung{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin:0 0 16px}
+.vermutung label{display:grid;gap:4px;font-size:1rem;font-weight:700}
+.vermutung input{min-height:44px;padding:6px 10px;border:2px solid var(--stahl);border-radius:4px;background:var(--flaeche);font-size:1.125rem;width:100%}
+.raster-tab td.zahl{min-width:60px}
+.urteil{display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:768px){.urteil{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header class="kopf"><div class="kopf-innen"></div></header>
+<main id="inhalt">
+  <ol class="fort" aria-label="Fortschritt"></ol>
+  <h1>Warum wählen Menschen so?</h1>
+  <p>Leitfrage: <strong>Wählen Junge anders als Alte, Frauen anders als Männer, und was folgt daraus?</strong> Erst vermutest du, dann deckst du die amtliche Repräsentative Wahlstatistik zur Bundestagswahl 2025 auf. Zum Schluss beurteilst du die 5-%-Hürde.</p>
+
+  <section class="karte">
+    <h2>1. Vermuten: Die 18- bis 24-Jährigen</h2>
+    <p>Welche Partei hat bei den 18- bis 24-Jährigen 2025 die meisten Zweitstimmen bekommen? Trag deine Schätzung in Prozent ein, mindestens für drei Parteien. Dann aufdecken.</p>
+    <div class="vermutung" id="vermutung"></div>
+    <div class="deck" id="deck-alter"><div class="decke"><button type="button">Wahlstatistik aufdecken</button></div>
+      <div class="tab-roll"><table class="raster-tab" id="tab-alter"></table></div>
+      <div class="rueck" id="alter-rueck"></div>
+      <p class="klein" style="color:var(--leise)">Quelle: Bundeswahlleiterin, Repräsentative Wahlstatistik 2025 (Zweitstimmen in Prozent je Altersgruppe); Aufbereitung PolitikCheck Deutschland; Konrad-Adenauer-Stiftung, Monitor 2025.</p>
+    </div>
+    <p style="margin-top:16px"><strong>Aufgabe (beschreiben, AFB I):</strong> Beschreibe für zwei Parteien, wie sich ihr Anteil mit dem Alter verändert. Verwende Zahlen.</p>
+  </section>
+
+  <section class="karte">
+    <h2>2. Frauen und Männer unter 25</h2>
+    <p>Vermute: Bei welcher Partei ist der Unterschied zwischen jungen Frauen und jungen Männern am größten? Tippe eine Partei, dann aufdecken.</p>
+    <ul class="optionen" id="gender-tipp" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))"></ul>
+    <div class="deck" id="deck-gender"><div class="decke"><button type="button">Aufdecken</button></div>
+      <div class="tab-roll"><table class="raster-tab" id="tab-gender"></table></div>
+      <div class="rueck" id="gender-rueck"></div>
+      <p class="klein" id="gender-hinweis"></p>
+    </div>
+      <h3>Was Forschende dazu sagen</h3>
+      <ul class="klein">
+        <li>Die Konrad-Adenauer-Stiftung (2025) hält fest, dass die Unterschiede zwischen jungen Frauen und jungen Männern 2025 so groß waren wie nie zuvor gemessen; eine ähnliche Auseinanderentwicklung zeigte die <em>Financial Times</em> 2024 für mehrere Länder gleichzeitig, darunter die USA, Südkorea und Großbritannien.</li>
+        <li>Shell Jugendstudie 2024: Seit 2019 ist vor allem der Anteil männlicher Jugendlicher gestiegen, die sich als »eher rechts« oder »rechts« einordnen (jeder vierte; 2019 weniger als jeder fünfte). Bei den weiblichen Jugendlichen sind es 11 Prozent, ohne Anstieg. 50 Prozent der Jugendlichen nennen sich politisch interessiert (2002: 34 Prozent).</li>
+        <li>Erklärungsansätze in der Forschung (keine gesicherten Ursachen): unterschiedliche Mediennutzung (TikTok, YouTube), unterschiedliche Erfahrungen mit Bildung und Arbeitsmarkt, Themen wie Gleichstellung und Migration, die jeweils anders bewertet werden. Welche Erklärung überzeugt dich, und was spricht dagegen?</li>
+      </ul>
+  </section>
+
+  <section class="karte">
+    <h2>3. Ein Blick nach Großbritannien: Brexit 2016</h2>
+    <p>Beim Referendum über den EU-Austritt stimmten 51,9 % für »Leave«. Die Nachwahlbefragung von Lord Ashcroft zeigt nach Alter:</p>
+    <div class="tab-roll"><table id="tab-brexit"></table></div>
+    <p><strong>Diskussion:</strong> Die Jungen wollten mehrheitlich bleiben, die Alten mehrheitlich gehen. Wer lebt länger mit der Entscheidung? Wäre ein niedrigeres Wahlalter gerecht, oder ist das ein Argument, das man auch umdrehen kann (Erfahrung, Steuern, Lebensleistung)? Sammelt je zwei Argumente für beide Seiten.</p>
+  </section>
+
+  <section class="karte">
+    <h2>4. Beurteilen: Die 5-%-Hürde</h2>
+    <p>2025 erhielten BSW (4,98 %) und FDP (4,3 %) zusammen über 4,5 Millionen Zweitstimmen und keinen Sitz. Mit der Hürde hatten Union und SPD eine Mehrheit; ohne Hürde nicht (prüfe es im Sitzrechner).</p>
+    <p><strong>Aufgabe (beurteilen, AFB III):</strong> Ist die 5-%-Hürde in ihrer heutigen Form angemessen? Nutze das Raster. Ein <em>Sachurteil</em> prüft Wirkungen an Kriterien; ein <em>Werturteil</em> gewichtet die Kriterien nach deinen Werten und sagt, was wichtiger sein soll.</p>
+    <div class="urteil">
+      <div class="karte karte--leise"><h3>Kriterium: Effektivität</h3><p class="klein">Kann ein Parlament stabile Mehrheiten bilden? Beleg: Weimar 1932; Koalitionsrechner mit und ohne Hürde.</p></div>
+      <div class="karte karte--leise"><h3>Kriterium: Repräsentation</h3><p class="klein">Wie viele Stimmen bleiben ohne Sitz? Beleg: 2025 über 13 % der Zweitstimmen (BSW, FDP, Sonstige).</p></div>
+      <div class="karte karte--leise"><h3>Kriterium: Gleichheit der Wahl</h3><p class="klein">Zählt jede Stimme gleich? Beleg: Art. 38 GG; Grundmandatsklausel; Ausnahme SSW.</p></div>
+      <div class="karte karte--leise"><h3>Kriterium: Alternativen</h3><p class="klein">3-%-Hürde (wie in einigen Ländern), Ersatzstimme, keine Hürde. Welche Folgen hätte jede Variante?</p></div>
+    </div>
+    <details style="margin-top:16px"><summary>Satzbausteine für das schriftliche Urteil</summary>
+      <ul class="klein"><li>Sachurteil: »Gemessen am Kriterium … wirkt die Hürde …, wie das Beispiel … zeigt (Beleg).«</li><li>Abwägung: »Dem steht gegenüber, dass … Daher wiegt … schwerer, weil …«</li><li>Werturteil: »Ich halte die Hürde für …, weil mir … wichtiger ist als …; eine Alternative wäre …«</li></ul>
+    </details>
+    <p class="knopfzeile knopfzeile--rechts"><a class="knopf" href="station4.html">Zurück</a> <a class="knopf knopf--voll" href="../zusammenfassung.html" onclick="PW.stationFertig(5)">Zur Zusammenfassung</a></p>
+  </section>
+</main>
+<footer class="fuss"><div class="fuss-innen"></div></footer>
+<script src="../assets/js/daten.js"></script>
+<script src="../assets/js/werkstatt.js"></script>
+<script src="../assets/js/motion.js"></script>
+<script>
+PW.rahmen('st5', '../');
+(function () {
+  var namen = Object.keys(PW.alter.werte);
+  /* 1. Vermutung */
+  var v = document.getElementById('vermutung'), tipps = {};
+  PW.mischen(namen).forEach(function (n) { var inp = PW.el('input', { type: 'number', min: 0, max: 100, step: 1, inputmode: 'numeric', id: 'v-' + n }); tipps[n] = inp; v.appendChild(PW.el('label', { 'for': 'v-' + n }, [n + ' %', inp])); });
+  var t = document.getElementById('tab-alter');
+  var tr = PW.el('tr', {}, [PW.el('th', { text: 'Partei' })]); PW.alter.gruppen.forEach(function (g) { tr.appendChild(PW.el('th', { 'class': 'zahl', text: g })); }); tr.appendChild(PW.el('th', { 'class': 'zahl', text: 'Dein Tipp (18–24)' }));
+  t.appendChild(PW.el('thead', {}, [tr])); var tb = PW.el('tbody'); t.appendChild(tb);
+  document.querySelector('#deck-alter button').addEventListener('click', function (ev) {
+    tb.innerHTML = '';
+    namen.forEach(function (n) { var row = PW.el('tr', {}, [PW.el('th', { scope: 'row', text: n })]); PW.alter.werte[n].forEach(function (x, i) { row.appendChild(PW.el('td', { 'class': 'zahl', text: PW.fmt(x), style: i === 0 ? 'font-weight:700' : '' })); }); row.appendChild(PW.el('td', { 'class': 'zahl', text: tipps[n].value ? tipps[n].value + ' %' : '–' })); tb.appendChild(row); });
+    var top = namen.slice().sort(function (a, b) { return PW.alter.werte[b][0] - PW.alter.werte[a][0]; });
+    var getippt = namen.filter(function (n) { return tipps[n].value; }).sort(function (a, b) { return tipps[b].value - tipps[a].value; });
+    var r = document.getElementById('alter-rueck'); r.className = 'rueck';
+    r.innerHTML = '<strong>Stärkste Partei bei den 18- bis 24-Jährigen: ' + top[0] + ' (' + PW.fmt(PW.alter.werte[top[0]][0]) + ' %), dann ' + top[1] + ' (' + PW.fmt(PW.alter.werte[top[1]][0]) + ' %).</strong> ' + (getippt.length ? (getippt[0] === top[0] ? 'Dein Tipp lag richtig.' : 'Du hattest ' + getippt[0] + ' vorn.') : 'Du hast nichts getippt.') + ' Bei den über 70-Jährigen liegt ' + (function () { var s = namen.slice().sort(function (a, b) { return PW.alter.werte[b][5] - PW.alter.werte[a][5]; }); return s[0] + ' mit ' + PW.fmt(PW.alter.werte[s[0]][5]) + ' %'; })() + ' vorn.';
+    PW.aufdecken(document.getElementById('deck-alter'), ev);
+  });
+
+  /* 2. Geschlecht */
+  var gt = document.getElementById('gender-tipp'), gnamen = Object.keys(PW.geschlecht1824.werte), gewaehlt = null;
+  PW.mischen(gnamen).forEach(function (n) { var inp = PW.el('input', { type: 'radio', name: 'g', value: n }); inp.addEventListener('change', function () { gewaehlt = n; }); gt.appendChild(PW.el('label', { 'class': 'opt' }, [inp, PW.el('span', { 'class': 'kreis', 'aria-hidden': 'true' }), PW.el('span', { text: n })])); });
+  var g = document.getElementById('tab-gender');
+  g.appendChild(PW.el('thead', {}, [PW.el('tr', {}, [PW.el('th', { text: 'Partei' }), PW.el('th', { 'class': 'zahl', text: 'Frauen 18–24' }), PW.el('th', { 'class': 'zahl', text: 'Männer 18–24' }), PW.el('th', { 'class': 'zahl', text: 'Unterschied' })])]));
+  var gb = PW.el('tbody'); g.appendChild(gb);
+  document.querySelector('#deck-gender button').addEventListener('click', function (ev) {
+    gb.innerHTML = '';
+    var diff = {}; gnamen.forEach(function (n) { var w = PW.geschlecht1824.werte[n]; diff[n] = Math.abs(w[0] - w[1]); gb.appendChild(PW.el('tr', {}, [PW.el('th', { scope: 'row', text: n }), PW.el('td', { 'class': 'zahl', text: PW.fmt(w[0]) }), PW.el('td', { 'class': 'zahl', text: PW.fmt(w[1]) }), PW.el('td', { 'class': 'zahl', text: PW.fmt(diff[n]) + ' Punkte' })])); });
+    var top = gnamen.slice().sort(function (a, b) { return diff[b] - diff[a]; });
+    var r = document.getElementById('gender-rueck'); r.className = 'rueck';
+    r.innerHTML = '<strong>Größter Unterschied: ' + top[0] + ' (' + PW.fmt(diff[top[0]]) + ' Punkte), dann ' + top[1] + ' (' + PW.fmt(diff[top[1]]) + ' Punkte).</strong> ' + (gewaehlt ? (gewaehlt === top[0] ? 'Dein Tipp lag richtig.' : 'Du hattest ' + gewaehlt + ' getippt.') : '') + ' Über alle Altersgruppen ist der Unterschied kleiner: AfD Frauen 16,7 % / Männer 25,1 %; SPD 17,9 / 14,9; Linke 10,2 / 7,3.';
+    document.getElementById('gender-hinweis').textContent = PW.geschlecht1824.hinweis + ' Quelle: Repräsentative Wahlstatistik 2025.';
+    PW.aufdecken(document.getElementById('deck-gender'), ev);
+  });
+
+  /* 3. Brexit */
+  var b = document.getElementById('tab-brexit');
+  b.appendChild(PW.el('thead', {}, [PW.el('tr', {}, [PW.el('th', { text: 'Alter' }), PW.el('th', { 'class': 'zahl', text: 'Bleiben (Remain) %' }), PW.el('th', { 'class': 'zahl', text: 'Austritt (Leave) %' })])]));
+  var bb = PW.el('tbody'); PW.brexit.gruppen.forEach(function (gr, i) { bb.appendChild(PW.el('tr', {}, [PW.el('th', { scope: 'row', text: gr }), PW.el('td', { 'class': 'zahl', text: PW.brexit.verbleib[i] }), PW.el('td', { 'class': 'zahl', text: PW.brexit.austritt[i] })])); }); b.appendChild(bb);
+  b.parentNode.appendChild(PW.el('p', { 'class': 'klein', style: 'color:var(--leise)', text: 'Quelle: ' + PW.brexit.quelle + '. Nachwahlbefragung, gewichtet; Angaben in Prozent der Befragten je Altersgruppe.' }));
+})();
+</script>
+</body>
+</html>

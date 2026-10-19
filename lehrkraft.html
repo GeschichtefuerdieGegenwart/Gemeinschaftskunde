@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lehrkraft-Modus</title>
+<link rel="stylesheet" href="assets/css/werkstatt.css">
+<style>
+.eingaben{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:0 0 16px}
+.eingaben label{display:grid;gap:4px;font-size:1rem;font-weight:700}
+.eingaben input{min-height:44px;padding:6px 10px;border:2px solid var(--stahl);border-radius:4px;background:var(--flaeche);font-size:1.125rem;width:100%}
+.verlauf td:first-child{white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="kopf"><div class="kopf-innen"></div></header>
+<main id="inhalt">
+  <h1>Lehrkraft-Modus</h1>
+  <p>Dieser Bereich ist nicht geschützt; er enthält keine Lösungen, die die Lernenden nicht ohnehin in den Stationen sehen. Hier tragen Sie das Menti-Ergebnis ein, finden die Beamer-Ansichten und den Verlaufsplan.</p>
+
+  <section class="karte">
+    <h2>1. Klassenwahl aus Menti eintragen</h2>
+    <p>Menti-Vorschlag: Zwei Fragen vom Typ »Multiple Choice«, anonym, Antwortoptionen in Stimmzettel-Reihenfolge. Frage 1 Erststimme (10 Kandidierende), Frage 2 Zweitstimme (16 Listen). Tragen Sie die Zweitstimmen hier in Prozent ein (Menti zeigt sie an). Die Werte werden nur auf <strong>diesem Gerät</strong> gespeichert und erscheinen im Sitzrechner und im Realitätsabgleich; am Beamer reicht das.</p>
+    <div class="eingaben" id="eingaben"></div>
+    <p class="knopfzeile"><button class="knopf knopf--voll" type="button" id="speichern">Speichern</button> <button class="knopf knopf--leise" type="button" id="loeschen">Klassenergebnis löschen</button> <a class="knopf" href="parteien-wahlen/station4.html#rechner">Zum Sitzrechner</a></p>
+    <div class="rueck" id="rueck" aria-live="polite"></div>
+  </section>
+
+  <section class="karte">
+    <h2>2. Beamer-Ansichten (1280 × 720)</h2>
+    <ul>
+      <li><a href="index.html">Startseite</a>: Überblick der fünf Stationen beim Einstieg.</li>
+      <li><a href="parteien-wahlen/station4.html#rechner">Sitzrechner</a>: Bundesergebnis laden, Hürde ausschalten, Grundmandatsklausel erklären.</li>
+      <li><a href="parteien-wahlen/station4.html#koalition">Koalitionsrechner</a> für das Gespräch über Mehrheiten.</li>
+      <li><a href="parteien-wahlen/station5.html">Station 5</a>: Vermuten im Plenum, dann gemeinsam aufdecken.</li>
+      <li><a href="musterbuch.html">Musterbuch der Bewegungen</a> (Gestaltung, zur Auswahl).</li>
+    </ul>
+    <p class="klein">Tipp: Im Browser Vollbild (F11) und Zoom 100 %. Bei <em>Einstellungen → Bedienungshilfen → Bewegung reduzieren</em> entfallen die Animationen automatisch; der Schalter unten tut dasselbe.</p>
+    <p><label class="schalter"><input type="checkbox" id="bewegung"> Bewegung auf diesem Gerät an</label></p>
+  </section>
+
+  <section class="karte">
+    <h2>3. Verlaufsplan: zwei Doppelstunden</h2>
+    <h3>Doppelstunde A · Was Parteien tun und wollen</h3>
+    <div class="tab-roll"><table class="verlauf"><thead><tr><th>Zeit</th><th>Phase</th><th>Was passiert</th><th>Sozialform</th></tr></thead><tbody>
+      <tr><td>10 Min.</td><td>Einstieg</td><td>Beamer: Startseite. Frage: »Wer von euch kann mit 18 wählen, und was muss man dafür wissen?« Ziel und fünf Stationen vorstellen; Regel: eine Seite pro Phase, Gerät nur bei Auftrag.</td><td>Plenum</td></tr>
+      <tr><td>20 Min.</td><td>Station 1</td><td>Art. 21 GG, vier Aufgaben, elf Funktionskarten, Selbsttest. Schnelle Gruppen: Sicherungssatz schreiben.</td><td>Einzel/Partner</td></tr>
+      <tr><td>20 Min.</td><td>Station 2</td><td>Zwölf Beispiele zuordnen; Rückmeldung lesen, nicht nur anklicken. Auswertung: Welche Funktionen sind strittig (Mehrfachlösungen)?</td><td>Partner, dann Plenum</td></tr>
+      <tr><td>15 Min.</td><td>Station 3, Profile</td><td>Kurzprofile lesen; Einordnungen Dritter thematisieren: Was ist Selbstdarstellung, was Fremdeinordnung, warum stehen Datum und Quelle dabei?</td><td>Einzel, Plenum</td></tr>
+      <tr><td>20 Min.</td><td>Station 3, Fragen</td><td>Acht Streitfragen tippen und aufdecken. Auftrag: eine Frage, zwei Parteien, fünf Sätze mit Beleg (vergleichen).</td><td>Einzel</td></tr>
+      <tr><td>5 Min.</td><td>Sicherung</td><td>Drei Lernende lesen ihren Vergleich vor; Hausaufgabe: Zusammenfassung Abschnitte 1–3 lesen.</td><td>Plenum</td></tr>
+    </tbody></table></div>
+    <h3>Doppelstunde B · Wählen, auszählen, verstehen</h3>
+    <div class="tab-roll"><table class="verlauf"><thead><tr><th>Zeit</th><th>Phase</th><th>Was passiert</th><th>Sozialform</th></tr></thead><tbody>
+      <tr><td>5 Min.</td><td>Wiederholung</td><td>Kurzabfrage: drei Funktionen mit Beispiel (mündlich).</td><td>Plenum</td></tr>
+      <tr><td>20 Min.</td><td>Wahl und Auszählung</td><td>Stimmzettel auf der Seite üben (Erst/Zweit). Dann anonyme Wahl in Menti. Ergebnis im Lehrkraft-Modus eintragen.</td><td>Einzel, Plenum</td></tr>
+      <tr><td>15 Min.</td><td>Sitzrechner</td><td>Klassenergebnis laden; Hürde an/aus; Grundmandatsklausel; Weimar-Karte. Frage: Wer verliert durch die Hürde?</td><td>Plenum am Beamer, dann Einzel</td></tr>
+      <tr><td>15 Min.</td><td>Koalitionsrechner</td><td>Welche Mehrheiten gibt es rechnerisch? Welche sind politisch realistisch (Belege aus Station 3)?</td><td>Partner</td></tr>
+      <tr><td>10 Min.</td><td>Realitätsabgleich</td><td>Klasse, Herrenberg, Wahlkreis, Land, Bund. Zwei Unterschiede benennen und Hypothesen bilden.</td><td>Partner</td></tr>
+      <tr><td>20 Min.</td><td>Station 5</td><td>Vermuten, aufdecken (Alter, Geschlecht), Brexit-Tabelle, Beurteilung der 5-%-Hürde mit Raster.</td><td>Einzel, Plenum</td></tr>
+      <tr><td>5 Min.</td><td>Ausblick</td><td>Zusammenfassung ausdrucken oder speichern; Klausuraufgabe ankündigen (beurteilen, AFB III).</td><td>Plenum</td></tr>
+    </tbody></table></div>
+    <h3>Bildungsplanbezug</h3>
+    <p class="klein">Bildungsplan Berufliches Gymnasium, Geschichte mit Gemeinschaftskunde, BPE 2.1: Parteien (Funktionen, Art. 21 GG), Bundestagswahl (Wahlrecht, Wahlsystem, 5-%-Hürde), Wahlverhalten; Operatoren beschreiben, erläutern, analysieren, vergleichen, beurteilen. Überwältigungsverbot und Kontroversitätsgebot (Beutelsbacher Konsens): keine Empfehlung, wörtliche Belege, Einordnungen Dritter mit Quelle für alle Parteien im gleichen Raster.</p>
+  </section>
+
+  <section class="karte karte--leise">
+    <h2>4. Datenschutz und Technik</h2>
+    <p class="klein">Die Seite lädt nichts nach, verwendet keine Cookies und keine Schriften aus dem Netz. Gespeichert werden nur: angetippte Karten, Tipps in Station 3, Klassenergebnis, Bewegungsschalter – im localStorage des jeweiligen Geräts, löschbar über »Eingaben löschen« im Fuß. Läuft offline über Datei-Doppelklick und über GitHub Pages.</p>
+  </section>
+</main>
+<footer class="fuss"><div class="fuss-innen"></div></footer>
+<script src="assets/js/daten.js"></script>
+<script src="assets/js/werkstatt.js"></script>
+<script src="assets/js/motion.js"></script>
+<script>
+PW.rahmen('lehr', '');
+(function () {
+  var ids = ['cdu', 'csu', 'spd', 'gruene', 'fdp', 'afd', 'linke', 'bsw'];
+  var felder = {}, box = document.getElementById('eingaben'), alt = PW.lies('klasse', {}) || {};
+  ids.forEach(function (id) { var p = PW.partei(id); var inp = PW.el('input', { type: 'number', min: 0, max: 100, step: 0.1, inputmode: 'decimal', id: 'k-' + id, value: alt[id] === null || alt[id] === undefined ? '' : alt[id] }); felder[id] = inp; box.appendChild(PW.el('label', { 'for': 'k-' + id }, [p.name + ' %', inp])); });
+  var r = document.getElementById('rueck');
+  document.getElementById('speichern').addEventListener('click', function () {
+    var w = {}, s = 0; ids.forEach(function (id) { var v = parseFloat(felder[id].value.replace(',', '.')); w[id] = isNaN(v) ? null : v; s += w[id] || 0; });
+    PW.merke('klasse', w); r.className = 'rueck rueck--gut'; r.textContent = 'Gespeichert. Summe ' + PW.fmt(s) + ' %' + (s > 100.5 ? ' – mehr als 100, bitte prüfen.' : '') + ' Der Sitzrechner zeigt jetzt den Knopf »Klassenergebnis«.';
+  });
+  document.getElementById('loeschen').addEventListener('click', function () { try { localStorage.removeItem('pw:klasse'); } catch (e) {} ids.forEach(function (id) { felder[id].value = ''; }); r.className = 'rueck'; r.textContent = 'Klassenergebnis gelöscht.'; });
+  var bw = document.getElementById('bewegung'); bw.checked = !PW.wenigerBewegung(); bw.addEventListener('change', function () { PW.schalteBewegung(bw.checked); });
+})();
+</script>
+</body>
+</html>

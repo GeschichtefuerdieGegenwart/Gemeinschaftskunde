@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Station 4 · Wählen</title>
+<link rel="stylesheet" href="../assets/css/werkstatt.css">
+<style>
+.zettel{background:var(--flaeche);border:2px solid var(--text);padding:16px;max-width:980px}
+.zettel-kopf{text-align:center;border-bottom:2px solid var(--text);padding-bottom:8px;margin-bottom:12px}
+.zettel-kopf h2{margin:0;font-size:1.5rem}
+.spalten{display:grid;gap:20px;grid-template-columns:1fr}
+@media (min-width:768px){.spalten{grid-template-columns:1fr 1fr}}
+.spalte h3{text-align:center;border-bottom:2px solid var(--text);padding-bottom:6px}
+.spalte--zweit h3,.spalte--zweit .kreis,.spalte--zweit .opt{border-color:var(--blau)}
+.spalte--zweit .kreis::before,.spalte--zweit .kreis::after{background:var(--blau)}
+.spalte--zweit .opt:has(input:checked){border-color:var(--blau)}
+.spalte--zweit h3{color:var(--blau)}
+.zettel .opt{min-height:52px;padding:6px 10px}
+.zettel .nr{color:var(--leise);font-size:1rem;margin-right:6px}
+.eingaben{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:0 0 16px}
+.eingaben label{display:grid;gap:4px;font-size:1rem;font-weight:700}
+.eingaben input{min-height:44px;padding:6px 10px;border:2px solid var(--stahl);border-radius:4px;background:var(--flaeche);font-size:1.125rem;width:100%}
+.koal label{display:flex;align-items:center;gap:12px;min-height:48px;font-size:1.125rem}
+.koal input{width:28px;height:28px;accent-color:var(--blau)}
+.gross{font-family:var(--schrift-titel);font-size:2rem;font-weight:700;line-height:1.1}
+</style>
+</head>
+<body>
+<header class="kopf"><div class="kopf-innen"></div></header>
+<main id="inhalt">
+  <ol class="fort" aria-label="Fortschritt"></ol>
+  <h1>Wählen und auszählen</h1>
+  <p>Leitfrage: <strong>Wie wird aus Stimmen ein Bundestag, und was ändert die 5-%-Hürde?</strong> Du siehst den Stimmzettel deines Wahlkreises 260 Böblingen von 2025. Gewählt wird anonym über Menti (Link kommt von der Lehrkraft); hier übst du den Stimmzettel und rechnest Ergebnisse in Sitze um.</p>
+
+  <section class="karte" id="wahl">
+    <h2>1. Der Stimmzettel</h2>
+    <p class="klein">Zwei Stimmen, zwei Farben: <strong>Erststimme</strong> (schwarz) für eine Person im Wahlkreis, <strong>Zweitstimme</strong> (blau) für die Landesliste einer Partei. Die Zweitstimme entscheidet über die Sitzverteilung im Bundestag. Die Reihenfolge entspricht dem amtlichen Stimmzettel.</p>
+    <div class="zettel" id="zettel">
+      <div class="zettel-kopf"><h2>Stimmzettel</h2><p class="klein" style="margin:0">für die Wahl zum Deutschen Bundestag im Wahlkreis 260 Böblingen am 23. Februar 2025 · <strong>Sie haben 2 Stimmen</strong></p></div>
+      <div class="spalten">
+        <div class="spalte spalte--erst"><h3>Erststimme · eine Person</h3><ul class="optionen" id="erst"></ul></div>
+        <div class="spalte spalte--zweit"><h3>Zweitstimme · eine Landesliste</h3><ul class="optionen" id="zweit"></ul></div>
+      </div>
+    </div>
+    <p class="knopfzeile"><button class="knopf knopf--voll" type="button" id="abgeben">Stimmzettel üben: abgeben</button> <button class="knopf knopf--leise" type="button" id="zurueck" hidden>Noch einmal ausfüllen</button></p>
+    <div class="rueck" id="wahl-rueck" aria-live="polite"></div>
+    <p class="hinweis" style="margin-top:12px"><strong>Was 2025 im Wahlkreis geschah:</strong> Marc Biadacz (CDU) gewann das Direktmandat mit 37,3 % der Erststimmen. Jasmina Hostert (SPD) und Markus Frohnmaier (AfD) zogen über die Landesliste ein, Tobias Bacherle (GRÜNE) und Florian Toncar (FDP) nicht mehr. Wahlbeteiligung 84,3 % (Bundeswahlleiterin).</p>
+  </section>
+
+  <section class="karte" id="rechner">
+    <h2>2. Der Sitzrechner</h2>
+    <p>Trage Zweitstimmen in Prozent ein oder lade ein echtes Ergebnis. Der Rechner verteilt 630 Sitze nach dem Verfahren Sainte-Laguë/Schepers. <strong>Regeln 2025:</strong> Nur Parteien mit mindestens 5 % der Zweitstimmen oder drei Direktmandaten (Grundmandatsklausel) bekommen Sitze; der SSW ist als Minderheitenpartei befreit; Überhangmandate gibt es nicht mehr (Zweitstimmendeckung).</p>
+    <p class="knopfzeile"><button class="knopf" type="button" data-lade="bund">Bundesergebnis 2025</button> <button class="knopf" type="button" data-lade="wahlkreis">Wahlkreis 260</button> <button class="knopf" type="button" data-lade="klasse" id="klasse-knopf">Klassenergebnis</button> <button class="knopf knopf--leise" type="button" data-lade="leer">Leeren</button></p>
+    <div class="eingaben" id="eingaben"></div>
+    <p class="klein" id="summe-hinweis" aria-live="polite"></p>
+    <p><label class="schalter"><input type="checkbox" id="huerde" checked> 5-%-Hürde anwenden</label> &nbsp;&nbsp; <label class="schalter"><input type="checkbox" id="grundmandat"> Grundmandatsklausel: Die Linke mit 3 Direktmandaten (wie 2025)</label></p>
+    <div id="balken"></div>
+    <div id="halbrund"></div>
+    <div class="rueck" id="rechner-rueck" aria-live="polite"></div>
+    <p class="klein" style="color:var(--leise)">Hinweis: Der Rechner arbeitet mit auf eine Stelle gerundeten Prozentwerten. Beim Bundesergebnis 2025 weicht er deshalb um einen Sitz ab (amtlich: CDU 164, SPD 120). Die Bundeswahlleiterin rechnet mit den absoluten Stimmen.</p>
+    <details><summary>Warum gibt es die 5-%-Hürde? Die Karte Weimar 1932</summary>
+      <p>Bei der Reichstagswahl am <strong>31. Juli 1932</strong> erhielt die NSDAP 37,3 % und die KPD 14,3 % der Stimmen. Beide wollten die parlamentarische Republik abschaffen. Zusammen hatten sie 51,6 %: Keine Regierung mit demokratischer Mehrheit war mehr möglich. Dazu kamen in Weimar viele kleine Parteien ohne Sperrklausel. Die Mütter und Väter des Grundgesetzes wollten 1949 beides vermeiden: Zersplitterung und Blockade. Ob die Hürde heute noch angemessen ist, beurteilst du in Station 5.</p>
+      <p class="klein" style="color:var(--leise)">Quelle: Deutsches Historisches Museum, LeMO; Bundeszentrale für politische Bildung.</p></details>
+  </section>
+
+  <section class="karte" id="koalition">
+    <h2>3. Der Koalitionsrechner</h2>
+    <p>Wer kann regieren? Eine Regierung braucht die Mehrheit der Abgeordneten: <strong>316 von 630</strong>. Setze Häkchen und beobachte die Summe. Rechnerisch möglich heißt nicht politisch gewollt: Welche Bündnisse schließen Parteien aus, und warum?</p>
+    <div class="koal" id="koal"></div>
+    <p class="gross" id="koal-summe" aria-live="polite">0 Sitze</p>
+    <div class="rueck" id="koal-rueck"></div>
+  </section>
+
+  <section class="karte" id="abgleich">
+    <h2>4. Realitätsabgleich</h2>
+    <p>Vergleiche eure Klassenwahl mit den echten Ergebnissen. Zweitstimmen in Prozent. Herrenberg: 22.928 Wahlberechtigte, 19.612 Wählende.</p>
+    <div class="tab-roll" id="abgleich-tab"></div>
+    <p><strong>Aufgabe (analysieren, AFB II):</strong> Nenne zwei Unterschiede zwischen Klasse und Bund und erkläre sie mit dem, was du in Station 5 über Alter und Geschlecht erfährst.</p>
+    <p class="knopfzeile knopfzeile--rechts"><a class="knopf" href="station3.html">Zurück</a> <a class="knopf knopf--voll" href="station5.html" onclick="PW.stationFertig(4)">Weiter zu Station 5: Warum so?</a></p>
+  </section>
+</main>
+<footer class="fuss"><div class="fuss-innen"></div></footer>
+<script src="../assets/js/daten.js"></script>
+<script src="../assets/js/werkstatt.js"></script>
+<script src="../assets/js/motion.js"></script>
+<script>
+PW.rahmen('st4', '../');
+(function () {
+  /* 1. Stimmzettel */
+  var erst = document.getElementById('erst'), zweit = document.getElementById('zweit');
+  PW.wahlkreis.kandidierende.forEach(function (k) {
+    var inp = PW.el('input', { type: 'radio', name: 'erst', value: k.name });
+    erst.appendChild(PW.el('label', { 'class': 'opt' }, [inp, PW.el('span', { 'class': 'kreis', 'aria-hidden': 'true' }), PW.el('span', { html: '<span class="nr">' + k.nr + '</span><strong>' + k.name + '</strong><span class="klein">' + k.partei + '</span>' })]));
+  });
+  PW.wahlkreis.listen.forEach(function (l) {
+    var inp = PW.el('input', { type: 'radio', name: 'zweit', value: l.pid });
+    zweit.appendChild(PW.el('label', { 'class': 'opt' }, [inp, PW.el('span', { 'class': 'kreis', 'aria-hidden': 'true' }), PW.el('span', { html: '<span class="nr">' + l.nr + '</span><strong>' + l.name + '</strong>' })]));
+  });
+  var zettel = document.getElementById('zettel'), rueck = document.getElementById('wahl-rueck'), ab = document.getElementById('abgeben'), zur = document.getElementById('zurueck');
+  ab.addEventListener('click', function () {
+    var e = document.querySelector('input[name=erst]:checked'), z = document.querySelector('input[name=zweit]:checked');
+    if (!e && !z) { rueck.className = 'rueck rueck--nein'; rueck.textContent = 'Der Zettel ist leer. Ein leerer Zettel zählt als ungültig. Du darfst auch nur eine der beiden Stimmen abgeben.'; return; }
+    PW.inDieUrne(zettel, function () {
+      zettel.hidden = true; ab.hidden = true; zur.hidden = false;
+      var text = '<strong>Abgegeben.</strong> ';
+      text += e ? 'Erststimme: ' + e.value + '. ' : 'Keine Erststimme (gültig, zählt nur für die Zweitstimme). ';
+      text += z ? 'Zweitstimme: ' + PW.wahlkreis.listen.filter(function (l) { return l.pid === z.value; })[0].name + '. ' : 'Keine Zweitstimme. ';
+      text += '<span class="beleg">Dieses Gerät speichert deine Wahl nicht. Die echte Klassenwahl läuft anonym über Menti.</span>';
+      rueck.className = 'rueck'; rueck.innerHTML = text;
+    });
+  });
+  zur.addEventListener('click', function () { zettel.hidden = false; zettel.style.cssText = ''; document.querySelectorAll('#zettel input').forEach(function (i) { i.checked = false; }); ab.hidden = false; zur.hidden = true; rueck.className = 'rueck'; rueck.textContent = ''; });
+
+  /* 2. Sitzrechner */
+  var ids = ['cdu', 'csu', 'spd', 'gruene', 'fdp', 'afd', 'linke', 'bsw'];
+  var felder = {}, eing = document.getElementById('eingaben');
+  ids.concat(['sonst']).forEach(function (id) {
+    var p = id === 'sonst' ? { name: 'Sonstige' } : PW.partei(id);
+    var inp = PW.el('input', { type: 'number', min: 0, max: 100, step: 0.1, inputmode: 'decimal', id: 'in-' + id, value: '' });
+    felder[id] = inp; eing.appendChild(PW.el('label', { 'for': 'in-' + id }, [p.name + ' %', inp]));
+    inp.addEventListener('input', rechne);
+  });
+  var huerde = document.getElementById('huerde'), gm = document.getElementById('grundmandat');
+  huerde.addEventListener('change', rechne); gm.addEventListener('change', rechne);
+  var farben = ids.map(function (id) { var p = PW.partei(id); return { id: id, name: p.name, farbe: p.farbe }; });
+  farben.push({ id: 'ssw', name: 'SSW', farbe: '#2A6F97' });
+  var letzteSitze = {};
+  function werte() { var w = {}; ids.forEach(function (id) { var v = parseFloat(felder[id].value.replace(',', '.')); w[id] = isNaN(v) ? null : v; }); return w; }
+  function rechne(animiert) {
+    var w = werte(); var s = parseFloat((felder.sonst.value || '0').replace(',', '.')) || 0;
+    var summe = s; ids.forEach(function (id) { summe += w[id] || 0; });
+    document.getElementById('summe-hinweis').textContent = summe ? 'Summe: ' + PW.fmt(summe) + ' %' + (Math.abs(summe - 100) > 0.6 ? ' (sollte etwa 100 sein)' : '') : 'Noch keine Werte.';
+    var opts = { huerde: huerde.checked ? 5 : 0, grundmandate: gm.checked ? { linke: 3 } : {}, ssw: huerde.checked && Math.abs(summe - 100) < 1 && w.cdu === 22.6 };
+    var sitze = PW.sitze(w, opts); letzteSitze = sitze;
+    /* Balken */
+    var b = document.getElementById('balken'); b.innerHTML = '';
+    var maxw = 50;
+    ids.forEach(function (id) {
+      var p = PW.partei(id); var v = w[id]; if (v === null) return;
+      var drin = (sitze[id] || 0) > 0;
+      var row = PW.el('div', { 'class': 'balken' }, [PW.el('span', { text: p.name }), PW.el('div', { 'class': 'spur huerde' }, [PW.el('div', { 'class': 'fuellung', 'data-wert': (Math.min(v, maxw) / maxw).toFixed(3), style: 'background:' + (drin ? p.farbe : '#9A948C') }), huerde.checked ? PW.el('div', { 'class': 'huerde-linie', style: 'left:' + (5 / maxw * 100) + '%', title: '5-%-Hürde' }) : PW.el('span')]), PW.el('span', { 'class': 'zahl', text: PW.fmt(v) + ' %' })]);
+      b.appendChild(row);
+    });
+    PW.balkenWachsen(b);
+    PW.halbrund(document.getElementById('halbrund'), sitze, farben, animiert === true);
+    var rr = document.getElementById('rechner-rueck'); var raus = ids.filter(function (id) { return w[id] !== null && w[id] > 0 && !sitze[id]; });
+    var verloren = 0; raus.forEach(function (id) { verloren += w[id]; });
+    rr.className = 'rueck'; rr.innerHTML = summe ? ('<strong>Ohne Sitz:</strong> ' + (raus.length ? raus.map(function (id) { return PW.partei(id).name + ' (' + PW.fmt(w[id]) + ' %)'; }).join(', ') + ' – zusammen ' + PW.fmt(verloren + s) + ' % der Stimmen, die keinen Sitz bekommen.' : 'keine der eingetragenen Parteien.') + (huerde.checked ? '' : ' <strong>Ohne Hürde</strong> bekommt jede Partei Sitze nach ihrem Anteil. Vergleiche: Wie viele Fraktionen gäbe es, und wie leicht wäre eine Mehrheit?')) : '';
+    baueKoalition(sitze); baueAbgleich();
+  }
+  function lade(art) {
+    var q = {};
+    if (art === 'bund') q = PW.ergebnisse.bund.werte; else if (art === 'wahlkreis') q = PW.ergebnisse.wahlkreis.werte; else if (art === 'klasse') q = PW.lies('klasse', null) || {};
+    ids.forEach(function (id) { felder[id].value = (q[id] === null || q[id] === undefined) ? '' : q[id]; });
+    var summe = 0; ids.forEach(function (id) { summe += parseFloat(felder[id].value) || 0; });
+    felder.sonst.value = art === 'leer' || !summe ? '' : Math.max(0, 100 - summe).toFixed(1);
+    gm.checked = art === 'bund';
+    rechne(true);
+  }
+  document.querySelectorAll('[data-lade]').forEach(function (b) { b.addEventListener('click', function () { lade(b.getAttribute('data-lade')); }); });
+  if (!PW.lies('klasse', null)) { var kk = document.getElementById('klasse-knopf'); kk.setAttribute('aria-disabled', 'true'); kk.title = 'Die Lehrkraft trägt das Menti-Ergebnis im Lehrkraft-Modus ein.'; }
+
+  /* 3. Koalition */
+  function baueKoalition(sitze) {
+    var k = document.getElementById('koal'); k.innerHTML = '';
+    var ids2 = ids.filter(function (id) { return sitze[id]; });
+    if (!ids2.length) { k.appendChild(PW.el('p', { 'class': 'klein', text: 'Lade zuerst ein Ergebnis im Sitzrechner.' })); summe(); return; }
+    ids2.forEach(function (id) {
+      var p = PW.partei(id); var inp = PW.el('input', { type: 'checkbox', value: id });
+      inp.addEventListener('change', summe);
+      k.appendChild(PW.el('label', {}, [inp, PW.el('span', { 'class': 'punkt', style: 'width:16px;height:16px;border-radius:50%;border:1px solid var(--text);display:inline-block;background:' + p.farbe }), p.name + ' · ' + sitze[id] + ' Sitze']));
+    });
+    summe();
+    function summe() {
+      var s = 0, namen = []; k.querySelectorAll('input:checked').forEach(function (i) { s += sitze[i.value]; namen.push(PW.partei(i.value).name); });
+      document.getElementById('koal-summe').textContent = s + ' Sitze';
+      var r = document.getElementById('koal-rueck');
+      if (!namen.length) { r.className = 'rueck'; r.textContent = ''; return; }
+      if (s >= PW.mehrheit) { r.className = 'rueck rueck--gut'; r.innerHTML = '<strong>Mehrheit.</strong> ' + namen.join(' + ') + ' hätten ' + s + ' von 630 Sitzen, ' + (s - PW.mehrheit) + ' über der Mehrheit. Frage: Würden diese Parteien zusammen regieren wollen? Was sagen ihre Programme zu den Streitfragen aus Station 3?'; }
+      else { r.className = 'rueck rueck--nein'; r.innerHTML = '<strong>Keine Mehrheit.</strong> ' + namen.join(' + ') + ' hätten ' + s + ' Sitze; es fehlen ' + (PW.mehrheit - s) + '.'; }
+    }
+  }
+
+  /* 4. Abgleich */
+  function baueAbgleich() {
+    var box = document.getElementById('abgleich-tab'); box.innerHTML = '';
+    var klasse = PW.lies('klasse', null);
+    var spalten = [{ titel: 'Klasse (Menti)', werte: klasse || {}, beteiligung: null }, PW.ergebnisse.herrenberg, PW.ergebnisse.wahlkreis, PW.ergebnisse.land, PW.ergebnisse.bund];
+    var t = PW.el('table'); var tr = PW.el('tr', {}, [PW.el('th', { text: 'Partei' })]);
+    spalten.forEach(function (s) { tr.appendChild(PW.el('th', { 'class': 'zahl', text: s.titel })); }); t.appendChild(PW.el('thead', {}, [tr]));
+    var tb = PW.el('tbody');
+    ids.forEach(function (id) {
+      var row = PW.el('tr', {}, [PW.el('th', { scope: 'row', text: PW.partei(id).name })]);
+      spalten.forEach(function (s) { var v = s.werte[id]; row.appendChild(PW.el('td', { 'class': 'zahl', text: (id === 'csu' && v === null) ? '–' : (v === null || v === undefined ? (klasse || s !== spalten[0] ? 'noch offen' : '–') : PW.fmt(v, id === 'bsw' && v === 4.98 ? 2 : 1)) })); });
+      tb.appendChild(row);
+    });
+    var bet = PW.el('tr', {}, [PW.el('th', { scope: 'row', text: 'Wahlbeteiligung' })]);
+    spalten.forEach(function (s) { bet.appendChild(PW.el('td', { 'class': 'zahl', text: s.beteiligung ? PW.fmt(s.beteiligung) + ' %' : '–' })); });
+    tb.appendChild(bet); t.appendChild(tb); box.appendChild(t);
+    box.appendChild(PW.el('p', { 'class': 'klein', style: 'color:var(--leise)', text: 'Quellen: Bundeswahlleiterin (Bund, Land, Wahlkreis 260); SWR-Wahlportal und Stadt Herrenberg (Herrenberg; CSU tritt nur in Bayern an). Klasse: anonyme Menti-Abstimmung, von der Lehrkraft eingetragen.' }));
+  }
+  rechne(false);
+})();
+</script>
+</body>
+</html>
