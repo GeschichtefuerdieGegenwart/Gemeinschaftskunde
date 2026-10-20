@@ -6,7 +6,7 @@ import sys, os, json
 from playwright.sync_api import sync_playwright
 
 WURZEL = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SEITEN = ['index.html', 'parteien-wahlen/station1.html', 'parteien-wahlen/station2.html', 'parteien-wahlen/station3.html',
+SEITEN = ['index.html', 'ziele.html', 'parteien-wahlen/station1.html', 'parteien-wahlen/station2.html', 'parteien-wahlen/station3.html',
           'parteien-wahlen/station4.html', 'parteien-wahlen/station5.html', 'zusammenfassung.html', 'vertiefung.html', 'lehrkraft.html', 'musterbuch.html']
 BREITEN = [1440, 1280, 1024, 768, 390]
 OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(WURZEL, 'tools', 'fotos')

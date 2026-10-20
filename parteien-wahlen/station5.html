@@ -56,6 +56,12 @@
     <p><strong>Diskussion:</strong> Die Jungen wollten mehrheitlich bleiben, die Alten mehrheitlich gehen. Wer lebt länger mit der Entscheidung? Wäre ein niedrigeres Wahlalter gerecht, oder ist das ein Argument, das man auch umdrehen kann (Erfahrung, Steuern, Lebensleistung)? Sammelt je zwei Argumente für beide Seiten.</p>
   </section>
 
+  <section class="karte karte--leise">
+    <h2>Dein Zwischenstand</h2>
+    <div id="lernstand"></div>
+    <p class="klein">Der Gesamtüberblick nach den vier Zielen steht auf der Seite <a href="../ziele.html">Ziele</a>.</p>
+  </section>
+
   <section class="karte">
     <h2>4. Beurteilen: Die 5-%-Hürde</h2>
     <p>2025 erhielten BSW (4,98 %) und FDP (4,3 %) zusammen über 4,5 Millionen Zweitstimmen und keinen Sitz. Mit der Hürde hatten Union und SPD eine Mehrheit; ohne Hürde nicht (prüfe es im Sitzrechner).</p>
@@ -78,6 +84,7 @@
 <script src="../assets/js/motion.js"></script>
 <script src="../assets/js/faecher.js"></script>
 <script src="../assets/js/merkzettel.js"></script>
+<script src="../assets/js/lernstand.js"></script>
 <script>
 PW.rahmen('st5', '../'); PW.merkzettel('../');
 (function () {
@@ -95,6 +102,7 @@ PW.rahmen('st5', '../'); PW.merkzettel('../');
     var getippt = namen.filter(function (n) { return tipps[n].value; }).sort(function (a, b) { return tipps[b].value - tipps[a].value; });
     var r = document.getElementById('alter-rueck'); r.className = 'rueck';
     r.innerHTML = '<strong>Stärkste Partei bei den 18- bis 24-Jährigen: ' + top[0] + ' (' + PW.fmt(PW.alter.werte[top[0]][0]) + ' %), dann ' + top[1] + ' (' + PW.fmt(PW.alter.werte[top[1]][0]) + ' %).</strong> ' + (getippt.length ? (getippt[0] === top[0] ? 'Dein Tipp lag richtig.' : 'Du hattest ' + getippt[0] + ' vorn.') : 'Du hast nichts getippt.') + ' Bei den über 70-Jährigen liegt ' + (function () { var s = namen.slice().sort(function (a, b) { return PW.alter.werte[b][5] - PW.alter.werte[a][5]; }); return s[0] + ' mit ' + PW.fmt(PW.alter.werte[s[0]][5]) + ' %'; })() + ' vorn.';
+    PW.notiere(5, 'alter-tipp', getippt.length > 0 && getippt[0] === top[0], 'Wahlverhalten nach Alter 2025');
     PW.aufdecken(document.getElementById('deck-alter'), ev);
   });
 
@@ -111,6 +119,7 @@ PW.rahmen('st5', '../'); PW.merkzettel('../');
     var r = document.getElementById('gender-rueck'); r.className = 'rueck';
     r.innerHTML = '<strong>Größter Unterschied: ' + top[0] + ' (' + PW.fmt(diff[top[0]]) + ' Punkte), dann ' + top[1] + ' (' + PW.fmt(diff[top[1]]) + ' Punkte).</strong> ' + (gewaehlt ? (gewaehlt === top[0] ? 'Dein Tipp lag richtig.' : 'Du hattest ' + gewaehlt + ' getippt.') : '') + ' Über alle Altersgruppen ist der Unterschied kleiner: AfD Frauen 16,7 % / Männer 25,1 %; SPD 17,9 / 14,9; Linke 10,2 / 7,3.';
     document.getElementById('gender-hinweis').textContent = PW.geschlecht1824.hinweis + ' Quelle: Repräsentative Wahlstatistik 2025.';
+    PW.notiere(5, 'gender-tipp', !!gewaehlt && gewaehlt === top[0], 'Unterschiede zwischen jungen Frauen und Männern 2025');
     PW.aufdecken(document.getElementById('deck-gender'), ev);
   });
 
@@ -118,6 +127,7 @@ PW.rahmen('st5', '../'); PW.merkzettel('../');
   var b = document.getElementById('tab-brexit');
   b.appendChild(PW.el('thead', {}, [PW.el('tr', {}, [PW.el('th', { text: 'Alter' }), PW.el('th', { 'class': 'zahl', text: 'Bleiben (Remain) %' }), PW.el('th', { 'class': 'zahl', text: 'Austritt (Leave) %' })])]));
   var bb = PW.el('tbody'); PW.brexit.gruppen.forEach(function (gr, i) { bb.appendChild(PW.el('tr', {}, [PW.el('th', { scope: 'row', text: gr }), PW.el('td', { 'class': 'zahl', text: PW.brexit.verbleib[i] }), PW.el('td', { 'class': 'zahl', text: PW.brexit.austritt[i] })])); }); b.appendChild(bb);
+  PW.lernstandAnzeigen(5);
   b.parentNode.appendChild(PW.el('p', { 'class': 'klein', style: 'color:var(--leise)', text: 'Quelle: ' + PW.brexit.quelle + '. Nachwahlbefragung, gewichtet; Angaben in Prozent der Befragten je Altersgruppe.' }));
 })();
 </script>

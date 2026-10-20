@@ -67,3 +67,19 @@ Umgesetzt nach `claude/04_Prompt_Website_v2.md`:
 - **Farbe**: Akzent `#A8411A` (Grund 5,36:1) für Grundfrage, Stationsnummern, Empfehlung; Kopfband je Station in getöntem Ton (warm, blau, grün, lila; Text ≥ 13:1); Parteifarben in Profilen stets mit Namen.
 
 Prüfkette v2: taste-skill lint **0 FAIL, 0 WARN**; inspect (App-Modus, 1440/1280/1024/768/390) **alle 10 Seiten 0 FAIL** (neue begründete Allowances: edge-text, covered-text, palette-cream – Fächer-Randkarten und Stationston); eigene Prüfung: keine Konsolenfehler, kein waagerechtes Scrollen, kein Text < 16 px, keine Tippziele < 44 px; Funktionstest: Fächer, Selbsttest → Empfehlung, Reiter, Merkzettel (1280 und 390), Sitzrechner, Koalition. Nicht gelaufen: Impeccable audit/polish, Test auf echtem iPad.
+
+## v3 (20.10.2026): Eröffnung, Differenzierung, Lernstand
+
+Umgesetzt nach `claude/05_Prompt_Website_v3.md`:
+- **Intro** (`assets/js/intro.js`, Muster L): 5,2 Sekunden in fünf Stufen – Stimmzettelzeilen ziehen ein, Kreuze setzen sich, acht Parteiplatten fliegen in zufälliger Reihenfolge ein und verblassen, 630 Sitzpunkte formieren sich **in der echten Sitzverteilung 2025** (Linke–SPD–Grüne–SSW–CDU–CSU–AfD), dann steht »Wozu gibt es Parteien?«. Keine Logos und keine Fotos: Marken- und Persönlichkeitsrechte, außerdem würde eine Bilderfolge einzelne Parteien hervorheben. Überspringbar per Knopf, Klick und Taste; einmal je Sitzung; bei »Weniger Bewegung« entfällt es ganz.
+- **Zielmenü** (`ziele.html`): die vier Ziele wörtlich, mit Station, Link und – sobald bearbeitet – dem Stand je Ziel. Aus der Kopfnavigation jeder Seite erreichbar.
+- **Station 1**: Markierfunktion im Art. 21 (zwei Marker, Prüfung mit begründeter Rückmeldung), Stufenschalter A/B/C (vorgegeben · selbst erklären mit lokaler Begriffsprüfung · eigenes Beispiel mit drei Kriterien), Selbsttest jetzt im Fächer.
+- **Station 3**: Detailblatt je Partei (`assets/js/profile.js`) mit drei Kernanliegen und sechs Politikfeldern – Wirtschaft und Arbeit, Soziales und Rente, Klima und Energie, Migration, Europa, Sicherheit –, je mit wörtlichem Zitat und PDF-Seite, gleiches Raster für alle acht Parteien, Einordnungen Dritter weiterhin getrennt.
+- **Station 4**: Kontrollfrage zur Wirkung der 5-%-Hürde (ohne Hürde kämen Union und SPD auf 297 statt 328 Sitze – im Rechner nachprüfbar).
+- **Lernstand** (`assets/js/lernstand.js`, Muster N): zählt je Aufgabe nur den ersten Versuch, zeigt am Ende jeder Station einen Satz plus Empfehlung mit Fachbegriffen und Verweis auf den Merkzettel, Gesamtüberblick nach den vier Zielen auf `ziele.html`. Keine Noten, keine Punkte, keine Prozente, kein Vergleich; alles im localStorage, über »Eingaben löschen« entfernbar, nichts wird übertragen.
+
+Neue Muster im Musterbuch: **L** Intro, **M** Markieren, **N** Lernstand, **O** Detailblatt.
+
+Prüfkette v3: taste-skill lint **0 FAIL, 0 WARN**; inspect (App-Modus, 1440/1280/1024/768/390) **alle 11 Seiten 0 FAIL**; neue begründete Allowances: `rainbow-chart` (Parteifarben im Halbrund, immer mit Name und Zahl), `panel-void` (gleich hohe Fächerkarten), `covered-text` (Grundfrage vor dem abgedunkelten Halbrund). Eigene Prüfung: keine Konsolenfehler, kein waagerechtes Scrollen, kein Text < 16 px, keine Tippziele < 44 px, Startseite 938 px bei 1280 × 720 (Prolog und erste Stationen sichtbar, Rest darunter). Funktionstest: Intro inklusive Überspringen per Escape, Markieren mit Prüfung, Stufen A/B/C mit Freitext, Selbsttest-Fächer, Detailblatt mit Escape, Kontrollfrage Station 4, Lernstand je Station und Gesamtüberblick.
+
+Grenzen, ehrlich benannt: Die Freitextprüfung erkennt Schlüsselbegriffe, nicht den Sinn – sie sagt das auf der Seite und überlässt das Urteil den Lernenden. Nicht gelaufen: Impeccable audit/polish (Plugin hier nicht installiert), Test auf einem echten iPad und mit VoiceOver.

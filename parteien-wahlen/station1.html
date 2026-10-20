@@ -9,16 +9,20 @@
 <body data-ton="warm">
 <header class="kopf"><div class="kopf-innen"></div></header>
 <main id="inhalt">
-  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">1</span><h1>Was Parteien tun</h1><p class="leitfrage">Warum braucht eine Demokratie Parteien, und was genau leisten sie?</p><p class="klein" style="margin:0">Verfassungstext lesen · vier Aufgaben ordnen · elf Funktionen durchblättern · Selbsttest. Der Merkzettel oben rechts fasst alles zusammen.</p><div class="kz"><div><b>Art. 21</b><span>Grundgesetz</span></div><div><b>4</b><span>Aufgaben</span></div><div><b>11</b><span>Funktionen</span></div></div></div></div>
+  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">1</span><h1>Was Parteien tun</h1><p class="leitfrage">Warum braucht eine Demokratie Parteien, und was genau leisten sie?</p><p class="klein" style="margin:0">Verfassungstext markieren · vier Aufgaben ordnen · elf Funktionen auf deiner Stufe erarbeiten · Selbsttest. Der Merkzettel oben rechts fasst alles zusammen. <a href="../ziele.html">Ziel 1 dieser Einheit</a>.</p><div class="kz"><div><b>Art. 21</b><span>Grundgesetz</span></div><div><b>4</b><span>Aufgaben</span></div><div><b>11</b><span>Funktionen</span></div></div></div></div>
   <ol class="fort" aria-label="Fortschritt"></ol>
 
   <section class="karte">
-    <h2>1. Das Grundgesetz</h2>
-    <blockquote class="zitat"><p>»(1) Die Parteien wirken bei der politischen Willensbildung des Volkes mit. Ihre Gründung ist frei. Ihre innere Ordnung muß demokratischen Grundsätzen entsprechen. Sie müssen über die Herkunft und Verwendung ihrer Mittel sowie über ihr Vermögen öffentlich Rechenschaft geben.</p><p>(2) Parteien, die nach ihren Zielen oder nach dem Verhalten ihrer Anhänger darauf ausgehen, die freiheitliche demokratische Grundordnung zu beeinträchtigen oder zu beseitigen oder den Bestand der Bundesrepublik Deutschland zu gefährden, sind verfassungswidrig.«</p><footer>Artikel 21 Absatz 1 und 2 Grundgesetz</footer></blockquote>
-    <p><strong>Aufgabe 1:</strong> Markiere im Kopf drei Dinge, die Artikel 21 von Parteien verlangt, und eine Sache, die er ihnen garantiert. Tippe dann auf »Aufdecken« und vergleiche.</p>
-    <div class="deck"><div class="decke"><button type="button" onclick="PW.aufdecken(this.closest('.deck'), event)">Aufdecken</button></div>
-      <ul><li><strong>Garantie:</strong> Gründungsfreiheit (»Ihre Gründung ist frei«).</li><li><strong>Verlangt:</strong> innerparteiliche Demokratie, Rechenschaft über Geld, Verfassungstreue (sonst verfassungswidrig; das entscheidet allein das Bundesverfassungsgericht, Art. 21 Abs. 4).</li><li><strong>Auftrag:</strong> Mitwirkung an der politischen Willensbildung, also kein Monopol: Auch Verbände, Medien und Bürgerinitiativen wirken mit.</li></ul>
+    <h2>1. Das Grundgesetz markieren</h2>
+    <p>Artikel 21 sagt zweierlei: Er <strong>garantiert</strong> den Parteien etwas, und er <strong>verlangt</strong> etwas von ihnen. Wähle unten einen Marker und tippe dann die Satzteile an, die dazu passen. Nochmal tippen hebt die Markierung auf.</p>
+    <div class="markier-leiste" role="group" aria-label="Marker wählen">
+      <button type="button" class="knopf" id="mk-verlangt" aria-pressed="true">▲ Das verlangt Art. 21</button>
+      <button type="button" class="knopf" id="mk-garantiert" aria-pressed="false">● Das garantiert Art. 21</button>
+      <button type="button" class="knopf knopf--leise" id="mk-reset">Markierungen löschen</button>
     </div>
+    <blockquote class="zitat"><p class="markiertext" id="gg1"></p><p class="markiertext" id="gg2"></p><footer>Artikel 21 Absatz 1 und 2 Grundgesetz</footer></blockquote>
+    <p class="knopfzeile"><button class="knopf knopf--akzent" type="button" id="mk-pruefen">Markierung prüfen</button></p>
+    <div class="rueck" id="mk-rueck" aria-live="polite"></div>
   </section>
 
   <section class="karte">
@@ -29,19 +33,27 @@
 
   <section class="karte">
     <h2>3. Elf Funktionen von Parteien</h2>
-    <p>Parteien erfüllen diese Aufgaben über Funktionen. Blättere durch den Fächer; tippe »Kann ich erklären«, wenn du die Funktion in einem Satz erklären kannst. Das zählt niemand mit.</p>
+    <p>Wähle deine Stufe. Du kannst jederzeit wechseln – die Stufen sind unterschiedliche Wege zum selben Ziel, keine Rangliste.</p>
+    <div class="stufen" role="group" aria-label="Schwierigkeitsstufe">
+      <span class="klein" style="margin-right:4px">Stufe:</span>
+      <button type="button" class="knopf" data-stufe="A" aria-pressed="true">A · Lesen und zuordnen</button>
+      <button type="button" class="knopf" data-stufe="B" aria-pressed="false">B · Selbst erklären</button>
+      <button type="button" class="knopf" data-stufe="C" aria-pressed="false">C · Eigenes Beispiel</button>
+    </div>
+    <p class="klein" id="stufen-text" style="color:var(--leise)"></p>
     <div class="faecher" data-label="Elf Funktionen von Parteien" id="funktionen-faecher" data-manuell><ul class="faecher-spur" id="funktionen"></ul></div>
   </section>
 
   <section class="karte">
     <h2>4. Selbsttest</h2>
-    <p>Sechs Fragen. Es wird nichts gezählt; jede Antwort bekommt eine Begründung.</p>
-    <div id="test"></div>
+    <p>Sechs Fragen im Fächer – eine nach der anderen. Jede Antwort bekommt eine Begründung; gezählt wird nur, ob du beim ersten Versuch richtig lagst, und das nur für dich.</p>
+    <div class="faecher" data-label="Sechs Testfragen" id="test-faecher" data-manuell><ul class="faecher-spur" id="test"></ul></div>
   </section>
 
   <section class="karte karte--leise">
-    <h2>Sicherung in einem Satz</h2>
-    <p>Schreib in dein Heft: <em>Parteien sind …, weil sie … (nenne zwei Funktionen mit je einem Beispiel).</em></p>
+    <h2>Dein Zwischenstand</h2>
+    <div id="lernstand"></div>
+    <p>Sicherung ins Heft: <em>Parteien sind …, weil sie … (nenne zwei Funktionen mit je einem Beispiel).</em></p>
     <p class="knopfzeile knopfzeile--rechts"><a class="knopf knopf--voll" href="station2.html" onclick="PW.stationFertig(1)">Weiter zu Station 2: Erkennen</a></p>
   </section>
 </main>
@@ -51,10 +63,76 @@
 <script src="../assets/js/motion.js"></script>
 <script src="../assets/js/faecher.js"></script>
 <script src="../assets/js/merkzettel.js"></script>
+<script src="../assets/js/lernstand.js"></script>
 <script>
 PW.rahmen('st1', '../'); PW.merkzettel('../');
 (function () {
-  /* Aufgaben zuordnen */
+  /* ---------- 1. Markieren (Muster M) ---------- */
+  var absatz1 = [
+    ['Die Parteien wirken bei der politischen Willensbildung des Volkes mit.', 'auftrag', 'Das ist der Auftrag: mitwirken, nicht bestimmen. Auch Verbände, Medien und Bürgerinitiativen wirken mit.'],
+    ['Ihre Gründung ist frei.', 'garantiert', 'Eine Garantie: Jede und jeder darf eine Partei gründen; es braucht keine staatliche Erlaubnis.'],
+    ['Ihre innere Ordnung muß demokratischen Grundsätzen entsprechen.', 'verlangt', 'Eine Forderung: innerparteiliche Demokratie – Mitglieder wählen die Führung und entscheiden über das Programm.'],
+    ['Sie müssen über die Herkunft und Verwendung ihrer Mittel sowie über ihr Vermögen öffentlich Rechenschaft geben.', 'verlangt', 'Eine Forderung: Transparenz über das Geld, damit Einfluss sichtbar wird.']
+  ];
+  var absatz2 = [
+    ['Parteien, die nach ihren Zielen oder nach dem Verhalten ihrer Anhänger darauf ausgehen, die freiheitliche demokratische Grundordnung zu beeinträchtigen oder zu beseitigen', 'verlangt', 'Eine Forderung: Verfassungstreue. Maßstab sind Ziele und Verhalten der Anhänger.'],
+    ['oder den Bestand der Bundesrepublik Deutschland zu gefährden, sind verfassungswidrig.', 'verlangt', 'Rechtsfolge: Über die Verfassungswidrigkeit entscheidet allein das Bundesverfassungsgericht (Art. 21 Abs. 4).']
+  ];
+  var marker = 'verlangt';
+  var gespeichert = PW.lies('st1-mark', {});
+  function setzeMarkerKnopf(id) {
+    marker = id;
+    document.getElementById('mk-verlangt').setAttribute('aria-pressed', id === 'verlangt' ? 'true' : 'false');
+    document.getElementById('mk-garantiert').setAttribute('aria-pressed', id === 'garantiert' ? 'true' : 'false');
+  }
+  document.getElementById('mk-verlangt').addEventListener('click', function () { setzeMarkerKnopf('verlangt'); });
+  document.getElementById('mk-garantiert').addEventListener('click', function () { setzeMarkerKnopf('garantiert'); });
+
+  function baueAbsatz(el, teile, praefix) {
+    el.textContent = praefix === 'a' ? '»(1) ' : '(2) ';
+    teile.forEach(function (t, i) {
+      var key = praefix + i;
+      var b = PW.el('button', { type: 'button', 'class': 'mk', text: t[0] });
+      if (gespeichert[key]) b.setAttribute('data-mark', gespeichert[key]);
+      b.setAttribute('aria-label', t[0] + ' – markieren');
+      b.addEventListener('click', function () {
+        if (b.getAttribute('data-mark') === marker) { b.removeAttribute('data-mark'); delete gespeichert[key]; }
+        else { b.setAttribute('data-mark', marker); gespeichert[key] = marker; }
+        PW.merke('st1-mark', gespeichert);
+      });
+      el.appendChild(b); el.appendChild(document.createTextNode(' '));
+    });
+    if (praefix === 'b') el.appendChild(document.createTextNode('«'));
+  }
+  baueAbsatz(document.getElementById('gg1'), absatz1, 'a');
+  baueAbsatz(document.getElementById('gg2'), absatz2, 'b');
+  document.getElementById('mk-reset').addEventListener('click', function () {
+    gespeichert = {}; PW.merke('st1-mark', gespeichert);
+    document.querySelectorAll('.markiertext .mk').forEach(function (b) { b.removeAttribute('data-mark'); });
+    var r = document.getElementById('mk-rueck'); r.className = 'rueck'; r.textContent = '';
+  });
+  document.getElementById('mk-pruefen').addEventListener('click', function () {
+    var alle = absatz1.map(function (t, i) { return { key: 'a' + i, soll: t[1], warum: t[2], text: t[0] }; })
+      .concat(absatz2.map(function (t, i) { return { key: 'b' + i, soll: t[1], warum: t[2], text: t[0] }; }));
+    var treffer = 0, soll = 0, fehlt = [], falsch = [];
+    alle.forEach(function (t) {
+      if (t.soll !== 'auftrag') soll++;
+      var ist = gespeichert[t.key];
+      if (ist && ist === t.soll) treffer++;
+      else if (ist && ist !== t.soll) falsch.push(t);
+      else if (!ist && t.soll !== 'auftrag') fehlt.push(t);
+    });
+    var r = document.getElementById('mk-rueck');
+    var html = '<strong>' + treffer + ' von ' + soll + ' Stellen richtig markiert.</strong> ';
+    if (falsch.length) html += '<br>Noch einmal ansehen: »' + falsch[0].text.slice(0, 60) + '…« – ' + falsch[0].warum + ' ';
+    if (fehlt.length) html += '<br>Nicht markiert: »' + fehlt[0].text.slice(0, 60) + '…« – ' + fehlt[0].warum + ' ';
+    if (!falsch.length && !fehlt.length) html += 'Und die erste Stelle? Sie ist weder Garantie noch Forderung, sondern der <em>Auftrag</em>: mitwirken – kein Monopol.';
+    r.className = treffer === soll && !falsch.length ? 'rueck rueck--gut' : 'rueck';
+    r.innerHTML = html;
+    PW.notiere(1, 'markieren', treffer === soll && !falsch.length, 'Art. 21 GG: Garantie, Forderungen, Auftrag');
+  });
+
+  /* ---------- 2. Aufgaben zuordnen ---------- */
   var box = document.getElementById('aufgaben');
   PW.mischen(PW.aufgaben).forEach(function (a, i) {
     var f = PW.el('fieldset', { style: 'border:0;padding:0;margin:0 0 20px' });
@@ -66,8 +144,10 @@ PW.rahmen('st1', '../'); PW.merkzettel('../');
       inp.addEventListener('change', function () {
         ul.querySelectorAll('.opt').forEach(function (l) { l.classList.remove('ist-richtig', 'ist-falsch'); });
         var r = f.querySelector('.rueck');
-        if (o.id === a.id) { lab.classList.add('ist-richtig'); r.className = 'rueck rueck--gut'; r.textContent = 'Passt. »' + a.text + '« ist ' + a.name + '.'; }
+        var ok = o.id === a.id;
+        if (ok) { lab.classList.add('ist-richtig'); r.className = 'rueck rueck--gut'; r.textContent = 'Passt. »' + a.text + '« ist ' + a.name + '.'; }
         else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.textContent = 'Noch nicht. ' + o.name + ' heißt: ' + PW.aufgaben.filter(function (x) { return x.id === o.id; })[0].text + ' Lies die Beschreibung noch einmal.'; }
+        PW.notiere(1, 'aufgabe-' + a.id, ok, 'Die vier Aufgaben: ' + a.name);
       });
       ul.appendChild(lab);
     });
@@ -75,48 +155,136 @@ PW.rahmen('st1', '../'); PW.merkzettel('../');
     box.appendChild(f);
   });
 
-  /* Funktionskarten im Fächer */
-  var fk = document.getElementById('funktionen');
+  /* ---------- 3. Funktionen in drei Stufen ---------- */
+  var stufe = PW.lies('st1-stufe', 'A');
+  var stufenText = {
+    A: 'Stufe A: Definition und Beispiel stehen auf der Karte. Du ordnest die Funktion der richtigen Aufgabe zu.',
+    B: 'Stufe B: Die Definition ist verdeckt. Erkläre die Funktion in eigenen Worten; danach vergleichst du selbst mit der Musterformulierung.',
+    C: 'Stufe C: Kein Beispiel vorgegeben. Schreibe ein eigenes Beispiel und prüfe es an den drei Kriterien.'
+  };
   var gelesen = PW.lies('st1-karten', {});
-  PW.funktionen.forEach(function (fn, i) {
-    var aufg = PW.aufgaben.filter(function (a) { return a.id === fn.aufgabe; })[0];
-    var b = PW.el('button', { type: 'button', 'class': 'knopf', 'aria-pressed': gelesen[fn.id] ? 'true' : 'false', text: gelesen[fn.id] ? 'Erklärt: ja' : 'Kann ich erklären' });
-    b.addEventListener('click', function () { var an = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', an ? 'true' : 'false'); b.textContent = an ? 'Erklärt: ja' : 'Kann ich erklären'; b.classList.toggle('knopf--voll', an); gelesen[fn.id] = an; PW.merke('st1-karten', gelesen); });
-    if (gelesen[fn.id]) b.classList.add('knopf--voll');
-    fk.appendChild(PW.el('li', {}, [PW.el('div', { 'class': 'karte' }, [
-      PW.el('p', { 'class': 'klein', style: 'color:var(--leise);margin:0 0 4px', text: (i + 1) + ' von 11 · Aufgabe: ' + aufg.name }),
-      PW.el('h3', { text: fn.name }), PW.el('p', { text: fn.kurz }), PW.el('p', { html: '<strong>Beispiel:</strong> ' + fn.beispiel }), b])]));
-  });
-  PW.faecher(document.getElementById('funktionen-faecher'));
+  var texte = PW.lies('st1-texte', {});
+  var fk = document.getElementById('funktionen'), faecherApi = null;
 
-  /* Selbsttest */
+  function schluessel(fn) {
+    /* Kernbegriffe je Funktion für die lokale Textprüfung – erkennt Wörter, bewertet nicht */
+    var map = {
+      artikulation: ['interesse', 'wunsch', 'bedürfnis', 'ausdruck', 'fordert', 'forderung', 'programm'],
+      aggregation: ['bündel', 'zusammenfass', 'gewicht', 'einig', 'ausgleich', 'verschieden'],
+      transmission: ['umsetz', 'gesetz', 'entscheidung', 'regierung', 'einbring'],
+      partizipation: ['beteilig', 'mitmach', 'engagement', 'mitglied', 'dialog', 'teilnehm'],
+      information: ['informier', 'erklär', 'sachlich', 'aufklär', 'vermittel'],
+      mobilisierung: ['gewinn', 'werb', 'wahlkampf', 'überzeug', 'stimme'],
+      sozialisation: ['lernen', 'präg', 'einführ', 'erfahrung', 'verfahren'],
+      legitimation: ['akzept', 'unterstütz', 'anerkenn', 'vertrauen', 'system'],
+      herrschaft: ['verbindlich', 'entscheid', 'regier', 'macht', 'gesetz'],
+      kontrolle: ['kontroll', 'prüf', 'opposition', 'anfrage', 'untersuch'],
+      rekrutierung: ['personal', 'kandidat', 'nominier', 'amt', 'mandat', 'auswahl']
+    };
+    return map[fn.id] || [];
+  }
+
+  function baueKarten() {
+    fk.innerHTML = '';
+    document.getElementById('stufen-text').textContent = stufenText[stufe];
+    PW.funktionen.forEach(function (fn, i) {
+      var aufg = PW.aufgaben.filter(function (a) { return a.id === fn.aufgabe; })[0];
+      var k = PW.el('div', { 'class': 'karte' });
+      k.appendChild(PW.el('p', { 'class': 'klein', style: 'color:var(--leise);margin:0 0 4px', text: (i + 1) + ' von 11 · Aufgabe: ' + aufg.name }));
+      k.appendChild(PW.el('h3', { text: fn.name }));
+
+      if (stufe === 'A') {
+        k.appendChild(PW.el('p', { text: fn.kurz }));
+        k.appendChild(PW.el('p', { html: '<strong>Beispiel:</strong> ' + fn.beispiel }));
+        var b = PW.el('button', { type: 'button', 'class': 'knopf', 'aria-pressed': gelesen[fn.id] ? 'true' : 'false', text: gelesen[fn.id] ? 'Erklärt: ja' : 'Kann ich erklären' });
+        if (gelesen[fn.id]) b.classList.add('knopf--voll');
+        b.addEventListener('click', function () {
+          var an = b.getAttribute('aria-pressed') !== 'true';
+          b.setAttribute('aria-pressed', an ? 'true' : 'false'); b.textContent = an ? 'Erklärt: ja' : 'Kann ich erklären';
+          b.classList.toggle('knopf--voll', an); gelesen[fn.id] = an; PW.merke('st1-karten', gelesen);
+        });
+        k.appendChild(b);
+      } else {
+        var frage = stufe === 'B' ? 'Kannst du es erklären? Schreib die Funktion in ein bis zwei Sätzen auf.' : 'Schreib ein eigenes Beispiel: Wer handelt, was tut diese Person oder Partei, und wozu?';
+        k.appendChild(PW.el('p', { text: frage }));
+        var feld = PW.el('textarea', { 'class': 'eingabe-feld', id: 'tx-' + stufe + '-' + fn.id, 'aria-label': fn.name + ': ' + frage });
+        feld.value = texte[stufe + fn.id] || '';
+        feld.addEventListener('input', function () { texte[stufe + fn.id] = feld.value; PW.merke('st1-texte', texte); });
+        k.appendChild(feld);
+        var pruef = PW.el('button', { type: 'button', 'class': 'knopf knopf--akzent', style: 'margin-top:10px', text: 'Vergleichen' });
+        var erg = PW.el('div', { 'class': 'rueck', 'aria-live': 'polite', style: 'margin-top:10px' });
+        pruef.addEventListener('click', function () {
+          var txt = (feld.value || '').toLowerCase();
+          erg.className = 'rueck'; erg.innerHTML = '';
+          if (txt.trim().length < 15) { erg.innerHTML = '<strong>Noch zu kurz.</strong> Schreib mindestens einen vollständigen Satz, dann vergleichen wir.'; return; }
+          if (stufe === 'B') {
+            var worte = schluessel(fn), drin = worte.filter(function (w) { return txt.indexOf(w) >= 0; });
+            erg.innerHTML = '<strong>Dein Text und die Musterformulierung:</strong><br>Muster: »' + fn.kurz + '«<br>' +
+              (drin.length ? 'Dein Text enthält passende Begriffe (' + drin.slice(0, 3).join(', ') + '…).' : 'Begriffe aus der Musterformulierung kommen bei dir noch nicht vor – das kann trotzdem richtig sein, wenn du es anders ausdrückst.') +
+              '<span class="beleg">Diese Prüfung erkennt nur Wörter, nicht den Sinn. Entscheide selbst: Steht in deinem Satz, <em>wer</em> etwas tut und <em>wozu</em>?</span>';
+          } else {
+            var liste = PW.el('ul', { 'class': 'pruefliste' });
+            var kriterien = [
+              ['Wer handelt?', /\b(partei|fraktion|mitglied|vorsitz|ortsverband|abgeordnete|kreisverband|regierung|opposition)\w*/i.test(feld.value)],
+              ['Was wird getan?', (feld.value.match(/\b\w+(t|en|te|et)\b/g) || []).length > 2],
+              ['Wozu? (Zweck)', /(um |damit|weil|dadurch|ziel|zweck|so dass|sodass)/i.test(feld.value)]
+            ];
+            kriterien.forEach(function (kr) { var li = PW.el('li', { text: kr[0] }); li.className = kr[1] ? 'ist-drin' : ''; liste.appendChild(li); });
+            erg.innerHTML = '<strong>Prüfe dein Beispiel an den Kriterien:</strong>';
+            erg.appendChild(liste);
+            erg.appendChild(PW.el('span', { 'class': 'beleg', html: 'Zum Vergleich: »' + fn.beispiel + '« – deins darf ganz anders aussehen.' }));
+          }
+        });
+        k.appendChild(pruef); k.appendChild(erg);
+      }
+      fk.appendChild(PW.el('li', {}, [k]));
+    });
+    faecherApi = PW.faecher(document.getElementById('funktionen-faecher'));
+  }
+  document.querySelectorAll('[data-stufe]').forEach(function (b) {
+    b.setAttribute('aria-pressed', b.getAttribute('data-stufe') === stufe ? 'true' : 'false');
+    b.addEventListener('click', function () {
+      stufe = b.getAttribute('data-stufe'); PW.merke('st1-stufe', stufe);
+      document.querySelectorAll('[data-stufe]').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      var alt = document.querySelector('#funktionen-faecher .faecher-steuer'); if (alt) alt.remove();
+      baueKarten();
+    });
+  });
+  baueKarten();
+
+  /* ---------- 4. Selbsttest im Fächer ---------- */
   var fragen = [
-    { f: 'Wer darf eine Partei verbieten?', o: ['Der Bundestag mit Zweidrittelmehrheit', 'Das Bundesverfassungsgericht', 'Der Bundespräsident', 'Das Bundesamt für Verfassungsschutz'], r: 1, w: 'Nur das Bundesverfassungsgericht entscheidet über die Verfassungswidrigkeit (Art. 21 Abs. 4 GG). Der Verfassungsschutz beobachtet und stuft ein, verbietet aber nicht.' },
-    { f: 'Eine Partei nominiert ihre Kandidatin für das Direktmandat. Welche Funktion?', o: ['Interessenartikulation', 'Rekrutierung', 'Sozialisation', 'Kontrollfunktion'], r: 1, w: 'Personal für Ämter und Mandate auszuwählen ist Rekrutierung.' },
-    { f: 'Zwei Parteiflügel einigen sich auf eine gemeinsame Linie beim Wahlalter. Welche Funktion?', o: ['Interessenaggregation', 'Mobilisierung', 'Herrschaftsfunktion', 'Legitimation'], r: 0, w: 'Verschiedene Interessen bündeln und gewichten ist Interessenaggregation.' },
-    { f: 'Die Opposition stellt eine Kleine Anfrage an die Regierung. Welche Aufgabe?', o: ['Politikformulierung', 'Politikimplementation', 'Politikkontrolle', 'Personalrekrutierung'], r: 2, w: 'Der politische Prozess wird kontrolliert: Politikkontrolle, meist durch die Opposition.' },
-    { f: 'Was verlangt Art. 21 GG von der inneren Ordnung einer Partei?', o: ['Sie muss einen Vorsitzenden haben', 'Sie muss demokratischen Grundsätzen entsprechen', 'Sie muss in allen Ländern antreten', 'Sie muss ein Wahlprogramm beschließen'], r: 1, w: '»Ihre innere Ordnung muß demokratischen Grundsätzen entsprechen.« Alles andere steht nicht im Grundgesetz.' },
-    { f: 'Parteien »wirken bei der politischen Willensbildung des Volkes mit«. Was folgt daraus?', o: ['Nur Parteien dürfen politisch werben', 'Parteien haben kein Monopol; Verbände und Medien wirken ebenfalls mit', 'Parteien entscheiden Gesetze allein', 'Das Volk muss Parteien folgen'], r: 1, w: '»Mitwirken« heißt: Sie sind ein wichtiger Akteur neben anderen, nicht der einzige.' }
+    { f: 'Wer darf eine Partei verbieten?', o: ['Der Bundestag mit Zweidrittelmehrheit', 'Das Bundesverfassungsgericht', 'Der Bundespräsident', 'Das Bundesamt für Verfassungsschutz'], r: 1, t: 'Parteiverbot: Art. 21 Abs. 4 GG', w: 'Nur das Bundesverfassungsgericht entscheidet über die Verfassungswidrigkeit (Art. 21 Abs. 4 GG). Der Verfassungsschutz beobachtet und stuft ein, verbietet aber nicht.' },
+    { f: 'Eine Partei nominiert ihre Kandidatin für das Direktmandat. Welche Funktion?', o: ['Interessenartikulation', 'Rekrutierung', 'Sozialisation', 'Kontrollfunktion'], r: 1, t: 'Funktion: Rekrutierung', w: 'Personal für Ämter und Mandate auszuwählen ist Rekrutierung.' },
+    { f: 'Zwei Parteiflügel einigen sich auf eine gemeinsame Linie beim Wahlalter. Welche Funktion?', o: ['Interessenaggregation', 'Mobilisierung', 'Herrschaftsfunktion', 'Legitimation'], r: 0, t: 'Funktion: Interessenaggregation', w: 'Verschiedene Interessen bündeln und gewichten ist Interessenaggregation.' },
+    { f: 'Die Opposition stellt eine Kleine Anfrage an die Regierung. Welche Aufgabe?', o: ['Politikformulierung', 'Politikimplementation', 'Politikkontrolle', 'Personalrekrutierung'], r: 2, t: 'Aufgabe: Politikkontrolle', w: 'Der politische Prozess wird kontrolliert: Politikkontrolle, meist durch die Opposition.' },
+    { f: 'Was verlangt Art. 21 GG von der inneren Ordnung einer Partei?', o: ['Sie muss einen Vorsitzenden haben', 'Sie muss demokratischen Grundsätzen entsprechen', 'Sie muss in allen Ländern antreten', 'Sie muss ein Wahlprogramm beschließen'], r: 1, t: 'Art. 21 GG: innerparteiliche Demokratie', w: '»Ihre innere Ordnung muß demokratischen Grundsätzen entsprechen.« Alles andere steht nicht im Grundgesetz.' },
+    { f: 'Parteien »wirken bei der politischen Willensbildung des Volkes mit«. Was folgt daraus?', o: ['Nur Parteien dürfen politisch werben', 'Parteien haben kein Monopol; Verbände und Medien wirken ebenfalls mit', 'Parteien entscheiden Gesetze allein', 'Das Volk muss Parteien folgen'], r: 1, t: 'Art. 21 GG: Mitwirkung, kein Monopol', w: '»Mitwirken« heißt: Sie sind ein wichtiger Akteur neben anderen, nicht der einzige.' }
   ];
   var t = document.getElementById('test');
   fragen.forEach(function (q, i) {
-    var f = PW.el('fieldset', { style: 'border:0;padding:0;margin:0 0 20px' });
-    f.appendChild(PW.el('legend', { html: '<strong>' + (i + 1) + '. ' + q.f + '</strong>' }));
+    var f = PW.el('fieldset', { 'class': 'karte', style: 'margin:0;height:100%' });
+    f.appendChild(PW.el('legend', { style: 'padding:0 8px;font-family:var(--schrift-titel);font-weight:700;font-size:1.125rem', text: 'Frage ' + (i + 1) + ' von 6' }));
+    f.appendChild(PW.el('p', { html: '<strong>' + q.f + '</strong>' }));
     var ul = PW.el('ul', { 'class': 'optionen' });
+    var r = PW.el('div', { 'class': 'rueck', 'aria-live': 'polite' });
     q.o.forEach(function (txt, j) {
       var inp = PW.el('input', { type: 'radio', name: 'test' + i, value: j });
       var lab = PW.el('label', { 'class': 'opt' }, [inp, PW.el('span', { 'class': 'kreis', 'aria-hidden': 'true' }), PW.el('span', { text: txt })]);
       inp.addEventListener('change', function () {
         ul.querySelectorAll('.opt').forEach(function (l) { l.classList.remove('ist-richtig', 'ist-falsch'); });
-        var r = f.querySelector('.rueck');
-        if (j === q.r) { lab.classList.add('ist-richtig'); r.className = 'rueck rueck--gut'; r.textContent = 'Passt. ' + q.w; }
+        var ok = j === q.r;
+        if (ok) { lab.classList.add('ist-richtig'); r.className = 'rueck rueck--gut'; r.textContent = 'Passt. ' + q.w; }
         else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.textContent = 'Noch nicht. ' + q.w; }
+        PW.notiere(1, 'test-' + i, ok, q.t);
       });
       ul.appendChild(lab);
     });
-    f.appendChild(ul); f.appendChild(PW.el('div', { 'class': 'rueck', 'aria-live': 'polite' }));
-    t.appendChild(f);
+    f.appendChild(ul); f.appendChild(r);
+    t.appendChild(PW.el('li', {}, [f]));
   });
+  PW.faecher(document.getElementById('test-faecher'));
+  PW.lernstandAnzeigen(1);
 })();
 </script>
 </body>

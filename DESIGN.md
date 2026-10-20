@@ -253,3 +253,12 @@ Ecken 4 px für Karten, Knöpfe, Felder; Kreise (50 %) nur für Stimmzettelkreis
 - **Merkzettel** (Muster K): Seitenleiste 440 px, Split-Screen ab 1024 px; Inhalt = Klausur-PDF.
 - **Reiter** (Muster J): Ordnerblätter, aktives Blatt weiß, inaktive Karton; Adresse #id.
 - **Kopfband** je Station: Nummer, H1, Leitfrage (Bricolage 600), drei Kennzahlkacheln.
+
+## v3 (20.10.2026): Intro, Zielmenü, Markieren, Stufen, Lernstand
+
+- **Intro »Die Auszählung«** (Muster L): fünf Stufen in 5,2 s. Stimmzettelzeilen → Kreuze → Parteiplatten (zufällige Reihenfolge, gleiche Größe) → 630 Sitzpunkte **im echten Ergebnis 2025** → Grundfrage. Kein Logo, kein Foto, kein Ton. Überspringbar per Klick, Taste und Knopf; einmal je Sitzung (sessionStorage); entfällt bei »Weniger Bewegung«. Die Seite darunter bleibt im DOM sichtbar, damit ohne JavaScript und in Vorschauen sofort Inhalt steht.
+- **Zielmenü** (`ziele.html`): vier Ziele wörtlich, jedes mit Station und – sobald vorhanden – dem eigenen Stand. Über die Kopfnavigation von jeder Seite erreichbar.
+- **Markieren** (Muster M): Satzteile sind Knöpfe; zwei Marker, je mit Farbe, Unterstreichung **und** Zeichen (▲ / ●). Tippziel ≥ 44 px durch Zeilenhöhe 2,4.
+- **Stufen A/B/C** in Station 1: frei wählbar, kein Freischalten, keine Abwertung. Stufe B und C prüfen Freitext nur auf Schlüsselbegriffe und sagen das ausdrücklich; die Bewertung bleibt bei den Lernenden.
+- **Lernstand** (Muster N): nur der erste Versuch, in Worten, nie als Note, Prozentzahl oder Abzeichen; Empfehlung mit Fachbegriff und Verweis auf den Merkzettel.
+- **Detailblatt** (Muster O): Dialog mit identischem Raster für alle acht Parteien – drei Kernanliegen, sechs Politikfelder, jeweils mit wörtlichem Beleg und Seitenzahl.

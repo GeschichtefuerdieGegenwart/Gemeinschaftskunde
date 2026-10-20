@@ -58,6 +58,15 @@
     <div id="balken"></div>
     <div id="halbrund"></div>
     <div class="rueck" id="rechner-rueck" aria-live="polite"></div>
+    <fieldset style="border:0;padding:0;margin:16px 0 0" id="huerde-frage">
+      <legend><strong>Kontrollfrage:</strong> Union und SPD kamen 2025 zusammen auf 328 Sitze. Wie wäre es ohne die 5-%-Hürde? Probiere es mit dem Schalter aus und antworte dann.</legend>
+      <ul class="optionen" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">
+        <li><label class="opt"><input type="radio" name="hf" value="0"><span class="kreis" aria-hidden="true"></span><span>Sie hätten mehr Sitze</span></label></li>
+        <li><label class="opt"><input type="radio" name="hf" value="1"><span class="kreis" aria-hidden="true"></span><span>Sie hätten keine Mehrheit mehr</span></label></li>
+        <li><label class="opt"><input type="radio" name="hf" value="2"><span class="kreis" aria-hidden="true"></span><span>Es ändert sich nichts</span></label></li>
+      </ul>
+      <div class="rueck" id="hf-rueck" aria-live="polite"></div>
+    </fieldset>
     <p class="klein" style="color:var(--leise)">Hinweis: Der Rechner arbeitet mit auf eine Stelle gerundeten Prozentwerten. Beim Bundesergebnis 2025 weicht er deshalb um einen Sitz ab (amtlich: CDU 164, SPD 120). Die Bundeswahlleiterin rechnet mit den absoluten Stimmen.</p>
     <details><summary>Warum gibt es die 5-%-Hürde? Die Karte Weimar 1932</summary>
       <p>Bei der Reichstagswahl am <strong>31. Juli 1932</strong> erhielt die NSDAP 37,3 % und die KPD 14,3 % der Stimmen. Beide wollten die parlamentarische Republik abschaffen. Zusammen hatten sie 51,6 %: Keine Regierung mit demokratischer Mehrheit war mehr möglich. Dazu kamen in Weimar viele kleine Parteien ohne Sperrklausel. Die Mütter und Väter des Grundgesetzes wollten 1949 beides vermeiden: Zersplitterung und Blockade. Ob die Hürde heute noch angemessen ist, beurteilst du in Station 5.</p>
@@ -78,6 +87,10 @@
     <div class="tab-roll" id="abgleich-tab"></div>
     <p><strong>Aufgabe (analysieren, AFB II):</strong> Nenne zwei Unterschiede zwischen Klasse und Bund und erkläre sie mit dem, was du in Station 5 über Alter und Geschlecht erfährst.</p>
   </section>
+  <section class="karte karte--leise">
+    <h2>Dein Zwischenstand</h2>
+    <div id="lernstand"></div>
+  </section>
   <p class="knopfzeile knopfzeile--rechts"><a class="knopf" href="station3.html">Zurück</a> <a class="knopf knopf--voll" href="station5.html" onclick="PW.stationFertig(4)">Weiter zu Station 5: Warum so?</a></p>
 </main>
 <footer class="fuss"><div class="fuss-innen"></div></footer>
@@ -86,6 +99,7 @@
 <script src="../assets/js/motion.js"></script>
 <script src="../assets/js/faecher.js"></script>
 <script src="../assets/js/merkzettel.js"></script>
+<script src="../assets/js/lernstand.js"></script>
 <script>
 PW.rahmen('st4', '../'); PW.merkzettel('../');
 var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel', rechner: 'Sitzrechner', koalition: 'Koalition', abgleich: 'Abgleich' });
@@ -204,6 +218,17 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
     box.appendChild(PW.el('p', { 'class': 'klein', style: 'color:var(--leise)', text: 'Quellen: Bundeswahlleiterin (Bund, Land, Wahlkreis 260); SWR-Wahlportal und Stadt Herrenberg (Herrenberg; CSU tritt nur in Bayern an). Klasse: anonyme Menti-Abstimmung, von der Lehrkraft eingetragen.' }));
   }
   lade('bund');
+  document.querySelectorAll('input[name=hf]').forEach(function (i) {
+    i.addEventListener('change', function () {
+      var ok = i.value === '1'; var r = document.getElementById('hf-rueck');
+      r.className = ok ? 'rueck rueck--gut' : 'rueck rueck--nein';
+      r.innerHTML = ok
+        ? '<strong>Richtig.</strong> Ohne Hürde ziehen FDP und BSW ein; alle anderen verlieren Sitze. Union und SPD kämen zusammen auf 297 statt 328 Sitze und lägen damit unter der Mehrheit von 316. Die Hürde entscheidet also mit darüber, wer regieren kann.'
+        : '<strong>Noch nicht.</strong> Schalte die 5-%-Hürde aus und sieh dir die Legende an: FDP und BSW bekommen Sitze, alle anderen verlieren welche. Union und SPD kommen dann auf 297 – weniger als die nötigen 316.';
+      PW.notiere(4, 'huerde-frage', ok, 'Wirkung der 5-%-Hürde auf Mehrheiten');
+    });
+  });
+  PW.lernstandAnzeigen(4);
   document.getElementById('reiter').addEventListener('reiter:wechsel', function (e) { if (e.detail.id === 'rechner') rechne(true); });
 })();
 </script>

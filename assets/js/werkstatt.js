@@ -99,6 +99,7 @@
   /* Kopf, Fortschritt, Fuß */
   var seiten = [
     { id: 'start', url: 'index.html', name: 'Start' },
+    { id: 'ziele', url: 'ziele.html', name: 'Ziele' },
     { id: 'st1', url: 'parteien-wahlen/station1.html', name: 'Grundlagen', station: 1 },
     { id: 'st2', url: 'parteien-wahlen/station2.html', name: 'Erkennen', station: 2 },
     { id: 'st3', url: 'parteien-wahlen/station3.html', name: 'Positionen', station: 3 },
@@ -113,7 +114,7 @@
     var kopf = document.querySelector('.kopf-innen'); if (!kopf) return;
     kopf.appendChild(PW.el('a', { 'class': 'marke', href: wurzel + 'index.html' }, [PW.el('span', { 'class': 'kreuz', 'aria-hidden': 'true' }), 'Politik-Werkstatt']));
     var nav = PW.el('nav', { 'class': 'nav', 'aria-label': 'Hauptnavigation' });
-    [seiten[0], seiten[6], seiten[7], seiten[8]].forEach(function (s) { var a = PW.el('a', { href: wurzel + s.url, text: s.name }); if (s.id === aktuell) a.setAttribute('aria-current', 'page'); nav.appendChild(a); });
+    [seiten[0], seiten[1], seiten[7], seiten[9]].forEach(function (s) { var a = PW.el('a', { href: wurzel + s.url, text: s.name }); if (s.id === aktuell) a.setAttribute('aria-current', 'page'); nav.appendChild(a); });
     kopf.appendChild(nav);
     var fort = document.querySelector('.fort');
     if (fort) {

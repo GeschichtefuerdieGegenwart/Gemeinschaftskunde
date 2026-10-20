@@ -8,8 +8,14 @@
 <link rel="stylesheet" href="assets/css/werkstatt.css">
 </head>
 <body data-ton="warm">
+<div class="intro" id="intro" hidden aria-hidden="true">
+  <button class="knopf knopf--leise intro-skip" type="button">Überspringen</button>
+  <div class="intro-buehne"></div>
+  <div class="intro-frage"><p>Wozu gibt es<span class="akzent">Parteien?</span></p></div>
+</div>
+<p class="sr-only">Kurze Einleitung ohne Ton; sie lässt sich überspringen. Danach beginnt die Einheit mit der Frage: Wozu gibt es Parteien?</p>
 <header class="kopf"><div class="kopf-innen"></div></header>
-<main id="inhalt" class="start">
+<main id="nach-intro" class="start">
   <section class="prolog" aria-label="Prolog">
     <div class="faecher" data-label="Prolog in drei Bildern">
       <ul class="faecher-spur">
@@ -17,7 +23,8 @@
           <p class="klein" style="color:var(--leise);margin:0 0 12px">Gemeinschaftskunde J1 · Parteien und Wahlen</p>
           <h1 class="grundfrage">Wozu<span class="akzent">Parteien?</span></h1>
           <p class="gross">Am 23. Februar 2025 haben 49,9 Millionen Menschen gewählt. Fast alle haben ihr Kreuz bei einer Partei gemacht. Warum eigentlich?</p>
-          <p class="klein" style="color:var(--leise);margin:0">Wische oder tippe auf den Pfeil →</p>
+          <p class="klein" style="color:var(--leise);margin:0 0 16px">Wische oder tippe auf den Pfeil →</p>
+          <p class="knopfzeile" style="justify-content:center;margin:0"><a class="knopf knopf--akzent" href="ziele.html">Was wir in dieser Einheit vorhaben</a></p>
         </div></li>
         <li><div class="karte">
           <p class="klein" style="color:var(--leise);margin:0 0 12px">Das Grundgesetz sagt:</p>
@@ -34,7 +41,7 @@
             <div>Personal finden<span>Personalrekrutierung</span></div>
           </div>
           <p class="gross" style="margin-top:24px">Wie Parteien diese vier Aufgaben erfüllen, was sie wollen und wie aus deiner Stimme ein Sitz wird: fünf Stationen.</p>
-          <p class="knopfzeile" style="justify-content:center"><a class="knopf knopf--akzent" href="parteien-wahlen/station1.html">Station 1 starten</a></p>
+          <p class="knopfzeile" style="justify-content:center"><a class="knopf knopf--akzent" href="ziele.html">Weiter zu den Zielen</a></p>
         </div></li>
       </ul>
     </div>
@@ -57,6 +64,8 @@
 <script src="assets/js/motion.js"></script>
 <script src="assets/js/faecher.js"></script>
 <script src="assets/js/merkzettel.js"></script>
-<script>PW.rahmen('start', ''); PW.merkzettel('');</script>
+<script src="assets/js/intro.js"></script>
+<script src="assets/js/lernstand.js"></script>
+<script>PW.rahmen('start', ''); PW.merkzettel(''); PW.intro(document.getElementById('intro'));</script>
 </body>
 </html>

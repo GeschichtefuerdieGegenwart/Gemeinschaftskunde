@@ -1,0 +1,134 @@
+{
+ "index.html": {
+  "konsole": [],
+  "breiten": {
+   "1440": [],
+   "1280": [
+    "Beamer: Seitenhöhe 1018 px (ohne Scrollen bis 720)"
+   ],
+   "1024": [],
+   "768": [],
+   "390": []
+  }
+ },
+ "ziele.html": {
+  "konsole": [],
+  "breiten": {
+   "1440": [],
+   "1280": [
+    "Beamer: Seitenhöhe 1406 px (ohne Scrollen bis 720)"
+   ],
+   "1024": [],
+   "768": [],
+   "390": []
+  }
+ },
+ "parteien-wahlen/station1.html": {
+  "konsole": [],
+  "breiten": {
+   "1440": [],
+   "1280": [
+    "Beamer: Seitenhöhe 4568 px (ohne Scrollen bis 720)"
+   ],
+   "1024": [],
+   "768": [],
+   "390": []
+  }
+ },
+ "parteien-wahlen/station2.html": {
+  "konsole": [],
+  "breiten": {
+   "1440": [],
+   "1280": [
+    "Beamer: Seitenhöhe 1743 px (ohne Scrollen bis 720)"
+   ],
+   "1024": [],
+   "768": [],
+   "390": []
+  }
+ },
+ "parteien-wahlen/station3.html": {
+  "konsole": [],
+  "breiten": {
+   "1440": [],
+   "1280": [
+    "Beamer: Seitenhöhe 4216 px (ohne Scrollen bis 720)"
+   ],
+   "1024": [],
+   "768": [],
+   "390": []
+  }
+ },
+ "parteien-wahlen/station4.html": {
+  "konsole": [],
+  "breiten": {
+   "1440": [],
+   "1280": [
+    "Beamer: Seitenhöhe 2475 px (ohne Scrollen bis 720)"
+   ],
+   "1024": [],
+   "768": [],
+   "390": []
+  }
+ },
+ "parteien-wahlen/station5.html": {
+  "konsole": [],
+  "breiten": {
+   "1440": [],
+   "1280": [
+    "Beamer: Seitenhöhe 3480 px (ohne Scrollen bis 720)"
+   ],
+   "1024": [],
+   "768": [],
+   "390": []
+  }
+ },
+ "zusammenfassung.html": {
+  "konsole": [],
+  "breiten": {
+   "1440": [],
+   "1280": [
+    "Beamer: Seitenhöhe 1860 px (ohne Scrollen bis 720)"
+   ],
+   "1024": [],
+   "768": [],
+   "390": []
+  }
+ },
+ "vertiefung.html": {
+  "konsole": [],
+  "breiten": {
+   "1440": [],
+   "1280": [
+    "Beamer: Seitenhöhe 1364 px (ohne Scrollen bis 720)"
+   ],
+   "1024": [],
+   "768": [],
+   "390": []
+  }
+ },
+ "lehrkraft.html": {
+  "konsole": [],
+  "breiten": {
+   "1440": [],
+   "1280": [
+    "Beamer: Seitenhöhe 2847 px (ohne Scrollen bis 720)"
+   ],
+   "1024": [],
+   "768": [],
+   "390": []
+  }
+ },
+ "musterbuch.html": {
+  "konsole": [],
+  "breiten": {
+   "1440": [],
+   "1280": [
+    "Beamer: Seitenhöhe 9384 px (ohne Scrollen bis 720)"
+   ],
+   "1024": [],
+   "768": [],
+   "390": []
+  }
+ }
+}

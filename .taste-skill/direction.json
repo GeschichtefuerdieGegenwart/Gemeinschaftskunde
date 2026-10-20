@@ -11,7 +11,9 @@
     "app-title-size",
     "edge-text",
     "covered-text",
-    "palette-cream"
+    "palette-cream",
+    "rainbow-chart",
+    "panel-void"
   ],
   "reasons": {
     "still-page": "Unterricht mit iPads: Aufmerksamkeit ist knapp, kein Autoplay, keine Scroll-Einblendungen. Bewegung nur bei Tippen (Kreuz, Aufdecken, Halbrund) und mit Schalter »Weniger Bewegung«.",
@@ -23,8 +25,11 @@
     "heavy-borders": "2-px-Rahmen in Druckfarbe wie der amtliche Stimmzettel (Two-Inks Rule).",
     "app-title-size": "h1 44px Desktop, 30px Telefon: Beamer-Lesbarkeit aus 8 m.",
     "edge-text": "Fächer: Randkarten sind absichtlich angeschnitten sichtbar (zeigen, dass es weitergeht).",
-    "covered-text": "Fächer im Musterbuch: Randkarten liegen teilweise hinter dem Bühnenrand (overflow clip).",
-    "palette-cream": "Warmer Stationston #F6E3D5 (Akzent 5,4:1), kein Creme-Grund; der Seitengrund bleibt #F1F0ED."
+    "covered-text": "Intro: Die Grundfrage liegt bewusst vor dem Halbrund, das dahinter auf 14 % Deckkraft steht.",
+    "palette-cream": "Warmer Stationston #F6E3D5 (Akzent 5,4:1), kein Creme-Grund; der Seitengrund bleibt #F1F0ED.",
+    "scroll-hijack": "Keine Scroll-Steuerung; das Intro ist eine einmalige, überspringbare Eröffnung.",
+    "rainbow-chart": "Parteifarben im Halbrund: Die Farbe steht für eine Partei und erscheint immer mit Name und Sitzzahl (Legende). Weniger Farben wären sachlich falsch.",
+    "panel-void": "Fächerkarten sind gleich hoch, damit beim Wischen nichts springt; kurze Karten behalten deshalb freien Raum."
   },
   "kind": "app"
 }
