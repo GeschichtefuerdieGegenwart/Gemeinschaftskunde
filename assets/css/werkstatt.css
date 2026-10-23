@@ -295,25 +295,25 @@ body.intro-laeuft{overflow:hidden}
 .intro.stufe-zeilen .intro-zeilen{opacity:1}
 .intro.stufe-platten .intro-zeilen{opacity:0;transition:opacity 220ms var(--ease-out)}
 .intro-zeile{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:center;background:var(--flaeche);border:2px solid var(--text);border-radius:4px;padding:10px 14px;font-weight:700;
-  transform:translateX(110%);opacity:0;transition:transform 420ms var(--ease-out),opacity 300ms var(--ease-out);transition-delay:calc(var(--i)*60ms)}
+  transform:translateX(110%);opacity:0;transition:transform 640ms var(--ease-out),opacity 420ms var(--ease-out);transition-delay:calc(var(--i)*150ms)}
 .intro.stufe-zeilen .intro-zeile{transform:translateX(0);opacity:1}
 .intro-kreis{width:30px;height:30px;border:2px solid var(--text);border-radius:50%;position:relative}
-.intro-kreis::before,.intro-kreis::after{content:'';position:absolute;left:50%;top:50%;width:3px;height:20px;background:var(--akzent);transform:translate(-50%,-50%) rotate(45deg) scaleY(0);transition:transform 200ms var(--ease-out);transition-delay:calc(var(--i)*70ms)}
+.intro-kreis::before,.intro-kreis::after{content:'';position:absolute;left:50%;top:50%;width:3px;height:20px;background:var(--akzent);transform:translate(-50%,-50%) rotate(45deg) scaleY(0);transition:transform 260ms var(--ease-out);transition-delay:calc(var(--i)*170ms)}
 .intro-kreis::after{transform:translate(-50%,-50%) rotate(-45deg) scaleY(0)}
 .intro.stufe-kreuze .intro-zeile:nth-child(2n) .intro-kreis::before{transform:translate(-50%,-50%) rotate(45deg) scaleY(1)}
 .intro.stufe-kreuze .intro-zeile:nth-child(2n) .intro-kreis::after{transform:translate(-50%,-50%) rotate(-45deg) scaleY(1)}
 .intro-platten{position:absolute;inset:0;display:grid;place-content:center;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:0 24px}
 .intro-platte{display:grid;place-items:center;min-width:120px;min-height:64px;padding:8px 10px;border:2px solid var(--text);border-radius:4px;background:var(--flaeche);
   font-family:var(--schrift-titel);font-weight:700;font-size:1.5rem;color:var(--text);box-shadow:5px 5px 0 0 var(--pf); /* taste-skill-ignore: versetzte Platte, kein Weichzeichner */
-  opacity:0;transform:translateY(26px) scale(.96);transition:opacity 260ms var(--ease-out),transform 320ms var(--ease-out);transition-delay:calc(var(--i)*30ms)}
+  opacity:0;transform:translateY(26px) scale(.96);transition:opacity 360ms var(--ease-out),transform 420ms var(--ease-out);transition-delay:calc(var(--i)*110ms)}
 .intro.stufe-platten .intro-platte{opacity:1;transform:none}
-.intro.stufe-sitze .intro-platte{opacity:0;transform:translateY(-14px);transition-duration:180ms;transition-delay:calc(var(--i)*12ms)}
+.intro.stufe-sitze .intro-platte{opacity:0;transform:translateY(-14px);transition-duration:220ms;transition-delay:calc(var(--i)*26ms)}
 .intro-sitze{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);width:min(96%,700px);opacity:0}
 .intro.stufe-sitze .intro-sitze{opacity:1;transition:opacity 200ms var(--ease-out)}
 .intro.stufe-frage .intro-sitze{opacity:.14;transition:opacity 300ms var(--ease-out)}
-.intro-punkt{opacity:0;transform:scale(.3);transform-origin:center;transform-box:fill-box;transition:opacity 260ms var(--ease-out),transform 300ms var(--ease-out);transition-delay:var(--d)}
+.intro-punkt{opacity:0;transform:scale(.3);transform-origin:center;transform-box:fill-box;transition:opacity 340ms var(--ease-out),transform 380ms var(--ease-out);transition-delay:var(--d)}
 .intro.stufe-sitze .intro-punkt{opacity:1;transform:none}
-.intro-frage{position:absolute;inset:0;display:grid;place-content:center;text-align:center;opacity:0;transform:translateY(14px);transition:opacity 360ms var(--ease-out),transform 360ms var(--ease-out);z-index:2}
+.intro-frage{position:absolute;inset:0;display:grid;place-content:center;text-align:center;opacity:0;transform:translateY(14px);transition:opacity 520ms var(--ease-out),transform 520ms var(--ease-out);z-index:2}
 .intro.stufe-frage .intro-frage{opacity:1;transform:none}
 .intro .intro-frage p{font-family:var(--schrift-titel);font-weight:700;font-size:clamp(2rem,6vw,4rem);line-height:1.05;margin:0;max-width:none;background:var(--grund);padding:18px 28px;border-radius:4px}
 .intro .intro-frage .akzent{color:var(--akzent);display:block}
@@ -326,7 +326,7 @@ body.intro-laeuft{overflow:hidden}
 .ziel-nr{font-family:var(--schrift-titel);font-weight:700;color:var(--akzent);margin:0;font-size:1.125rem}
 .ziel-text{font-size:1.25rem;margin:0 0 4px;max-width:none}
 .ziel-karte p{margin:0}
-.ziel-karte a,main li>a,.klein a{display:inline-block;padding:12px 0;line-height:1.4;min-height:44px;min-width:44px}
+.ziel-karte a,main li>a,.klein a,main p>a{display:inline-block;padding:12px 0;line-height:1.4;min-height:44px;min-width:44px}
 .stand-satz{font-size:1.125rem}
 
 /* Markieren (Muster M) */
@@ -371,3 +371,55 @@ body.detail-auf{overflow:hidden}
 .detail-blatt .zitat{margin:6px 0 0;font-size:1rem}
 /* Überschrift bekommt nach dem Intro den Fokus (für Screenreader); dabei kein sichtbarer Ring, sie ist kein Bedienelement */
 .grundfrage:focus,.grundfrage:focus-visible{outline:none;box-shadow:none}
+
+/* ===== v4: Auftakt mit Zielen, Lernstand-Ring, Urne, Koalitionen ===== */
+.auftakt{max-width:62ch;margin:0 0 28px}
+.auftakt .grundfrage{font-family:var(--schrift-titel);font-weight:700;font-size:clamp(2.25rem,6vw,4rem);line-height:1.02;letter-spacing:-.02em;margin:0 0 .3em}
+.auftakt .grundfrage .akzent{color:var(--akzent);display:block}
+.auftakt .gross{font-size:1.25rem;max-width:58ch}
+.ziele-titel{margin:0 0 16px}
+.ziel-tafel{list-style:none;counter-reset:z;margin:0 0 28px;padding:0;display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:768px){.ziel-tafel{grid-template-columns:1fr 1fr;gap:20px}}
+.ziel-tafel li{position:relative;background:var(--flaeche);border:2px solid var(--text);border-radius:var(--radius);padding:20px 20px 18px 74px;box-shadow:var(--platte)} /* taste-skill-ignore: versetzte Platte, kein Weichzeichner */
+.ziel-ziffer{position:absolute;left:18px;top:18px;width:42px;height:42px;border-radius:50%;background:var(--akzent);color:var(--flaeche);
+  font-family:var(--schrift-titel);font-weight:700;font-size:1.5rem;display:grid;place-items:center}
+.ziel-tafel h3{margin:0 0 6px;font-size:1.25rem;line-height:1.2}
+.ziel-tafel p{margin:0;font-size:1rem;color:var(--leise);max-width:none}
+.knopfzeile--mitte{justify-content:center}
+.knopf--gross{min-height:60px;padding:14px 32px;font-size:1.25rem}
+
+/* Lernstand-Ring und Stufen */
+.stand-kopf{display:grid;grid-template-columns:86px 1fr;gap:18px;align-items:center;margin:0 0 12px}
+.stand-ring{width:86px;height:86px}
+.stufen-stand{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.stufen-marke{display:inline-block;font-size:.9375rem;padding:4px 10px;border:2px solid var(--linie);border-radius:4px;background:var(--grund)}
+.stufen-marke.stufe-B{border-color:var(--blau);color:var(--blau-tief)}
+.stufen-marke.stufe-C{border-color:var(--akzent);color:var(--akzent)}
+
+/* Urnen-Modus */
+.urne-stand{font-family:var(--schrift-titel);font-weight:700;font-size:2.5rem;line-height:1}
+.urne-raster{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(210px,100%),1fr));margin:0 0 16px}
+.urne-knopf{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:center;min-height:62px;padding:8px 14px;border:2px solid var(--text);
+  border-radius:var(--radius);background:var(--flaeche);font:inherit;font-weight:700;cursor:pointer;text-align:left}
+.urne-knopf i{width:26px;height:26px;border-radius:50%;background:var(--pf,var(--stahl));border:1px solid var(--text);display:block}
+.urne-knopf:active{transform:translate(2px,2px)}
+.urne-danke{display:grid;place-items:center;min-height:220px;text-align:center;gap:12px}
+.urne-danke .gross{font-family:var(--schrift-titel);font-weight:700;font-size:2rem;margin:0}
+.einfuegen{width:100%;min-height:110px;padding:10px 12px;border:2px solid var(--stahl);border-radius:4px;background:var(--flaeche);font:inherit;font-size:1rem}
+
+/* Koalitionen */
+.koal-pruefung{display:grid;gap:14px;grid-template-columns:1fr;margin:12px 0 0}
+@media (min-width:768px){.koal-pruefung{grid-template-columns:1fr 1fr}}
+.koal-feld{border:2px solid var(--linie);border-radius:4px;padding:14px;background:var(--flaeche)}
+.koal-feld h4{margin:0 0 8px;font-size:1.0625rem;font-family:var(--schrift-titel)}
+.koal-feld ul{margin:0;padding-left:1.1em;font-size:1rem;overflow-wrap:anywhere}
+.koal-feld li{margin:0 0 4px}
+.koal-kriterium{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;margin:0 0 10px;font-size:1rem}
+.koal-kriterium b{font-family:var(--schrift-titel)}
+/* Schritte in Station 3 */
+.schritt{margin:0 0 36px}
+.schritt-marke{display:inline-block;font-size:1rem;font-weight:700;letter-spacing:.02em;color:var(--akzent);margin:0 0 4px;
+  border-bottom:3px solid var(--akzent);padding-bottom:2px}
+.schritt h2{margin:0 0 8px}
+/* Lange URLs und Pfade im Fließtext brechen um */
+code{font-size:1rem;background:var(--karton);padding:2px 5px;border-radius:3px;overflow-wrap:anywhere;word-break:break-word}

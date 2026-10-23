@@ -67,21 +67,22 @@
       c.setAttribute('cx', p.x.toFixed(1)); c.setAttribute('cy', p.y.toFixed(1)); c.setAttribute('r', 4.4);
       c.setAttribute('fill', sitzfolge[i] || '#E7E5E0');
       c.setAttribute('class', 'intro-punkt');
-      c.style.setProperty('--d', Math.round(i / 630 * 900) + 'ms');
+      c.style.setProperty('--d', Math.round(i / 630 * 1700) + 'ms');
       svg.appendChild(c);
     });
     buehne.appendChild(svg);
 
     /* Ablauf: die Klassen schalten die CSS-Stufen; Gesamtdauer ~5 s */
+    /* v4: ruhiger getaktet, rund 9,5 Sekunden; jede Stufe bekommt Standzeit zum Hinsehen */
     var schritte = [
-      [60, 'stufe-zeilen'],
-      [900, 'stufe-kreuze'],
-      [1700, 'stufe-platten'],
-      [2900, 'stufe-sitze'],
-      [4300, 'stufe-frage']
+      [120, 'stufe-zeilen'],
+      [1900, 'stufe-kreuze'],
+      [3600, 'stufe-platten'],
+      [5800, 'stufe-sitze'],
+      [8100, 'stufe-frage']
     ];
     var timer = schritte.map(function (s) { return setTimeout(function () { wurzel.classList.add(s[1]); }, s[0]); });
-    var ende = setTimeout(fertig, 5200);
+    var ende = setTimeout(fertig, 9600);
 
     function abbrechen() {
       timer.forEach(clearTimeout); clearTimeout(ende);

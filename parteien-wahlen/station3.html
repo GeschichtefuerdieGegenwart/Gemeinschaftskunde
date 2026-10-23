@@ -18,24 +18,33 @@
 <body data-ton="gruen">
 <header class="kopf"><div class="kopf-innen"></div></header>
 <main id="inhalt">
-  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">3</span><h1>Wofür stehen die Parteien?</h1><p class="leitfrage">Wie würde Partei X entscheiden, und woher weiß man das?</p><p class="klein" style="margin:0">Acht Kurzprofile im Fächer · ein kurzer Selbsttest, welche drei Streitfragen zu dir passen · tippen, dann die wörtliche Programmstelle lesen.</p><div class="kz"><div><b>8</b><span>Parteien</span></div><div><b>8</b><span>Streitfragen</span></div><div><b>3</b><span>passen zu dir</span></div></div></div></div>
+  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">3</span><h1>Wofür stehen die Parteien?</h1><p class="leitfrage">Wie würde Partei X entscheiden, und woher weiß man das?</p><p class="klein" style="margin:0">Drei Schritte: erst klären, was dir wichtig ist · dann nachlesen, was die Parteien dazu schreiben · dann prüfen, ob du ihre Positionen triffst.</p><div class="kz"><div><b>8</b><span>Parteien</span></div><div><b>8</b><span>Streitfragen</span></div><div><b>3</b><span>passen zu dir</span></div></div></div></div>
   <ol class="fort" aria-label="Fortschritt"></ol>
   <p class="hinweis"><strong>Zwei Ebenen, getrennt:</strong> Was eine Partei über sich sagt (Programm) und was andere über sie feststellen (Gerichte, Verfassungsschutz, Recherchen). Beides steht hier, aber nie vermischt und immer mit Datum und Quelle. Die Seite sagt dir nicht, was du wählen sollst, und rechnet keine Übereinstimmung aus.</p>
 
-  <h2>Kurzprofile</h2>
-  <p class="klein">Reihenfolge wie auf dem Stimmzettel 2025 (Listenplatz). Blättere durch; die Farbe ist die Parteifarbe und steht immer mit dem Namen.</p>
-  <div class="faecher" data-label="Acht Kurzprofile" id="profile-faecher" data-manuell><ul class="faecher-spur" id="profile"></ul></div>
-
-  <section class="karte" id="selbsttest" style="margin-top:28px">
+  <section class="schritt" id="schritt1">
+    <p class="schritt-marke">Schritt 1 von 3</p>
     <h2>Was ist dir wichtig?</h2>
-    <p>Fünf schnelle Fragen. Daraus ergeben sich drei Streitfragen, die zu dir passen. Es geht um Themen, nicht um Parteien: Die Seite merkt sich keine Antworten und rechnet nichts über dich aus. Du kannst danach jede der acht Fragen öffnen.</p>
-    <div id="selbsttest-fragen"></div>
-    <div class="rueck" id="selbsttest-rueck" aria-live="polite"></div>
+    <p>Fünf schnelle Fragen. Daraus ergeben sich drei Streitfragen, die zu dir passen. Es geht um Themen, nicht um Parteien: Die Seite merkt sich keine Antworten und rechnet nichts über dich aus.</p>
+    <div class="karte" id="selbsttest">
+      <div id="selbsttest-fragen"></div>
+      <div class="rueck" id="selbsttest-rueck" aria-live="polite"></div>
+    </div>
   </section>
 
-  <h2 style="margin-top:36px">Acht Streitfragen</h2>
-  <p>Von leicht nach schwer: zuerst klare Ja/Nein-Themen, dann Fragen, bei denen Parteien ähnliche Worte für verschiedene Dinge benutzen. <strong>Vorgehen:</strong> Für jede Partei tippen, dann »Alle Programmstellen aufdecken«. Lies die Stelle ganz, nicht nur die Kategorie. Drei Fragen reichen für die Sicherung.</p>
-  <div class="faecher" data-label="Acht Streitfragen" id="fragen-faecher" data-manuell><ul class="faecher-spur" id="fragen"></ul></div>
+  <section class="schritt" id="schritt2">
+    <p class="schritt-marke">Schritt 2 von 3</p>
+    <h2>Was sagen die Parteien dazu?</h2>
+    <p>Acht Kurzprofile in der Reihenfolge des Stimmzettels 2025. Blättere durch; »Mehr zum Programm 2025« öffnet die Kernanliegen und sechs Politikfelder mit den wörtlichen Stellen. Die Farbe ist die Parteifarbe und steht immer mit dem Namen.</p>
+    <div class="faecher" data-label="Acht Kurzprofile" id="profile-faecher" data-manuell><ul class="faecher-spur" id="profile"></ul></div>
+  </section>
+
+  <section class="schritt" id="schritt3">
+    <p class="schritt-marke">Schritt 3 von 3</p>
+    <h2>Kontrolle: Acht Streitfragen</h2>
+    <p>Jetzt prüfst du, ob du die Positionen triffst. Von leicht nach schwer: zuerst klare Ja/Nein-Themen, dann Fragen, bei denen Parteien ähnliche Worte für verschiedene Dinge benutzen. <strong>Vorgehen:</strong> Für jede Partei tippen, dann die Programmstelle lesen – nicht nur die Kategorie. Deine drei Fragen aus Schritt 1 sind markiert; drei Fragen reichen für die Sicherung.</p>
+    <div class="faecher" data-label="Acht Streitfragen" id="fragen-faecher" data-manuell><ul class="faecher-spur" id="fragen"></ul></div>
+  </section>
 
   <section class="karte karte--leise">
     <h2>Sicherung: Analyse mit Beleg</h2>
@@ -153,7 +162,7 @@ PW.rahmen('st3', '../'); PW.merkzettel('../');
     if (n < st.length) { r.className = 'rueck'; r.textContent = 'Noch ' + (st.length - n) + ' von ' + st.length + ' Fragen.'; return; }
     empfohlen = Object.keys(zaehl).sort(function (a, b) { return zaehl[b] - zaehl[a]; }).slice(0, 3);
     var namen = empfohlen.map(function (id) { return PW.fragen.filter(function (q) { return q.id === id; })[0].frage; });
-    r.className = 'rueck rueck--gut'; r.innerHTML = '<strong>Deine drei Streitfragen:</strong> ' + namen.join(' · ') + ' <span class="beleg">Sie sind im Fächer unten markiert. Du kannst auch alle anderen öffnen.</span>';
+    r.className = 'rueck rueck--gut'; r.innerHTML = '<strong>Deine drei Streitfragen:</strong> ' + namen.join(' · ') + ' <span class="beleg">Lies zuerst in Schritt 2 nach, was die Parteien dazu schreiben. In Schritt 3 sind diese Fragen markiert; du kannst auch alle anderen öffnen.</span>';
     fragenKarten.forEach(function (li, i) { li.classList.toggle('ist-empfohlen', empfohlen.indexOf(PW.fragen[i].id) >= 0); var m = li.querySelector('.marke-empfohlen'); if (m) m.hidden = empfohlen.indexOf(PW.fragen[i].id) < 0; });
     var erste = PW.fragen.map(function (q) { return q.id; }).indexOf(empfohlen[0]); if (fragenFaecher && erste >= 0) { fragenFaecher.zeige(erste); document.getElementById('fragen-faecher').scrollIntoView({ behavior: PW.wenigerBewegung() ? 'auto' : 'smooth', block: 'start' }); }
   }

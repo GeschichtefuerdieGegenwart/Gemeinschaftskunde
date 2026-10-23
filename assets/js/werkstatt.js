@@ -99,7 +99,7 @@
   /* Kopf, Fortschritt, Fuß */
   var seiten = [
     { id: 'start', url: 'index.html', name: 'Start' },
-    { id: 'ziele', url: 'ziele.html', name: 'Ziele' },
+    { id: 'ziele', url: 'ziele.html', name: 'Mein Stand' },
     { id: 'st1', url: 'parteien-wahlen/station1.html', name: 'Grundlagen', station: 1 },
     { id: 'st2', url: 'parteien-wahlen/station2.html', name: 'Erkennen', station: 2 },
     { id: 'st3', url: 'parteien-wahlen/station3.html', name: 'Positionen', station: 3 },
@@ -128,7 +128,7 @@
     }
     var fuss = document.querySelector('.fuss-innen');
     if (fuss) {
-      fuss.appendChild(PW.el('span', { text: 'Politik-Werkstatt · Einheit »Parteien und Wahlen« · Stand 19.10.2026 · Daten: Bundeswahlleiterin, Wahlprogramme 2025 (Quellen auf der Zusammenfassung)' }));
+      fuss.appendChild(PW.el('span', { text: 'Politik-Werkstatt · Einheit »Parteien und Wahlen« · Stand 23.10.2026 · Daten: Bundeswahlleiterin, Wahlprogramme 2025 (Quellen auf der Zusammenfassung)' }));
       var b = PW.el('button', { 'class': 'knopf knopf--leise', type: 'button', text: 'Eingaben löschen' });
       b.addEventListener('click', function () { if (confirm('Alle gespeicherten Eingaben auf diesem Gerät löschen?')) PW.loescheAlles(); });
       fuss.appendChild(b);

@@ -12,6 +12,12 @@
   <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">1</span><h1>Was Parteien tun</h1><p class="leitfrage">Warum braucht eine Demokratie Parteien, und was genau leisten sie?</p><p class="klein" style="margin:0">Verfassungstext markieren · vier Aufgaben ordnen · elf Funktionen auf deiner Stufe erarbeiten · Selbsttest. Der Merkzettel oben rechts fasst alles zusammen. <a href="../ziele.html">Ziel 1 dieser Einheit</a>.</p><div class="kz"><div><b>Art. 21</b><span>Grundgesetz</span></div><div><b>4</b><span>Aufgaben</span></div><div><b>11</b><span>Funktionen</span></div></div></div></div>
   <ol class="fort" aria-label="Fortschritt"></ol>
 
+  <section class="karte karte--leise einfuehrung">
+    <h2>So gehst du vor</h2>
+    <p>Vier Schritte, etwa 20 Minuten: Du <strong>markierst</strong> im Grundgesetz, was Parteien garantiert wird und was von ihnen verlangt wird. Dann ordnest du die <strong>vier Aufgaben</strong> zu, die jede Demokratie zu erledigen hat. Danach arbeitest du dich durch die <strong>elf Funktionen</strong> – auf der Stufe, die zu dir passt. Zum Schluss prüfst du dich im <strong>Selbsttest</strong>.</p>
+    <p class="klein">Nachschlagen erlaubt und erwünscht: Der <button type="button" class="knopf knopf--leise merk-auf-knopf">Merkzettel</button> oben rechts enthält alle Begriffe mit je einem Beispiel – dieselbe Kurzfassung gibt es als <a href="../docs/Zusammenfassung_Parteien_und_Wahlen.pdf">PDF zur Klausurvorbereitung</a>.</p>
+  </section>
+
   <section class="karte">
     <h2>1. Das Grundgesetz markieren</h2>
     <p>Artikel 21 sagt zweierlei: Er <strong>garantiert</strong> den Parteien etwas, und er <strong>verlangt</strong> etwas von ihnen. Wähle unten einen Marker und tippe dann die Satzteile an, die dazu passen. Nochmal tippen hebt die Markierung auf.</p>
@@ -27,8 +33,8 @@
 
   <section class="karte">
     <h2>2. Vier Aufgaben der Politik</h2>
-    <p>Politik heißt: Entscheidungen müssen diskutiert, getroffen, umgesetzt und kontrolliert werden, und dafür braucht es Personal. Ordne jede Beschreibung der passenden Aufgabe zu.</p>
-    <div id="aufgaben"></div>
+    <p>Politik heißt: Entscheidungen müssen diskutiert, getroffen, umgesetzt und kontrolliert werden, und dafür braucht es Personal. Blättere durch die vier Karten und ordne jede Beschreibung der passenden Aufgabe zu.</p>
+    <div class="faecher" data-label="Vier Aufgaben der Politik" id="aufgaben-faecher" data-manuell><ul class="faecher-spur" id="aufgaben"></ul></div>
   </section>
 
   <section class="karte">
@@ -66,6 +72,7 @@
 <script src="../assets/js/lernstand.js"></script>
 <script>
 PW.rahmen('st1', '../'); PW.merkzettel('../');
+document.querySelectorAll('.merk-auf-knopf').forEach(function (b) { b.addEventListener('click', function () { var k = document.querySelector('.merk-knopf'); if (k) k.click(); }); });
 (function () {
   /* ---------- 1. Markieren (Muster M) ---------- */
   var absatz1 = [
@@ -135,8 +142,9 @@ PW.rahmen('st1', '../'); PW.merkzettel('../');
   /* ---------- 2. Aufgaben zuordnen ---------- */
   var box = document.getElementById('aufgaben');
   PW.mischen(PW.aufgaben).forEach(function (a, i) {
-    var f = PW.el('fieldset', { style: 'border:0;padding:0;margin:0 0 20px' });
-    f.appendChild(PW.el('legend', { html: '<strong>' + a.text + '</strong>' }));
+    var f = PW.el('fieldset', { 'class': 'karte', style: 'margin:0;height:100%' });
+    f.appendChild(PW.el('legend', { style: 'padding:0 8px;font-family:var(--schrift-titel);font-weight:700;font-size:1.125rem', text: 'Aufgabe ' + (i + 1) + ' von 4' }));
+    f.appendChild(PW.el('p', { html: '<strong>' + a.text + '</strong>' }));
     var ul = PW.el('ul', { 'class': 'optionen' });
     PW.mischen(PW.aufgaben).forEach(function (o) {
       var inp = PW.el('input', { type: 'radio', name: 'aufg' + i, value: o.id });
@@ -152,8 +160,9 @@ PW.rahmen('st1', '../'); PW.merkzettel('../');
       ul.appendChild(lab);
     });
     f.appendChild(ul); f.appendChild(PW.el('div', { 'class': 'rueck', 'aria-live': 'polite' }));
-    box.appendChild(f);
+    box.appendChild(PW.el('li', {}, [f]));
   });
+  PW.faecher(document.getElementById('aufgaben-faecher'));
 
   /* ---------- 3. Funktionen in drei Stufen ---------- */
   var stufe = PW.lies('st1-stufe', 'A');
@@ -202,6 +211,7 @@ PW.rahmen('st1', '../'); PW.merkzettel('../');
           var an = b.getAttribute('aria-pressed') !== 'true';
           b.setAttribute('aria-pressed', an ? 'true' : 'false'); b.textContent = an ? 'Erklärt: ja' : 'Kann ich erklären';
           b.classList.toggle('knopf--voll', an); gelesen[fn.id] = an; PW.merke('st1-karten', gelesen);
+          if (an) PW.notiereStufe(1, 'A-' + fn.id, 'A');
         });
         k.appendChild(b);
       } else {
@@ -217,6 +227,7 @@ PW.rahmen('st1', '../'); PW.merkzettel('../');
           var txt = (feld.value || '').toLowerCase();
           erg.className = 'rueck'; erg.innerHTML = '';
           if (txt.trim().length < 15) { erg.innerHTML = '<strong>Noch zu kurz.</strong> Schreib mindestens einen vollständigen Satz, dann vergleichen wir.'; return; }
+          PW.notiereStufe(1, stufe + '-' + fn.id, stufe);
           if (stufe === 'B') {
             var worte = schluessel(fn), drin = worte.filter(function (w) { return txt.indexOf(w) >= 0; });
             erg.innerHTML = '<strong>Dein Text und die Musterformulierung:</strong><br>Muster: »' + fn.kurz + '«<br>' +

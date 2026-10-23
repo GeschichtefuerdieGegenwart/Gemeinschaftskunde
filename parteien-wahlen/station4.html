@@ -29,7 +29,7 @@
 <body data-ton="blau">
 <header class="kopf"><div class="kopf-innen"></div></header>
 <main id="inhalt">
-  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">4</span><h1>Wählen und auszählen</h1><p class="leitfrage">Wie wird aus Stimmen ein Bundestag, und was ändert die 5-%-Hürde?</p><p class="klein" style="margin:0">Vier Reiter: Stimmzettel üben · Sitze rechnen · Koalition bilden · mit der Wirklichkeit abgleichen. Die echte Klassenwahl läuft anonym über Menti.</p><div class="kz"><div><b>630</b><span>Sitze</span></div><div><b>316</b><span>Mehrheit</span></div><div><b>5 %</b><span>Hürde</span></div></div></div></div>
+  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">4</span><h1>Wählen und auszählen</h1><p class="leitfrage">Wie wird aus Stimmen ein Bundestag, und was ändert die 5-%-Hürde?</p><p class="klein" style="margin:0">Fünf Reiter: Stimmzettel üben · die Klasse wählen lassen · Sitze rechnen · Koalition bilden · mit der Wirklichkeit abgleichen.</p><div class="kz"><div><b>630</b><span>Sitze</span></div><div><b>316</b><span>Mehrheit</span></div><div><b>5 %</b><span>Hürde</span></div></div></div></div>
   <ol class="fort" aria-label="Fortschritt"></ol>
   <ul class="reiter" id="reiter"></ul>
 
@@ -46,6 +46,23 @@
     <p class="knopfzeile"><button class="knopf knopf--voll" type="button" id="abgeben">Stimmzettel üben: abgeben</button> <button class="knopf knopf--leise" type="button" id="zurueck" hidden>Noch einmal ausfüllen</button></p>
     <div class="rueck" id="wahl-rueck" aria-live="polite"></div>
     <p class="hinweis" style="margin-top:12px"><strong>Was 2025 im Wahlkreis geschah:</strong> Marc Biadacz (CDU) gewann das Direktmandat mit 37,3 % der Erststimmen. Jasmina Hostert (SPD) und Markus Frohnmaier (AfD) zogen über die Landesliste ein, Tobias Bacherle (GRÜNE) und Florian Toncar (FDP) nicht mehr. Wahlbeteiligung 84,3 % (Bundeswahlleiterin).</p>
+  </section>
+
+
+  <section id="urne">
+    <h2>Die Klassenwahl</h2>
+    <p>Zwei Wege, beide ohne Anmeldung und ohne dass Daten das Klassenzimmer verlassen. Die Lehrkraft entscheidet, welcher genutzt wird.</p>
+    <div class="karte">
+      <h3>Weg 1: Dieses Gerät ist die Wahlurne</h3>
+      <p class="klein">Ein Gerät wird herumgegeben (am besten im Flüstermodus mit Sichtschutz). Jede Person tippt ihre Partei an, bestätigt und gibt weiter. Gezählt werden nur Summen – keine Namen, keine Reihenfolge, keine Uhrzeit.</p>
+      <div id="urne-box"></div>
+    </div>
+    <div class="karte">
+      <h3>Weg 2: Ergebnis einfügen</h3>
+      <p class="klein">Wurde mit Menti, einer Moodle-Abstimmung oder einer Strichliste an der Tafel gewählt? Dann das Ergebnis hier als Text einfügen – eine Zeile je Partei mit Zahl. Prozentwerte und Stimmenzahlen werden beide erkannt.</p>
+      <div id="einfuege-box"></div>
+    </div>
+    <p class="hinweis"><strong>Warum nicht direkt aus Menti?</strong> Diese Seite läuft ohne eigenen Server – auch wenn sie in Moodle liegt. Sie kann deshalb keine Eingaben von vielen Geräten zusammenführen, und Menti bietet für Ergebnisse keine offene Schnittstelle an. Alles, was eine statische Seite tun kann, ist selbst auszuzählen (Weg 1) oder ein fertiges Ergebnis zu übernehmen (Weg 2).</p>
   </section>
 
   <section id="rechner">
@@ -75,10 +92,35 @@
 
   <section id="koalition">
     <h2>Der Koalitionsrechner</h2>
-    <p>Wer kann regieren? Eine Regierung braucht die Mehrheit der Abgeordneten: <strong>316 von 630</strong>. Setze Häkchen und beobachte die Summe. Rechnerisch möglich heißt nicht politisch gewollt: Welche Bündnisse schließen Parteien aus, und warum?</p>
+    <p>Wer kann regieren? Eine Regierung braucht die Mehrheit der Abgeordneten: <strong>316 von 630</strong>. Rechnerisch möglich heißt aber nicht, dass ein Bündnis zustande kommt. Setze Häkchen – darunter prüfst du drei Kriterien: Mehrheit, inhaltliche Nähe, öffentliche Aussagen.</p>
     <div class="koal" id="koal"></div>
     <p class="gross" id="koal-summe" aria-live="polite">0 Sitze</p>
     <div class="rueck" id="koal-rueck"></div>
+
+    <div class="karte" id="koal-pruefung-karte">
+      <h3>Drei Kriterien prüfen</h3>
+      <div id="koal-pruefung"></div>
+    </div>
+
+    <section class="karte karte--leise">
+      <h3>Aufgaben</h3>
+      <ol>
+        <li><strong>Beschreiben (AFB I):</strong> Nenne zwei Bündnisse mit rechnerischer Mehrheit und je ihre Sitzzahl.</li>
+        <li><strong>Analysieren (AFB II):</strong> Wähle ein Bündnis mit Mehrheit. In welchen der acht Streitfragen sind sich die Partner einig, in welchen nicht? Nenne zu einem strittigen Thema beide Positionen mit Beleg (Station 3, Schritt 3).</li>
+        <li><strong>Vergleichen (AFB III):</strong> Vergleiche zwei mögliche Bündnisse: Welches hat die größere inhaltliche Nähe, welches die bequemere Mehrheit? Was wäre im jeweils strittigsten Punkt der Kompromiss?</li>
+        <li><strong>Beurteilen (AFB III):</strong> Wie wahrscheinlich ist ein Bündnis deiner Wahl? Nutze alle drei Kriterien und die Satzbausteine unten. Prüfe zusätzlich in aktuellen Nachrichten, ob sich an den Aussagen seit Oktober 2026 etwas geändert hat.</li>
+        <li><strong>Diskussion:</strong> 2025 kam eine Koalition aus Union und SPD zustande, obwohl beide in mehreren Streitfragen gegensätzliche Positionen vertreten. Wie geht das zusammen? Welche Rolle spielt ein Koalitionsvertrag?</li>
+      </ol>
+      <details>
+        <summary>Satzbausteine für das Urteil</summary>
+        <ul class="klein">
+          <li>»Rechnerisch möglich ist das Bündnis, weil …«</li>
+          <li>»Inhaltlich liegen die Partner bei … nah beieinander, bei … dagegen auseinander (Beleg: Programm, S. …).«</li>
+          <li>»Dagegen spricht die Aussage von … vom … (Quelle).«</li>
+          <li>»Ich halte das Bündnis daher für … wahrscheinlich, weil ich … stärker gewichte als …«</li>
+        </ul>
+      </details>
+    </section>
   </section>
 
   <section id="abgleich">
@@ -100,9 +142,11 @@
 <script src="../assets/js/faecher.js"></script>
 <script src="../assets/js/merkzettel.js"></script>
 <script src="../assets/js/lernstand.js"></script>
+<script src="../assets/js/urne.js"></script>
+<script src="../assets/js/koalition.js"></script>
 <script>
 PW.rahmen('st4', '../'); PW.merkzettel('../');
-var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel', rechner: 'Sitzrechner', koalition: 'Koalition', abgleich: 'Abgleich' });
+var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel', urne: 'Klassenwahl', rechner: 'Sitzrechner', koalition: 'Koalition', abgleich: 'Abgleich' });
 (function () {
   /* 1. Stimmzettel */
   var erst = document.getElementById('erst'), zweit = document.getElementById('zweit');
@@ -182,7 +226,7 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
   function baueKoalition(sitze) {
     var k = document.getElementById('koal'); k.innerHTML = '';
     var ids2 = ids.filter(function (id) { return sitze[id]; });
-    if (!ids2.length) { k.appendChild(PW.el('p', { 'class': 'klein', text: 'Lade zuerst ein Ergebnis im Sitzrechner.' })); summe(); return; }
+    if (!ids2.length) { k.appendChild(PW.el('p', { 'class': 'klein', text: 'Lade zuerst ein Ergebnis im Sitzrechner.' })); PW.koalPruefung(document.getElementById('koal-pruefung'), [], sitze); summe(); return; }
     ids2.forEach(function (id) {
       var p = PW.partei(id); var inp = PW.el('input', { type: 'checkbox', value: id });
       inp.addEventListener('change', summe);
@@ -194,8 +238,10 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
       document.getElementById('koal-summe').textContent = s + ' Sitze';
       var r = document.getElementById('koal-rueck');
       if (!namen.length) { r.className = 'rueck'; r.textContent = ''; return; }
-      if (s >= PW.mehrheit) { r.className = 'rueck rueck--gut'; r.innerHTML = '<strong>Mehrheit.</strong> ' + namen.join(' + ') + ' hätten ' + s + ' von 630 Sitzen, ' + (s - PW.mehrheit) + ' über der Mehrheit. Frage: Würden diese Parteien zusammen regieren wollen? Was sagen ihre Programme zu den Streitfragen aus Station 3?'; }
+      if (s >= PW.mehrheit) { r.className = 'rueck rueck--gut'; r.innerHTML = '<strong>Mehrheit.</strong> ' + namen.join(' + ') + ' hätten ' + s + ' von 630 Sitzen, ' + (s - PW.mehrheit) + ' über der Mehrheit.'; }
       else { r.className = 'rueck rueck--nein'; r.innerHTML = '<strong>Keine Mehrheit.</strong> ' + namen.join(' + ') + ' hätten ' + s + ' Sitze; es fehlen ' + (PW.mehrheit - s) + '.'; }
+      var gewaehlt = []; k.querySelectorAll('input:checked').forEach(function (i) { gewaehlt.push(i.value); });
+      PW.koalPruefung(document.getElementById('koal-pruefung'), gewaehlt, sitze);
     }
   }
 
@@ -228,6 +274,9 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
       PW.notiere(4, 'huerde-frage', ok, 'Wirkung der 5-%-Hürde auf Mehrheiten');
     });
   });
+  /* Klassenwahl: Urne und Einfüge-Import */
+  PW.urne(document.getElementById('urne-box'), function () { lade('klasse'); });
+  PW.einfuegen(document.getElementById('einfuege-box'), function () { lade('klasse'); });
   PW.lernstandAnzeigen(4);
   document.getElementById('reiter').addEventListener('reiter:wechsel', function (e) { if (e.detail.id === 'rechner') rechne(true); });
 })();

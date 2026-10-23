@@ -19,19 +19,33 @@
   <p>Dieser Bereich ist nicht geschützt; er enthält keine Lösungen, die die Lernenden nicht ohnehin in den Stationen sehen. Hier tragen Sie das Menti-Ergebnis ein, finden die Beamer-Ansichten und den Verlaufsplan.</p>
 
   <section class="karte">
-    <h2>1. Klassenwahl aus Menti eintragen</h2>
-    <p>Menti-Vorschlag: Zwei Fragen vom Typ »Multiple Choice«, anonym, Antwortoptionen in Stimmzettel-Reihenfolge. Frage 1 Erststimme (10 Kandidierende), Frage 2 Zweitstimme (16 Listen). Tragen Sie die Zweitstimmen hier in Prozent ein (Menti zeigt sie an). Die Werte werden nur auf <strong>diesem Gerät</strong> gespeichert und erscheinen im Sitzrechner und im Realitätsabgleich; am Beamer reicht das.</p>
+    <h2>1. Klassenwahl: drei Wege ohne Medienbruch</h2>
+    <p><strong>Weg 1 – Wahlurne auf einem Gerät (empfohlen).</strong> Öffnen Sie <a href="parteien-wahlen/station4.html#urne">Station 4 → Reiter »Klassenwahl«</a> auf einem iPad und geben Sie es herum. Jede Person tippt ihre Partei an, bestätigt und reicht weiter; gezählt werden nur Summen, keine Namen und keine Reihenfolge. »Auszählen und übernehmen« schreibt das Ergebnis in Sitzrechner und Realitätsabgleich. Für ein echtes Wahlgeheimnis: Gerät kurz abdrehen oder Sichtschutz, Reihenfolge zufällig.</p>
+    <p><strong>Weg 2 – Ergebnis einfügen.</strong> Sie haben mit Menti, einer Moodle-Abstimmung oder einer Strichliste gewählt? Ergebnis als Text in dasselbe Feld einfügen (eine Zeile je Partei mit Zahl, z. B. »CDU 7«). Stimmenzahlen und Prozentwerte werden beide erkannt; nichts muss einzeln getippt werden.</p>
+    <p><strong>Weg 3 – Werte hier eintragen.</strong> Die klassische Eingabe, falls Sie die Zahlen schon kennen:</p>
     <div class="eingaben" id="eingaben"></div>
     <p class="knopfzeile"><button class="knopf knopf--voll" type="button" id="speichern">Speichern</button> <button class="knopf knopf--leise" type="button" id="loeschen">Klassenergebnis löschen</button> <a class="knopf" href="parteien-wahlen/station4.html#rechner">Zum Sitzrechner</a></p>
     <div class="rueck" id="rueck" aria-live="polite"></div>
+    <p class="hinweis"><strong>Warum keine Live-Verbindung zu Menti?</strong> Die Seite ist statisch: Sie läuft ohne eigenen Server – auch in Moodle. Sie kann deshalb keine Eingaben vieler Geräte zusammenführen, und Menti bietet für Ergebnisse keine offene Schnittstelle, die eine Seite ohne Server und ohne Konto abrufen dürfte. Weg 1 ersetzt Menti vollständig, Weg 2 macht die Übernahme zu einem Einfügen.</p>
+  </section>
+
+  <section class="karte">
+    <h2>1b. In Moodle einbinden</h2>
+    <ol>
+      <li><strong>Als Link (am einfachsten):</strong> Material »Link/URL« anlegen und auf <code>geschichtefuerdiegegenwart.github.io/Gemeinschaftskunde/</code> zeigen lassen, Anzeige »In neuem Fenster«.</li>
+      <li><strong>Als Datei im Kurs:</strong> Den Ordner als ZIP in ein Material vom Typ »Datei« hochladen und <code>index.html</code> als Hauptdatei wählen. Alle Pfade der Seite sind relativ, das funktioniert ohne Änderung; die Schriften liegen bei.</li>
+      <li><strong>Eingebettet:</strong> In einem Textblock mit dem HTML-Editor ein <code>&lt;iframe&gt;</code> auf die Startseite setzen (Höhe mindestens 800 px). Hinweis: In einem iframe ist der Vollbildmodus für den Beamer unbequem – für den Unterricht besser Weg 1 oder 2.</li>
+    </ol>
+    <p class="klein">In allen Fällen bleiben Eingaben der Lernenden auf ihrem Gerät (localStorage); Moodle erhält keine Daten aus der Seite.</p>
   </section>
 
   <section class="karte">
     <h2>2. Beamer-Ansichten (1280 × 720)</h2>
     <ul>
       <li><a href="index.html">Startseite</a>: Überblick der fünf Stationen beim Einstieg.</li>
+      <li><a href="parteien-wahlen/station4.html#urne">Klassenwahl</a>: Wahlurne herumgeben oder Ergebnis einfügen.</li>
       <li><a href="parteien-wahlen/station4.html#rechner">Sitzrechner</a>: Bundesergebnis laden, Hürde ausschalten, Grundmandatsklausel erklären.</li>
-      <li><a href="parteien-wahlen/station4.html#koalition">Koalitionsrechner</a> für das Gespräch über Mehrheiten.</li>
+      <li><a href="parteien-wahlen/station4.html#koalition">Koalitionsrechner</a>: Mehrheit, inhaltliche Nähe aus den acht Streitfragen und belegte Aussagen – mit Urteilsaufgabe.</li>
       <li><a href="parteien-wahlen/station5.html">Station 5</a>: Vermuten im Plenum, dann gemeinsam aufdecken.</li>
       <li><a href="musterbuch.html">Musterbuch der Bewegungen</a> (Gestaltung, zur Auswahl).</li>
     </ul>
@@ -53,9 +67,9 @@
     <h3>Doppelstunde B · Wählen, auszählen, verstehen</h3>
     <div class="tab-roll"><table class="verlauf"><thead><tr><th>Zeit</th><th>Phase</th><th>Was passiert</th><th>Sozialform</th></tr></thead><tbody>
       <tr><td>5 Min.</td><td>Wiederholung</td><td>Kurzabfrage: drei Funktionen mit Beispiel (mündlich).</td><td>Plenum</td></tr>
-      <tr><td>20 Min.</td><td>Wahl und Auszählung</td><td>Stimmzettel auf der Seite üben (Erst/Zweit). Dann anonyme Wahl in Menti. Ergebnis im Lehrkraft-Modus eintragen.</td><td>Einzel, Plenum</td></tr>
+      <tr><td>20 Min.</td><td>Wahl und Auszählung</td><td>Stimmzettel auf der Seite üben (Erst/Zweit). Dann Klassenwahl im Reiter »Klassenwahl«: Urne herumgeben, danach gemeinsam auszählen.</td><td>Einzel, Plenum</td></tr>
       <tr><td>15 Min.</td><td>Sitzrechner</td><td>Klassenergebnis laden; Hürde an/aus; Grundmandatsklausel; Weimar-Karte. Frage: Wer verliert durch die Hürde?</td><td>Plenum am Beamer, dann Einzel</td></tr>
-      <tr><td>15 Min.</td><td>Koalitionsrechner</td><td>Welche Mehrheiten gibt es rechnerisch? Welche sind politisch realistisch (Belege aus Station 3)?</td><td>Partner</td></tr>
+      <tr><td>15 Min.</td><td>Koalitionsrechner</td><td>Drei Kriterien: Mehrheit, inhaltliche Nähe (aus den acht Streitfragen), Aussagen. Aufgabe 4: Wahrscheinlichkeit begründet beurteilen. Diskussionsanker: Union und SPD regieren trotz vieler Gegensätze.</td><td>Partner</td></tr>
       <tr><td>10 Min.</td><td>Realitätsabgleich</td><td>Klasse, Herrenberg, Wahlkreis, Land, Bund. Zwei Unterschiede benennen und Hypothesen bilden.</td><td>Partner</td></tr>
       <tr><td>20 Min.</td><td>Station 5</td><td>Vermuten, aufdecken (Alter, Geschlecht), Brexit-Tabelle, Beurteilung der 5-%-Hürde mit Raster.</td><td>Einzel, Plenum</td></tr>
       <tr><td>5 Min.</td><td>Ausblick</td><td>Zusammenfassung ausdrucken oder speichern; Klausuraufgabe ankündigen (beurteilen, AFB III).</td><td>Plenum</td></tr>
@@ -66,7 +80,7 @@
 
   <section class="karte karte--leise">
     <h2>4. Datenschutz und Technik</h2>
-    <p class="klein">Die Seite lädt nichts nach, verwendet keine Cookies und keine Schriften aus dem Netz. Gespeichert werden nur: angetippte Karten, Tipps in Station 3, Klassenergebnis, Bewegungsschalter – im localStorage des jeweiligen Geräts, löschbar über »Eingaben löschen« im Fuß. Läuft offline über Datei-Doppelklick und über GitHub Pages.</p>
+    <p class="klein">Die Seite lädt nichts nach, verwendet keine Cookies und keine Schriften aus dem Netz. Gespeichert werden nur: angetippte Karten, Tipps in Station 3, Lernstand (erste Versuche und Niveaustufe), Klassenergebnis und Stimmensummen der Urne, Bewegungsschalter – im localStorage des jeweiligen Geräts, löschbar über »Eingaben löschen« im Fuß. Die Urne speichert keine Namen, keine Reihenfolge und keine Uhrzeiten. Läuft offline über Datei-Doppelklick, über GitHub Pages und als Datei in Moodle.</p>
   </section>
 </main>
 <footer class="fuss"><div class="fuss-innen"></div></footer>

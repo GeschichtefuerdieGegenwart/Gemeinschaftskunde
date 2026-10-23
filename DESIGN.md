@@ -262,3 +262,12 @@ Ecken 4 px für Karten, Knöpfe, Felder; Kreise (50 %) nur für Stimmzettelkreis
 - **Stufen A/B/C** in Station 1: frei wählbar, kein Freischalten, keine Abwertung. Stufe B und C prüfen Freitext nur auf Schlüsselbegriffe und sagen das ausdrücklich; die Bewertung bleibt bei den Lernenden.
 - **Lernstand** (Muster N): nur der erste Versuch, in Worten, nie als Note, Prozentzahl oder Abzeichen; Empfehlung mit Fachbegriff und Verweis auf den Merkzettel.
 - **Detailblatt** (Muster O): Dialog mit identischem Raster für alle acht Parteien – drei Kernanliegen, sechs Politikfelder, jeweils mit wörtlichem Beleg und Seitenzahl.
+
+## v4 (23.10.2026): Ruhigere Eröffnung, Ziele zuerst, Urne, Koalitionsprüfung
+
+- **Intro** auf rund 9,5 s gedehnt (fünf Stufen mit Standzeit, Staffel 150 ms je Zeile, Sitzpunkte über 1,7 s). Regeln unverändert; weiterhin überspringbar und einmal je Sitzung.
+- **Startseite**: Grundfrage, dann die **vier Ziele** als Tafel (Ziffer im Akzentkreis, Titel, ein Satz Erklärung) und ein großer Knopf »Einheit starten«. Keine Stationskacheln mehr – die Stationen führt die Fortschrittsleiste. `ziele.html` heißt jetzt **»Mein Stand«**.
+- **Lernstand-Ring** (Muster N erweitert): Kreis wie der Stimmzettelkreis, füllt sich in 440 ms, Zahl in der Mitte; daneben Satz, Stufenmarken (A/B/C) und Empfehlung. Weiterhin keine Noten, Punkte oder Prozente.
+- **Schritt-Marken** in Station 3: »Schritt 1 von 3« in Akzentfarbe mit Unterstreichung gliedert die neue Reihenfolge (wichtig → Parteien → Kontrolle).
+- **Wahlurne** (Muster P): große Parteiknöpfe mit Farbpunkt und Name, Bestätigungsbild, Zähler in Displaygröße; Summen statt Datensätzen.
+- **Koalitionsprüfung** (Muster Q): drei nummerierte Kriterien, zwei Felder »Darin einig« / »Darin uneinig«, Aussagen mit Quelle. Keine Prognose, keine Empfehlung.
