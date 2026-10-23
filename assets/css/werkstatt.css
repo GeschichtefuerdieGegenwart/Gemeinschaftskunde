@@ -423,3 +423,9 @@ body.detail-auf{overflow:hidden}
 .schritt h2{margin:0 0 8px}
 /* Lange URLs und Pfade im Fließtext brechen um */
 code{font-size:1rem;background:var(--karton);padding:2px 5px;border-radius:3px;overflow-wrap:anywhere;word-break:break-word}
+/* Wahllokal: Stimmzettel im Urnen-Modus etwas kompakter als im Übungsreiter */
+.urne-zettel{margin:0 auto 4px}
+.urne-zettel .spalte h4{text-align:center;border-bottom:2px solid var(--text);padding-bottom:6px;margin:0 0 10px;font-size:1.0625rem;font-family:var(--schrift-titel)}
+.urne-zettel .opt{min-height:52px;padding:6px 10px}
+.urne-zettel .nr{color:var(--leise);font-size:1rem;margin-right:6px}
+.spalte--zweit h4{color:var(--blau);border-bottom-color:var(--blau)}

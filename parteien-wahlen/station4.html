@@ -53,8 +53,8 @@
     <h2>Die Klassenwahl</h2>
     <p>Zwei Wege, beide ohne Anmeldung und ohne dass Daten das Klassenzimmer verlassen. Die Lehrkraft entscheidet, welcher genutzt wird.</p>
     <div class="karte">
-      <h3>Weg 1: Dieses Gerät ist die Wahlurne</h3>
-      <p class="klein">Ein Gerät wird herumgegeben (am besten im Flüstermodus mit Sichtschutz). Jede Person tippt ihre Partei an, bestätigt und gibt weiter. Gezählt werden nur Summen – keine Namen, keine Reihenfolge, keine Uhrzeit.</p>
+      <h3>Weg 1: Wahllokal am Lehrkraftgerät</h3>
+      <p class="klein">Das Gerät bleibt vorn. Eine Person nach der anderen kommt nach vorn, kreuzt auf dem <strong>amtlichen Stimmzettel des Wahlkreises 260</strong> Erst- und Zweitstimme an und wirft ihn ein – wie im echten Wahllokal. Gezählt werden nur Summen: keine Namen, keine Reihenfolge, keine Uhrzeit.</p>
       <div id="urne-box"></div>
     </div>
     <div class="karte">
@@ -220,7 +220,12 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
     rechne(true);
   }
   document.querySelectorAll('[data-lade]').forEach(function (b) { b.addEventListener('click', function () { lade(b.getAttribute('data-lade')); }); });
-  if (!PW.lies('klasse', null)) { var kk = document.getElementById('klasse-knopf'); kk.setAttribute('aria-disabled', 'true'); kk.title = 'Die Lehrkraft trägt das Menti-Ergebnis im Lehrkraft-Modus ein.'; }
+  function klassenKnopf() {
+    var kk = document.getElementById('klasse-knopf'); if (!kk) return;
+    if (PW.lies('klasse', null)) { kk.removeAttribute('aria-disabled'); kk.disabled = false; kk.title = 'Das Ergebnis eurer Klassenwahl laden'; }
+    else { kk.setAttribute('aria-disabled', 'true'); kk.disabled = true; kk.title = 'Erst im Reiter »Klassenwahl« wählen oder ein Ergebnis einfügen.'; }
+  }
+  klassenKnopf();
 
   /* 3. Koalition */
   function baueKoalition(sitze) {
@@ -275,8 +280,8 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
     });
   });
   /* Klassenwahl: Urne und Einfüge-Import */
-  PW.urne(document.getElementById('urne-box'), function () { lade('klasse'); });
-  PW.einfuegen(document.getElementById('einfuege-box'), function () { lade('klasse'); });
+  PW.urne(document.getElementById('urne-box'), function () { klassenKnopf(); lade('klasse'); });
+  PW.einfuegen(document.getElementById('einfuege-box'), function () { klassenKnopf(); lade('klasse'); });
   PW.lernstandAnzeigen(4);
   document.getElementById('reiter').addEventListener('reiter:wechsel', function (e) { if (e.detail.id === 'rechner') rechne(true); });
 })();

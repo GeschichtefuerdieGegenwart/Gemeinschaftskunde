@@ -100,3 +100,15 @@ Neue Muster im Musterbuch: **P** Wahlurne, **Q** Koalitionsprüfung.
 Prüfkette v4: taste-skill lint **0 FAIL**; inspect (App-Modus, 1440/1280/1024/768/390) **alle 11 Seiten 0 FAIL** (Rest-WARN: below-fold auf langen Lernseiten, tabular – Atkinson kennt kein tnum-Feature). Eigene Prüfung: keine Konsolenfehler, kein waagerechtes Scrollen, kein Text < 16 px, keine Tippziele < 44 px. Funktionstest: Intro-Takt, Zieltafel, Aufgaben-Fächer, Stufen mit Stufenerfassung, Lernstand-Ring, Station-3-Schritte, Urne (fünf Stimmen, Auszählen, Leeren), Einfüge-Import (Stimmen und Prozentwerte), Koalitionsprüfung mit CDU + SPD, Abgleich mit Klassenergebnis.
 
 Grenzen, ehrlich benannt: Eine Live-Übernahme aus Menti ist ohne Server oder kostenpflichtige Schnittstelle nicht möglich; die Seite sagt das auf der Seite und im Lehrkraft-Modus. Das Wahlgeheimnis beim Urnen-Modus hängt am Verfahren im Raum, nicht an der Technik. Nicht gelaufen: Impeccable audit/polish (Plugin hier nicht installiert), Test auf einem echten iPad, Test der Moodle-Einbindung in einer echten Moodle-Instanz.
+
+## v4.1 (23.10.2026): Wahllokal statt Knopfliste
+
+Auf Wunsch der Lehrkraft ist der Urnen-Modus jetzt ein **Wahllokal am Lehrkraftgerät**: Das Gerät bleibt vorn, die Lernenden kommen einzeln nach vorn und kreuzen auf dem **amtlichen Stimmzettel des Wahlkreises 260** Erst- und Zweitstimme an (dieselbe Darstellung wie im Übungsreiter, mit den echten Kandidierenden und den 16 Landeslisten von 2025). »Stimmzettel einwerfen« lässt den Zettel nach unten wegsinken (Muster G), danach steht nur die Bestätigung; »Nächste Person« holt den leeren Zettel zurück.
+
+- Gezählt werden **Erst- und Zweitstimmen getrennt**, als Summen je Kandidat und je Liste – keine Namen, keine Reihenfolge, keine Uhrzeit.
+- »Auszählen und übernehmen« gibt beide Auszählungen aus, nennt das **Direktmandat der Klasse** im Vergleich mit dem echten Ergebnis 2025 (Marc Biadacz, CDU, 37,3 %) und schreibt die Zweitstimmen in Sitzrechner und Realitätsabgleich; Stimmen für die kleinen Listen zählen dort als »Sonstige«.
+- Ein leerer Zettel wird abgewiesen – mit dem Hinweis, dass er in einer echten Wahl ungültig wäre.
+- Der Knopf »Klassenergebnis« im Sitzrechner schaltet sich frei, sobald eine Klassenwahl vorliegt.
+- Lehrkraft-Modus und Musterbuch (Muster P »Das Wahllokal«) sind entsprechend umgeschrieben; dort steht auch der Zeitbedarf: rund 15 Sekunden je Person, bei 19 Lernenden etwa 5 Minuten.
+
+Prüfkette v4.1: taste-skill lint 0 FAIL/0 WARN; inspect der geänderten Seiten 0 FAIL; eigene Prüfung ohne Befund; Funktionstest mit sieben Stimmzetteln inklusive Kleinpartei, leerem Zettel, Auszählung, Übernahme in den Sitzrechner und Realitätsabgleich.
