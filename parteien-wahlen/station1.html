@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Station 1 · Grundlagen</title>
+<script>try{var a=localStorage.getItem("pw:ansicht");if(a){a=JSON.parse(a);if(a==="hell"||a==="dunkel"||a==="beamer")document.documentElement.setAttribute("data-ansicht",a)}}catch(e){}</script>
 <link rel="stylesheet" href="../assets/css/werkstatt.css">
 </head>
 <body data-ton="warm">
@@ -70,6 +71,7 @@
 <script src="../assets/js/faecher.js"></script>
 <script src="../assets/js/merkzettel.js"></script>
 <script src="../assets/js/lernstand.js"></script>
+<script src="../assets/js/hilfen.js"></script>
 <script>
 PW.rahmen('st1', '../'); PW.merkzettel('../');
 document.querySelectorAll('.merk-auf-knopf').forEach(function (b) { b.addEventListener('click', function () { var k = document.querySelector('.merk-knopf'); if (k) k.click(); }); });
@@ -154,12 +156,17 @@ document.querySelectorAll('.merk-auf-knopf').forEach(function (b) { b.addEventLi
         var r = f.querySelector('.rueck');
         var ok = o.id === a.id;
         if (ok) { lab.classList.add('ist-richtig'); r.className = 'rueck rueck--gut'; r.textContent = 'Passt. »' + a.text + '« ist ' + a.name + '.'; }
-        else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.textContent = 'Noch nicht. ' + o.name + ' heißt: ' + PW.aufgaben.filter(function (x) { return x.id === o.id; })[0].text + ' Lies die Beschreibung noch einmal.'; }
+        else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.textContent = 'Passt nicht. ' + o.name + ' heißt: ' + PW.aufgaben.filter(function (x) { return x.id === o.id; })[0].text + ' Lies die Beschreibung noch einmal.'; }
         PW.notiere(1, 'aufgabe-' + a.id, ok, 'Die vier Aufgaben: ' + a.name);
       });
       ul.appendChild(lab);
     });
     f.appendChild(ul); f.appendChild(PW.el('div', { 'class': 'rueck', 'aria-live': 'polite' }));
+    PW.hilfen(f, [
+      '<p>Die vier Fachwörter bestehen aus Wortteilen: <strong>Formulierung</strong> = etwas in Worte fassen und beschließen · <strong>Implementation</strong> = umsetzen, in die Tat bringen · <strong>Kontrolle</strong> = prüfen, ob es richtig läuft · <strong>Rekrutierung</strong> = Personal gewinnen.</p>',
+      '<p>Suche im Satz das Tätigkeitswort. Was passiert mit der Entscheidung – wird sie getroffen, umgesetzt, geprüft, oder geht es um Personen für Ämter?</p>',
+      function () { return '<p>Der Satz lautet: »' + a.text + '«. Nimm das Tätigkeitswort aus Stufe 2 und suche das Fachwort, dessen Wortteil aus Stufe 1 genau das bedeutet. Lege dich dann fest – die Rückmeldung sagt dir, ob es passt.</p>'; }
+    ], { station: 1, id: 'aufgabe-' + a.id });
     box.appendChild(PW.el('li', {}, [f]));
   });
   PW.faecher(document.getElementById('aufgaben-faecher'));
@@ -286,12 +293,17 @@ document.querySelectorAll('.merk-auf-knopf').forEach(function (b) { b.addEventLi
         ul.querySelectorAll('.opt').forEach(function (l) { l.classList.remove('ist-richtig', 'ist-falsch'); });
         var ok = j === q.r;
         if (ok) { lab.classList.add('ist-richtig'); r.className = 'rueck rueck--gut'; r.textContent = 'Passt. ' + q.w; }
-        else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.textContent = 'Noch nicht. ' + q.w; }
+        else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.textContent = 'Passt nicht. ' + q.w; }
         PW.notiere(1, 'test-' + i, ok, q.t);
       });
       ul.appendChild(lab);
     });
     f.appendChild(ul); f.appendChild(r);
+    PW.hilfen(f, [
+      function () { return '<p>Es geht um: <strong>' + q.t + '</strong>. Den Begriff findest du im Merkzettel oben rechts.</p>'; },
+      '<p>Streiche zuerst die Antworten, die sicher nicht passen. Meist bleiben zwei – entscheide dann nach dem genauen Wortlaut der Frage.</p>',
+      function () { return '<p>' + q.w + '</p><p>Lege dich jetzt fest.</p>'; }
+    ], { station: 1, id: 'test-' + i });
     t.appendChild(PW.el('li', {}, [f]));
   });
   PW.faecher(document.getElementById('test-faecher'));

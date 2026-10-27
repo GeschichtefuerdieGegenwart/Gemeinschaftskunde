@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Station 3 · Positionen</title>
+<script>try{var a=localStorage.getItem("pw:ansicht");if(a){a=JSON.parse(a);if(a==="hell"||a==="dunkel"||a==="beamer")document.documentElement.setAttribute("data-ansicht",a)}}catch(e){}</script>
 <link rel="stylesheet" href="../assets/css/werkstatt.css">
 <style>
 .pz{border-top:2px solid var(--linie);padding:12px 0 4px}
@@ -12,7 +13,7 @@
 .faecher-spur .pz h4{padding-top:8px}
 @media (min-width:1024px){#fragen-faecher .faecher-spur{padding-inline:11%}}
 @media (max-width:600px){.pz-opt{grid-template-columns:1fr}dl dd{margin-left:0!important}}
-@media (min-width:768px){.pz{display:grid;grid-template-columns:110px 1fr;gap:4px 16px;align-items:start}.pz h4{padding-top:12px}.pz .rueck{grid-column:2}}
+@media (min-width:768px){.pz{display:grid;grid-template-columns:110px 1fr;gap:4px 16px;align-items:start}.pz h4{padding-top:12px}.pz .rueck,.pz .hilfen{grid-column:2}}
 </style>
 </head>
 <body data-ton="gruen">
@@ -71,6 +72,7 @@
 <script src="../assets/js/merkzettel.js"></script>
 <script src="../assets/js/profile.js"></script>
 <script src="../assets/js/lernstand.js"></script>
+<script src="../assets/js/hilfen.js"></script>
 <script>
 PW.rahmen('st3', '../'); PW.merkzettel('../');
 (function () {
@@ -98,6 +100,11 @@ PW.rahmen('st3', '../'); PW.merkzettel('../');
   /* Detailansicht je Partei: Kernanliegen und sechs Politikfelder, für alle Parteien gleich */
   var dlg = document.getElementById('detail'), dInhalt = document.getElementById('detail-inhalt'), letzterKnopf = null;
   function zeigeDetail(id) {
+    var karte = prof.querySelectorAll('.profil')[reihenfolge.indexOf(id)];
+    var von = karte ? karte.querySelector('.pf-marke') : null;
+    PW.ansicht(von, function () { return dInhalt.querySelector('.pf-marke'); }, function () { baueDetail(id); });
+  }
+  function baueDetail(id) {
     var p = PW.partei(id), pr = PW.profile[id];
     letzterKnopf = document.activeElement;
     dInhalt.innerHTML = '';
@@ -128,9 +135,14 @@ PW.rahmen('st3', '../'); PW.merkzettel('../');
     }
     dInhalt.appendChild(PW.el('p', { 'class': 'klein', style: 'color:var(--leise)', text: PW.profilHinweis }));
     dlg.hidden = false; document.body.classList.add('detail-auf');
+    var ez = dInhalt.querySelector('.zitat p'); if (ez && PW.aufbauen) PW.aufbauen(ez, { dauer: 1800 });
     dlg.querySelector('.detail-schliessen').focus();
   }
-  function schliesse() { dlg.hidden = true; document.body.classList.remove('detail-auf'); if (letzterKnopf) letzterKnopf.focus(); }
+  function schliesse() {
+    var marke = dInhalt.querySelector('.pf-marke'); var karte = letzterKnopf && letzterKnopf.closest ? letzterKnopf.closest('.profil') : null;
+    PW.ansicht(marke, function () { return karte ? karte.querySelector('.pf-marke') : null; }, function () { dlg.hidden = true; document.body.classList.remove('detail-auf'); });
+    if (letzterKnopf) letzterKnopf.focus();
+  }
   dlg.querySelector('.detail-schliessen').addEventListener('click', schliesse);
   dlg.addEventListener('click', function (e) { if (e.target === dlg) schliesse(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !dlg.hidden) schliesse(); });
@@ -162,7 +174,7 @@ PW.rahmen('st3', '../'); PW.merkzettel('../');
     if (n < st.length) { r.className = 'rueck'; r.textContent = 'Noch ' + (st.length - n) + ' von ' + st.length + ' Fragen.'; return; }
     empfohlen = Object.keys(zaehl).sort(function (a, b) { return zaehl[b] - zaehl[a]; }).slice(0, 3);
     var namen = empfohlen.map(function (id) { return PW.fragen.filter(function (q) { return q.id === id; })[0].frage; });
-    r.className = 'rueck rueck--gut'; r.innerHTML = '<strong>Deine drei Streitfragen:</strong> ' + namen.join(' · ') + ' <span class="beleg">Lies zuerst in Schritt 2 nach, was die Parteien dazu schreiben. In Schritt 3 sind diese Fragen markiert; du kannst auch alle anderen öffnen.</span>';
+    r.className = 'rueck rueck--eigen'; r.innerHTML = '<strong>Deine drei Streitfragen:</strong> ' + namen.join(' · ') + ' <span class="beleg">Lies zuerst in Schritt 2 nach, was die Parteien dazu schreiben. In Schritt 3 sind diese Fragen markiert; du kannst auch alle anderen öffnen.</span>';
     fragenKarten.forEach(function (li, i) { li.classList.toggle('ist-empfohlen', empfohlen.indexOf(PW.fragen[i].id) >= 0); var m = li.querySelector('.marke-empfohlen'); if (m) m.hidden = empfohlen.indexOf(PW.fragen[i].id) < 0; });
     var erste = PW.fragen.map(function (q) { return q.id; }).indexOf(empfohlen[0]); if (fragenFaecher && erste >= 0) { fragenFaecher.zeige(erste); document.getElementById('fragen-faecher').scrollIntoView({ behavior: PW.wenigerBewegung() ? 'auto' : 'smooth', block: 'start' }); }
   }
@@ -173,7 +185,7 @@ PW.rahmen('st3', '../'); PW.merkzettel('../');
     var li = PW.el('li'); fragenKarten.push(li);
     var sec = PW.el('section', { 'class': 'karte', style: 'margin:0' }); li.appendChild(sec);
     sec.appendChild(PW.el('span', { 'class': 'marke-empfohlen', text: 'Passt zu deinen Antworten', hidden: '' }));
-    sec.appendChild(PW.el('h3', { text: (qi + 1) + '. ' + q.frage }));
+    sec.appendChild(PW.el('h3', { 'class': 'stimme-frage', text: (qi + 1) + '. ' + q.frage }));
     sec.appendChild(PW.el('p', { 'class': 'klein', style: 'color:var(--leise)', text: 'Stufe ' + q.stufe + ' von 3 · Tippe für jede Partei' }));
     var tab = PW.el('div', { 'class': 'parteien' });
     var ord = PW.mischen(reihenfolge);
@@ -192,12 +204,18 @@ PW.rahmen('st3', '../'); PW.merkzettel('../');
           ul.querySelectorAll('.opt').forEach(function (l) { l.classList.remove('ist-richtig', 'ist-falsch'); });
           var beleg = '<span class="beleg">Beleg: Wahlprogramm 2025 der ' + p.name + (pos[2] !== '–' ? ', ' + pos[2] + ' der PDF-Datei' : '') + '</span>';
           if (k === pos[0]) { lab.classList.add('ist-richtig'); r.className = 'rueck rueck--gut'; r.innerHTML = '<strong>Passt.</strong> ' + pos[1] + beleg; }
-          else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.innerHTML = '<strong>Das Programm sagt etwas anderes:</strong> ' + pos[1] + beleg; }
+          else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.innerHTML = '<strong>Passt nicht.</strong> Das Programm sagt: ' + pos[1] + beleg; }
           PW.notiere(3, 'q' + qi + id, k === pos[0], 'Position belegen: ' + q.frage.replace(/\?$/, ''));
         });
         ul.appendChild(lab);
       });
-      zeile.appendChild(ul); zeile.appendChild(r); tab.appendChild(zeile);
+      zeile.appendChild(ul); zeile.appendChild(r);
+      PW.hilfen(zeile, [
+        function () { return '<p><strong>' + q.kategorien[0] + '</strong> / <strong>' + q.kategorien[1] + '</strong>: Das Programm spricht sich ausdrücklich aus. <strong>keine Aussage</strong>: Das Programm äußert sich zu dieser Frage nicht – auch das ist ein Befund.' + (id === 'csu' ? ' Die CSU hat mit der CDU ein gemeinsames Programm.' : '') + '</p>'; },
+        function () { return pos[2] !== '–' ? '<p>Fundstelle: Wahlprogramm 2025 der ' + p.name + ', <strong>' + pos[2] + ' der PDF-Datei</strong>. Lies die Stelle, bevor du dich festlegst.</p>' : '<p>Für diese Frage gibt es im Programm der ' + p.name + ' keine Fundstelle. Was folgt daraus für deine Zuordnung?</p>'; },
+        function () { return '<p>Die Programmstelle lautet: ' + pos[1] + '</p><p>Ordne sie jetzt selbst zu.</p>'; }
+      ], { station: 3, id: 'q' + qi + id });
+      tab.appendChild(zeile);
     });
     sec.appendChild(tab);
     var deck = PW.el('div', { 'class': 'deck' });

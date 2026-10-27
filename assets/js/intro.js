@@ -10,14 +10,14 @@
   PW.intro = function (wurzel) {
     if (!wurzel) return;
     var ziel = document.getElementById('nach-intro');
+    var gesehen = false;
+    try { gesehen = sessionStorage.getItem('pw:intro') === '1'; } catch (e) {}
     function fertig() {
       wurzel.setAttribute('hidden', '');
       document.body.classList.remove('intro-laeuft');
-      if (ziel) { var h = ziel.querySelector('h1'); if (h) { h.setAttribute('tabindex', '-1'); try { h.focus({ preventScroll: true }); } catch (e) {} } }
+      if (ziel) { var h = ziel.querySelector('h1'); if (h) { h.setAttribute('tabindex', '-1'); try { h.focus({ preventScroll: true }); } catch (e) {} if (PW.aufbauen) PW.aufbauen(h, { sofort: gesehen }); } }
       try { sessionStorage.setItem('pw:intro', '1'); } catch (e) {}
     }
-    var gesehen = false;
-    try { gesehen = sessionStorage.getItem('pw:intro') === '1'; } catch (e) {}
     var ruhig = (PW.wenigerBewegung && PW.wenigerBewegung()) || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     if (gesehen || ruhig) { fertig(); return; }
 
@@ -59,13 +59,13 @@
     /* Farben nach dem echten Ergebnis 2025 (Sitzordnung von links nach rechts), nicht erfunden */
     var sitzfolge = [];
     [['linke', 64], ['spd', 120], ['gruene', 85], ['ssw', 1], ['cdu', 164], ['csu', 44], ['afd', 152]].forEach(function (x) {
-      var p = PW.partei(x[0]); var f = p ? p.farbe : '#2A6F97';
+      var p = PW.partei(x[0]); var f = p ? p.farbe : 'var(--partei-ssw)';
       for (var k = 0; k < x[1]; k++) sitzfolge.push(f);
     });
     punkte.forEach(function (p, i) {
       var c = document.createElementNS(ns, 'circle');
       c.setAttribute('cx', p.x.toFixed(1)); c.setAttribute('cy', p.y.toFixed(1)); c.setAttribute('r', 4.4);
-      c.setAttribute('fill', sitzfolge[i] || '#E7E5E0');
+      c.style.fill = sitzfolge[i] || 'var(--partei-leer)';
       c.setAttribute('class', 'intro-punkt');
       c.style.setProperty('--d', Math.round(i / 630 * 1700) + 'ms');
       svg.appendChild(c);

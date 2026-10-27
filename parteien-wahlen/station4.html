@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Station 4 · Wählen</title>
+<script>try{var a=localStorage.getItem("pw:ansicht");if(a){a=JSON.parse(a);if(a==="hell"||a==="dunkel"||a==="beamer")document.documentElement.setAttribute("data-ansicht",a)}}catch(e){}</script>
 <link rel="stylesheet" href="../assets/css/werkstatt.css">
 <style>
 .zettel{background:var(--flaeche);border:2px solid var(--text);padding:16px;max-width:980px}
@@ -142,6 +143,7 @@
 <script src="../assets/js/faecher.js"></script>
 <script src="../assets/js/merkzettel.js"></script>
 <script src="../assets/js/lernstand.js"></script>
+<script src="../assets/js/hilfen.js"></script>
 <script src="../assets/js/urne.js"></script>
 <script src="../assets/js/koalition.js"></script>
 <script>
@@ -185,7 +187,7 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
   var huerde = document.getElementById('huerde'), gm = document.getElementById('grundmandat');
   huerde.addEventListener('change', rechne); gm.addEventListener('change', rechne);
   var farben = ids.map(function (id) { var p = PW.partei(id); return { id: id, name: p.name, farbe: p.farbe }; });
-  farben.push({ id: 'ssw', name: 'SSW', farbe: '#2A6F97' });
+  farben.push({ id: 'ssw', name: 'SSW', farbe: 'var(--partei-ssw)' });
   var letzteSitze = {};
   function werte() { var w = {}; ids.forEach(function (id) { var v = parseFloat(felder[id].value.replace(',', '.')); w[id] = isNaN(v) ? null : v; }); return w; }
   function rechne(animiert) {
@@ -200,7 +202,7 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
     ids.forEach(function (id) {
       var p = PW.partei(id); var v = w[id]; if (v === null) return;
       var drin = (sitze[id] || 0) > 0;
-      var row = PW.el('div', { 'class': 'balken' }, [PW.el('span', { text: p.name }), PW.el('div', { 'class': 'spur huerde' }, [PW.el('div', { 'class': 'fuellung', 'data-wert': (Math.min(v, maxw) / maxw).toFixed(3), style: 'background:' + (drin ? p.farbe : '#9A948C') }), huerde.checked ? PW.el('div', { 'class': 'huerde-linie', style: 'left:' + (5 / maxw * 100) + '%', title: '5-%-Hürde' }) : PW.el('span')]), PW.el('span', { 'class': 'zahl', text: PW.fmt(v) + ' %' })]);
+      var row = PW.el('div', { 'class': 'balken' }, [PW.el('span', { text: p.name }), PW.el('div', { 'class': 'spur huerde' }, [PW.el('div', { 'class': 'fuellung', 'data-wert': (Math.min(v, maxw) / maxw).toFixed(3), style: 'background:' + (drin ? p.farbe : 'var(--partei-sonstige)') }), huerde.checked ? PW.el('div', { 'class': 'huerde-linie', style: 'left:' + (5 / maxw * 100) + '%', title: '5-%-Hürde' }) : PW.el('span')]), PW.el('span', { 'class': 'zahl', text: PW.fmt(v) + ' %' })]);
       b.appendChild(row);
     });
     PW.balkenWachsen(b);
@@ -274,8 +276,8 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
       var ok = i.value === '1'; var r = document.getElementById('hf-rueck');
       r.className = ok ? 'rueck rueck--gut' : 'rueck rueck--nein';
       r.innerHTML = ok
-        ? '<strong>Richtig.</strong> Ohne Hürde ziehen FDP und BSW ein; alle anderen verlieren Sitze. Union und SPD kämen zusammen auf 297 statt 328 Sitze und lägen damit unter der Mehrheit von 316. Die Hürde entscheidet also mit darüber, wer regieren kann.'
-        : '<strong>Noch nicht.</strong> Schalte die 5-%-Hürde aus und sieh dir die Legende an: FDP und BSW bekommen Sitze, alle anderen verlieren welche. Union und SPD kommen dann auf 297 – weniger als die nötigen 316.';
+        ? '<strong>Passt.</strong> Ohne Hürde ziehen FDP und BSW ein; alle anderen verlieren Sitze. Union und SPD kämen zusammen auf 297 statt 328 Sitze und lägen damit unter der Mehrheit von 316. Die Hürde entscheidet also mit darüber, wer regieren kann.'
+        : '<strong>Passt nicht.</strong> Schalte die 5-%-Hürde aus und sieh dir die Legende an: FDP und BSW bekommen Sitze, alle anderen verlieren welche. Union und SPD kommen dann auf 297 – weniger als die nötigen 316.';
       PW.notiere(4, 'huerde-frage', ok, 'Wirkung der 5-%-Hürde auf Mehrheiten');
     });
   });

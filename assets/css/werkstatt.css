@@ -3,15 +3,61 @@
 @font-face{font-family:'Atkinson Hyperlegible Next';src:url('../fonts/AtkinsonHyperlegibleNext-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
 @font-face{font-family:'Bricolage Grotesque';src:url('../fonts/BricolageGrotesque-SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
 @font-face{font-family:'Bricolage Grotesque';src:url('../fonts/BricolageGrotesque96pt-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Fraunces';src:url('../fonts/Fraunces72pt-SemiBoldItalic.woff') format('woff');font-weight:600;font-style:italic;font-display:swap}
 
+/* ===== Tokens · drei Ansichten: Hell (Standard), Dunkel, Beamer (≥ 7:1). Werte nach dem Designsystem »Gemeinschaftskunde«,
+   Dunkel- und Beamer-Werte nach »Gegenwart« abgeleitet (siehe DESIGN.md). Parteifarben nur im Halbrund, in Balken und als Kante/Marke. ===== */
 :root{
   --grund:#F1F0ED;--flaeche:#FFFFFD;--karton:#E7E5E0;--text:#1F1D1A;--leise:#5B5751;--stahl:#75706A;--linie:#DDD9D2;
-  --blau:#1F4E8C;--blau-zart:#DCE6F3;--blau-tief:#163A69;--erfolg:#2E6B34;--erfolg-zart:#E3EEE4;--fehler:#B0281C;--fehler-zart:#F6E2DF;
-  --schrift-text:'Atkinson Hyperlegible Next',system-ui,sans-serif;--schrift-titel:'Bricolage Grotesque','Atkinson Hyperlegible Next',system-ui,sans-serif;
+  --blau:#1F4E8C;--blau-zart:#DCE6F3;--blau-tief:#163A69;
+  --erfolg:#2E6B34;--erfolg-zart:#E3EEE4;--erfolg-tief:#1F4A24;--fehler:#B0281C;--fehler-zart:#F6E2DF;--fehler-tief:#6E1710;
+  --warnung:#8A5300;--warnung-zart:#F5E8CF;--warnung-tief:#5B3600;
+  --akzent:#A8411A;--akzent-zart:#F6E3D5;--kuli:#1E4FB5;--kuli-zart:#E4EBF8;--marker:#F3D54E;
+  --ton-warm:#F6E3D5;--ton-warm-tief:#7A2E10;--ton-blau:#DCE6F3;--ton-blau-tief:#163A69;--ton-gruen:#E3EEE4;--ton-gruen-tief:#1F4A24;--ton-lila:#ECE4F2;--ton-lila-tief:#4A2A66;--ton-gelb:#F5ECC8;--ton-gelb-tief:#5B4A08;
+  --partei-cdu:#1F1D1A;--partei-csu:#0C6DB3;--partei-spd:#C8102E;--partei-gruene:#2E7D32;--partei-fdp:#E8C300;--partei-afd:#1A8FD6;--partei-linke:#B5176B;--partei-bsw:#6B2D8B;--partei-ssw:#2A6F97;--partei-sonstige:#9A948C;--partei-leer:#E7E5E0;
+  --schleier:rgba(31,29,26,.55);--fokus-innen:#FFFFFD;
+  --schrift-text:'Atkinson Hyperlegible Next',system-ui,sans-serif;--schrift-titel:'Bricolage Grotesque','Atkinson Hyperlegible Next',system-ui,sans-serif;--schrift-stimme:'Fraunces',Georgia,'Times New Roman',serif;
   --radius:4px;--platte:6px 6px 0 0 var(--karton);
-  --dauer-druck:100ms;--dauer-schnell:160ms;--dauer-mittel:220ms;--dauer-langsam:300ms;--dauer-aus:150ms;--dauer-aufdecken:360ms;--dauer-sitze:440ms;
+  --dauer-druck:100ms;--dauer-schnell:160ms;--dauer-mittel:220ms;--dauer-langsam:300ms;--dauer-aus:150ms;--dauer-aufdecken:360ms;--dauer-sitze:440ms;--dauer-aufbauen:2400ms;
   --ease-out:cubic-bezier(.23,1,.32,1);--ease-inout:cubic-bezier(.77,0,.175,1);
   --mass:68ch;
+  color-scheme:light;
+}
+html[data-ansicht=dunkel]{
+  --grund:#181715;--flaeche:#22201D;--karton:#2D2A26;--text:#F3EADB;--leise:#B8AD9E;--stahl:#8F8576;--linie:#3A3631;
+  --blau:#8FB0F0;--blau-zart:#1C2A44;--blau-tief:#C4D6F7;
+  --erfolg:#7CC488;--erfolg-zart:#1D3320;--erfolg-tief:#BFE6C4;--fehler:#F08A7E;--fehler-zart:#3D1C18;--fehler-tief:#F7C2BA;
+  --warnung:#E0A34A;--warnung-zart:#3A2A10;--warnung-tief:#F2D3A0;
+  --akzent:#DB826C;--akzent-zart:#3A221C;--kuli:#8FB0F0;--kuli-zart:#1C2A44;--marker:#6B5A10;
+  --ton-warm:#3A221C;--ton-warm-tief:#F2BFAE;--ton-blau:#1C2A44;--ton-blau-tief:#C4D6F7;--ton-gruen:#1D3320;--ton-gruen-tief:#BFE6C4;--ton-lila:#2C2140;--ton-lila-tief:#D9C6F0;--ton-gelb:#3A3010;--ton-gelb-tief:#EBDA93;
+  --partei-cdu:#E6E0D6;--partei-csu:#58A8EA;--partei-spd:#F05C70;--partei-gruene:#62C168;--partei-fdp:#F2D23C;--partei-afd:#58B4F2;--partei-linke:#E862A4;--partei-bsw:#B98BDC;--partei-ssw:#66ACCF;--partei-sonstige:#8C867E;--partei-leer:#3A3631;
+  --schleier:rgba(0,0,0,.65);--fokus-innen:#181715;
+  color-scheme:dark;
+}
+html[data-ansicht=beamer]{
+  --grund:#FFFFFF;--flaeche:#FFFFFF;--karton:#ECE7DE;--text:#000000;--leise:#3A342E;--stahl:#4A433B;--linie:#C9C1B4;
+  --blau:#15407A;--blau-zart:#DCE6F3;--blau-tief:#0E2A52;
+  --erfolg:#1F4F24;--erfolg-zart:#DCEBDC;--erfolg-tief:#143618;--fehler:#8A1E14;--fehler-zart:#F6DCD8;--fehler-tief:#5E140D;
+  --warnung:#6B4000;--warnung-zart:#F5E8CF;--warnung-tief:#4A2C00;
+  --akzent:#7A2E1F;--akzent-zart:#F3DFD8;--kuli:#163C8C;--kuli-zart:#E4EBF8;--marker:#F3D54E;
+  --ton-warm:#F3DFD8;--ton-warm-tief:#5E2314;--ton-blau:#DCE6F3;--ton-blau-tief:#0E2A52;--ton-gruen:#DCEBDC;--ton-gruen-tief:#143618;--ton-lila:#ECE4F2;--ton-lila-tief:#3A1F52;--ton-gelb:#F5ECC8;--ton-gelb-tief:#463806;
+  --partei-cdu:#000000;--partei-csu:#0A5A96;--partei-spd:#B30E29;--partei-gruene:#246B2A;--partei-fdp:#D9B400;--partei-afd:#1578B8;--partei-linke:#9E145D;--partei-bsw:#5E2779;--partei-ssw:#1F6F8F;--partei-sonstige:#6E6860;--partei-leer:#ECE7DE;
+  --platte:6px 6px 0 0 #000000;--schleier:rgba(0,0,0,.6);--fokus-innen:#FFFFFF;
+  color-scheme:light;
+}
+/* Ohne eigene Wahl folgt die Ansicht dem System */
+@media (prefers-color-scheme:dark){
+  html:not([data-ansicht]){
+  --grund:#181715;--flaeche:#22201D;--karton:#2D2A26;--text:#F3EADB;--leise:#B8AD9E;--stahl:#8F8576;--linie:#3A3631;
+  --blau:#8FB0F0;--blau-zart:#1C2A44;--blau-tief:#C4D6F7;
+  --erfolg:#7CC488;--erfolg-zart:#1D3320;--erfolg-tief:#BFE6C4;--fehler:#F08A7E;--fehler-zart:#3D1C18;--fehler-tief:#F7C2BA;
+  --warnung:#E0A34A;--warnung-zart:#3A2A10;--warnung-tief:#F2D3A0;
+  --akzent:#DB826C;--akzent-zart:#3A221C;--kuli:#8FB0F0;--kuli-zart:#1C2A44;--marker:#6B5A10;
+  --ton-warm:#3A221C;--ton-warm-tief:#F2BFAE;--ton-blau:#1C2A44;--ton-blau-tief:#C4D6F7;--ton-gruen:#1D3320;--ton-gruen-tief:#BFE6C4;--ton-lila:#2C2140;--ton-lila-tief:#D9C6F0;--ton-gelb:#3A3010;--ton-gelb-tief:#EBDA93;
+  --partei-cdu:#E6E0D6;--partei-csu:#58A8EA;--partei-spd:#F05C70;--partei-gruene:#62C168;--partei-fdp:#F2D23C;--partei-afd:#58B4F2;--partei-linke:#E862A4;--partei-bsw:#B98BDC;--partei-ssw:#66ACCF;--partei-sonstige:#8C867E;--partei-leer:#3A3631;
+  --schleier:rgba(0,0,0,.65);--fokus-innen:#181715;
+  color-scheme:dark;
+  }
 }
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -28,7 +74,7 @@ a{color:var(--blau);text-underline-offset:.15em}
 strong{font-weight:700}
 small,.klein{font-size:1rem}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-:focus-visible{outline:3px solid var(--text);outline-offset:2px;box-shadow:0 0 0 5px var(--flaeche)} /* taste-skill-ignore: Fokusring, zweiter Ring ohne Weichzeichner (WCAG 2.4.11) */
+:focus-visible{outline:3px solid var(--text);outline-offset:2px;box-shadow:0 0 0 5px var(--fokus-innen)} /* taste-skill-ignore: Fokusring, zweiter Ring ohne Weichzeichner (WCAG 2.4.11) */
 button,input,select{font:inherit;color:inherit}
 button{touch-action:manipulation}
 img,svg{max-width:100%;height:auto}
@@ -47,7 +93,13 @@ main{flex:1;width:100%;max-width:1180px;margin:0 auto;padding:24px 16px 48px}
 @media (min-width:768px){main{padding:40px 24px 64px}}
 .fuss{border-top:2px solid var(--linie);background:var(--grund);color:var(--leise);font-size:1rem}
 .fuss-innen{max-width:1180px;margin:0 auto;padding:16px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
-.fuss button{margin-left:auto}
+.einstellungen{margin-left:auto;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.einst-wort{font-weight:700;color:var(--text)}
+.ansicht-wahl{display:inline-flex;gap:4px}
+.ansicht-wahl .knopf{min-height:44px;padding:6px 12px;font-size:1rem}
+.ansicht-wahl .knopf[aria-pressed=true]{background:var(--text);color:var(--flaeche);border-color:var(--text)}
+.schalter--klein{font-size:1rem;color:var(--text);min-height:44px}
+.schalter--klein input{width:44px;height:26px}.schalter--klein input::after{width:16px;height:16px}.schalter--klein input:checked::after{transform:translateX(18px)}
 
 /* Fortschritt: fünf Kreise */
 .fort{display:flex;gap:4px 20px;list-style:none;margin:0 0 24px;padding:0;font-size:1rem;flex-wrap:wrap}
@@ -87,17 +139,19 @@ main{flex:1;width:100%;max-width:1180px;margin:0 auto;padding:24px 16px 48px}
 .opt:has(input:checked){border-color:var(--text);border-width:2px}
 .opt:has(input:checked) .kreis::before{transform:translate(-50%,-50%) rotate(45deg) scaleY(1)}
 .opt:has(input:checked) .kreis::after{transform:translate(-50%,-50%) rotate(-45deg) scaleY(1)}
-.opt:has(input:focus-visible){outline:3px solid var(--text);outline-offset:2px;box-shadow:0 0 0 5px var(--flaeche)} /* taste-skill-ignore: Fokusring */
+.opt:has(input:focus-visible){outline:3px solid var(--text);outline-offset:2px;box-shadow:0 0 0 5px var(--fokus-innen)} /* taste-skill-ignore: Fokusring */
 .opt.ist-richtig{border-color:var(--erfolg);background:var(--erfolg-zart)}
 .opt.ist-falsch{border-color:var(--fehler);background:var(--fehler-zart)}
+.opt.ist-auch{border-color:var(--warnung);background:var(--warnung-zart)}
 .opt .klein{color:var(--leise);display:block}
 @media (hover:hover) and (pointer:fine){.opt:hover{border-color:var(--text)}}
 
 /* Rückmeldung */
 .rueck{background:var(--blau-zart);color:var(--blau-tief);padding:16px 20px;border-radius:var(--radius);margin:12px 0 20px;border-left:6px solid var(--blau)}
 .rueck:empty{display:none}
-.rueck--gut{background:var(--erfolg-zart);color:#1F4A24;border-left-color:var(--erfolg)}
-.rueck--nein{background:var(--fehler-zart);color:#6E1710;border-left-color:var(--fehler)}
+.rueck--gut{background:var(--erfolg-zart);color:var(--erfolg-tief);border-left-color:var(--erfolg)}
+.rueck--nein{background:var(--fehler-zart);color:var(--fehler-tief);border-left-color:var(--fehler)}
+.rueck--auch{background:var(--warnung-zart);color:var(--warnung-tief);border-left-color:var(--warnung)}
 .beleg{display:block;margin-top:8px;font-size:1rem}
 .zitat{font-style:normal;border-left:4px solid var(--text);padding:8px 16px;margin:12px 0;background:var(--flaeche)}
 .zitat footer{font-size:1rem;color:var(--leise);margin-top:6px}
@@ -112,7 +166,7 @@ td.zahl,th.zahl{text-align:right;font-variant-numeric:tabular-nums}
 /* Balken (nur Ergebnisse, immer mit Name und Zahl) */
 .balken{display:grid;grid-template-columns:minmax(100px,160px) 1fr 64px;gap:8px 12px;align-items:center;margin:0 0 8px;font-size:1rem}
 .balken .spur{height:22px;background:var(--karton);border-radius:2px;overflow:hidden}
-.balken .fuellung{height:100%;background:var(--stahl);transform-origin:left;transition:transform var(--dauer-sitze) var(--ease-out)}
+.balken .fuellung{height:100%;background:var(--stahl);box-shadow:inset 0 0 0 1px var(--text);transform-origin:left;transition:transform var(--dauer-sitze) var(--ease-out)} /* taste-skill-ignore: 1-px-Kante innen, damit helle Parteifarben (FDP) am Beamer 3:1 halten; kein Weichzeichner */
 .balken .zahl{text-align:right;font-variant-numeric:tabular-nums}
 .balken .huerde{position:relative}
 .huerde-linie{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--text)}
@@ -183,13 +237,13 @@ html[data-bewegung=weniger] *,html[data-bewegung=weniger] *::before,html[data-be
 .quellen li{margin:0 0 4px}.quellen a,main li>a{display:inline-block;padding:11px 0;line-height:1.3}
 
 /* ===================== v2 · Farbe, Fächer, Merkzettel, Reiter, Prolog ===================== */
-:root{--akzent:#A8411A;--akzent-zart:#F6E3D5;--ton:var(--blau-zart);--ton-tief:var(--blau-tief)}
+:root{--ton:var(--blau-zart);--ton-tief:var(--blau-tief)}
 /* Stationstöne: getönte Flächen je Station, immer mit Wort und Zahl */
-body[data-ton=warm]{--ton:#F6E3D5;--ton-tief:#7A2E10}
-body[data-ton=blau]{--ton:#DCE6F3;--ton-tief:#163A69}
-body[data-ton=gruen]{--ton:#E3EEE4;--ton-tief:#1F4A24}
-body[data-ton=lila]{--ton:#ECE4F2;--ton-tief:#4A2A66}
-body[data-ton=gelb]{--ton:#F5ECC8;--ton-tief:#5B4A08}
+body[data-ton=warm]{--ton:var(--ton-warm);--ton-tief:var(--ton-warm-tief)}
+body[data-ton=blau]{--ton:var(--ton-blau);--ton-tief:var(--ton-blau-tief)}
+body[data-ton=gruen]{--ton:var(--ton-gruen);--ton-tief:var(--ton-gruen-tief)}
+body[data-ton=lila]{--ton:var(--ton-lila);--ton-tief:var(--ton-lila-tief)}
+body[data-ton=gelb]{--ton:var(--ton-gelb);--ton-tief:var(--ton-gelb-tief)}
 .ton{background:var(--ton);color:var(--ton-tief)}
 .kopfzeile{background:var(--ton);color:var(--ton-tief);margin:-24px -16px 24px;padding:28px 16px 24px}
 @media (min-width:768px){.kopfzeile{margin:-40px -24px 32px;padding:40px 24px 32px}}
@@ -337,7 +391,7 @@ body.intro-laeuft{overflow:hidden}
 .markiertext .mk:hover{background:var(--karton)}
 .markiertext .mk[data-mark=verlangt]{background:var(--blau-zart);border-bottom:3px solid var(--blau);font-weight:700}
 .markiertext .mk[data-mark=verlangt]::after{content:' ▲';font-size:.7em;vertical-align:middle}
-.markiertext .mk[data-mark=garantiert]{background:#F6E3D5;border-bottom:3px solid var(--akzent);font-weight:700}
+.markiertext .mk[data-mark=garantiert]{background:var(--kuli-zart);border-bottom:3px solid var(--kuli);font-weight:700}
 .markiertext .mk[data-mark=garantiert]::after{content:' ●';font-size:.7em;vertical-align:middle}
 
 /* Stufenschalter */
@@ -358,7 +412,7 @@ body.intro-laeuft{overflow:hidden}
 
 /* Detailansicht Partei (Muster O) */
 body.detail-auf{overflow:hidden}
-.detail{position:fixed;inset:0;z-index:60;background:rgba(31,29,26,.55);display:grid;place-items:end center;padding:0}
+.detail{position:fixed;inset:0;z-index:60;background:var(--schleier);display:grid;place-items:end center;padding:0}
 @media (min-width:768px){.detail{place-items:center;padding:24px}}
 .detail-blatt{background:var(--flaeche);border:2px solid var(--text);border-radius:4px;width:min(100%,760px);max-height:92vh;overflow-y:auto;padding:20px;
   position:relative;animation:detail-auf 220ms cubic-bezier(.23,1,.32,1)}
@@ -429,3 +483,45 @@ code{font-size:1rem;background:var(--karton);padding:2px 5px;border-radius:3px;o
 .urne-zettel .opt{min-height:52px;padding:6px 10px}
 .urne-zettel .nr{color:var(--leise);font-size:1rem;margin-right:6px}
 .spalte--zweit h4{color:var(--blau);border-bottom-color:var(--blau)}
+
+/* ===== v5 · Stimme (Fraunces kursiv) und Aufbauen ===== */
+/* Stimme: nur die Grundfrage, die Leitfrage einer Station, die Streitfragen und wörtliche Zitate. Alles Lesbare bleibt Atkinson. */
+.auftakt .grundfrage,.intro .intro-frage p,.prolog .grundfrage{font-family:var(--schrift-stimme);font-style:italic;font-weight:600;letter-spacing:0}
+.kopfzeile .leitfrage{font-family:var(--schrift-stimme);font-style:italic;font-weight:600;font-size:clamp(1.375rem,2.6vw,1.875rem);letter-spacing:0}
+.stimme-frage{font-family:var(--schrift-stimme);font-style:italic;font-weight:600;letter-spacing:0}
+.zitat p{font-family:var(--schrift-stimme);font-style:italic;font-weight:600;font-size:1.125rem;line-height:1.4}
+.detail-blatt .zitat p{font-size:1.0625rem}
+/* Aufbauen (Muster R): Wörter erscheinen gestaffelt, Endzustand ist der Ruhezustand */
+.aufbau .wort{display:inline-block;opacity:0;transform:translateY(.14em);transition:opacity var(--dauer-mittel) var(--ease-out),transform var(--dauer-mittel) var(--ease-out);transition-delay:var(--d,0ms)}
+.aufbau.ist-da .wort{opacity:1;transform:none}
+.aufbau.ist-fertig .wort{transition:none}
+html[data-bewegung=weniger] .aufbau .wort{opacity:1;transform:none}
+@media print{.aufbau .wort{opacity:1;transform:none}}
+
+/* Gestufte Hilfen (aus »Gegenwart«): Begriff → Hinweis → Lösungsweg, nur auf Wunsch */
+.hilfen{margin:10px 0 4px}
+.hilfen-knopf{min-height:48px;padding:6px 14px;font-size:1rem}
+.hilfen-stufen{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.hilfe{border-left:4px solid var(--warnung);background:var(--warnung-zart);color:var(--text);padding:10px 14px;border-radius:0 var(--radius) var(--radius) 0;font-size:1rem}
+.hilfe-titel{display:block;margin:0 0 4px}
+.hilfe p{margin:0 0 6px;max-width:none}.hilfe p:last-child{margin:0}
+.hilfe ul{margin:0;padding-left:1.1em}
+.hilfe.ist-neu{animation:hilfe-auf var(--dauer-mittel) var(--ease-out)}
+@keyframes hilfe-auf{from{transform:translateY(6px);opacity:0}to{transform:none;opacity:1}}
+html[data-bewegung=weniger] .hilfe.ist-neu{animation:none}
+/* »Dein Gedanke« (kuli): alles, was die Person selbst gewählt oder geschrieben hat */
+.eingabe-feld:not(:placeholder-shown){color:var(--kuli);border-color:var(--kuli)}
+.eingabe-feld:focus-visible{border-color:var(--kuli)}
+.rueck--eigen{background:var(--kuli-zart);color:var(--text);border-left-color:var(--kuli)}
+.marke-empfohlen{background:var(--kuli)}
+.faecher-spur>li.ist-empfohlen>.karte{border-color:var(--kuli)}
+.eigen{color:var(--kuli)}
+.markiertext .mk[data-mark=verlangt]{background:var(--marker);border-bottom-color:var(--blau)}
+/* Ansichtswechsel (View Transitions): Wortmarke, Fortschritt und Stationsnummer bleiben dasselbe Ding */
+@view-transition{navigation:auto}
+.marke{view-transition-name:marke}
+.fort{view-transition-name:fortschritt}
+.kopfzeile .nummer{view-transition-name:station-nummer}
+::view-transition-old(root),::view-transition-new(root){animation-duration:var(--dauer-mittel)}
+@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:1ms!important}}
+html[data-bewegung=weniger]::view-transition-group(*),html[data-bewegung=weniger]::view-transition-old(*),html[data-bewegung=weniger]::view-transition-new(*){animation-duration:1ms!important}

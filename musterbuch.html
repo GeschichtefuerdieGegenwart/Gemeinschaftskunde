@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Musterbuch · Bewegung</title>
+<script>try{var a=localStorage.getItem("pw:ansicht");if(a){a=JSON.parse(a);if(a==="hell"||a==="dunkel"||a==="beamer")document.documentElement.setAttribute("data-ansicht",a)}}catch(e){}</script>
 <link rel="stylesheet" href="assets/css/werkstatt.css">
 <style>
 .band{display:grid;gap:20px;grid-template-columns:1fr;border-top:2px solid var(--text);padding:28px 0}
@@ -17,13 +18,14 @@
 .mini-fort li{width:28px;height:28px;border:2px solid var(--text);border-radius:50%;background:var(--flaeche)}
 .mini-fort li.ist-fertig{background:var(--text)}
 .urne{width:120px;height:60px;border:2px solid var(--text);border-top:0;margin:8px auto 0;border-radius:0 0 6px 6px}
+.zustaende{grid-column:1/-1;margin:0}.zustaende table{font-size:1rem;margin:8px 0 0}.zustaende th{width:11em;font-weight:700}
 </style>
 </head>
 <body>
 <header class="kopf"><div class="kopf-innen"></div></header>
 <main id="inhalt">
   <h1>Musterbuch: Bewegung aus dem Stimmzettel</h1>
-  <p>Acht Bewegungsideen, alle aus der Metapher »Stimmzettel und Auszählung«. Jede startet nur auf Tippen, nichts läuft in Schleife, alles ist im Ruhezustand vollständig sichtbar. <label class="schalter" style="margin-left:8px"><input type="checkbox" id="weniger"> Weniger Bewegung</label></p>
+  <p>Neunzehn Bewegungsideen, alle aus der Metapher »Stimmzettel und Auszählung«. Jede startet nur auf Tippen, nichts läuft in Schleife, alles ist im Ruhezustand vollständig sichtbar. <label class="schalter" style="margin-left:8px"><input type="checkbox" id="weniger"> Weniger Bewegung</label></p>
   <p class="hinweis">Lies die Steckbriefe, probiere die Bühnen aus, und sag mir die Buchstaben, die in die Einheit sollen. Empfehlung am Ende.</p>
 
   <section class="band" id="A"><div class="buehne"><span class="buchstabe">A</span><h2>Das Kreuz</h2><p>Tippe eine Option: Das Kreuz zeichnet sich in zwei Strichen in den Kreis, wie mit dem Stift.</p>
@@ -88,9 +90,18 @@
     <div class="koal-pruefung"><div class="koal-feld"><h4>Darin einig</h4><ul><li>Soll die EU mehr gemeinsam entscheiden – alle: <strong>mehr gemeinsam</strong></li></ul></div><div class="koal-feld"><h4>Darin uneinig</h4><ul><li>Tempolimit – CDU: <strong>dagegen</strong>, SPD: <strong>dafür</strong></li></ul></div></div>
     <p><a class="knopf" href="parteien-wahlen/station4.html#koalition">In Station 4 ansehen</a></p></div>
     <dl class="steck"><dt>Worum</dt><dd>Aus »rechnerisch möglich« wird eine Urteilsaufgabe: Nähe und Aussagen stehen neben der Sitzzahl.</dd><dt>Wo</dt><dd>Station 4, Reiter »Koalition«.</dd><dt>Zweck</dt><dd>Erklärung durch Gegenüberstellung.</dd><dt>Häufigkeit · Dauer</dt><dd>bei jeder Auswahl · ohne Bewegung</dd><dt>Technik</dt><dd>Die Nähe wird aus den Positionen der acht Streitfragen gerechnet; »keine Aussage« zählt weder als Einigkeit noch als Gegensatz.</dd><dt>Aufwand · Risiko</dt><dd>mittel · darf nie wie eine Prognose wirken: keine Wahrscheinlichkeit, keine Empfehlung, nur Material.</dd><dt>Weniger Bewegung</dt><dd>identisch.</dd></dl></section>
+  <section class="band" id="R"><div class="buehne"><span class="buchstabe">R</span><h2>Aufbauen</h2><p>Die eine Leitfrage einer Ansicht erscheint Wort für Wort – höchstens 2,4 Sekunden, dann steht sie. Für Hilfstechnik liegt der ganze Satz sofort bereit.</p>
+    <p class="leitfrage stimme-frage" id="r-probe" style="font-size:1.5rem">Wie wird aus Stimmen ein Bundestag, und was ändert die 5-%-Hürde?</p>
+    <p><button type="button" class="knopf" id="r-start">Noch einmal aufbauen</button></p></div>
+    <dl class="steck"><dt>Worum</dt><dd>Aus »Gegenwart«: Text darf sich aufbauen, wenn er die eine Frage oder das eine Zitat einer Ansicht ist. Nie Fließtext, nie Bedienelemente.</dd><dt>Wo</dt><dd>Grundfrage nach dem Intro, Leitfrage jeder Station (einmal je Sitzung), erstes Zitat im Detailblatt.</dd><dt>Zweck</dt><dd>Wiedererkennung, Lesen in Ruhe.</dd><dt>Häufigkeit · Dauer</dt><dd>einmal je Ansicht · je Wort 220 ms, gesamt ≤ 2,4 s</dd><dt>Technik</dt><dd>Wörter in Spans mit gestaffelter Verzögerung (<code>PW.aufbauen</code>); eine <code>sr-only</code>-Kopie trägt den vollen Text.</dd><dt>Aufwand · Risiko</dt><dd>gering · Wortumbruch leicht anders, deshalb inline-block</dd><dt>Weniger Bewegung</dt><dd>Der Satz steht sofort.</dd></dl></section>
+
+  <section class="band" id="S"><div class="buehne"><span class="buchstabe">S</span><h2>Ansichtswechsel</h2><p>Von der Profilkarte ins Detailblatt: Die Parteimarke bleibt dasselbe Ding und wandert an ihren neuen Platz. Zwischen den Seiten bleiben Wortmarke, Fortschritt und Stationsnummer stehen.</p>
+    <p><a class="knopf" href="parteien-wahlen/station3.html">In Station 3 ausprobieren</a></p></div>
+    <dl class="steck"><dt>Worum</dt><dd>View Transitions aus »Gegenwart«: Karte und Detail werden als Zusammenhang erkennbar statt als Sprung.</dd><dt>Wo</dt><dd>Station 3 (Kurzprofil → Detailblatt); alle Seiten (<code>@view-transition{navigation:auto}</code>).</dd><dt>Zweck</dt><dd>Orientierung.</dd><dt>Häufigkeit · Dauer</dt><dd>bei jedem Öffnen · 220 ms</dd><dt>Technik</dt><dd><code>document.startViewTransition</code> und <code>view-transition-name</code>; Browser ohne Unterstützung zeigen schlicht die neue Ansicht. Über <code>file://</code> gibt es keine seitenübergreifenden Übergänge.</dd><dt>Aufwand · Risiko</dt><dd>gering · keines</dd><dt>Weniger Bewegung</dt><dd>Nur Einblenden, 1 ms.</dd></dl></section>
+
   <section class="karte" style="margin-top:28px">
     <h2>Empfehlung</h2>
-    <p>Neu in v4: <strong>P</strong> (Wahlurne), <strong>Q</strong> (Koalitionsprüfung). Aus v3: <strong>L</strong> (Intro, jetzt rund 9,5 s), <strong>M</strong> (Markieren), <strong>N</strong> (Lernstand mit Ring und Stufen), <strong>O</strong> (Detailblatt). Oft, billig und wirksam zuerst: <strong>A, B, C, E, H</strong>. Dazu <strong>D</strong> für den Beamer-Moment der Auszählung und <strong>F</strong> für die Orientierung. <strong>G</strong> ist Schmuck mit Bedeutung. Neu seit v2 und eingebaut: <strong>I</strong> Fächer, <strong>J</strong> Reiter, <strong>K</strong> Merkzettel.</p>
+    <p>Neu in v5: <strong>R</strong> (Aufbauen), <strong>S</strong> (Ansichtswechsel), dazu drei Ansichten (Hell, Dunkel, Beamer) und die Zustände-Karten unter jedem Muster. Aus v4: <strong>P</strong> (Wahlurne), <strong>Q</strong> (Koalitionsprüfung). Aus v3: <strong>L</strong> (Intro, jetzt rund 9,5 s), <strong>M</strong> (Markieren), <strong>N</strong> (Lernstand mit Ring und Stufen), <strong>O</strong> (Detailblatt). Oft, billig und wirksam zuerst: <strong>A, B, C, E, H</strong>. Dazu <strong>D</strong> für den Beamer-Moment der Auszählung und <strong>F</strong> für die Orientierung. <strong>G</strong> ist Schmuck mit Bedeutung. Neu seit v2 und eingebaut: <strong>I</strong> Fächer, <strong>J</strong> Reiter, <strong>K</strong> Merkzettel.</p>
     <p><strong>Sag mir die Buchstaben.</strong></p>
   </section>
 </main>
@@ -103,22 +114,56 @@
 <script>
 PW.rahmen('must', ''); PW.merkzettel('');
 (function () {
+
+  /* Zustände-Karten (aus »Gegenwart«): zu jedem Muster alle Zustände mit ihren Tokens */
+  var Z = {
+    A: [['ruhig','Kreis 2 px text, leer'],['gewählt','Kreuz scaleY(1), dauer-schnell'],['passt','Rand erfolg, Fläche erfolg-zart, Wort »Passt.«'],['passt auch','Rand warnung, Fläche warnung-zart'],['passt nicht','Rand fehler, Fläche fehler-zart'],['Fokus','Doppelring: 3 px text, innen fokus-innen'],['weniger Bewegung','Kreuz sofort']],
+    B: [['ruhig','Rand text, Fläche flaeche'],['Überfahren (nur Maus)','platte-knopf 4 px linie'],['gedrückt','translate(2px,2px), dauer-druck'],['deaktiviert','Deckkraft .5, cursor not-allowed'],['Hauptaktion','Fläche text, Schrift flaeche – nie in blau']],
+    C: [['zu','Decke karton über dem Inhalt, Knopf »aufdecken«'],['offen','Decke scaleY(0), dauer-aufdecken; Inhalt lesbar'],['weniger Bewegung','Decke blendet in dauer-aus aus'],['ohne JS','offen']],
+    D: [['leer','Punkte partei-leer, Kante partei-sonstige'],['füllt sich','Punkte färben sich links→rechts, dauer-sitze'],['gefüllt','Parteifarbe, Kante text .6; Legende mit Name und Zahl'],['drei Ansichten','partei-* je Ansicht; Beamer mit schwarzer Kante']],
+    E: [['leer','scaleX(0)'],['gewachsen','scaleX(wert), dauer-sitze; 1-px-Kante text innen'],['unter der Hürde','Fläche partei-sonstige'],['weniger Bewegung','steht sofort']],
+    F: [['offen','Kreis flaeche, Kante text'],['aktuell','Fläche blau, fett'],['erledigt','Fläche text; einmal scale(1.12)→1, dauer-mittel']],
+    G: [['Zettel','Stimmzettel sichtbar'],['eingeworfen','translateY(40px) scale(.92) + Ausblenden, dauer-langsam'],['gezählt','»Abgegeben.« in erfolg-zart']],
+    H: [['ohne Hürde','alle Balken in Parteifarbe'],['mit Hürde','Linie bei 5 %; Balken darunter partei-sonstige, dauer-mittel']],
+    I: [['Mitte','Deckkraft 1, scale(1)'],['Rand','Deckkraft .55, scale(.96)'],['empfohlen','Kante kuli, Marke kuli »Passt zu deinen Antworten«'],['ohne JS','Liste untereinander']],
+    J: [['gewählt','Fläche flaeche, Unterkante offen'],['andere','Fläche karton, Schrift leise'],['ohne JS','alle Blätter untereinander']],
+    K: [['zu','translateX(100%), visibility hidden'],['offen','translateX(0), dauer-langsam; ab 1024 px Split-Screen']],
+    L: [['läuft','fünf Stufen, 9,6 s, überspringbar'],['gesehen','entfällt (sessionStorage)'],['weniger Bewegung','entfällt']],
+    M: [['unmarkiert','Schrift text'],['▲ verlangt','Fläche marker, Unterstrich blau'],['● garantiert','Fläche kuli-zart, Unterstrich kuli'],['Überfahren','Fläche karton']],
+    N: [['leer','Satz »Sobald du …«'],['Ring','Spur linie, Füllung blau, dauer-sitze; keine Ziffer im Ring'],['Hilfe genutzt','Satz in Worten, kein Abzug'],['freie Antworten','Satz in kuli']],
+    O: [['zu','hidden'],['offen','Schleier schleier, Blatt von unten, dauer-mittel'],['Ansichtswechsel','Parteimarke wandert (S)']],
+    P: [['Zettel','amtliche Reihenfolge, zwei Spalten'],['leer eingeworfen','Hinweis »ungültig«, kein Zählen'],['eingeworfen','G, dann nächster Zettel'],['Ergebnis','Prozent auf Basis aller gültigen Zweitstimmen']],
+    Q: [['ohne Auswahl','Hinweis »Lade zuerst ein Ergebnis«'],['Mehrheit','erfolg-zart, Wort »Mehrheit.«'],['keine Mehrheit','fehler-zart, Wort »Keine Mehrheit.«'],['einig / uneinig','zwei Felder koal-feld, Kante linie']],
+    R: [['vor dem Aufbau','Wörter Deckkraft 0, translateY(.14em); sr-only-Kopie vollständig'],['baut auf','gestaffelt, je Wort dauer-mittel, gesamt ≤ 2,4 s'],['steht','Deckkraft 1, keine Übergänge mehr'],['weniger Bewegung / Druck','steht sofort']],
+    S: [['Karte','pf-marke auf der Profilkarte'],['Wechsel','view-transition-name pw-wechsel, 220 ms'],['Detail','pf-marke im Blatt'],['ohne Unterstützung','direkter Wechsel']]
+  };
+  Object.keys(Z).forEach(function (k) {
+    var sec = document.getElementById(k); if (!sec) return;
+    var d = PW.el('details', { 'class': 'zustaende' }); d.appendChild(PW.el('summary', { text: 'Zustände' }));
+    var t = PW.el('table'); var tb = PW.el('tbody');
+    Z[k].forEach(function (z) { tb.appendChild(PW.el('tr', {}, [PW.el('th', { text: z[0] }), PW.el('td', { text: z[1] })])); });
+    t.appendChild(tb); d.appendChild(t); sec.appendChild(d);
+  });
+  /* R · Aufbauen: Probe */
+  var rp = document.getElementById('r-probe'), rs = document.getElementById('r-start'), rText = rp.textContent;
+  function rNeu() { rp.innerHTML = ''; rp.textContent = rText; rp.removeAttribute('data-aufgebaut'); rp.className = 'leitfrage stimme-frage'; PW.aufbauen(rp); }
+  rNeu(); rs.addEventListener('click', rNeu);
   var w = document.getElementById('weniger'); w.checked = PW.wenigerBewegung(); w.addEventListener('change', function () { PW.schalteBewegung(!w.checked); });
   var ids = ['cdu', 'csu', 'spd', 'gruene', 'fdp', 'afd', 'linke', 'bsw'];
-  var farben = ids.map(function (id) { var p = PW.partei(id); return { id: id, name: p.name, farbe: p.farbe }; }); farben.push({ id: 'ssw', name: 'SSW', farbe: '#2A6F97' });
+  var farben = ids.map(function (id) { var p = PW.partei(id); return { id: id, name: p.name, farbe: p.farbe }; }); farben.push({ id: 'ssw', name: 'SSW', farbe: 'var(--partei-ssw)' });
   var sitze = PW.sitze(PW.ergebnisse.bund.werte, { huerde: 5, ssw: true });
   PW.halbrund(document.getElementById('halbD'), sitze, farben, false);
   document.getElementById('knopfD').addEventListener('click', function () { PW.halbrund(document.getElementById('halbD'), sitze, farben, true); });
   function balken(box, werte, huerde) {
     box.innerHTML = '';
     ids.forEach(function (id) { var v = werte[id]; if (v === null || v === undefined) return; var p = PW.partei(id); var drin = !huerde || v >= 5;
-      box.appendChild(PW.el('div', { 'class': 'balken' }, [PW.el('span', { text: p.name }), PW.el('div', { 'class': 'spur huerde' }, [PW.el('div', { 'class': 'fuellung', 'data-wert': (Math.min(v, 50) / 50).toFixed(3), style: 'background:' + (drin ? p.farbe : '#9A948C') + ';transition:transform 440ms cubic-bezier(.23,1,.32,1),background-color 160ms' }), PW.el('div', { 'class': 'huerde-linie', style: 'left:10%;opacity:' + (huerde ? 1 : 0) + ';transition:opacity 160ms' })]), PW.el('span', { 'class': 'zahl', text: PW.fmt(v) + ' %' })])); });
+      box.appendChild(PW.el('div', { 'class': 'balken' }, [PW.el('span', { text: p.name }), PW.el('div', { 'class': 'spur huerde' }, [PW.el('div', { 'class': 'fuellung', 'data-wert': (Math.min(v, 50) / 50).toFixed(3), style: 'background:' + (drin ? p.farbe : 'var(--partei-sonstige)') + ';transition:transform 440ms cubic-bezier(.23,1,.32,1),background-color 160ms' }), PW.el('div', { 'class': 'huerde-linie', style: 'left:10%;opacity:' + (huerde ? 1 : 0) + ';transition:opacity 160ms' })]), PW.el('span', { 'class': 'zahl', text: PW.fmt(v) + ' %' })])); });
   }
   var bE = document.getElementById('balkenE'); balken(bE, PW.ergebnisse.wahlkreis.werte, true); bE.querySelectorAll('.fuellung').forEach(function (f) { f.style.transform = 'scaleX(' + f.getAttribute('data-wert') + ')'; });
   document.getElementById('knopfE').addEventListener('click', function () { balken(bE, PW.ergebnisse.wahlkreis.werte, true); PW.balkenWachsen(bE); });
   var bH = document.getElementById('balkenH'), hH = document.getElementById('huerdeH');
   function zeichneH() { balken(bH, PW.ergebnisse.bund.werte, hH.checked); bH.querySelectorAll('.fuellung').forEach(function (f) { f.style.transform = 'scaleX(' + f.getAttribute('data-wert') + ')'; }); }
-  zeichneH(); hH.addEventListener('change', function () { var alt = {}; bH.querySelectorAll('.fuellung').forEach(function (f, i) { alt[i] = f.style.background; }); var drin = hH.checked; ids.forEach(function (id, i) { var f = bH.querySelectorAll('.fuellung')[i]; if (!f) return; var v = PW.ergebnisse.bund.werte[id]; f.style.background = (!drin || v >= 5) ? PW.partei(id).farbe : '#9A948C'; }); bH.querySelectorAll('.huerde-linie').forEach(function (l) { l.style.opacity = drin ? 1 : 0; }); });
+  zeichneH(); hH.addEventListener('change', function () { var alt = {}; bH.querySelectorAll('.fuellung').forEach(function (f, i) { alt[i] = f.style.background; }); var drin = hH.checked; ids.forEach(function (id, i) { var f = bH.querySelectorAll('.fuellung')[i]; if (!f) return; var v = PW.ergebnisse.bund.werte[id]; f.style.background = (!drin || v >= 5) ? PW.partei(id).farbe : 'var(--partei-sonstige)'; }); bH.querySelectorAll('.huerde-linie').forEach(function (l) { l.style.opacity = drin ? 1 : 0; }); });
   document.getElementById('knopfF').addEventListener('click', function () { PW.stempel(document.querySelectorAll('#fortF li')[2]); });
   var zG = document.getElementById('zettelG');
   document.getElementById('knopfG').addEventListener('click', function () { PW.inDieUrne(zG, function () { zG.style.visibility = 'hidden'; }); });

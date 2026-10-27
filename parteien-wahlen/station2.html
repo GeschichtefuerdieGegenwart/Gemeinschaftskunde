@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Station 2 · Erkennen</title>
+<script>try{var a=localStorage.getItem("pw:ansicht");if(a){a=JSON.parse(a);if(a==="hell"||a==="dunkel"||a==="beamer")document.documentElement.setAttribute("data-ansicht",a)}}catch(e){}</script>
 <link rel="stylesheet" href="../assets/css/werkstatt.css">
 </head>
 <body data-ton="blau">
@@ -31,6 +32,7 @@
 <script src="../assets/js/faecher.js"></script>
 <script src="../assets/js/merkzettel.js"></script>
 <script src="../assets/js/lernstand.js"></script>
+<script src="../assets/js/hilfen.js"></script>
 <script>
 PW.rahmen('st2', '../'); PW.merkzettel('../');
 (function () {
@@ -49,13 +51,22 @@ PW.rahmen('st2', '../'); PW.merkzettel('../');
       inp.addEventListener('change', function () {
         if (!inp.checked) { lab.classList.remove('ist-richtig', 'ist-falsch'); return; }
         if (b.richtig.indexOf(fn.id) >= 0) { lab.classList.add('ist-richtig'); r.className = 'rueck rueck--gut'; r.innerHTML = '<strong>Passt.</strong> ' + b.warum + (b.richtig.length > 1 ? ' Hier passen zwei Funktionen: ' + b.richtig.map(name).join(' und ') + '.' : ''); }
-        else if (b.auch.indexOf(fn.id) >= 0) { lab.classList.add('ist-richtig'); r.className = 'rueck'; r.innerHTML = '<strong>Vertretbar.</strong> ' + fn.name + ' lässt sich begründen. Am deutlichsten ist aber: ' + b.warum; }
-        else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.innerHTML = '<strong>Eher nicht.</strong> ' + fn.name + ' heißt: ' + fn.kurz + ' Frag dich: Wer tut hier was, und wozu?'; }
+        else if (b.auch.indexOf(fn.id) >= 0) { lab.classList.add('ist-auch'); r.className = 'rueck rueck--auch'; r.innerHTML = '<strong>Passt auch.</strong> ' + fn.name + ' lässt sich begründen. Am deutlichsten ist aber: ' + b.warum; }
+        else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.innerHTML = '<strong>Passt nicht.</strong> ' + fn.name + ' heißt: ' + fn.kurz + ' Frag dich: Wer tut hier was, und wozu?'; }
         PW.notiere(2, 'bsp-' + i, b.richtig.indexOf(fn.id) >= 0 || b.auch.indexOf(fn.id) >= 0, 'Funktion erkennen: ' + b.richtig.map(name).join(' und '));
       });
       ul.appendChild(lab);
     });
     f.appendChild(ul); f.appendChild(r);
+    PW.hilfen(f, [
+      function () {
+        var kand = b.richtig.concat(b.auch); PW.mischen(PW.funktionen).forEach(function (fn) { if (kand.length < 3 && kand.indexOf(fn.id) < 0) kand.push(fn.id); });
+        var ul2 = PW.el('ul'); PW.mischen(kand).forEach(function (id) { var fn = PW.funktionen.filter(function (x) { return x.id === id; })[0]; ul2.appendChild(PW.el('li', { html: '<strong>' + fn.name + '</strong>: ' + fn.kurz })); });
+        var d = PW.el('div'); d.appendChild(PW.el('p', { text: 'Drei Funktionen kommen in Frage – lies ihre Kurzdefinitionen:' })); d.appendChild(ul2); return d;
+      },
+      function () { var fn = PW.funktionen.filter(function (x) { return x.id === b.richtig[0]; })[0]; var auf = PW.aufgaben.filter(function (x) { return x.id === fn.aufgabe; })[0]; return '<p>Die gesuchte Funktion gehört zur Aufgabe <strong>' + auf.name + '</strong> (' + auf.text + ') Frag dich: Wer tut hier was – und wozu?</p>'; },
+      function () { var t = b.warum; PW.funktionen.forEach(function (fn) { t = t.split(fn.name).join('…'); }); return '<p>Die Begründung, ohne den Namen der Funktion: ' + t + '</p><p>Welche Funktion heißt so? Lege dich fest.</p>'; }
+    ], { station: 2, id: 'bsp-' + i });
     box.appendChild(li);
   });
   PW.faecher(document.getElementById('beispiele-faecher'));

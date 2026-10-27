@@ -57,22 +57,18 @@
     var u = 2 * Math.PI * 52;
     var hinten = document.createElementNS(ns, 'circle');
     hinten.setAttribute('cx', 60); hinten.setAttribute('cy', 60); hinten.setAttribute('r', 52);
-    hinten.setAttribute('fill', 'none'); hinten.setAttribute('stroke', '#DDD9D2'); hinten.setAttribute('stroke-width', 12);
+    hinten.setAttribute('fill', 'none'); hinten.style.stroke = 'var(--linie)'; hinten.setAttribute('stroke-width', 12);
     svg.appendChild(hinten);
     var vorn = document.createElementNS(ns, 'circle');
     vorn.setAttribute('cx', 60); vorn.setAttribute('cy', 60); vorn.setAttribute('r', 52);
-    vorn.setAttribute('fill', 'none'); vorn.setAttribute('stroke', '#1F4E8C'); vorn.setAttribute('stroke-width', 12);
+    vorn.setAttribute('fill', 'none'); vorn.style.stroke = 'var(--blau)'; vorn.setAttribute('stroke-width', 12);
     vorn.setAttribute('stroke-linecap', 'butt');
     vorn.setAttribute('transform', 'rotate(-90 60 60)');
     var anteil = gesamt ? richtig / gesamt : 0;
     vorn.setAttribute('stroke-dasharray', u.toFixed(1));
     vorn.setAttribute('stroke-dashoffset', (PW.wenigerBewegung && PW.wenigerBewegung() ? u * (1 - anteil) : u).toFixed(1));
     svg.appendChild(vorn);
-    var t = document.createElementNS(ns, 'text');
-    t.setAttribute('x', 60); t.setAttribute('y', 68); t.setAttribute('text-anchor', 'middle');
-    t.setAttribute('font-family', 'Bricolage Grotesque, sans-serif'); t.setAttribute('font-size', '34'); t.setAttribute('font-weight', '700'); t.setAttribute('fill', '#1F1D1A');
-    t.textContent = String(richtig);
-    svg.appendChild(t);
+    /* Keine Ziffer im Ring: der Lernstand steht in Worten daneben (Designsystem: »nur in Worten, nie als Note«) */
     if (!(PW.wenigerBewegung && PW.wenigerBewegung())) {
       setTimeout(function () { vorn.style.transition = 'stroke-dashoffset 440ms cubic-bezier(.23,1,.32,1)'; vorn.setAttribute('stroke-dashoffset', (u * (1 - anteil)).toFixed(1)); }, 60);
     }
@@ -105,7 +101,8 @@
     if (s.gesamt) {
       text.appendChild(PW.el('p', { 'class': 'stand-satz', html: '<strong>' + s.richtig + ' von ' + s.gesamt + '</strong> bearbeiteten Aufgaben im ersten Anlauf richtig.' }));
     }
-    if (s.freie) text.appendChild(PW.el('p', { 'class': 'klein', text: s.freie + (s.freie === 1 ? ' freie Antwort' : ' freie Antworten') + ' geschrieben – die bewertet niemand außer dir.' }));
+    if (s.freie) text.appendChild(PW.el('p', { 'class': 'klein eigen', text: s.freie + (s.freie === 1 ? ' freie Antwort' : ' freie Antworten') + ' geschrieben – die bewertet niemand außer dir.' }));
+    if (PW.hilfenStand) { var h = PW.hilfenStand(station); if (h.aufgaben) text.appendChild(PW.el('p', { 'class': 'klein', text: 'Bei ' + h.aufgaben + (h.aufgaben === 1 ? ' Aufgabe' : ' Aufgaben') + ' Hilfe genutzt' + (h.loesungsweg ? ', davon ' + h.loesungsweg + ' mal bis zum Lösungsweg' : '') + ' – gut so, dafür ist sie da.' })); }
     var st = stufenZeile(s); if (st) text.appendChild(st);
     kopf.appendChild(text);
     box.appendChild(kopf);

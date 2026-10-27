@@ -271,3 +271,19 @@ Ecken 4 px für Karten, Knöpfe, Felder; Kreise (50 %) nur für Stimmzettelkreis
 - **Schritt-Marken** in Station 3: »Schritt 1 von 3« in Akzentfarbe mit Unterstreichung gliedert die neue Reihenfolge (wichtig → Parteien → Kontrolle).
 - **Wahlurne** (Muster P): große Parteiknöpfe mit Farbpunkt und Name, Bestätigungsbild, Zähler in Displaygröße; Summen statt Datensätzen.
 - **Koalitionsprüfung** (Muster Q): drei nummerierte Kriterien, zwei Felder »Darin einig« / »Darin uneinig«, Aussagen mit Quelle. Keine Prognose, keine Empfehlung.
+
+## v5 (27.10.2026): Angleichung an »Gemeinschaftskunde«, Übernahmen aus »Gegenwart«
+
+Grundlage sind die beiden Designsysteme **Gemeinschaftskunde** (die Beschreibung dieser Werkstatt) und **Gegenwart** (das gemeinsame System der Lernwerkstätten). Übernommen wurde nur, was der Werkstatt etwas bringt; die Perspektivfarben Honig/Petrol, der Überdruck, Autoplay, Wende, Schwärzung, Stempel und die Leinwände bleiben bewusst draußen.
+
+- **Drei Ansichten:** `Hell` (Standard), `Dunkel` und `Beamer` über `html[data-ansicht]`; ohne eigene Wahl folgt die Seite `prefers-color-scheme`. Alle Farben sind Tokens, auch die Parteifarben (`--partei-*`) und die Stationstöne; kein Hexwert mehr im Skript (Halbrund, Ring, Intro, Balken lesen `var(--…)`). Beamer-Werte sind für ≥ 7:1 gerechnet (Tabelle in BERICHT.md). Ein Schalter im Fuß (Hell · Dunkel · Beamer), gespeichert wie »Weniger Bewegung«, das jetzt ebenfalls im Fuß steht; ein Kopfskript stellt die Ansicht vor dem ersten Zeichnen wieder her.
+- **Stimme (Fraunces kursiv, 600):** nur für die Grundfrage, die Leitfrage einer Station, die acht Streitfragen und wörtliche Programmzitate. Alles Lesbare bleibt Atkinson, alle Titel Bricolage. Drei Familien sind die Obergrenze; Schrift lokal (`Fraunces72pt-SemiBoldItalic.woff`, OFL).
+- **Rückmeldung dreistufig in Worten:** »Passt.« / »Passt auch.« (neu: `.rueck--auch`, `.opt.ist-auch` in Warnung) / »Passt nicht.« – immer mit Begründung und Beleg. Keine anderen Leitwörter mehr.
+- **Lernstand nur in Worten:** der Ring bleibt, die Ziffer in der Mitte entfällt; der Satz »7 von 9 im ersten Anlauf« steht daneben. Hilfe-Nutzung wird in Worten vermerkt, nie als Abzug.
+- **Dein Gedanke (`--kuli`):** eigene Freitexte, die eigenen Streitfragen aus Schritt 1, die Empfehlungsmarke im Fächer und die ●-Markierung. Der Textmarker ▲ liegt auf `--marker` (Beleg). Das Kreuz bleibt in Druckschwarz.
+- **Gestufte Hilfen** (`hilfen.js`): Begriff → Hinweis → Lösungsweg, nur auf Wunsch, nacheinander, in Station 1–3. Die Aufgabe bleibt offen; die Person legt sich selbst fest.
+- **Muster R Aufbauen:** die eine Leitfrage oder das eine Zitat einer Ansicht erscheint Wort für Wort (≤ 2,4 s), eine `sr-only`-Kopie trägt den vollen Text sofort. Nie Fließtext, nie Bedienelemente; bei weniger Bewegung sofort.
+- **Muster S Ansichtswechsel:** View Transitions für Profilkarte → Detailblatt (`pw-wechsel`) und zwischen den Seiten (Wortmarke, Fortschritt, Stationsnummer). Ohne Unterstützung oder über `file://` schlicht die neue Ansicht.
+- **Fokus-Doppelring** überall: 3 px `text`, Offset 2 px, innen `--fokus-innen` (je Ansicht).
+- **Zustände-Karten** im Musterbuch: zu jedem Muster A–S alle Zustände mit ihren Tokens.
+- Neue Tokens: `--warnung`, `--warnung-zart`, `--warnung-tief`, `--erfolg-tief`, `--fehler-tief`, `--kuli`, `--kuli-zart`, `--marker`, `--ton-*`, `--partei-*`, `--schleier`, `--fokus-innen`, `--schrift-stimme`, `--dauer-aufbauen`.

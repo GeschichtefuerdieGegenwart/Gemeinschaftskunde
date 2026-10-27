@@ -8,6 +8,11 @@
   PW.merke = function (k, v) { try { localStorage.setItem('pw:' + k, JSON.stringify(v)); } catch (e) { /* privates Fenster o. ä. */ } };
   PW.loescheAlles = function () { try { Object.keys(localStorage).filter(function (k) { return k.indexOf('pw:') === 0; }).forEach(function (k) { localStorage.removeItem(k); }); } catch (e) {} location.reload(); };
 
+  /* Farben nur aus Tokens (drei Ansichten): liefert den aktuellen Wert einer CSS-Variablen */
+  PW.farbe = function (name) { try { return getComputedStyle(document.documentElement).getPropertyValue('--' + name).trim(); } catch (e) { return ''; } };
+  /* Ansicht: hell · dunkel · beamer (html[data-ansicht]); ohne Wahl folgt sie dem System */
+  PW.ansichten = { hell: 'Hell', dunkel: 'Dunkel', beamer: 'Beamer' };
+  PW.setzeAnsicht = function (a) { if (PW.ansichten[a]) document.documentElement.setAttribute('data-ansicht', a); else document.documentElement.removeAttribute('data-ansicht'); PW.merke('ansicht', a); document.dispatchEvent(new CustomEvent('pw:ansicht', { detail: a })); };
   PW.fmt = function (n, stellen) { if (n === null || n === undefined || isNaN(n)) return 'noch offen'; if (stellen === undefined) stellen = Math.abs(Math.round(n * 10) / 10 - Math.round(n * 100) / 100) < 1e-9 ? 1 : 2; return Number(n).toLocaleString('de-DE', { minimumFractionDigits: stellen, maximumFractionDigits: stellen }); };
   PW.partei = function (id) { for (var i = 0; i < PW.parteien.length; i++) if (PW.parteien[i].id === id) return PW.parteien[i]; return null; };
   PW.mischen = function (a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
@@ -72,23 +77,23 @@
       for (var i = 0; i < n && idx < punkte.length; i++, idx++) {
         var c = document.createElementNS(ns, 'circle'); var p = punkte[idx];
         c.setAttribute('cx', p.x.toFixed(1)); c.setAttribute('cy', p.y.toFixed(1)); c.setAttribute('r', 5);
-        c.setAttribute('fill', animiert ? '#E7E5E0' : r.farbe); c.setAttribute('stroke', '#1F1D1A'); c.setAttribute('stroke-width', '.6');
-        if (animiert) { (function (c, farbe, d) { setTimeout(function () { c.setAttribute('fill', farbe); }, d); })(c, r.farbe, Math.min(440, (k++ / PW.sitzeGesamt) * 440)); }
+        c.style.fill = animiert ? 'var(--partei-leer)' : r.farbe; c.style.stroke = 'var(--text)'; c.setAttribute('stroke-width', '.6');
+        if (animiert) { (function (c, farbe, d) { setTimeout(function () { c.style.fill = farbe; }, d); })(c, r.farbe, Math.min(440, (k++ / PW.sitzeGesamt) * 440)); }
         svg.appendChild(c);
       }
     });
     for (; idx < punkte.length; idx++) {
       var c2 = document.createElementNS(ns, 'circle'); var p2 = punkte[idx];
-      c2.setAttribute('cx', p2.x.toFixed(1)); c2.setAttribute('cy', p2.y.toFixed(1)); c2.setAttribute('r', 5); c2.setAttribute('fill', '#E7E5E0'); c2.setAttribute('stroke', '#9A948C'); c2.setAttribute('stroke-width', '.6');
+      c2.setAttribute('cx', p2.x.toFixed(1)); c2.setAttribute('cy', p2.y.toFixed(1)); c2.setAttribute('r', 5); c2.style.fill = 'var(--partei-leer)'; c2.style.stroke = 'var(--partei-sonstige)'; c2.setAttribute('stroke-width', '.6');
       svg.appendChild(c2);
     }
     /* Mehrheitsmarke */
-    var l = document.createElementNS(ns, 'line'); l.setAttribute('x1', cx); l.setAttribute('x2', cx); l.setAttribute('y1', cy - r0 - dr * reihen + 2); l.setAttribute('y2', cy - 44); l.setAttribute('stroke', '#1F1D1A'); l.setAttribute('stroke-width', 2); l.setAttribute('stroke-dasharray', '6 4'); svg.appendChild(l);
-    var t = document.createElementNS(ns, 'text'); t.setAttribute('x', cx); t.setAttribute('y', cy - 14); t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', '18'); t.setAttribute('font-family', 'Atkinson Hyperlegible Next, sans-serif'); t.setAttribute('fill', '#1F1D1A'); t.textContent = 'Mehrheit ab ' + PW.mehrheit + ' Sitzen'; svg.appendChild(t);
+    var l = document.createElementNS(ns, 'line'); l.setAttribute('x1', cx); l.setAttribute('x2', cx); l.setAttribute('y1', cy - r0 - dr * reihen + 2); l.setAttribute('y2', cy - 44); l.style.stroke = 'var(--text)'; l.setAttribute('stroke-width', 2); l.setAttribute('stroke-dasharray', '6 4'); svg.appendChild(l);
+    var t = document.createElementNS(ns, 'text'); t.setAttribute('x', cx); t.setAttribute('y', cy - 14); t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', '18'); t.setAttribute('font-family', 'Atkinson Hyperlegible Next, sans-serif'); t.style.fill = 'var(--text)'; t.textContent = 'Mehrheit ab ' + PW.mehrheit + ' Sitzen'; svg.appendChild(t);
     container.appendChild(svg);
     var leg = PW.el('ul', { 'class': 'legende' });
     reihenfolge.forEach(function (r) { if (!sitzeJeId[r.id]) return; leg.appendChild(PW.el('li', {}, [PW.el('span', { 'class': 'punkt', style: 'background:' + r.farbe }), r.name + ' ' + sitzeJeId[r.id] + (sitzeJeId[r.id] === 1 ? ' Sitz' : ' Sitze')])); });
-    if (rest > 0) leg.appendChild(PW.el('li', {}, [PW.el('span', { 'class': 'punkt', style: 'background:#E7E5E0' }), 'unbesetzt ' + rest]));
+    if (rest > 0) leg.appendChild(PW.el('li', {}, [PW.el('span', { 'class': 'punkt', style: 'background:var(--partei-leer)' }), 'unbesetzt ' + rest]));
     container.appendChild(leg);
     /* Tabelle als Rückfall für Screenreader und Druck */
     var tab = PW.el('table', { 'class': 'sr-only' }); var tb = PW.el('tbody');
@@ -126,12 +131,31 @@
         fort.appendChild(li);
       });
     }
+    var lf = document.querySelector('.kopfzeile .leitfrage');
+    if (lf && PW.aufbauen) { var schon = false; try { schon = sessionStorage.getItem('pw:lf:' + aktuell) === '1'; sessionStorage.setItem('pw:lf:' + aktuell, '1'); } catch (e) {} PW.aufbauen(lf, { sofort: schon }); }
     var fuss = document.querySelector('.fuss-innen');
     if (fuss) {
-      fuss.appendChild(PW.el('span', { text: 'Politik-Werkstatt · Einheit »Parteien und Wahlen« · Stand 23.10.2026 · Daten: Bundeswahlleiterin, Wahlprogramme 2025 (Quellen auf der Zusammenfassung)' }));
+      fuss.appendChild(PW.el('span', { text: 'Politik-Werkstatt · Einheit »Parteien und Wahlen« · Stand 27.10.2026 · Daten: Bundeswahlleiterin, Wahlprogramme 2025 (Quellen auf der Zusammenfassung)' }));
+      var einst = PW.el('div', { 'class': 'einstellungen' });
+      /* Ansicht: Hell · Dunkel · Beamer */
+      var ans = PW.el('div', { 'class': 'ansicht-wahl', role: 'group', 'aria-label': 'Ansicht' });
+      var aktiv = PW.lies('ansicht', '');
+      Object.keys(PW.ansichten).forEach(function (k) {
+        var kn = PW.el('button', { type: 'button', 'class': 'knopf knopf--leise', 'aria-pressed': aktiv === k ? 'true' : 'false', text: PW.ansichten[k] });
+        kn.addEventListener('click', function () { PW.setzeAnsicht(k); ans.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x === kn ? 'true' : 'false'); }); });
+        ans.appendChild(kn);
+      });
+      einst.appendChild(PW.el('span', { 'class': 'einst-wort', text: 'Ansicht' })); einst.appendChild(ans);
+      /* Weniger Bewegung */
+      var sw = PW.el('label', { 'class': 'schalter schalter--klein' });
+      var cb = PW.el('input', { type: 'checkbox' }); cb.checked = PW.wenigerBewegung ? PW.wenigerBewegung() : false;
+      cb.addEventListener('change', function () { if (PW.schalteBewegung) PW.schalteBewegung(!cb.checked); });
+      sw.appendChild(cb); sw.appendChild(document.createTextNode('Weniger Bewegung'));
+      einst.appendChild(sw);
       var b = PW.el('button', { 'class': 'knopf knopf--leise', type: 'button', text: 'Eingaben löschen' });
       b.addEventListener('click', function () { if (confirm('Alle gespeicherten Eingaben auf diesem Gerät löschen?')) PW.loescheAlles(); });
-      fuss.appendChild(b);
+      einst.appendChild(b);
+      fuss.appendChild(einst);
     }
   };
   /* Reiter (Muster J): <ul class="reiter" data-fuer="a,b,c"> + Abschnitte mit id. Hash öffnet den passenden Reiter. */

@@ -112,3 +112,28 @@ Auf Wunsch der Lehrkraft ist der Urnen-Modus jetzt ein **Wahllokal am Lehrkraftg
 - Lehrkraft-Modus und Musterbuch (Muster P »Das Wahllokal«) sind entsprechend umgeschrieben; dort steht auch der Zeitbedarf: rund 15 Sekunden je Person, bei 19 Lernenden etwa 5 Minuten.
 
 Prüfkette v4.1: taste-skill lint 0 FAIL/0 WARN; inspect der geänderten Seiten 0 FAIL; eigene Prüfung ohne Befund; Funktionstest mit sieben Stimmzetteln inklusive Kleinpartei, leerem Zettel, Auszählung, Übernahme in den Sitzrechner und Realitätsabgleich.
+
+## v5 (27.10.2026): Angleichung an »Gemeinschaftskunde«, Übernahmen aus »Gegenwart«
+
+**Was sich geändert hat** (Freigabe: alle Punkte A1–A3, B1–B7; Fraunces für Grundfrage, Streitfragen und Programmzitate – zusätzlich, weil es dieselbe Rolle ist, für die Leitfrage jeder Station):
+
+| Nr | Änderung | Wo |
+|---|---|---|
+| A1 | Rückmeldung einheitlich »Passt.« / »Passt auch.« / »Passt nicht.«, Begründung und Beleg bleiben | Station 1, 2, 3, 4 (Hürdenfrage), 5 |
+| A2 | Lernstand-Ring ohne Ziffer; alle Hexwerte aus den Skripten entfernt (Halbrund, Ring, Intro, Balken, Legende lesen Tokens) | `lernstand.js`, `werkstatt.js`, `intro.js`, `daten.js`, Station 4, Musterbuch |
+| A3 | Fokus-Doppelring mit `--fokus-innen` je Ansicht, auch im Stimmzettel | `werkstatt.css` |
+| B1 | Drei Ansichten Hell · Dunkel · Beamer, Schalter im Fuß neben »Weniger Bewegung«, Wiederherstellung vor dem ersten Zeichnen | alle Seiten, `werkstatt.css`, `werkstatt.js` |
+| B2 | Fraunces kursiv als Stimme (lokal, OFL) | Grundfrage, Leitfragen, Streitfragen, Zitate |
+| B3 | Muster R Aufbauen | Grundfrage nach dem Intro, Leitfrage je Station (einmal je Sitzung), erstes Zitat im Detailblatt, Musterbuch |
+| B4 | Gestufte Hilfen Begriff → Hinweis → Lösungsweg, aus den vorhandenen Daten (Definitionen, Aufgabengruppe, Fundstelle, Programmstelle) | Station 1 (Aufgaben, Selbsttest), 2 (zwölf Beispiele), 3 (jede Partei je Streitfrage) |
+| B5 | Muster S Ansichtswechsel (View Transitions) | Station 3 Profil → Detail; seitenübergreifend Wortmarke, Fortschritt, Stationsnummer |
+| B6 | `--kuli` für Eigenes: Freitexte, eigene Streitfragen, Empfehlungsmarke, ●-Markierung; ▲ auf `--marker` | Station 1, 3, Lernstand |
+| B7 | Zustände-Karten zu jedem Muster A–S | `musterbuch.html` |
+
+**Kontraste** (gerechnet, nicht geschätzt; alle Paare in allen drei Ansichten): Text auf Grund 14,8 / 15,0 / 21,0; Leise auf Fläche 7,2 / 7,4 / 12,3; Blau auf Fläche 8,3 / 7,5 / 10,3; Akzent auf Fläche 6,1 / 5,7 / 9,4; kuli auf Fläche 7,4 / 7,5 / 10,2; alle Rückmeldungspaare ≥ 8,5; Stationstöne ≥ 7,3. Beamer: jedes Textpaar ≥ 7:1 (Mindestwert 8,5). Parteifarben als Grafik ≥ 3:1 auf Fläche in allen Ansichten, außer FDP-Gelb (1,7 hell / 2,0 Beamer) – deshalb tragen Sitzpunkte, Balken und Legendenpunkte eine Kante in `--text`.
+
+**Prüfkette (wirklich gelaufen):** `tools/pruefen.py` bei 1440/1280/1024/768/390 – keine Konsolenfehler, kein waagerechtes Scrollen, kein Text unter 16 px, keine Tippziele unter 44 px, Start und »Mein Stand« bei 1280 × 720 ohne Scrollen. Dasselbe zusätzlich für Dunkel und Beamer bei 1280 und 390 auf allen elf Seiten (eigenes Skript, 0 Befunde). taste-skill `lint.mjs` auf CSS, JS und den geänderten Seiten: 0 FAIL, 1 WARN (das Wort »ease-in« im Kommentar »nie ease-in« in `motion.js`). Aufbauen gemessen: 10 Wörter, nach 250 ms 1 sichtbar, nach 2,85 s alle, `sr-only`-Kopie vollständig. Bildschirmfotos in Hell, Dunkel und Beamer angesehen (Start, Station 2–4, Musterbuch).
+
+**Bewusst nicht übernommen:** Honig/Petrol und Überdruck (hätten hier keine Bedeutung), Autoplay (die Werkstatt sagt »nie Autoplay«), Wende, Schwärzung, Stempel, Zeitstrahl, Leinwände.
+
+**Offen / Freigabe nötig:** Probe am echten Beamer (Beamer-Ansicht ist für helle Räume gerechnet, nicht am Gerät getestet); VoiceOver am iPad für Aufbauen (Kopie vorhanden, nicht gehört); seitenübergreifende View Transitions wirken nur auf GitHub Pages, nicht über `file://`; Impeccable `audit`/`polish` weiterhin nicht installiert.
