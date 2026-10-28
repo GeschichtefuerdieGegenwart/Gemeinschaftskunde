@@ -70,6 +70,12 @@
       </ul>
     </section>
   </div>
+  <section class="karte kein-druck" id="lernkarten">
+    <h2>Lernkarten: Begriffe wenden</h2>
+    <p class="stimme-frage" style="font-size:1.25rem;margin:0 0 8px">Kannst du den Begriff erklären, bevor du die Rückseite siehst?</p>
+    <p>Zwölf Karten. Sag dir die Erklärung zuerst selbst, dann tippe die Karte um und vergleiche. Danach: »Kann ich erklären« oder »Noch nicht« – das ist dein eigener Stand für die Klausurvorbereitung, keine Note. Er erscheint auch unter »Mein Stand«.</p>
+    <div id="wende"></div>
+  </section>
   <section class="karte">
     <h2>7 · Urteilen wie in der Klausur</h2>
     <p><strong>Sachurteil:</strong> Wirkung an Kriterien prüfen (Effektivität, Repräsentation, Gleichheit der Wahl, Legitimität). <strong>Werturteil:</strong> Kriterien gewichten und begründen, was wichtiger sein soll. Immer: Behauptung → Beleg (Zahl, Artikel, Programmseite) → Erklärung → Gegenargument → Abwägung. Beispielfrage: <em>Beurteilen Sie, ob die 5-%-Hürde angemessen ist.</em> Operatoren: beschreiben (AFB I) · erläutern, analysieren (AFB II) · vergleichen, beurteilen, bewerten, Stellung nehmen, erörtern (AFB III).</p>
@@ -83,7 +89,9 @@
 <script src="assets/js/motion.js"></script>
 <script src="assets/js/faecher.js"></script>
 <script src="assets/js/merkzettel.js"></script>
+<script src="assets/js/bausteine.js"></script>
 <script>
+if (PW.wendekarten && document.getElementById('wende')) PW.wendekarten(document.getElementById('wende'), PW.begriffe, { schluessel: 'karten' });
 PW.rahmen('zus', ''); PW.merkzettel('');
 var q = document.getElementById('quellen'); PW.quellen.forEach(function (s) { q.appendChild(PW.el('li', {}, [s[1] ? PW.el('a', { href: s[1], text: s[0] }) : PW.el('span', { text: s[0] })])); });
 </script>

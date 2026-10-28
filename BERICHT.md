@@ -137,3 +137,25 @@ Prüfkette v4.1: taste-skill lint 0 FAIL/0 WARN; inspect der geänderten Seiten 
 **Bewusst nicht übernommen:** Honig/Petrol und Überdruck (hätten hier keine Bedeutung), Autoplay (die Werkstatt sagt »nie Autoplay«), Wende, Schwärzung, Stempel, Zeitstrahl, Leinwände.
 
 **Offen / Freigabe nötig:** Probe am echten Beamer (Beamer-Ansicht ist für helle Räume gerechnet, nicht am Gerät getestet); VoiceOver am iPad für Aufbauen (Kopie vorhanden, nicht gehört); seitenübergreifende View Transitions wirken nur auf GitHub Pages, nicht über `file://`; Impeccable `audit`/`polish` weiterhin nicht installiert.
+
+## v6 (28.10.2026): Route Archivpapier, Film, sechs Bausteine – Pull Request, nicht zusammengeführt
+
+**Freigabe im Chat (28.10.2026):** Film weiter verbessern · Route Archivpapier · alle sechs Elemente C1–C6.
+
+| Was | Wo | Stand |
+|---|---|---|
+| Film T: Titelkarte und Aufgabenband auf der Leinwand, Überblenden, durchgehende »15 €«-Marke, Plakat mit Kreis und Kreuz, Stimmenzähler, Tempo-Schalter (Beamer), Leertaste, Klick auf die Bühne spielt die Szene | Station 1 | fertig |
+| Route Archivpapier (Tokens, Kopfzeile, Platte im Stationston) | alle Seiten | fertig |
+| U Schieber 1932 ↔ 2025 | Station 4, Sitzrechner | fertig |
+| V Regler statt Fünf-Fragen-Test (Fragen bleiben als Einstellhilfe) | Station 3, Schritt 1 | fertig |
+| W Wendekarten mit zwölf Begriffen, Stand unter »Mein Stand« | Zusammenfassung, Mein Stand | fertig |
+| X Verortung auf zwei Achsen | Station 3, Schritt 3 | fertig – Beutelsbach: keine Quote, keine Empfehlung, »keine Aussage« getrennt |
+| Y Zeitstrahl 1863–2025 (16 Ereignisse) | Station 3, Schritt 2 | fertig – Daten vor Einsatz prüfen |
+| Z Sortieren mit der Hand | Station 2, vor dem Fächer | fertig – Papier gleichwertig, eingebaut auf Wunsch |
+| Musterbuch T–Z mit Zustände-Karten | musterbuch.html | fertig |
+
+**Daten, die du prüfen solltest, bevor es in den Unterricht geht:** Reichstag 1932 (NSDAP 230, SPD 133, KPD 89, Zentrum 75, DNVP 37, BVP 22, DVP 7, DStP 4, weitere 11 = 608) – die Kleinparteien sind zusammengefasst; die Zeitstrahl-Daten (ADAV 1863, Gotha 1875, Parteiengesetz 14.07.1933, CSU 10/1945, FDP 12/1948, GG 23.05.1949, SRP-Verbot 23.10.1952, KPD-Verbot 17.08.1956, Grüne 01/1980, PDS 1989/90, Bündnis 90/Grüne 05/1993, Linke 16.06.2007, AfD 02/2013, NPD-Urteil 17.01.2017, BSW 08.01.2024, Grundmandatsklausel 30.07.2024, Wahl 23.02.2025); die zwölf Begriffskarten (Wortlaut aus der Zusammenfassung).
+
+**Prüfkette (wirklich gelaufen):** `tools/pruefen.py` bei 1440/1280/1024/768/390 auf allen elf Seiten: 0 Befunde (nach zwei Korrekturen: Nummern im Sortieren auf 16 px, Zeitstrahl-Marken auf 44 px Tippfläche). Zusätzlich Hell, Dunkel und Beamer bei 1280 und 390 auf allen elf Seiten (66 Läufe): keine Konsolenfehler, kein waagerechtes Scrollen, kein Text unter 16 px. taste-skill `lint.mjs` auf CSS, `bausteine.js`, `film.js` und den geänderten Seiten: 0 FAIL, 0 WARN. Funktionstest Film: Autoplay erreicht nach 7,5 s Szene 3, »Anhalten« stoppt, Pfeiltaste wechselt, Regler springt auf Szene 11, Ende blendet Vermutungsvergleich ein, `aria-label` nennt Szene und Satz. Funktionstest Bausteine per Skript: Sortieren (wählen → Hierhin), Zeitstrahl (Regler auf 1956 zeigt KPD-Verbot), Verortung (Punkt setzen → Festlegen → Parteien einblenden: SPD, Grüne, Linke oben rechts; CDU, CSU, FDP unten links; Rest als »keine Aussage«), Wendekarte dreht, Wichtigkeits-Regler ordnet. Kontraste der Route Archivpapier (hell): Text auf Grund 13,1 · Leise auf Fläche 6,4 · Blau 7,7 · Akzent 6,3 · kuli 7,0 · Stahl 4,4 (≥ 3) · alle Rückmeldungs- und Tonpaare ≥ 5,9; Dunkel und Beamer unverändert aus v5.
+
+**Nicht gemacht / nur du:** echter Beamer, Finger am iPad (Ziehen bei U, X, Z; Regler bei V, Y), VoiceOver (Film-Satz, Verortung-Beschreibung), Moodle. Impeccable nicht installiert.

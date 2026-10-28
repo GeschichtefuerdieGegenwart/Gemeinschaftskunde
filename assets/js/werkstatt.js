@@ -53,10 +53,11 @@
   };
 
   /* Halbrund: 630 Punkte in Reihen. Parteifarbe nur mit Name und Zahl (Legende). */
-  PW.halbrund = function (container, sitzeJeId, reihenfolge, animiert) {
+  PW.halbrund = function (container, sitzeJeId, reihenfolge, animiert, opts) {
     container.innerHTML = '';
+    var gesamtSitze = (opts && opts.gesamt) || PW.sitzeGesamt, mehrheit = (opts && opts.mehrheit) || PW.mehrheit;
     var gesamt = 0; reihenfolge.forEach(function (r) { gesamt += sitzeJeId[r.id] || 0; });
-    var rest = PW.sitzeGesamt - gesamt;
+    var rest = gesamtSitze - gesamt;
     var reihen = 9, r0 = 150, dr = 24, W = 720, H = 390, cx = 360, cy = 372;
     var punkte = [];
     for (var r = 0; r < reihen; r++) {
@@ -64,8 +65,8 @@
       for (var i = 0; i < n; i++) { var a = Math.PI - Math.PI * (i + 0.5) / n; punkte.push({ x: cx + rad * Math.cos(a), y: cy - rad * Math.sin(a), a: a }); }
     }
     punkte.sort(function (p, q) { return q.a - p.a; });
-    var extra = punkte.length - PW.sitzeGesamt; if (extra > 0) punkte = punkte.slice(Math.floor(extra / 2), Math.floor(extra / 2) + PW.sitzeGesamt);
-    while (punkte.length < PW.sitzeGesamt) punkte.push(punkte[punkte.length - 1]);
+    var extra = punkte.length - gesamtSitze; if (extra > 0) punkte = punkte.slice(Math.floor(extra / 2), Math.floor(extra / 2) + gesamtSitze);
+    while (punkte.length < gesamtSitze) punkte.push(punkte[punkte.length - 1]);
     var ns = 'http://www.w3.org/2000/svg';
     var svg = document.createElementNS(ns, 'svg');
     svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.setAttribute('class', 'halbrund'); svg.setAttribute('role', 'img');
@@ -78,7 +79,7 @@
         var c = document.createElementNS(ns, 'circle'); var p = punkte[idx];
         c.setAttribute('cx', p.x.toFixed(1)); c.setAttribute('cy', p.y.toFixed(1)); c.setAttribute('r', 5);
         c.style.fill = animiert ? 'var(--partei-leer)' : r.farbe; c.style.stroke = 'var(--text)'; c.setAttribute('stroke-width', '.6');
-        if (animiert) { (function (c, farbe, d) { setTimeout(function () { c.style.fill = farbe; }, d); })(c, r.farbe, Math.min(440, (k++ / PW.sitzeGesamt) * 440)); }
+        if (animiert) { (function (c, farbe, d) { setTimeout(function () { c.style.fill = farbe; }, d); })(c, r.farbe, Math.min(440, (k++ / gesamtSitze) * 440)); }
         svg.appendChild(c);
       }
     });
@@ -89,7 +90,7 @@
     }
     /* Mehrheitsmarke */
     var l = document.createElementNS(ns, 'line'); l.setAttribute('x1', cx); l.setAttribute('x2', cx); l.setAttribute('y1', cy - r0 - dr * reihen + 2); l.setAttribute('y2', cy - 44); l.style.stroke = 'var(--text)'; l.setAttribute('stroke-width', 2); l.setAttribute('stroke-dasharray', '6 4'); svg.appendChild(l);
-    var t = document.createElementNS(ns, 'text'); t.setAttribute('x', cx); t.setAttribute('y', cy - 14); t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', '18'); t.setAttribute('font-family', 'Atkinson Hyperlegible Next, sans-serif'); t.style.fill = 'var(--text)'; t.textContent = 'Mehrheit ab ' + PW.mehrheit + ' Sitzen'; svg.appendChild(t);
+    var t = document.createElementNS(ns, 'text'); t.setAttribute('x', cx); t.setAttribute('y', cy - 14); t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', '18'); t.setAttribute('font-family', 'Atkinson Hyperlegible Next, sans-serif'); t.style.fill = 'var(--text)'; t.textContent = 'Mehrheit ab ' + mehrheit + ' Sitzen'; svg.appendChild(t);
     container.appendChild(svg);
     var leg = PW.el('ul', { 'class': 'legende' });
     reihenfolge.forEach(function (r) { if (!sitzeJeId[r.id]) return; leg.appendChild(PW.el('li', {}, [PW.el('span', { 'class': 'punkt', style: 'background:' + r.farbe }), r.name + ' ' + sitzeJeId[r.id] + (sitzeJeId[r.id] === 1 ? ' Sitz' : ' Sitze')])); });

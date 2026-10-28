@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vorschlag v6 · Politik-Werkstatt</title>
+<meta name="description" content="Entwurf zur Freigabe: Eingabe-Film zu den elf Funktionen, drei Farbrouten, weitere interaktive Elemente.">
+<link rel="stylesheet" href="assets/css/werkstatt.css">
+<style>
+/* Vorschlagsseite: nutzt das Stylesheet der Werkstatt, dazu Routen als Variablen-Räume und Vorschauen */
+.v-kopf{border-bottom:2px solid var(--text);padding:8px 0 20px;margin:0 0 28px}
+.v-kopf h1{font-size:clamp(2rem,4.5vw,3rem);margin:0 0 8px}
+.v-kopf .meta{color:var(--leise);margin:0}
+.v-teil{margin:0 0 56px}
+.v-teil>h2{font-size:clamp(1.75rem,3.2vw,2.25rem);margin:0 0 6px;padding-top:8px;border-top:3px solid var(--text)}
+.v-teil>h2 span{display:block;font-size:1rem;font-weight:400;color:var(--leise);font-family:var(--schrift-text);letter-spacing:0}
+.v-frage{font-family:var(--schrift-stimme);font-style:italic;font-weight:600;font-size:1.375rem;line-height:1.3;max-width:40ch;margin:12px 0 20px}
+.v-liste{margin:0 0 16px;padding-left:1.2em}.v-liste li{margin:0 0 6px}
+.v-zwei{display:grid;gap:20px;grid-template-columns:1fr}
+@media (min-width:1024px){.v-zwei{grid-template-columns:1.2fr 1fr}}
+/* Routen */
+.route{margin:0 0 40px;border:2px solid var(--text);border-radius:var(--radius);overflow:hidden;background:var(--grund);color:var(--text)}
+.route-kopf{display:grid;gap:4px 24px;grid-template-columns:1fr;padding:18px 20px;background:var(--flaeche);border-bottom:2px solid var(--linie)}
+@media (min-width:1024px){.route-kopf{grid-template-columns:1.1fr 1fr}}
+.route-kopf h3{margin:0;font-size:1.75rem}
+.route-kopf .idee{font-family:var(--schrift-stimme);font-style:italic;font-weight:600;font-size:1.25rem;margin:0 0 6px}
+.route-kopf p{margin:0 0 6px;max-width:none}
+.route-kopf .klein{color:var(--leise)}
+.palette{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.farbe{display:grid;grid-template-rows:44px auto;width:92px;font-size:1rem}
+.farbe i{display:block;border:1px solid var(--linie);border-radius:3px}
+.farbe span{color:var(--leise);line-height:1.2;padding-top:2px}
+.kontrast{font-size:1rem;margin:10px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px 14px;color:var(--leise)}
+.kontrast b{color:var(--text);font-variant-numeric:tabular-nums}
+.kontrast .ok::after{content:' ✓';color:var(--erfolg)} /* taste-skill-ignore: Zeichen, kein Emoji */
+/* Vorschau: ein Stück Station */
+.vorschau{padding:0 0 20px}
+.vorschau .kopfzeile{margin:0;padding:24px 20px}
+.vorschau .kopfzeile-innen{max-width:none}
+.vorschau .inhalt{padding:20px;display:grid;gap:20px;grid-template-columns:1fr}
+@media (min-width:1024px){.vorschau .inhalt{grid-template-columns:1.1fr 1fr}}
+.vorschau .karte{margin:0}
+.vorschau .fort{margin:0 0 4px}
+.vorschau h2{font-size:1.375rem}
+.vorschau .halbrund{max-width:420px}
+/* Route 1 · Amtsblatt */
+.route[data-route=amtsblatt]{--grund:#F4F6F9;--flaeche:#FFFFFF;--karton:#E2E7EE;--text:#121A26;--leise:#4B5665;--stahl:#6B7786;--linie:#D2DAE4;--blau:#1A4DB3;--blau-zart:#DEE7FA;--blau-tief:#0F3380;--akzent:#C9431A;--akzent-zart:#FBE2D8;--kuli:#1E6B67;--kuli-zart:#DBEAE6;--marker:#F7D64A;--erfolg:#1E7A3C;--erfolg-zart:#DCEFE1;--erfolg-tief:#14522A;--fehler:#B8291E;--fehler-zart:#F8DFDC;--fehler-tief:#731A12;--warnung:#8A5300;--warnung-zart:#F6E8CF;--warnung-tief:#5B3600;--ton-warm:#FBE2D8;--ton-warm-tief:#7A2A10;--ton-blau:#DEE7FA;--ton-blau-tief:#0F3380;--ton-gruen:#DCEFE1;--ton-gruen-tief:#17512A;--ton-lila:#E8E2F7;--ton-lila-tief:#45286E;--ton-gelb:#F8EFC8;--ton-gelb-tief:#5B4A08;--platte:6px 6px 0 0 var(--karton);--fokus-innen:#FFFFFF}
+.route[data-route=amtsblatt] .kopfzeile{background:var(--flaeche);border-left:14px solid var(--ton-tief);color:var(--text)}
+.route[data-route=amtsblatt] .kopfzeile .leitfrage{color:var(--ton-tief)}
+.route[data-route=amtsblatt] .nummer{border-radius:4px;background:var(--ton-tief)}
+.route[data-route=amtsblatt] .karte{border-width:1px;border-color:var(--stahl);box-shadow:var(--platte)} /* taste-skill-ignore: versetzte Platte */
+.route[data-route=amtsblatt] .kz div{box-shadow:none;border:1px solid var(--stahl)}
+/* Route 2 · Archivpapier (Gegenwart) */
+.route[data-route=archiv]{--grund:#F3EFE7;--flaeche:#FAF8F3;--karton:#E9E2D7;--text:#2A2622;--leise:#625A52;--stahl:#7D7364;--linie:#E4DCCF;--blau:#1D4F8F;--blau-zart:#DCE6F3;--blau-tief:#163A69;--akzent:#9B402D;--akzent-zart:#F3DFD8;--kuli:#1E4FB5;--kuli-zart:#E4EBF8;--marker:#F3D54E;--erfolg:#2E6B34;--erfolg-zart:#DCEBDC;--erfolg-tief:#1F4A24;--fehler:#B0281C;--fehler-zart:#F6DCD8;--fehler-tief:#6E1710;--warnung:#8A5300;--warnung-zart:#F5E8CF;--warnung-tief:#5B3600;--ton-warm:#F3DFD8;--ton-warm-tief:#7A2E1F;--ton-blau:#DCE6F3;--ton-blau-tief:#163A69;--ton-gruen:#DBEAE6;--ton-gruen-tief:#0F4F4B;--ton-lila:#EAE1F0;--ton-lila-tief:#4A2A66;--ton-gelb:#F5E8CF;--ton-gelb-tief:#7A4F12;--platte:6px 6px 0 0 var(--karton);--fokus-innen:#FAF8F3}
+.route[data-route=archiv] .kopfzeile{background:var(--karton);color:var(--text)}
+.route[data-route=archiv] .kopfzeile .leitfrage{color:var(--ton-tief);font-size:clamp(1.5rem,2.8vw,2rem)}
+.route[data-route=archiv] .nummer{background:var(--ton-tief)}
+.route[data-route=archiv] .karte{box-shadow:6px 6px 0 0 var(--ton)} /* taste-skill-ignore: versetzte Platte in Stationston */
+.route[data-route=archiv] .kz div{box-shadow:6px 6px 0 0 var(--ton-tief);color:var(--text)} /* taste-skill-ignore: versetzte Platte */
+.route[data-route=archiv] .kz b{color:var(--ton-tief)}
+/* Route 3 · Plakatwand */
+.route[data-route=plakat]{--grund:#FBF7EF;--flaeche:#FFFFFF;--karton:#EFE6D6;--text:#15120E;--leise:#5A5146;--stahl:#7A7060;--linie:#E3D9C6;--blau:#0B3D91;--blau-zart:#D6E2FF;--blau-tief:#082B66;--akzent:#C33D17;--akzent-zart:#FFE0D4;--kuli:#1F3FBF;--kuli-zart:#E1E7FF;--marker:#FFD23F;--erfolg:#1C7A3E;--erfolg-zart:#D9F2E1;--erfolg-tief:#135229;--fehler:#C1271D;--fehler-zart:#FCDFDB;--fehler-tief:#771912;--warnung:#8A5300;--warnung-zart:#FBEBC8;--warnung-tief:#5B3600;--ton-warm:#FFD9C9;--ton-warm-tief:#7A2A10;--ton-blau:#D6E2FF;--ton-blau-tief:#082B66;--ton-gruen:#D9F2E1;--ton-gruen-tief:#145A2E;--ton-lila:#E9DBFF;--ton-lila-tief:#4B2290;--ton-gelb:#FFF0B3;--ton-gelb-tief:#5B4A08;--platte:8px 8px 0 0 var(--text);--fokus-innen:#FFFFFF}
+.route[data-route=plakat] .kopfzeile{background:var(--ton-tief);color:var(--flaeche);padding:32px 20px}
+.route[data-route=plakat] .kopfzeile h1,.route[data-route=plakat] .kopfzeile .klein{color:var(--flaeche)}
+.route[data-route=plakat] .kopfzeile .leitfrage{color:var(--ton);font-size:clamp(1.75rem,3.4vw,2.5rem)}
+.route[data-route=plakat] .nummer{background:var(--akzent);color:var(--flaeche);width:64px;height:64px;font-size:2rem}
+.route[data-route=plakat] .kz div{background:var(--flaeche);border-color:var(--flaeche);color:var(--text);box-shadow:none}
+.route[data-route=plakat] .karte{border-width:3px;box-shadow:var(--platte)} /* taste-skill-ignore: versetzte Platte */
+.route[data-route=plakat] .knopf--voll{background:var(--akzent);border-color:var(--akzent)}
+/* Stationstöne im Nachbau (im Original an body) */
+.station-nachbau[data-ton=warm]{--ton:var(--ton-warm);--ton-tief:var(--ton-warm-tief)}.station-nachbau[data-ton=blau]{--ton:var(--ton-blau);--ton-tief:var(--ton-blau-tief)}.station-nachbau[data-ton=gruen]{--ton:var(--ton-gruen);--ton-tief:var(--ton-gruen-tief)}.station-nachbau[data-ton=lila]{--ton:var(--ton-lila);--ton-tief:var(--ton-lila-tief)}.station-nachbau[data-ton=gelb]{--ton:var(--ton-gelb);--ton-tief:var(--ton-gelb-tief)}
+/* Katalog der Elemente */
+.elemente{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:768px){.elemente{grid-template-columns:1fr 1fr}}
+.element{margin:0;display:grid;gap:6px;align-content:start}
+.element h3{margin:0;font-size:1.25rem}
+.element .nr{font-family:var(--schrift-titel);font-weight:700;color:var(--akzent);font-size:1rem;margin:0}
+.element dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:1rem}
+.element dt{font-weight:700;color:var(--leise)}.element dd{margin:0}
+.element.ist-empfohlen{border-color:var(--akzent)}
+.element .marke-empfohlen{background:var(--akzent)}
+.paket{background:var(--flaeche);border:2px solid var(--text);padding:20px;box-shadow:var(--platte)} /* taste-skill-ignore: versetzte Platte */
+.paket ol{padding-left:1.2em}.paket li{margin:0 0 8px}
+</style>
+<script>try{var a=localStorage.getItem("pw:ansicht");if(a){a=JSON.parse(a);if(a==="hell"||a==="dunkel"||a==="beamer")document.documentElement.setAttribute("data-ansicht",a)}}catch(e){}</script>
+</head>
+<body class="js">
+<main id="inhalt">
+  <header class="v-kopf">
+    <p class="meta">Politik-Werkstatt · Vorschlag v6 · Entwurf vom 28.10.2026 · Branch <code>v6-vorschlag</code>, nichts auf <code>main</code></p>
+    <h1>Weniger statisch: Film, Farbe, Bewegung</h1>
+    <p>Drei Teile zur Freigabe: <strong>A</strong> der Eingabe-Film zu den elf Funktionen (fertig, läuft hier live), <strong>B</strong> drei Farbrouten an den echten Bausteinen, <strong>C</strong> sechs weitere interaktive Elemente mit Papierprobe. Grundlage sind deine Skills <em>lernseite-bauen</em>, <em>bewegung-als-lernmittel</em>, <em>signatur-design</em> und <em>unterricht-digitalisieren</em> sowie das Designsystem <em>Gegenwart</em>.</p>
+  </header>
+
+  <!-- ================= A · Film ================= -->
+  <section class="v-teil" id="a">
+    <h2>A · Der Weg einer Forderung <span>Eingabe-Film zu den elf Funktionen · Muster T · in Station 1 vor den Stufen</span></h2>
+    <p class="v-frage">Was passiert mit dem Wunsch »15 € Mindestlohn«, bis daraus ein Gesetz wird?</p>
+    <div class="v-zwei">
+      <div>
+        <p><strong>Warum ein Film und kein Text:</strong> Der Lerngegenstand ist der <em>Zusammenhang</em> der elf Funktionen – dass eine Forderung durch die Partei hindurch Stationen durchläuft. Das ist eine Veränderung, also nach deinem Skill <em>bewegung-als-lernmittel</em> ein Fall für Bewegung als Lernmittel (Form: Ziehen). Eine statische Grafik mit elf Kästen zeigt die Liste, nicht den Weg.</p>
+        <p><strong>Wie er gebaut ist:</strong> Eine Leinwand (Canvas) mit elf Szenen à 2,6 s; dieselben Figuren wie in der Werkstatt (Punkte für Menschen, Platte für die Partei, Urne, Halbrund), nur aus Tokens gezeichnet, deshalb auch in Dunkel und Beamer richtig. Jede Szene steht am Ende still. Steuerung: elf Kreise, Zurück/Weiter, »Szene noch einmal«, »Alle elf abspielen« (startet nur auf Klick, hält außer Sicht an, steht nach einem Durchlauf), ein Regler zum Ziehen durch den ganzen Film, Pfeiltasten. Bei »Weniger Bewegung« steht jede Szene sofort.</p>
+        <p><strong>Didaktik nach <em>lernseite-bauen</em>:</strong> Frage davor (oben), <em>Erst vermuten</em> als Freitext in kuli, dann der Film, am Ende der Vergleich mit der eigenen Vermutung und die Frage »Was lässt dieses Modell weg?«. Text steht immer neben dem Bild: Name der Funktion, Aufgabe, Definition, der Szenensatz in Fraunces, das echte Beispiel aus der Liste. Status: <em>Modell</em>. Die Forderung ist belegt (SPD-Programm 2025), der Weg ist durchgespielt, nicht behauptet.</p>
+        <p><strong>Erzählreihenfolge ≠ Listenreihenfolge:</strong> Der Film ordnet die Funktionen als Geschichte (Artikulation → Aggregation → Partizipation → Information → Mobilisierung → Sozialisation → Rekrutierung → Legitimation → Herrschaft → Transmission → Kontrolle). Die Nummer in der Liste steht jeweils dabei, damit die Klausurordnung nicht verrutscht.</p>
+      </div>
+      <div>
+        <div class="film-vermutung">
+          <label for="v-verm"><strong>Erst vermuten</strong> (so steht es in Station 1): Schreib zwei bis drei Schritte, so wie du sie dir vorstellst.</label>
+          <textarea id="v-verm" class="eingabe-feld" placeholder="1. … 2. … 3. …"></textarea>
+        </div>
+        <p class="klein" style="color:var(--leise)">Der Film unten ist derselbe Baustein wie in Station 1 (<code>assets/js/film.js</code>). Probiere Regler, Tasten und »Alle elf abspielen«.</p>
+      </div>
+    </div>
+    <div id="film"></div>
+    <details style="margin-top:16px"><summary>Zustände-Karte zu Muster T</summary>
+      <table><tbody>
+        <tr><th>vor dem Start</th><td>Szene 1 steht (t = 1), Regler bei 1000, Kreis 1 gefüllt in <code>text</code></td></tr>
+        <tr><th>läuft</th><td>Leinwand zeichnet mit requestAnimationFrame, 2,6 s je Szene, Regler folgt; außer Sicht angehalten</td></tr>
+        <tr><th>steht</th><td>Endbild der Szene, Satz unter der Bühne (<code>aria-live</code>), <code>aria-label</code> der Leinwand nennt Szene und Satz</td></tr>
+        <tr><th>gezogen</th><td>Regler 0–11000, Szene = ⌊v/1000⌋, Zeitpunkt = Rest; jede Berührung beendet Autoplay</td></tr>
+        <tr><th>Autoplay</th><td>nur nach Klick auf »Alle elf abspielen«, 700 ms Standzeit zwischen Szenen, endet nach Szene 11; nie bei weniger Bewegung</td></tr>
+        <tr><th>gesehen</th><td>Kreise vor der aktuellen Szene in <code>karton</code>; aktuelle Szene in <code>text</code></td></tr>
+        <tr><th>Ende</th><td>Vergleich mit der Vermutung in <code>kuli-zart</code>, Modellgrenze, Lernstand vermerkt »Film gesehen« als Stufe A</td></tr>
+        <tr><th>weniger Bewegung</th><td>jede Szene sofort im Endzustand; Autoplay-Knopf ohne Wirkung</td></tr>
+        <tr><th>Beamer / Dunkel</th><td>alle Farben aus Tokens; Leinwandschrift mindestens 24 px logisch (≥ 16 px ab 640 px Breite)</td></tr>
+      </tbody></table>
+    </details>
+  </section>
+
+  <!-- ================= B · Farbrouten ================= -->
+  <section class="v-teil" id="b">
+    <h2>B · Drei Farbrouten <span>jede an denselben echten Bausteinen: Kopfzeile, Fortschritt, Stimmzettel-Option, Rückmeldung, Knöpfe, Halbrund</span></h2>
+    <p class="v-frage">Welche Welt soll die Werkstatt sein – Amtsblatt, Archiv oder Plakatwand?</p>
+    <p>Die Metapher »Stimmzettel« bleibt in allen drei Routen (Kreis, Kreuz, zwei Druckfarben, Halbrund). Was sich ändert, sind Grundton, Akzent, Stationstöne und die Kopfzeile – also das, was du als »Layout« empfindest. Alle Kontraste unten sind gerechnet, nicht geschätzt (Text ≥ 4,5:1, Grenzen ≥ 3:1). Die Vorschauen sind Nachbauten mit den echten Klassen; Dunkel- und Beamer-Werte leite ich für die gewählte Route ab.</p>
+    <div id="routen"></div>
+  </section>
+
+  <!-- ================= C · Weitere Elemente ================= -->
+  <section class="v-teil" id="c">
+    <h2>C · Sechs weitere interaktive Elemente <span>nach Denkhandlung gewählt, mit Papierprobe aus <em>unterricht-digitalisieren</em>; höchstens zwei Bewegungsformen je Stunde</span></h2>
+    <p class="v-frage">Was kann das Tablet hier, was Papier nicht kann?</p>
+    <div class="elemente">
+      <article class="karte element ist-empfohlen">
+        <span class="marke-empfohlen">Empfehlung</span><p class="nr">C1 · Station 4</p><h3>Vorher–nachher: Bundestag 1932 und 2025</h3>
+        <p>Zwei Halbrunde übereinander, ein Schieber: der Reichstag vom Juli 1932 (Daten sind schon da, Weimar-Karte) und der Bundestag 2025. Die Person schiebt und sieht, was die 5-%-Hürde an Zersplitterung wegnimmt – und was sie an Stimmen kostet.</p>
+        <dl><dt>Denkhandlung</dt><dd>Veränderung erkennen und benennen</dd><dt>Form</dt><dd>Vorher–nachher (Schieber)</dd><dt>Papierprobe</dt><dd>klarer Lernmehrwert: zwei Bilder übereinander geschoben zeigen den Unterschied, Papier zeigt zwei Bilder nebeneinander</dd><dt>Aufwand</dt><dd>gering – Halbrund existiert, Daten existieren</dd></dl>
+      </article>
+      <article class="karte element ist-empfohlen">
+        <span class="marke-empfohlen">Empfehlung</span><p class="nr">C2 · Station 3, Schritt 1</p><h3>Regler statt Kreuz: »Wie wichtig ist dir …?«</h3>
+        <p>Die fünf Fragen in Schritt 1 bekommen Regler (0–100) statt Auswahl. Rechts daneben sortieren sich die acht Streitfragen live um – das Bild folgt der Hand. Die Festlegung bleibt (erst Regler, dann Programmstellen), die Auswertung wird sichtbar statt errechnet.</p>
+        <dl><dt>Denkhandlung</dt><dd>eigene Gewichtung erkennen</dd><dt>Form</dt><dd>Regler mit sichtbarer Folge (Katalog 5)</dd><dt>Papierprobe</dt><dd>Mehrwert möglich: die Folge zeigt sich sofort; auf Papier müsste gezählt werden</dd><dt>Aufwand</dt><dd>gering</dd></dl>
+      </article>
+      <article class="karte element ist-empfohlen">
+        <span class="marke-empfohlen">Empfehlung</span><p class="nr">C3 · Zusammenfassung</p><h3>Wendekarten für die Fachbegriffe</h3>
+        <p>Die Begriffe der Zusammenfassung als Kartenstapel: vorn der Begriff, Tippen dreht die Karte (Muster Wende aus Gegenwart), hinten Definition und belegtes Beispiel. Danach »Konnte ich« / »Noch nicht« – in Worten in den Lernstand. Klausurvorbereitung, die die Person selbst taktet.</p>
+        <dl><dt>Denkhandlung</dt><dd>Abrufen statt Wiederlesen (P2)</dd><dt>Form</dt><dd>physische Metapher (Wende) + Selbsteinschätzung mit Wort (Katalog 13)</dd><dt>Papierprobe</dt><dd>gleich gut wie Lernkarten aus Papier – aber nur hier mit Rückmeldung in den Lernstand; organisatorischer plus kleiner Lernnutzen</dd><dt>Aufwand</dt><dd>gering</dd></dl>
+      </article>
+      <article class="karte element">
+        <p class="nr">C4 · Station 3, Schritt 3</p><h3>Verortung auf zwei Achsen</h3>
+        <p>Zu zwei Streitfragen (z. B. Tempolimit × Wehrpflicht) setzt die Person einen Punkt auf einer Fläche; erst danach erscheinen die belegten Parteipositionen als Punkte. Keine Übereinstimmungsquote, keine Empfehlung – nur das Bild, wer wo steht, und der Beleg mit Seite.</p>
+        <dl><dt>Denkhandlung</dt><dd>sich einordnen, dann vergleichen</dd><dt>Form</dt><dd>Geste (Verortung aus Gegenwart)</dd><dt>Papierprobe</dt><dd>Mehrwert möglich; Beutelsbach-Prüfung nötig: Positionen zeigen ja, Nähe berechnen nein</dd><dt>Aufwand</dt><dd>mittel</dd></dl>
+      </article>
+      <article class="karte element">
+        <p class="nr">C5 · Station 3, Kurzprofile</p><h3>Zeitstrahl der Gründungen 1863–2024</h3>
+        <p>Ein ziehbarer Zeitstrahl von der ADAV-Gründung 1863 bis zum BSW 2024: Wer entsteht wann, was verschwindet, wo sind Brüche (1933, 1945, 1990). Daten sind in <code>daten.js</code> belegt. Für jedes Jahr ein Satz neben dem Bild.</p>
+        <dl><dt>Denkhandlung</dt><dd>Verlauf erkennen</dd><dt>Form</dt><dd>Ziehen (Zeitstrahl)</dd><dt>Papierprobe</dt><dd>Mehrwert möglich – aber nur mit mehr Daten (Vorgängerparteien, Verbote), sonst bleibt es eine hübsche Liste; deshalb nicht in der ersten Runde</dd><dt>Aufwand</dt><dd>mittel</dd></dl>
+      </article>
+      <article class="karte element">
+        <p class="nr">C6 · Station 2</p><h3>Beispiele mit der Hand sortieren</h3>
+        <p>Die zwölf Beispiele als Karten, die auf vier Felder (die vier Aufgaben) gezogen werden – erst dann wird die Funktion feiner bestimmt. Am Tablet die natürliche Geste, mit Tastatur als Auswahl.</p>
+        <dl><dt>Denkhandlung</dt><dd>Zuordnen mit Begründung</dd><dt>Form</dt><dd>Geste</dd><dt>Papierprobe</dt><dd>gleich gut wie Papierkarten – Papier gewinnt sogar (Tisch, Gespräch). Nur sinnvoll, wenn die Station ohnehin digital läuft; nicht empfohlen</dd><dt>Aufwand</dt><dd>mittel</dd></dl>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= D · Paket ================= -->
+  <section class="v-teil" id="d">
+    <h2>D · Mein Paket für v6 <span>was ich zusammenführen würde, wenn du freigibst</span></h2>
+    <div class="paket">
+      <ol>
+        <li><strong>Film »Der Weg einer Forderung«</strong> in Station 1 vor den Stufen (fertig; Musterbuch T und Zustände-Karte dazu).</li>
+        <li><strong>Eine Farbroute</strong> aus B – meine Empfehlung ist <strong>Archivpapier</strong>, weil die Werkstatt dann zur Familie deiner Lernwerkstätten gehört (Hilde Digital, Nation im Kopf, GGK-Labor) und die Stationstöne als Platte mehr Fläche bekommen, ohne dass die Stimmzettel-Metapher leidet. Wenn du mehr Kontrast willst: Plakatwand.</li>
+        <li><strong>C1, C2, C3</strong> als neue Bausteine – jeweils höchstens eine Bewegungsform je Station, mit Frage davor und Text neben dem Bild.</li>
+        <li>Prüfkette wie v5 (fünf Breiten, drei Ansichten, Kontraste gerechnet, Lint), dann Bericht und Pull Request. Zusammenführen erst nach deiner Freigabe.</li>
+      </ol>
+      <p><strong>Nicht in v6:</strong> C4 ohne vorherige Beutelsbach-Entscheidung, C5 ohne Datenerweiterung, C6 gar nicht (Papier gewinnt).</p>
+      <p class="klein" style="color:var(--leise)">Nur du kannst das: Beamer-Probe des Films im Klassenraum, Finger am iPad (Regler, Szenenkreise), VoiceOver (Satz unter der Bühne).</p>
+    </div>
+  </section>
+</main>
+<script src="assets/js/daten.js"></script>
+<script src="assets/js/werkstatt.js"></script>
+<script src="assets/js/motion.js"></script>
+<script src="assets/js/film.js"></script>
+<script>
+(function () {
+  /* Film live */
+  PW.film(document.getElementById('film'), {});
+
+  /* Routen mit Vorschau */
+  var routen = [
+    { id: 'amtsblatt', name: 'Route 1 · Amtsblatt', idee: 'Auf dieser Seite wird der amtliche Druck zur Gestaltung: kühles Papier, eine Linie am Rand, nichts lenkt ab.', text: 'Klar und sachlich. Kopfzeile weiß mit breitem Balken in der Stationsfarbe, eckige Nummer, dünne Kanten. Akzent: Siegelrot nur für Grundfrage und einen Hauptknopf. »Dein Gedanke« in Petrol, damit es sich vom Stimmzettelblau unterscheidet.', fuer: 'Passt, wenn die Werkstatt vor allem ruhig und prüfungsnah wirken soll.', ton: 'blau' },
+    { id: 'archiv', name: 'Route 2 · Archivpapier', idee: 'Auf dieser Seite wird das Archivpapier der Lernwerkstätten zum Grund: warm, mit harten versetzten Platten in der Stationsfarbe.', text: 'Das System »Gegenwart«: warmer Grund, Oxidrot als Leitakzent, Petrol und Honig als Stationstöne. Die Platte unter Karten und Kennzahlen trägt den Stationston – dadurch hat jede Station mehr Fläche in ihrer Farbe. Leitfrage größer in Fraunces.', fuer: 'Meine Empfehlung: gehört zur Familie deiner anderen Werkstätten, ohne die Stimmzettel-Metapher aufzugeben.', ton: 'gruen' },
+    { id: 'plakat', name: 'Route 3 · Plakatwand', idee: 'Auf dieser Seite wird die Plakatwand im Wahlkampf zur Gestaltung: große Farbflächen, dicke Kanten, eine Zeile, die man von weitem liest.', text: 'Kräftig. Die Kopfzeile ist ein voller Farbblock in der tiefen Stationsfarbe mit heller Schrift, die Nummer groß in Orange, Karten mit 3-px-Kante und schwarzer Platte, Hauptknopf in Orange. Am Beamer am stärksten, auf dem iPad am lautesten.', fuer: 'Passt, wenn du vor allem mehr Farbe willst; braucht Disziplin, damit nicht jede Seite schreit.', ton: 'warm' }
+  ];
+  var box = document.getElementById('routen');
+  function hex(el, name) { return getComputedStyle(el).getPropertyValue('--' + name).trim(); }
+  function lum(h) { var r = [1, 3, 5].map(function (i) { var c = parseInt(h.substr(i, 2), 16) / 255; return c <= .03928 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4); }); return .2126 * r[0] + .7152 * r[1] + .0722 * r[2]; }
+  function kontrast(a, b) { var x = lum(a), y = lum(b); var hi = Math.max(x, y), lo = Math.min(x, y); return (hi + .05) / (lo + .05); }
+  routen.forEach(function (r) {
+    var sec = PW.el('section', { 'class': 'route', 'data-route': r.id });
+    var kopf = PW.el('div', { 'class': 'route-kopf' });
+    var links = PW.el('div'); links.appendChild(PW.el('h3', { text: r.name })); links.appendChild(PW.el('p', { 'class': 'idee', text: r.idee })); links.appendChild(PW.el('p', { text: r.text })); links.appendChild(PW.el('p', { 'class': 'klein', text: r.fuer }));
+    var rechts = PW.el('div'); var pal = PW.el('div', { 'class': 'palette' });
+    ['grund', 'flaeche', 'karton', 'text', 'leise', 'blau', 'akzent', 'kuli', 'marker', 'ton-warm', 'ton-blau', 'ton-gruen', 'ton-lila', 'ton-gelb'].forEach(function (n) { var f = PW.el('div', { 'class': 'farbe' }); f.appendChild(PW.el('i', { style: 'background:var(--' + n + ')' })); f.appendChild(PW.el('span', { text: n })); pal.appendChild(f); });
+    rechts.appendChild(pal); var kt = PW.el('div', { 'class': 'kontrast' }); rechts.appendChild(kt);
+    kopf.appendChild(links); kopf.appendChild(rechts); sec.appendChild(kopf);
+    /* Vorschau: Station 4 in dieser Route */
+    var vs = PW.el('div', { 'class': 'vorschau' });
+    var b = PW.el('div', { 'class': 'station-nachbau' }); b.setAttribute('data-ton', r.ton);
+    b.innerHTML = '<div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">4</span><h1>Wählen und auszählen</h1><p class="leitfrage">Wie wird aus Stimmen ein Bundestag, und was ändert die 5-%-Hürde?</p><p class="klein" style="margin:0">Fünf Reiter: Stimmzettel üben · die Klasse wählen lassen · Sitze rechnen · Koalition bilden · mit der Wirklichkeit abgleichen.</p><div class="kz"><div><b>630</b><span>Sitze</span></div><div><b>316</b><span>Mehrheit</span></div><div><b>5 %</b><span>Hürde</span></div></div></div></div>' +
+      '<div class="inhalt"><div><ol class="fort"><li class="ist-fertig">1 Grundlagen</li><li class="ist-fertig">2 Erkennen</li><li>3 Positionen</li><li aria-current="step">4 Wählen</li><li>5 Warum so?</li></ol>' +
+      '<section class="karte"><h2>Kontrollfrage</h2><p>Union und SPD kamen 2025 zusammen auf 328 Sitze. Wie wäre es ohne die 5-%-Hürde?</p><ul class="optionen"><li><label class="opt"><input type="radio" name="v-' + r.id + '"><span class="kreis" aria-hidden="true"></span><span>Sie hätten mehr Sitze</span></label></li><li><label class="opt ist-richtig"><input type="radio" name="v-' + r.id + '" checked><span class="kreis" aria-hidden="true"></span><span>Sie hätten keine Mehrheit mehr</span></label></li><li><label class="opt"><input type="radio" name="v-' + r.id + '"><span class="kreis" aria-hidden="true"></span><span>Es ändert sich nichts</span></label></li></ul>' +
+      '<div class="rueck rueck--gut"><strong>Passt.</strong> Ohne Hürde ziehen FDP und BSW ein; Union und SPD kämen auf 297 statt 328 Sitze. <span class="beleg">Beleg: Bundeswahlleiterin, endgültiges Ergebnis 2025</span></div><div class="rueck rueck--auch"><strong>Passt auch.</strong> So sähe die zweite Stufe aus.</div><div class="rueck rueck--eigen"><strong>Deine drei Streitfragen:</strong> Tempolimit · Wehrpflicht · Mindestlohn</div>' +
+      '<div class="knopfzeile"><button type="button" class="knopf knopf--voll">Ergebnis laden</button><button type="button" class="knopf">Hürde ausschalten</button><button type="button" class="knopf knopf--leise">Hilfe</button></div></section></div>' +
+      '<div><section class="karte"><h2>Sitzverteilung 2025</h2><div class="hb"></div><p class="film-chip" style="margin-top:8px">Aufgabe: Politikformulierung</p><p class="markiertext" style="line-height:2.2;margin:8px 0 0"><button type="button" class="mk" data-mark="verlangt">Die Parteien wirken bei der politischen Willensbildung mit</button> <button type="button" class="mk" data-mark="garantiert">Ihre Gründung ist frei</button></p></section></div></div>';
+    vs.appendChild(b); sec.appendChild(vs); box.appendChild(sec);
+    var sitze = PW.sitze(PW.ergebnisse.bund.werte, { huerde: 5, grundmandate: { linke: 3 }, ssw: true });
+    var farben = ['cdu', 'csu', 'spd', 'gruene', 'fdp', 'afd', 'linke', 'bsw'].map(function (id) { var p = PW.partei(id); return { id: id, name: p.name, farbe: p.farbe }; }); farben.push({ id: 'ssw', name: 'SSW', farbe: 'var(--partei-ssw)' });
+    PW.halbrund(b.querySelector('.hb'), sitze, farben, false);
+    /* Kontraste rechnen */
+    var paare = [['text', 'grund', 4.5], ['text', 'flaeche', 4.5], ['leise', 'flaeche', 4.5], ['blau', 'flaeche', 4.5], ['akzent', 'flaeche', 4.5], ['kuli', 'flaeche', 4.5], ['flaeche', 'akzent', 4.5], ['stahl', 'flaeche', 3], ['erfolg-tief', 'erfolg-zart', 4.5], ['warnung-tief', 'warnung-zart', 4.5], ['ton-warm-tief', 'ton-warm', 4.5], ['ton-blau-tief', 'ton-blau', 4.5], ['ton-gruen-tief', 'ton-gruen', 4.5], ['ton-lila-tief', 'ton-lila', 4.5], ['ton-gelb-tief', 'ton-gelb', 4.5], ['text', 'marker', 4.5]];
+    if (r.id === 'plakat') paare.push(['flaeche', 'ton-warm-tief', 4.5], ['ton-warm', 'ton-warm-tief', 4.5]);
+    paare.forEach(function (p) { var k = kontrast(hex(sec, p[0]), hex(sec, p[1])); kt.appendChild(PW.el('span', { 'class': k >= p[2] ? 'ok' : 'nein', html: p[0] + ' auf ' + p[1] + ' <b>' + k.toFixed(1) + '</b>' })); });
+  });
+  document.querySelectorAll('.vorschau input').forEach(function (i) { i.addEventListener('change', function (e) { e.preventDefault(); }); });
+})();
+</script>
+</body>
+</html>

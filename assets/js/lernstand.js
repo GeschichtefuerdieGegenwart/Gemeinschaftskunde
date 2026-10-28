@@ -120,6 +120,8 @@
   PW.lernstandGesamt = function (box, wurzel) {
     wurzel = wurzel || '';
     box.innerHTML = '';
+    var karten = PW.lies('karten', {}) || {}; var kk = Object.keys(karten).filter(function (b) { return karten[b] === 'kann'; }).length, kn = Object.keys(karten).filter(function (b) { return karten[b] === 'noch'; }).length;
+    if (kk || kn) box.appendChild(PW.el('p', { 'class': 'stand-satz', html: '<strong>Lernkarten:</strong> ' + kk + ' Begriffe kannst du nach eigener Einschätzung erklären, ' + kn + ' noch nicht. <a href="' + wurzel + 'zusammenfassung.html#lernkarten">Weiter wenden</a>' }));
     var leer = true;
     PW.ziele.forEach(function (z) {
       var g = 0, r = 0, themen = [], stufen = { A: 0, B: 0, C: 0 }, frei = 0;

@@ -13,6 +13,13 @@
   <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">2</span><h1>Funktionen erkennen</h1><p class="leitfrage">Welche Funktion erfüllt eine Partei hier gerade?</p><p class="klein" style="margin:0">Zwölf Beispiele aus dem Wahljahr 2025 im Fächer, zufällige Reihenfolge. Oft passt mehr als eine Funktion; du bekommst eine Begründung, keine Punkte. Die Funktionen stehen im Merkzettel oben rechts.</p><div class="kz"><div><b>12</b><span>Beispiele</span></div><div><b>11</b><span>Funktionen zur Wahl</span></div><div><b>0</b><span>Punkte – nur Begründungen</span></div></div></div></div>
   <ol class="fort" aria-label="Fortschritt"></ol>
   <p class="hinweis">Operator <em>erläutern</em> (AFB II): Nenne die Funktion und erkläre am Beispiel, warum sie passt. Die Beispiele sind vereinfacht, aber nicht erfunden: Die Programmaussagen stehen in Station 3 wörtlich mit Seitenzahl.</p>
+  <section class="karte" id="sortieren-karte">
+    <h2>Erst grob: Zu welcher Aufgabe gehört das Beispiel?</h2>
+    <p class="stimme-frage" style="font-size:1.25rem;margin:0 0 8px">Wird hier etwas beschlossen, umgesetzt, geprüft – oder geht es um Personen?</p>
+    <p>Zieh jedes Beispiel auf eines der vier Felder – mit dem Finger, der Maus oder per Tippen (Beispiel wählen, dann »Hierhin«). Erst wenn alle liegen, prüfst du. Danach bestimmst du unten zu jedem Beispiel die genaue Funktion.</p>
+    <div id="sortieren"></div>
+  </section>
+  <h2 style="margin-top:8px">Dann genau: Welche Funktion?</h2>
   <div class="faecher" data-label="Zwölf Beispiele" id="beispiele-faecher" data-manuell><ul class="faecher-spur" id="beispiele"></ul></div>
   <section class="karte karte--leise">
     <h2>Dein Zwischenstand</h2>
@@ -33,9 +40,11 @@
 <script src="../assets/js/merkzettel.js"></script>
 <script src="../assets/js/lernstand.js"></script>
 <script src="../assets/js/hilfen.js"></script>
+<script src="../assets/js/bausteine.js"></script>
 <script>
 PW.rahmen('st2', '../'); PW.merkzettel('../');
 (function () {
+  if (PW.sortieren) PW.sortieren(document.getElementById('sortieren'), PW.beispiele, PW.aufgaben, PW.funktionen, { schluessel: 'st2-sortierung', danach: function () { document.getElementById('beispiele-faecher').scrollIntoView({ behavior: PW.wenigerBewegung() ? 'auto' : 'smooth', block: 'start' }); } });
   var box = document.getElementById('beispiele');
   var name = function (id) { return PW.funktionen.filter(function (f) { return f.id === id; })[0].name; };
   PW.mischen(PW.beispiele).forEach(function (b, i) {
