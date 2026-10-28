@@ -40,6 +40,19 @@
 
   <section class="karte">
     <h2>3. Elf Funktionen von Parteien</h2>
+    <h3>Zuerst der Film: Der Weg einer Forderung</h3>
+    <p>Bevor du die elf Funktionen bearbeitest, siehst du sie einmal im Zusammenhang. Der Film verfolgt eine einzige Forderung – <strong>Mindestlohn 15 €</strong> – vom ersten Wunsch bis zur Kontrolle des Gesetzes. Jede Szene zeigt eine Funktion. Du kannst ihn so oft ansehen, wie du willst, Szene für Szene oder am Regler gezogen.</p>
+    <div class="film-vermutung">
+      <label for="film-vermutung"><strong>Erst vermuten:</strong> Was passiert mit dem Wunsch »15 € Mindestlohn«, bis daraus ein Gesetz wird? Schreib zwei bis drei Schritte, so wie du es dir vorstellst.</label>
+      <textarea id="film-vermutung" class="eingabe-feld" placeholder="1. … 2. … 3. …"></textarea>
+    </div>
+    <div id="film"></div>
+    <div class="film-ende" id="film-ende" hidden>
+      <div class="rueck rueck--eigen" id="film-vergleich"></div>
+      <p><strong>Was lässt dieses Modell weg?</strong> Dass die Funktionen gleichzeitig laufen und nicht nacheinander. Dass die meisten Forderungen nie Gesetz werden. Dass Verbände, Medien und Gerichte mitwirken. Und dass Parteien auch Dinge tun, die in keiner Liste stehen – zum Beispiel Posten verteilen.</p>
+      <p class="klein" style="color:var(--leise)">Jetzt kennst du den Zusammenhang. Unten bearbeitest du die elf Funktionen einzeln – auf deiner Stufe.</p>
+    </div>
+    <h3 style="margin-top:28px">Dann deine Stufe</h3>
     <p>Wähle deine Stufe. Du kannst jederzeit wechseln – die Stufen sind unterschiedliche Wege zum selben Ziel, keine Rangliste.</p>
     <div class="stufen" role="group" aria-label="Schwierigkeitsstufe">
       <span class="klein" style="margin-right:4px">Stufe:</span>
@@ -72,6 +85,7 @@
 <script src="../assets/js/merkzettel.js"></script>
 <script src="../assets/js/lernstand.js"></script>
 <script src="../assets/js/hilfen.js"></script>
+<script src="../assets/js/film.js"></script>
 <script>
 PW.rahmen('st1', '../'); PW.merkzettel('../');
 document.querySelectorAll('.merk-auf-knopf').forEach(function (b) { b.addEventListener('click', function () { var k = document.querySelector('.merk-knopf'); if (k) k.click(); }); });
@@ -140,6 +154,23 @@ document.querySelectorAll('.merk-auf-knopf').forEach(function (b) { b.addEventLi
     r.innerHTML = html;
     PW.notiere(1, 'markieren', treffer === soll && !falsch.length, 'Art. 21 GG: Garantie, Forderungen, Auftrag');
   });
+
+  /* ---------- 3a. Film: Der Weg einer Forderung (Muster T) ---------- */
+  (function () {
+    var verm = document.getElementById('film-vermutung'); verm.value = PW.lies('film-vermutung', '');
+    verm.addEventListener('input', function () { PW.merke('film-vermutung', verm.value); });
+    var ende = document.getElementById('film-ende'), vgl = document.getElementById('film-vergleich');
+    PW.film(document.getElementById('film'), {
+      merke: function (i) { PW.merke('film-szene', i); },
+      amEnde: function () {
+        ende.hidden = false;
+        var v = verm.value.trim();
+        vgl.innerHTML = '<strong>Deine Vermutung:</strong> ' + (v ? v.replace(/</g, '&lt;') : 'Du hast nichts notiert.') + ' <span class="beleg">Vergleiche: Welche deiner Schritte kommen im Film vor – und welche Funktionen hattest du nicht auf dem Zettel?</span>';
+        if (PW.notiereStufe) PW.notiereStufe(1, 'film', 'A');
+        ende.scrollIntoView({ behavior: PW.wenigerBewegung() ? 'auto' : 'smooth', block: 'start' });
+      }
+    });
+  })();
 
   /* ---------- 2. Aufgaben zuordnen ---------- */
   var box = document.getElementById('aufgaben');

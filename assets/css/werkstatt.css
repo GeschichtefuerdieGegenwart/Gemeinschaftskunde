@@ -525,3 +525,29 @@ html[data-bewegung=weniger] .hilfe.ist-neu{animation:none}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:var(--dauer-mittel)}
 @media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:1ms!important}}
 html[data-bewegung=weniger]::view-transition-group(*),html[data-bewegung=weniger]::view-transition-old(*),html[data-bewegung=weniger]::view-transition-new(*){animation-duration:1ms!important}
+
+/* ===== v6-Vorschlag · Muster T »Der Weg einer Forderung« (Eingabe-Film zu den elf Funktionen) ===== */
+.film{display:grid;gap:14px;grid-template-columns:1fr;margin:0 0 8px}
+@media (min-width:1024px){.film{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);grid-template-areas:"buehne kopf" "punkte kopf" "regler steuer" "stand stand" "status status"}.film-buehne{grid-area:buehne}.film-kopf{grid-area:kopf}.film-punkte{grid-area:punkte}.film-regler{grid-area:regler}.film-steuer{grid-area:steuer}.film-stand{grid-area:stand}.film-status{grid-area:status}}
+.film-buehne{border:2px solid var(--text);border-radius:var(--radius);background:var(--flaeche);box-shadow:var(--platte);overflow:hidden;line-height:0} /* taste-skill-ignore: versetzte Platte, kein Weichzeichner */
+.film-leinwand{width:100%;display:block}
+.film-kopf{display:grid;align-content:start;gap:6px;background:var(--flaeche);border:2px solid var(--linie);border-radius:var(--radius);padding:16px 18px}
+.film-nr{margin:0;font-size:1rem;color:var(--leise)}
+.film-titel{margin:0;font-size:clamp(1.375rem,2.4vw,1.75rem)}
+.film-chip{margin:0;display:inline-block;justify-self:start;font-size:1rem;font-weight:700;color:var(--blau-tief);background:var(--blau-zart);padding:2px 10px;border-radius:2px}
+.film-kurz{margin:4px 0 0;font-weight:700;max-width:none}
+.film-satz{margin:0;font-family:var(--schrift-stimme);font-style:italic;font-weight:600;font-size:1.125rem;line-height:1.4;max-width:none}
+.film-bsp{margin:0;color:var(--leise);max-width:none}
+.film-punkte{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.film-punkte button{width:44px;height:44px;border-radius:50%;border:2px solid var(--text);background:var(--flaeche);font:inherit;font-weight:700;cursor:pointer;color:var(--text);transition:transform var(--dauer-schnell) var(--ease-out)}
+.film-punkte button.ist-gesehen{background:var(--karton)}
+.film-punkte button[aria-current=step]{background:var(--text);color:var(--flaeche)}
+.film-regler{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}
+.film-regler input[type=range]{width:100%;min-height:44px;accent-color:var(--text)}
+.film-steuer{display:flex;flex-wrap:wrap;gap:8px;align-content:start}
+.film-stand{margin:0;font-size:1rem;color:var(--text);max-width:none}
+.film-status{margin:0;color:var(--leise);max-width:none;border-top:1px dashed var(--linie);padding-top:8px}
+.film-vermutung{display:grid;gap:8px;margin:0 0 16px}
+.film-vermutung textarea{min-height:72px}
+.film-ende{margin-top:16px}
+@media (max-height:760px) and (min-width:1024px){.film-kopf{padding:10px 14px;gap:4px}.film-satz{font-size:1rem}}
