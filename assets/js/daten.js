@@ -203,6 +203,42 @@ PW.shell = [
   'Seit 2019 ist vor allem der Anteil männlicher Jugendlicher gestiegen, die sich als »eher rechts« oder »rechts« einordnen: jeder vierte (2019: weniger als jeder fünfte). Bei den weiblichen Jugendlichen sind es 11 Prozent, ohne Anstieg.',
   'Junge Frauen vertreten häufiger postmaterialistische Werte als junge Männer, etwa bei Feminismus oder Gendern.'
 ];
+/* Reichstag nach der Wahl vom 31. Juli 1932: 608 Sitze (Quelle: Statistik des Deutschen Reichs, Bd. 434; LeMO). Kleine Parteien (CSVD, Landvolk, Bauernpartei, Wirtschaftspartei u. a.) als »weitere« zusammengefasst – Einzelwerte vor Einsatz prüfen. */
+PW.reichstag1932 = { gesamt: 608, sitze: [['NSDAP', 230], ['SPD', 133], ['KPD', 89], ['Zentrum', 75], ['DNVP', 37], ['BVP', 22], ['DVP', 7], ['DStP', 4], ['weitere Kleinparteien', 11]], gegenRepublik: ['NSDAP', 'KPD'] };
+/* Fachbegriffe für die Wendekarten (Wortlaut wie auf der Zusammenfassung) */
+PW.begriffe = [
+  { b: 'Art. 21 GG', d: 'Parteien »wirken bei der politischen Willensbildung des Volkes mit« – kein Monopol. Gründung frei, innere Ordnung demokratisch, Rechenschaft über Finanzen.', bsp: 'Verbände und Medien wirken ebenfalls an der Willensbildung mit.' },
+  { b: 'Parteiverbot', d: 'Nur das Bundesverfassungsgericht kann eine Partei verbieten (Art. 21 Abs. 4 GG). Der Verfassungsschutz beobachtet und stuft ein, verbietet nicht.', bsp: 'Einstufung der AfD durch das BfV 2025 – kein Verbot, ein Verfahren vor Gericht.' },
+  { b: 'Vier Aufgaben', d: 'Politikformulierung · Politikimplementation · Politikkontrolle · Personalrekrutierung – das muss jede Demokratie erledigen; Parteien übernehmen Funktionen dabei.', bsp: 'Eine Kleine Anfrage der Opposition gehört zur Politikkontrolle.' },
+  { b: 'Erststimme', d: 'Stimme für eine Person im Wahlkreis (299 Wahlkreise). Die Erststimme entscheidet, wer das Direktmandat gewinnt – soweit die Zweitstimmen der Partei reichen.', bsp: 'Wahlkreis 260 Böblingen: 10 Kandidierende 2025.' },
+  { b: 'Zweitstimme', d: 'Stimme für die Landesliste einer Partei. Sie entscheidet über die Sitzverteilung im Bundestag (personalisierte Verhältniswahl).', bsp: '16 Landeslisten standen 2025 im Wahlkreis 260 auf dem Zettel.' },
+  { b: '5-%-Hürde', d: 'Eine Partei bekommt nur Sitze, wenn sie bundesweit mindestens 5 % der Zweitstimmen erhält – oder drei Direktmandate (Grundmandatsklausel). Die Minderheitenpartei SSW ist befreit.', bsp: 'FDP (4,3 %) und BSW (4,98 %) blieben 2025 draußen.' },
+  { b: 'Zweitstimmendeckung', d: 'Seit 2025 zählen Direktmandate nur, soweit die Zweitstimmen der Partei reichen. Keine Überhang- und Ausgleichsmandate mehr; der Bundestag hat fest 630 Sitze.', bsp: '2025 blieben 23 Wahlkreise ohne Direktmandat.' },
+  { b: 'Sainte-Laguë/Schepers', d: 'Das Rechenverfahren, das Zweitstimmen in Sitze umrechnet: Die Stimmen werden durch 0,5, 1,5, 2,5 … geteilt; die 630 höchsten Zahlen bekommen je einen Sitz.', bsp: 'Der Sitzrechner in Station 4 rechnet genau so.' },
+  { b: 'Koalition', d: 'Ein Bündnis mehrerer Fraktionen, das zusammen die Mehrheit hat (316 von 630) und eine Regierung trägt; Grundlage ist ein Koalitionsvertrag.', bsp: 'Union und SPD seit Mai 2025: 328 Sitze.' },
+  { b: 'Opposition', d: 'Die Fraktionen, die nicht die Regierung tragen. Sie kontrollieren die Regierung – mit Anfragen, Untersuchungsausschüssen, Gegenvorschlägen.', bsp: 'AfD, Grüne und Linke seit 2025.' },
+  { b: 'Sachurteil', d: 'Eine Aussage, die sich mit Belegen prüfen lässt: Was ist der Fall, welche Folgen hat etwas?', bsp: '»Ohne 5-%-Hürde hätten Union und SPD 2025 keine Mehrheit« – prüfbar im Sitzrechner.' },
+  { b: 'Werturteil', d: 'Eine Bewertung nach offengelegten Maßstäben: Was ist wichtiger – Vielfalt im Parlament oder stabile Mehrheiten?', bsp: '»Die Hürde sollte auf 3 % sinken« – ein Werturteil, das Gründe braucht.' }
+];
+/* Zeitstrahl: Parteien und Parteienrecht 1863–2024 (Quellen: bpb, LeMO, Bundesverfassungsgericht; Daten vor Einsatz prüfen) */
+PW.zeitstrahl = [
+  { j: 1863, t: 'Gründung des ADAV in Leipzig – die erste Arbeiterpartei, Vorläufer der SPD.', art: 'gruendung' },
+  { j: 1875, t: 'Vereinigung zur Sozialistischen Arbeiterpartei in Gotha; seit 1890 Name SPD.', art: 'gruendung' },
+  { j: 1933, t: 'Gesetz gegen die Neubildung von Parteien (14. Juli): Nur die NSDAP bleibt erlaubt – das Ende des Mehrparteiensystems.', art: 'bruch' },
+  { j: 1945, t: 'Neugründungen nach dem Krieg: CDU (regional, Bundespartei 1950) und CSU (Oktober 1945).', art: 'gruendung' },
+  { j: 1948, t: 'Gründung der FDP in Heppenheim (Dezember).', art: 'gruendung' },
+  { j: 1949, t: 'Grundgesetz (23. Mai) mit Art. 21: Parteien wirken an der Willensbildung mit; Sperrklausel im Wahlgesetz.', art: 'recht' },
+  { j: 1952, t: 'Verbot der SRP durch das Bundesverfassungsgericht (23. Oktober) – das erste Parteiverbot.', art: 'recht' },
+  { j: 1956, t: 'Verbot der KPD durch das Bundesverfassungsgericht (17. August).', art: 'recht' },
+  { j: 1980, t: 'Gründung der Grünen in Karlsruhe (Januar).', art: 'gruendung' },
+  { j: 1990, t: 'Aus der SED wird die PDS (Umbenennung 1989/90) – Vorläuferin der Linken.', art: 'gruendung' },
+  { j: 1993, t: 'Vereinigung von Bündnis 90 und Die Grünen (Mai).', art: 'gruendung' },
+  { j: 2007, t: 'Zusammenschluss von Linkspartei.PDS und WASG zur Partei Die Linke (16. Juni).', art: 'gruendung' },
+  { j: 2013, t: 'Gründung der AfD (Februar).', art: 'gruendung' },
+  { j: 2017, t: 'Das Bundesverfassungsgericht verbietet die NPD nicht (17. Januar): verfassungsfeindlich, aber zu unbedeutend.', art: 'recht' },
+  { j: 2024, t: 'Gründung des BSW (8. Januar); Grundmandatsklausel durch das Bundesverfassungsgericht wieder eingesetzt (30. Juli).', art: 'gruendung' },
+  { j: 2025, t: 'Erste Bundestagswahl mit 630 festen Sitzen und Zweitstimmendeckung (23. Februar).', art: 'recht' }
+];
 PW.weimar1932 = { datum: '31. Juli 1932', nsdap: 37.3, kpd: 14.3, hinweis: 'Reichstagswahl; NSDAP und KPD wollten die parlamentarische Republik abschaffen. Zusammen hatten sie mehr als die Hälfte der Stimmen: Keine demokratische Mehrheit war mehr möglich.' };
 
 PW.quellen = [

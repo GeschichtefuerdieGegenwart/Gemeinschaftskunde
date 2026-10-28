@@ -26,10 +26,11 @@
   <section class="schritt" id="schritt1">
     <p class="schritt-marke">Schritt 1 von 3</p>
     <h2>Was ist dir wichtig?</h2>
-    <p>Fünf schnelle Fragen. Daraus ergeben sich drei Streitfragen, die zu dir passen. Es geht um Themen, nicht um Parteien: Die Seite merkt sich keine Antworten und rechnet nichts über dich aus.</p>
+    <p>Acht Streitfragen, ein Regler je Frage: Wie wichtig ist sie dir? Rechts ordnet sich deine Reihung sofort – die drei obersten sind deine Streitfragen für Schritt 3. Es geht um Themen, nicht um Parteien: Die Seite rechnet nichts über dich aus, die Regler bleiben nur auf diesem Gerät.</p>
     <div class="karte" id="selbsttest">
-      <div id="selbsttest-fragen"></div>
-      <div class="rueck" id="selbsttest-rueck" aria-live="polite"></div>
+      <div id="wichtig"></div>
+      <div class="rueck" id="selbsttest-rueck" aria-live="polite" style="margin-top:16px"></div>
+      <details style="margin-top:12px"><summary>Unentschieden? Fünf Fragen aus deinem Alltag stellen die Regler für dich ein</summary><div id="selbsttest-fragen"></div></details>
     </div>
   </section>
 
@@ -38,6 +39,13 @@
     <h2>Was sagen die Parteien dazu?</h2>
     <p>Acht Kurzprofile in der Reihenfolge des Stimmzettels 2025. Blättere durch; »Mehr zum Programm 2025« öffnet die Kernanliegen und sechs Politikfelder mit den wörtlichen Stellen. Die Farbe ist die Parteifarbe und steht immer mit dem Namen.</p>
     <div class="faecher" data-label="Acht Kurzprofile" id="profile-faecher" data-manuell><ul class="faecher-spur" id="profile"></ul></div>
+    <div class="karte" id="zeitstrahl-karte">
+      <h3>Woher die Parteien kommen: 1863 bis 2025</h3>
+      <p class="stimme-frage" style="font-size:1.25rem;margin:0 0 8px">Welche Partei ist die älteste – und wann wurde das Parteiensystem einmal abgeschafft?</p>
+      <p>Zieh am Regler oder tippe eine Marke. Runde Marken sind Gründungen, eckige Brüche, doppelte Ränder das Parteienrecht (Grundgesetz, Verbote, Urteile).</p>
+      <div id="zeitstrahl"></div>
+      <p class="klein" style="color:var(--leise)">Quellen: Bundeszentrale für politische Bildung, LeMO (Deutsches Historisches Museum), Bundesverfassungsgericht. Nur Parteien, die 2025 im Bundestag sind oder knapp scheiterten, und die Eckpunkte des Parteienrechts – kein vollständiges Verzeichnis.</p>
+    </div>
   </section>
 
   <section class="schritt" id="schritt3">
@@ -45,7 +53,13 @@
     <h2>Kontrolle: Acht Streitfragen</h2>
     <p>Jetzt prüfst du, ob du die Positionen triffst. Von leicht nach schwer: zuerst klare Ja/Nein-Themen, dann Fragen, bei denen Parteien ähnliche Worte für verschiedene Dinge benutzen. <strong>Vorgehen:</strong> Für jede Partei tippen, dann die Programmstelle lesen – nicht nur die Kategorie. Deine drei Fragen aus Schritt 1 sind markiert; drei Fragen reichen für die Sicherung.</p>
     <div class="faecher" data-label="Acht Streitfragen" id="fragen-faecher" data-manuell><ul class="faecher-spur" id="fragen"></ul></div>
-  </section>
+    <div class="karte" id="verortung-karte">
+      <h3>Verortung: Wo stehst du, wo stehen die Parteien?</h3>
+      <p class="stimme-frage" style="font-size:1.25rem;margin:0 0 8px">Erst du, dann die Parteien – wer steht in deinem Feld?</p>
+      <p>Wähle zwei Streitfragen als Achsen und setz deinen Punkt auf die Fläche (tippen, ziehen oder Pfeiltasten). Erst nach »Festlegen« kannst du die Parteien einblenden – mit Fundstelle. Die Seite rechnet keine Übereinstimmung aus und empfiehlt nichts.</p>
+      <div id="verortung"></div>
+    </div>
+</section>
 
   <section class="karte karte--leise">
     <h2>Sicherung: Analyse mit Beleg</h2>
@@ -71,6 +85,7 @@
 <script src="../assets/js/faecher.js"></script>
 <script src="../assets/js/merkzettel.js"></script>
 <script src="../assets/js/profile.js"></script>
+<script src="../assets/js/bausteine.js"></script>
 <script src="../assets/js/lernstand.js"></script>
 <script src="../assets/js/hilfen.js"></script>
 <script>
@@ -167,19 +182,27 @@ PW.rahmen('st3', '../'); PW.merkzettel('../');
     });
     f.appendChild(ul); stBox.appendChild(f);
   });
-  var empfohlen = [];
+  var empfohlen = [], wichtig = null;
   function werte() {
+    /* Die fünf Alltagsfragen stellen die Regler ein; die Reihung selbst macht V */
     var zaehl = {}; Object.keys(stAntworten).forEach(function (k) { stAntworten[k].forEach(function (t) { zaehl[t] = (zaehl[t] || 0) + 1; }); });
-    var n = Object.keys(stAntworten).length; var r = document.getElementById('selbsttest-rueck');
-    if (n < st.length) { r.className = 'rueck'; r.textContent = 'Noch ' + (st.length - n) + ' von ' + st.length + ' Fragen.'; return; }
-    empfohlen = Object.keys(zaehl).sort(function (a, b) { return zaehl[b] - zaehl[a]; }).slice(0, 3);
+    var n = Object.keys(stAntworten).length;
+    if (n < st.length || !wichtig) return;
+    PW.fragen.forEach(function (q) { wichtig.setze(q.id, Math.min(100, 30 + 20 * (zaehl[q.id] || 0))); });
+  }
+  function zeigeEmpfehlung(top) {
+    var r = document.getElementById('selbsttest-rueck');
+    if (!top) { empfohlen = []; r.className = 'rueck'; r.textContent = 'Stelle die Regler ein – deine drei obersten Streitfragen erscheinen hier.'; fragenKarten.forEach(function (li) { li.classList.remove('ist-empfohlen'); var m = li.querySelector('.marke-empfohlen'); if (m) m.hidden = true; }); ersterLauf = false; return; }
+    empfohlen = top;
     var namen = empfohlen.map(function (id) { return PW.fragen.filter(function (q) { return q.id === id; })[0].frage; });
     r.className = 'rueck rueck--eigen'; r.innerHTML = '<strong>Deine drei Streitfragen:</strong> ' + namen.join(' · ') + ' <span class="beleg">Lies zuerst in Schritt 2 nach, was die Parteien dazu schreiben. In Schritt 3 sind diese Fragen markiert; du kannst auch alle anderen öffnen.</span>';
     fragenKarten.forEach(function (li, i) { li.classList.toggle('ist-empfohlen', empfohlen.indexOf(PW.fragen[i].id) >= 0); var m = li.querySelector('.marke-empfohlen'); if (m) m.hidden = empfohlen.indexOf(PW.fragen[i].id) < 0; });
-    var erste = PW.fragen.map(function (q) { return q.id; }).indexOf(empfohlen[0]); if (fragenFaecher && erste >= 0) { fragenFaecher.zeige(erste); document.getElementById('fragen-faecher').scrollIntoView({ behavior: PW.wenigerBewegung() ? 'auto' : 'smooth', block: 'start' }); }
+    var erste = PW.fragen.map(function (q) { return q.id; }).indexOf(empfohlen[0]); if (fragenFaecher && erste >= 0 && !ersterLauf) fragenFaecher.zeige(erste);
+    ersterLauf = false;
   }
 
   var fb = document.getElementById('fragen'), fragenKarten = [], fragenFaecher = null;
+  var ersterLauf = true;
   var gespeichert = PW.lies('st3', {});
   PW.fragen.forEach(function (q, qi) {
     var li = PW.el('li'); fragenKarten.push(li);
@@ -227,6 +250,9 @@ PW.rahmen('st3', '../'); PW.merkzettel('../');
     fb.appendChild(li);
   });
   fragenFaecher = PW.faecher(document.getElementById('fragen-faecher'));
+  wichtig = PW.wichtigkeit(document.getElementById('wichtig'), PW.fragen, { schluessel: 'st3-wichtig', bei: function (top) { zeigeEmpfehlung(top); } });
+  if (PW.zeitstrahlBaustein) PW.zeitstrahlBaustein(document.getElementById('zeitstrahl'), PW.zeitstrahl, { start: 1863 });
+  if (PW.verortung) PW.verortung(document.getElementById('verortung'), PW.fragen, { schluessel: 'st3-verortung' });
   PW.lernstandAnzeigen(3);
 })();
 </script>

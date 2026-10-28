@@ -89,6 +89,13 @@
     <details><summary>Warum gibt es die 5-%-Hürde? Die Karte Weimar 1932</summary>
       <p>Bei der Reichstagswahl am <strong>31. Juli 1932</strong> erhielt die NSDAP 37,3 % und die KPD 14,3 % der Stimmen. Beide wollten die parlamentarische Republik abschaffen. Zusammen hatten sie 51,6 %: Keine Regierung mit demokratischer Mehrheit war mehr möglich. Dazu kamen in Weimar viele kleine Parteien ohne Sperrklausel. Die Mütter und Väter des Grundgesetzes wollten 1949 beides vermeiden: Zersplitterung und Blockade. Ob die Hürde heute noch angemessen ist, beurteilst du in Station 5.</p>
       <p class="klein" style="color:var(--leise)">Quelle: Deutsches Historisches Museum, LeMO; Bundeszentrale für politische Bildung.</p></details>
+    <div class="karte" id="vorher-nachher">
+      <h3>Vorher–nachher: Reichstag 1932 und Bundestag 2025</h3>
+      <p class="stimme-frage" style="font-size:1.25rem;margin:0 0 8px">Was nimmt die 5-%-Hürde weg – und was kostet sie?</p>
+      <p>Zieh die Grenze über das Bild: links der Reichstag nach der Wahl vom 31. Juli 1932 (608 Sitze, neun Gruppen, die beiden größten gegen die Republik), rechts der Bundestag 2025 (630 Sitze, sieben Parteien). Zähle die Fraktionen, dann lies unten, was 2025 unter der Hürde blieb.</p>
+      <div id="schieber-1932"></div>
+      <p class="klein" style="color:var(--leise)">Quellen: Statistik des Deutschen Reichs, Bd. 434 (Reichstagswahl 31.07.1932); Bundeswahlleiterin 2025. Die Kleinparteien von 1932 sind als eine Gruppe zusammengefasst; Farben hier ohne Parteibezug, immer mit Name und Zahl. Modell: Die Sitze sind maßstäblich, die Sitzordnung ist vereinfacht.</p>
+    </div>
   </section>
 
   <section id="koalition">
@@ -146,6 +153,7 @@
 <script src="../assets/js/hilfen.js"></script>
 <script src="../assets/js/urne.js"></script>
 <script src="../assets/js/koalition.js"></script>
+<script src="../assets/js/bausteine.js"></script>
 <script>
 PW.rahmen('st4', '../'); PW.merkzettel('../');
 var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel', urne: 'Klassenwahl', rechner: 'Sitzrechner', koalition: 'Koalition', abgleich: 'Abgleich' });
@@ -222,6 +230,20 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
     rechne(true);
   }
   document.querySelectorAll('[data-lade]').forEach(function (b) { b.addEventListener('click', function () { lade(b.getAttribute('data-lade')); }); });
+  /* U · Vorher–nachher 1932 / 2025 */
+  (function () {
+    var box = document.getElementById('schieber-1932'); if (!box || !PW.schieber) return;
+    var toene = ['text', 'stahl', 'blau', 'blau-tief', 'leise', 'kuli', 'akzent', 'erfolg', 'partei-sonstige'];
+    var r32 = PW.reichstag1932.sitze.map(function (x, i) { return { id: 'r' + i, name: x[0], farbe: 'var(--' + toene[i] + ')' }; });
+    var s32 = {}; PW.reichstag1932.sitze.forEach(function (x, i) { s32['r' + i] = x[1]; });
+    var s25 = PW.sitze(PW.ergebnisse.bund.werte, { huerde: 5, grundmandate: { linke: 3 }, ssw: true });
+    PW.schieber(box, {
+      linksName: 'Reichstag 1932', rechtsName: 'Bundestag 2025', label: 'Grenze zwischen Reichstag 1932 und Bundestag 2025 ziehen',
+      links: function (el) { el.appendChild(PW.el('span', { 'class': 'schieber-etikett', text: 'Reichstag 31. Juli 1932 · 608 Sitze · Mehrheit 305' })); var h = PW.el('div'); el.appendChild(h); PW.halbrund(h, s32, r32, false, { gesamt: 608, mehrheit: 305 }); },
+      rechts: function (el) { el.appendChild(PW.el('span', { 'class': 'schieber-etikett', text: 'Bundestag 23. Februar 2025 · 630 Sitze · Mehrheit 316' })); var h = PW.el('div'); el.appendChild(h); PW.halbrund(h, s25, farben, false); }
+    });
+  })();
+
   function klassenKnopf() {
     var kk = document.getElementById('klasse-knopf'); if (!kk) return;
     if (PW.lies('klasse', null)) { kk.removeAttribute('aria-disabled'); kk.disabled = false; kk.title = 'Das Ergebnis eurer Klassenwahl laden'; }

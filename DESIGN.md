@@ -287,3 +287,16 @@ Grundlage sind die beiden Designsysteme **Gemeinschaftskunde** (die Beschreibung
 - **Fokus-Doppelring** überall: 3 px `text`, Offset 2 px, innen `--fokus-innen` (je Ansicht).
 - **Zustände-Karten** im Musterbuch: zu jedem Muster A–S alle Zustände mit ihren Tokens.
 - Neue Tokens: `--warnung`, `--warnung-zart`, `--warnung-tief`, `--erfolg-tief`, `--fehler-tief`, `--kuli`, `--kuli-zart`, `--marker`, `--ton-*`, `--partei-*`, `--schleier`, `--fokus-innen`, `--schrift-stimme`, `--dauer-aufbauen`.
+
+## v6 (28.10.2026): Route Archivpapier, Eingabe-Film, sechs Bausteine aus »Gegenwart«
+
+- **Route Archivpapier** (Freigabe 28.10.2026): Grund `#F3EFE7`, Fläche `#FAF8F3`, Karton `#E9E2D7`, Druckschwarz `#2A2622`, Zweitstimmenblau `#1D4F8F`, Leitakzent Oxidrot `#9B402D`, kuli `#1E4FB5`, Stationstöne warm / blau / Petrol (`#DBEAE6` / `#0F4F4B`) / lila / Honig (`#F5E8CF` / `#7A4F12`). Kopfzeile auf Karton; Nummer, Leitfrage (Fraunces, größer) und Kennzahlen in der tiefen Stationsfarbe; **die Platte unter Karten, Reiterblättern und Zieltafel trägt den Stationston** (`body[data-ton] .karte`). Dunkel- und Beamer-Werte unverändert aus v5. Kontraste gerechnet (BERICHT.md).
+- **Muster T Der Weg einer Forderung** (`film.js`): Eingabe-Film zu den elf Funktionen, Leinwand aus Tokens, Titelkarte und Aufgabenband auf der Bühne, Überblenden zwischen Szenen, Regler 0–11000, Tempo normal/langsam, Pfeiltasten und Leertaste, Autoplay nur nach Klick und im Sichtfeld, Vermutung davor, Modellgrenze danach. Erzählreihenfolge weicht von der Listenreihenfolge ab, die Listennummer steht dabei.
+- **Muster U Schieber** (Vorher–nachher): Reichstag 1932 ↔ Bundestag 2025 über `clip-path`; Farben 1932 ohne Parteibezug, immer mit Name und Zahl.
+- **Muster V Regler mit sichtbarer Folge**: Wichtigkeit je Streitfrage in kuli, Reihung per FLIP; ohne Eingabe keine Empfehlung. Die fünf Alltagsfragen stellen die Regler nur ein.
+- **Muster W Wendekarten**: zwölf Fachbegriffe, `rotateY` 460 ms (Tastatur und weniger Bewegung: Überblenden), Selbsteinschätzung in Worten → »Mein Stand«.
+- **Muster X Verortung**: zwei Achsen aus den Streitfragen, Punkt in kuli, Festlegen vor Einblenden, Parteien in vier Feldern mit Fundstelle; keine Quote, keine Empfehlung.
+- **Muster Y Zeitstrahl 1863–2025**: Marken (rund Gründung, eckig Bruch, doppelt Recht), Füllung `scaleX`, Satz neben dem Jahr.
+- **Muster Z Sortieren mit der Hand**: Pointer Events mit Capture, Tastaturweg über »Hierhin«, Rückmeldung je Karte dreistufig; grob (Aufgabe) vor fein (Funktion).
+- Neue Daten: `PW.reichstag1932`, `PW.begriffe`, `PW.zeitstrahl` – alle mit Quellenhinweis und »vor Einsatz prüfen«.
+- `PW.halbrund` nimmt `opts.gesamt` und `opts.mehrheit` (für 608 Sitze 1932).
