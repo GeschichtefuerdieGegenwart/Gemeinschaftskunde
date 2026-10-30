@@ -159,3 +159,17 @@ Prüfkette v4.1: taste-skill lint 0 FAIL/0 WARN; inspect der geänderten Seiten 
 **Prüfkette (wirklich gelaufen):** `tools/pruefen.py` bei 1440/1280/1024/768/390 auf allen elf Seiten: 0 Befunde (nach zwei Korrekturen: Nummern im Sortieren auf 16 px, Zeitstrahl-Marken auf 44 px Tippfläche). Zusätzlich Hell, Dunkel und Beamer bei 1280 und 390 auf allen elf Seiten (66 Läufe): keine Konsolenfehler, kein waagerechtes Scrollen, kein Text unter 16 px. taste-skill `lint.mjs` auf CSS, `bausteine.js`, `film.js` und den geänderten Seiten: 0 FAIL, 0 WARN. Funktionstest Film: Autoplay erreicht nach 7,5 s Szene 3, »Anhalten« stoppt, Pfeiltaste wechselt, Regler springt auf Szene 11, Ende blendet Vermutungsvergleich ein, `aria-label` nennt Szene und Satz. Funktionstest Bausteine per Skript: Sortieren (wählen → Hierhin), Zeitstrahl (Regler auf 1956 zeigt KPD-Verbot), Verortung (Punkt setzen → Festlegen → Parteien einblenden: SPD, Grüne, Linke oben rechts; CDU, CSU, FDP unten links; Rest als »keine Aussage«), Wendekarte dreht, Wichtigkeits-Regler ordnet. Kontraste der Route Archivpapier (hell): Text auf Grund 13,1 · Leise auf Fläche 6,4 · Blau 7,7 · Akzent 6,3 · kuli 7,0 · Stahl 4,4 (≥ 3) · alle Rückmeldungs- und Tonpaare ≥ 5,9; Dunkel und Beamer unverändert aus v5.
 
 **Nicht gemacht / nur du:** echter Beamer, Finger am iPad (Ziehen bei U, X, Z; Regler bei V, Y), VoiceOver (Film-Satz, Verortung-Beschreibung), Moodle. Impeccable nicht installiert.
+
+## v6.1 (30.10.2026): »Den Weg legen« in Station 1 – Pull Request, nicht zusammengeführt
+
+**Auftrag:** »Bau den Weg, aber lass die alte Aufgabe mit der Zuordnung erstmal drin.«
+
+- Neues Muster Ä in Station 1 nach dem Film: elf Begriffe auf den leeren Weg legen (Ziehen, Tippen, Tastatur), prüfen mit Erklärung je Verwechslung, danach einfärben nach den vier Aufgaben der Politik und ein Warum-Satz zur leeren Implementation. Stufen A/B/C. Spickzettel (Schaubild) erst nach dem ersten Prüfen. Lernstand: erster Versuch je Station und je Farbe.
+- Neu im Repo: `assets/js/weg.js`, `assets/img/Funktionen_Weg_einer_Forderung.png` und `.svg`.
+- Alte Zuordnung der vier Aufgaben (Abschnitt 2) unverändert.
+
+**Prüfung (gelaufen):** `tools/pruefen.py` fünf Breiten, elf Seiten: 0 Befunde. Station 1 und Musterbuch in Hell/Dunkel/Beamer bei 1280, 768, 390: keine Fehler, kein waagerechtes Scrollen. taste-skill lint 0 FAIL / 0 WARN. Funktionstest per Skript bei 1280 und 390: zwei vertauschte Begriffe → »9 von 11«, Erklärung »Transmission ist erst der Schritt in die Entscheidung …«, »Falsche zurücklegen«, korrigiert → Einfärben freigeschaltet → 11 von 11 Farben.
+
+**Nicht gelaufen:** Finger am echten iPad (Ziehen), VoiceOver.
+
+**Zum Prüfen:** Der »Gedanke zum Vergleichen« nach dem Warum-Satz (Umsetzung vor allem durch Regierung und Verwaltung, Gegenposition Herrschaft/Transmission) ist meine Formulierung, keine Quelle.
