@@ -300,3 +300,10 @@ Grundlage sind die beiden Designsysteme **Gemeinschaftskunde** (die Beschreibung
 - **Muster Z Sortieren mit der Hand**: Pointer Events mit Capture, Tastaturweg über »Hierhin«, Rückmeldung je Karte dreistufig; grob (Aufgabe) vor fein (Funktion).
 - Neue Daten: `PW.reichstag1932`, `PW.begriffe`, `PW.zeitstrahl` – alle mit Quellenhinweis und »vor Einsatz prüfen«.
 - `PW.halbrund` nimmt `opts.gesamt` und `opts.mehrheit` (für 608 Sitze 1932).
+
+## v6.1 (30.10.2026): Muster Ä »Den Weg legen«
+
+- In Station 1 nach dem Film (die alte Zuordnung der vier Aufgaben bleibt vorerst). Der Weg aus dem Schaubild »Der Weg einer Forderung« ist leer; die Lernenden legen die elf Begriffe auf die Szenen, prüfen erst, wenn alle liegen, und färben dann jede Station in der Farbe ihrer Aufgabe (Formulierung `--blau`, Implementation `--ton-gelb-tief`, Kontrolle `--akzent`, Rekrutierung `--ton-gruen-tief`; immer mit Wort auf dem Knopf). Abschluss: Warum-Satz zur leeren Implementation in kuli, danach ein Gedanke zum Vergleichen mit Gegenposition.
+- Anker ist die Szene, nicht die Reihenfolge. Rückmeldung je Verwechslung (Artikulation/Aggregation/Transmission, Partizipation/Mobilisierung/Sozialisation, Herrschaft/Legitimation u. a.). Spickzettel (Schaubild als PNG) erst nach dem ersten Prüfen.
+- Stufen: A Begriff + Definition, B nur Begriff, C nur Bildzeichen am Weg.
+- Layout: Raster 4 × 3 ab 760 px, darunter eine Spalte mit dem Weg links; der gepunktete Weg wird per SVG durch die Kreismitten gezeichnet und läuft an den Reihenenden außen herum.

@@ -52,6 +52,12 @@
       <p><strong>Was lässt dieses Modell weg?</strong> Dass die Funktionen gleichzeitig laufen und nicht nacheinander. Dass die meisten Forderungen nie Gesetz werden. Dass Verbände, Medien und Gerichte mitwirken. Und dass Parteien auch Dinge tun, die in keiner Liste stehen – zum Beispiel Posten verteilen.</p>
       <p class="klein" style="color:var(--leise)">Jetzt kennst du den Zusammenhang. Unten bearbeitest du die elf Funktionen einzeln – auf deiner Stufe.</p>
     </div>
+    <section class="karte" id="weg-legen" style="margin-top:24px">
+      <h3>Den Weg legen</h3>
+      <p class="stimme-frage" style="font-size:1.25rem;margin:0 0 8px">Welche Funktion steckt in welcher Szene?</p>
+      <p>Der Weg aus dem Film ist jetzt leer. Lege die elf Begriffe auf die Stationen – der Anker ist die Szene, nicht die Reihenfolge. Erst wenn alle liegen, prüfst du. Danach färbst du jede Station in der Farbe ihrer Aufgabe der Politik. Etwa 8 bis 10 Minuten, allein oder zu zweit.</p>
+      <div id="weg"></div>
+    </section>
     <h3 style="margin-top:28px">Dann deine Stufe</h3>
     <p>Wähle deine Stufe. Du kannst jederzeit wechseln – die Stufen sind unterschiedliche Wege zum selben Ziel, keine Rangliste.</p>
     <div class="stufen" role="group" aria-label="Schwierigkeitsstufe">
@@ -86,6 +92,7 @@
 <script src="../assets/js/lernstand.js"></script>
 <script src="../assets/js/hilfen.js"></script>
 <script src="../assets/js/film.js"></script>
+<script src="../assets/js/weg.js"></script>
 <script>
 PW.rahmen('st1', '../'); PW.merkzettel('../');
 document.querySelectorAll('.merk-auf-knopf').forEach(function (b) { b.addEventListener('click', function () { var k = document.querySelector('.merk-knopf'); if (k) k.click(); }); });
@@ -171,6 +178,9 @@ document.querySelectorAll('.merk-auf-knopf').forEach(function (b) { b.addEventLi
       }
     });
   })();
+
+  /* ---------- 3b. Den Weg legen (Muster Ä) ---------- */
+  if (PW.wegLegen) PW.wegLegen(document.getElementById('weg'), { schluessel: 'st1-weg' });
 
   /* ---------- 2. Aufgaben zuordnen ---------- */
   var box = document.getElementById('aufgaben');
