@@ -21,6 +21,7 @@
 <main id="inhalt">
   <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">3</span><h1>Wofür stehen die Parteien?</h1><p class="leitfrage">Wie würde Partei X entscheiden, und woher weiß man das?</p><p class="klein" style="margin:0">Drei Schritte: erst klären, was dir wichtig ist · dann nachlesen, was die Parteien dazu schreiben · dann prüfen, ob du ihre Positionen triffst.</p><div class="kz"><div><b>8</b><span>Parteien</span></div><div><b>8</b><span>Streitfragen</span></div><div><b>3</b><span>passen zu dir</span></div></div></div></div>
   <ol class="fort" aria-label="Fortschritt"></ol>
+  <aside class="caja" aria-label="Caja, eine erfundene Figur"><p>Caja darf am 23. Februar 2025 zum ersten Mal den Bundestag wählen. Was ihr wichtig ist, weiß sie: bezahlbares Wohnen, ein Lohn, von dem man leben kann. Welche Partei was dazu schreibt, weiß sie noch nicht.</p><p>Mach es wie Caja: erst klären, was dir wichtig ist, dann in den Programmen nachlesen. Eine Empfehlung gibt dir die Seite nicht.</p></aside>
   <p class="hinweis"><strong>Zwei Ebenen, getrennt:</strong> Was eine Partei über sich sagt (Programm) und was andere über sie feststellen (Gerichte, Verfassungsschutz, Recherchen). Beides steht hier, aber nie vermischt und immer mit Datum und Quelle. Die Seite sagt dir nicht, was du wählen sollst, und rechnet keine Übereinstimmung aus.</p>
 
   <section class="schritt" id="schritt1">
@@ -39,13 +40,6 @@
     <h2>Was sagen die Parteien dazu?</h2>
     <p>Acht Kurzprofile in der Reihenfolge des Stimmzettels 2025. Blättere durch; »Mehr zum Programm 2025« öffnet die Kernanliegen und sechs Politikfelder mit den wörtlichen Stellen. Die Farbe ist die Parteifarbe und steht immer mit dem Namen.</p>
     <div class="faecher" data-label="Acht Kurzprofile" id="profile-faecher" data-manuell><ul class="faecher-spur" id="profile"></ul></div>
-    <div class="karte" id="zeitstrahl-karte">
-      <h3>Woher die Parteien kommen: 1863 bis 2025</h3>
-      <p class="stimme-frage" style="font-size:1.25rem;margin:0 0 8px">Welche Partei ist die älteste – und wann wurde das Parteiensystem einmal abgeschafft?</p>
-      <p>Zieh am Regler oder tippe eine Marke. Runde Marken sind Gründungen, eckige Brüche, doppelte Ränder das Parteienrecht (Grundgesetz, Verbote, Urteile).</p>
-      <div id="zeitstrahl"></div>
-      <p class="klein" style="color:var(--leise)">Quellen: Bundeszentrale für politische Bildung, LeMO (Deutsches Historisches Museum), Bundesverfassungsgericht. Nur Parteien, die 2025 im Bundestag sind oder knapp scheiterten, und die Eckpunkte des Parteienrechts – kein vollständiges Verzeichnis.</p>
-    </div>
   </section>
 
   <section class="schritt" id="schritt3">
@@ -251,7 +245,6 @@ PW.rahmen('st3', '../'); PW.merkzettel('../');
   });
   fragenFaecher = PW.faecher(document.getElementById('fragen-faecher'));
   wichtig = PW.wichtigkeit(document.getElementById('wichtig'), PW.fragen, { schluessel: 'st3-wichtig', bei: function (top) { zeigeEmpfehlung(top); } });
-  if (PW.zeitstrahlBaustein) PW.zeitstrahlBaustein(document.getElementById('zeitstrahl'), PW.zeitstrahl, { start: 1863 });
   if (PW.verortung) PW.verortung(document.getElementById('verortung'), PW.fragen, { schluessel: 'st3-verortung' });
   PW.lernstandAnzeigen(3);
 })();

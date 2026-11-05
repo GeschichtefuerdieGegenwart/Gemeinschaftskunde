@@ -31,6 +31,13 @@
     <p class="hinweis"><strong>Warum keine Live-Verbindung zu Menti?</strong> Die Seite ist statisch: Sie läuft ohne eigenen Server – auch in Moodle. Sie kann deshalb keine Eingaben vieler Geräte zusammenführen, und Menti bietet für Ergebnisse keine offene Schnittstelle, die eine Seite ohne Server und ohne Konto abrufen dürfte. Weg 1 ersetzt Menti vollständig, Weg 2 macht die Übernahme zu einem Einfügen.</p>
   </section>
 
+  <section class="karte" id="urteilslinie">
+    <h2>1c. Urteilslinie: Klassenbild vorher und nachher</h2>
+    <p>Zur Streitfrage »Soll die 5-%-Hürde bleiben, wie sie ist?« stellt sich die Klasse zweimal auf eine Linie mit sieben Stellen: <strong>vor der Einheit</strong> (Doppelstunde 1, nach dem Einstieg) und <strong>nach Station 5</strong>. Ablauf wie beim Wahllokal: Gerät abgeschirmt aufstellen, Runde wählen, die Lernenden tippen einzeln ihre Stelle an und werfen ein. In der Runde »nachher« geben sie zusätzlich an, wo sie vorher standen (auf ihrem eigenen Gerät steht es auf der Startseite). Gespeichert werden nur Summen.</p>
+    <p>Am Beamer zeigt »Klassenbild« beide Verteilungen übereinander und in Worten, wie viele geblieben sind und wie viele sich in welche Richtung bewegt haben. Impuls fürs Gespräch: Welches Argument hat bewegt, welches bestärkt? Bitte keine Stelle als »richtig« markieren (Überwältigungsverbot); Bleiben ist so gut begründbar wie Wechseln. Bei sehr kleinen Gruppen (unter fünf Personen) besser nur die eigene Linie nutzen, weil sonst Rückschlüsse auf Einzelne möglich sind.</p>
+    <div id="urteil-klasse"></div>
+  </section>
+
   <section class="karte">
     <h2>1b. In Moodle einbinden</h2>
     <ol>
@@ -92,8 +99,9 @@
 <script src="assets/js/motion.js"></script>
 <script src="assets/js/faecher.js"></script>
 <script src="assets/js/merkzettel.js"></script>
+<script src="assets/js/urteil.js"></script>
 <script>
-PW.rahmen('lehr', ''); PW.merkzettel('');
+PW.rahmen('lehr', ''); PW.merkzettel(''); PW.urteilKlasse(document.getElementById('urteil-klasse'));
 (function () {
   var ids = ['cdu', 'csu', 'spd', 'gruene', 'fdp', 'afd', 'linke', 'bsw'];
   var felder = {}, box = document.getElementById('eingaben'), alt = PW.lies('klasse', {}) || {};
