@@ -173,3 +173,23 @@ Prüfkette v4.1: taste-skill lint 0 FAIL/0 WARN; inspect der geänderten Seiten 
 **Nicht gelaufen:** Finger am echten iPad (Ziehen), VoiceOver.
 
 **Zum Prüfen:** Der »Gedanke zum Vergleichen« nach dem Warum-Satz (Umsetzung vor allem durch Regierung und Verwaltung, Gegenposition Herrschaft/Transmission) ist meine Formulierung, keine Quelle.
+
+## v7 (05.11.2026): Organizer, Urteil, Klausur, Caja – Pull Request, nicht zusammengeführt
+
+**Auftrag:** Organizer für alle fünf Stationen (Startseite, Merkzettel) · Klausurtraining je Ziel mit Erwartungshorizont nach dem eigenen Text und Selbsteinschätzung · Urteilslinie mit anonymem Klassenbild vorher/nachher · Argumente-Waage · Caja als durchgehende Figur · Zeitstrahl in die Vertiefung und neu gestalten (Claude Design) · alte Zuordnung in Station 1 bleibt bis nach der Erprobung.
+
+| Was | Wo | Stand |
+|---|---|---|
+| AA Organizer »Der Weg durch die Einheit« | Startseite, Merkzettel | fertig |
+| AB Urteilslinie, Wahllokal und Klassenbild am Beamer | Startseite (vorher), Station 5 (nachher), Lehrkraft 1c | fertig |
+| AC Argumente-Waage mit Sach- und Werturteil | Station 5, Abschnitt 4 | fertig – Belege prüfen |
+| AD Klausurtraining, vier Aufgaben | klausurtraining.html, Navigation, Mein Stand, Station 5 | fertig – Erwartungshorizonte gegenlesen |
+| Caja (statt Lena) | Film-Schaubild, weg.js, Stationen 1, 3, 4, 5; Produktionsmappe des Lernvideos | fertig |
+| Y2 Zeitstrahl in Bahnen | Vertiefung (aus Station 3 entfernt) | fertig |
+| Alte Zuordnung der vier Aufgaben | Station 1 | unverändert, wie gewünscht |
+
+**Zum Prüfen vor dem Einsatz:** BVerfG-Urteil 30.07.2024 (Sperrklausel grundsätzlich gerechtfertigt, gilt bis zur Neuregelung mit Grundmandatsklausel); Europawahl-Urteile 09.11.2011 und 26.02.2014; »über 13 % ohne Sitz« (100 − Summe der sechs Parteien = 13,8 %, davon SSW abzuziehen); Erwartungshorizont Ziel 3 (»mit 0,02 Prozentpunkten mehr« beim BSW). Die Argumente »Klare Verantwortung« und »Neue Parteien haben es schwer« sind Formulierungen der Debatte, keine Zitate.
+
+**Prüfkette (gelaufen):** `tools/pruefen.py` bei 1440/1280/1024/768/390 auf zwölf Seiten: 0 Befunde (nach einer Korrektur: Links im Organizer auf 44 px). Hell, Dunkel, Beamer bei 1280 und 390 auf sechs Seiten: keine Konsolenfehler, kein waagerechtes Scrollen. Browser-Test Wahllokal: 12 Stimmen vorher, 11 nachher, Summen und Paare stimmen. Taste-Lint nicht gelaufen (Skript nicht im Container).
+
+**Nicht gelaufen:** echter Beamer, Finger am iPad (Linie, Waage, Zeitstrahl), VoiceOver.

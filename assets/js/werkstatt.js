@@ -102,6 +102,27 @@
     tab.appendChild(tb); container.appendChild(tab);
   };
 
+  /* Caja: eine erfundene Figur ohne Partei, die durch die Einheit führt. Markup: <aside class="caja"><p>…</p></aside>;
+     das Skript setzt nur das Bild davor – ohne Skript bleibt der Text vollständig. */
+  PW.cajaBild = function () {
+    return '<svg class="caja-bild" viewBox="0 0 96 112" aria-hidden="true">' +
+      '<rect x="6" y="8" width="84" height="100" style="fill:var(--karton)"/>' +
+      '<path d="M18 112c2-26 14-38 30-38s28 12 30 38z" style="fill:var(--ton-gelb-tief)"/>' +
+      '<path d="M38 74h20l-4 14h-12z" style="fill:var(--text)"/>' +
+      '<path d="M26 44c0-18 10-28 22-28s22 10 22 28c0 8-2 16-4 22H30c-2-6-4-14-4-22z" style="fill:var(--text)"/>' +
+      '<ellipse cx="48" cy="46" rx="15" ry="18" style="fill:var(--flaeche);stroke:var(--text);stroke-width:2"/>' +
+      '<path d="M34 38c6-8 20-10 28-2" style="fill:none;stroke:var(--text);stroke-width:5;stroke-linecap:round"/>' +
+      '<circle cx="42" cy="47" r="2" style="fill:var(--text)"/><circle cx="54" cy="47" r="2" style="fill:var(--text)"/>' +
+      '<path d="M43 56c3 2 7 2 10 0" style="fill:none;stroke:var(--text);stroke-width:2;stroke-linecap:round"/></svg>';
+  };
+  PW.cajaKarten = function () {
+    document.querySelectorAll('aside.caja').forEach(function (a) {
+      if (a.querySelector('.caja-bild')) return;
+      a.insertAdjacentHTML('afterbegin', PW.cajaBild());
+      if (!a.querySelector('.caja-name')) a.insertBefore(PW.el('p', { 'class': 'caja-name', text: 'Caja · 19 · erfundene Figur' }), a.querySelector('p'));
+    });
+  };
+
   /* Kopf, Fortschritt, Fuß */
   var seiten = [
     { id: 'start', url: 'index.html', name: 'Start' },
@@ -113,14 +134,15 @@
     { id: 'st5', url: 'parteien-wahlen/station5.html', name: 'Warum so?', station: 5 },
     { id: 'zus', url: 'zusammenfassung.html', name: 'Zusammenfassung' },
     { id: 'vert', url: 'vertiefung.html', name: 'Vertiefung' },
-    { id: 'lehr', url: 'lehrkraft.html', name: 'Lehrkraft' }
+    { id: 'lehr', url: 'lehrkraft.html', name: 'Lehrkraft' },
+    { id: 'klausur', url: 'klausurtraining.html', name: 'Klausurtraining' }
   ];
   PW.rahmen = function (aktuell, wurzel) {
     wurzel = wurzel || '';
     var kopf = document.querySelector('.kopf-innen'); if (!kopf) return;
     kopf.appendChild(PW.el('a', { 'class': 'marke', href: wurzel + 'index.html' }, [PW.el('span', { 'class': 'kreuz', 'aria-hidden': 'true' }), 'Politik-Werkstatt']));
     var nav = PW.el('nav', { 'class': 'nav', 'aria-label': 'Hauptnavigation' });
-    [seiten[0], seiten[1], seiten[7], seiten[9]].forEach(function (s) { var a = PW.el('a', { href: wurzel + s.url, text: s.name }); if (s.id === aktuell) a.setAttribute('aria-current', 'page'); nav.appendChild(a); });
+    [seiten[0], seiten[1], seiten[10], seiten[7], seiten[9]].forEach(function (s) { var a = PW.el('a', { href: wurzel + s.url, text: s.name }); if (s.id === aktuell) a.setAttribute('aria-current', 'page'); nav.appendChild(a); });
     kopf.appendChild(nav);
     var fort = document.querySelector('.fort');
     if (fort) {
@@ -132,6 +154,7 @@
         fort.appendChild(li);
       });
     }
+    if (PW.cajaKarten) PW.cajaKarten();
     var lf = document.querySelector('.kopfzeile .leitfrage');
     if (lf && PW.aufbauen) { var schon = false; try { schon = sessionStorage.getItem('pw:lf:' + aktuell) === '1'; sessionStorage.setItem('pw:lf:' + aktuell, '1'); } catch (e) {} PW.aufbauen(lf, { sofort: schon }); }
     var fuss = document.querySelector('.fuss-innen');

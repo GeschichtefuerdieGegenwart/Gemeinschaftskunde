@@ -3,6 +3,19 @@
 (function () {
   'use strict';
   var PW = window.PW = window.PW || {};
+  /* Muster AA · Kurzfassung des Organizers */
+  PW.organizerKurz = function (wurzel) {
+    if (!PW.einheit) return null;
+    var ol = PW.el('ol', { 'class': 'org-kurz' });
+    PW.einheit.forEach(function (s) {
+      ol.appendChild(PW.el('li', { style: '--st:var(--ton-' + s.ton + ');--st-tief:var(--ton-' + s.ton + '-tief)' }, [
+        PW.el('span', { 'class': 'org-kreis', 'aria-hidden': 'true', text: String(s.nr) }),
+        PW.el('p', { html: '<a href="' + (wurzel || '') + s.url + '"><strong>' + s.name + '</strong></a>' + s.frage + '<br><span class="org-kurz-begriffe">' + s.begriffe.join(' · ') + '</span>' })
+      ]));
+    });
+    ol.appendChild(PW.el('li', { 'class': 'org-ende' }, [PW.el('span', { 'class': 'org-kreis org-kreis--ende', 'aria-hidden': 'true', text: '§' }), PW.el('p', { html: '<strong>Dein Urteil</strong> · Soll die 5-%-Hürde bleiben, wie sie ist?' })]));
+    return ol;
+  };
   PW.merkzettel = function (wurzel) {
     wurzel = wurzel || '';
     var kopf = document.querySelector('.kopf-innen'); if (!kopf || !PW.funktionen) return;
@@ -13,6 +26,8 @@
     m.appendChild(zu);
     m.appendChild(PW.el('h2', { text: 'Merkzettel' }));
     m.appendChild(PW.el('p', { html: 'Die Kurzsicherung zum Nachschlagen während der Aufgaben. Als PDF für die Klausur: <a href="' + wurzel + 'docs/Zusammenfassung_Parteien_und_Wahlen.pdf">Zusammenfassung (2 Seiten)</a>.' }));
+    var kurzweg = PW.organizerKurz(wurzel);
+    if (kurzweg) { m.appendChild(PW.el('h3', { text: 'Der Weg durch die Einheit' })); m.appendChild(kurzweg); }
     m.appendChild(PW.el('h3', { text: 'Art. 21 GG in einem Satz' }));
     m.appendChild(PW.el('p', { text: 'Parteien wirken an der politischen Willensbildung mit (kein Monopol); Gründung frei, innere Ordnung demokratisch, Rechenschaft über Geld; Verbot nur durch das Bundesverfassungsgericht.' }));
     m.appendChild(PW.el('h3', { text: 'Vier Aufgaben' }));

@@ -261,3 +261,64 @@ PW.quellen = [
   ['Parteivorsitze: ZDFheute 30.05.2026 (FDP), 20.06.2026 (Linke), 04.07.2026 (AfD), 06.12.2025 (BSW); Bundestag, Datenhandbuch Kap. 5.7', ''],
   ['Lord Ashcroft Polls, How the United Kingdom voted on Thursday… and why (24.06.2016)', 'https://lordashcroftpolls.com/2016/06/how-the-united-kingdom-voted-and-why/']
 ];
+
+/* v7 · Organizer (Muster AA): der Weg durch die Einheit, fünf Stationen bis zum Urteil.
+   Leitfragen wörtlich aus den Stationen; Caja nur dort, wo sie in der Station auftritt. */
+PW.einheit = [
+  { nr: 1, name: 'Grundlagen', url: 'parteien-wahlen/station1.html', ton: 'warm', ziel: 1,
+    frage: 'Warum braucht eine Demokratie Parteien, und was genau leisten sie?',
+    caja: 'Caja wünscht sich 15 Euro Mindestlohn.',
+    begriffe: ['Art. 21 GG', 'vier Aufgaben der Politik', 'elf Funktionen'],
+    mit: 'Die elf Funktionen mit eigenem Beispiel' },
+  { nr: 2, name: 'Erkennen', url: 'parteien-wahlen/station2.html', ton: 'blau', ziel: 1,
+    frage: 'Welche Funktion erfüllt eine Partei hier gerade?',
+    caja: '',
+    begriffe: ['Politikformulierung', 'Politikkontrolle', 'Personalrekrutierung'],
+    mit: 'Eine Funktion am Fall erkennen und begründen' },
+  { nr: 3, name: 'Positionen', url: 'parteien-wahlen/station3.html', ton: 'gruen', ziel: 2,
+    frage: 'Wie würde Partei X entscheiden, und woher weiß man das?',
+    caja: 'Caja darf zum ersten Mal wählen.',
+    begriffe: ['Wahlprogramm', 'wörtlicher Beleg', 'Streitfrage'],
+    mit: 'Eine Position mit Zitat und Seitenzahl belegen' },
+  { nr: 4, name: 'Wählen', url: 'parteien-wahlen/station4.html', ton: 'blau', ziel: 3,
+    frage: 'Wie wird aus Stimmen ein Bundestag, und was ändert die 5-%-Hürde?',
+    caja: 'Caja steht in der Wahlkabine: zwei Kreuze.',
+    begriffe: ['Erst- und Zweitstimme', '5-%-Hürde', 'Sitzverteilung', 'Koalition'],
+    mit: 'Aus Stimmen Sitze machen und eine Mehrheit finden' },
+  { nr: 5, name: 'Warum so?', url: 'parteien-wahlen/station5.html', ton: 'lila', ziel: 4,
+    frage: 'Wählen Junge anders als Alte, Frauen anders als Männer – und was folgt daraus?',
+    caja: 'Caja und ihre Großmutter: anders gewählt?',
+    begriffe: ['Wahlstatistik', 'Sachurteil', 'Werturteil'],
+    mit: 'Ein begründetes Urteil zur 5-%-Hürde' }
+];
+
+/* v7 · Zeitstrahl in Bahnen (Vertiefung, Entwurf aus Claude Design »Zeitstrahl Parteien 1863–2025«).
+   Bahnen: heutige Bundestagsparteien und knapp gescheiterte; Sitze nach der Wahl 2025 (Bundeswahlleiterin). */
+PW.zeitBahnen = [
+  { id: 'spd', name: 'SPD', seit: 'seit 1863 (als ADAV)', von: [[1863, 1933], [1945, 2025]], farbe: 'var(--partei-spd)', sitze: 120 },
+  { id: 'cdu', name: 'CDU/CSU', seit: 'seit 1945', von: [[1945, 2025]], farbe: 'var(--partei-cdu)', sitze: 208 },
+  { id: 'fdp', name: 'FDP', seit: 'seit 1948', von: [[1948, 2025]], farbe: 'var(--partei-fdp)', sitze: 0 },
+  { id: 'gruene', name: 'Grüne', seit: 'seit 1980', von: [[1980, 2025]], farbe: 'var(--partei-gruene)', sitze: 85 },
+  { id: 'linke', name: 'Die Linke', seit: 'seit 2007 (PDS seit 1990)', von: [[1990, 2025]], farbe: 'var(--partei-linke)', sitze: 64 },
+  { id: 'afd', name: 'AfD', seit: 'seit 2013', von: [[2013, 2025]], farbe: 'var(--partei-afd)', sitze: 152 },
+  { id: 'bsw', name: 'BSW', seit: 'seit 2024', von: [[2024, 2025]], farbe: 'var(--partei-bsw)', sitze: 0 }
+];
+PW.zeitEreignisse = [
+  { j: 1863, bahn: 'spd', t: 'ADAV gegründet (23. Mai, Leipzig)', d: 'Der Allgemeine Deutsche Arbeiterverein ist die erste Arbeiterpartei – der Vorläufer der SPD.' },
+  { j: 1875, bahn: 'spd', t: 'Vereinigung in Gotha', d: 'Die Sozialistische Arbeiterpartei Deutschlands entsteht; seit 1890 heißt sie SPD.' },
+  { j: 1890, bahn: 'spd', t: 'Der Name SPD', d: 'Die Partei nennt sich Sozialdemokratische Partei Deutschlands.' },
+  { j: 1933, bahn: 'recht', reihe: 0, t: 'Gesetz gegen die Neubildung von Parteien (14. Juli)', d: 'Nur die NSDAP bleibt erlaubt – das Ende des Mehrparteiensystems.' },
+  { j: 1945, bahn: 'cdu', t: 'Neugründungen nach dem Krieg', d: 'CDU (zuerst regional, Bundespartei 1950) und CSU entstehen; die SPD gründet sich neu.' },
+  { j: 1948, bahn: 'fdp', t: 'FDP gegründet (Dezember, Heppenheim)', d: 'Liberale Gruppen aus den Westzonen schließen sich zusammen.' },
+  { j: 1949, bahn: 'recht', reihe: 0, t: 'Grundgesetz (23. Mai)', d: 'Art. 21: Parteien wirken bei der politischen Willensbildung des Volkes mit. Am 14. August folgt die erste Bundestagswahl.' },
+  { j: 1952, bahn: 'recht', reihe: 1, t: 'SRP-Verbot (23. Oktober)', d: 'Das Bundesverfassungsgericht verbietet zum ersten Mal eine Partei.' },
+  { j: 1956, bahn: 'recht', reihe: 2, t: 'KPD-Verbot (17. August)', d: 'Das zweite Parteiverbot durch das Bundesverfassungsgericht.' },
+  { j: 1980, bahn: 'gruene', t: 'Die Grünen gegründet (Januar, Karlsruhe)', d: 'Aus Umwelt- und Friedensbewegung entsteht eine neue Partei.' },
+  { j: 1990, bahn: 'linke', t: 'Aus der SED wird die PDS', d: 'Umbenennung 1989/90 – die Vorläuferin der Linken.' },
+  { j: 1993, bahn: 'gruene', t: 'Bündnis 90/Die Grünen (Mai)', d: 'Die Grünen vereinigen sich mit dem ostdeutschen Bündnis 90.' },
+  { j: 2007, bahn: 'linke', t: 'Die Linke (16. Juni)', d: 'Linkspartei.PDS und WASG schließen sich zusammen.' },
+  { j: 2013, bahn: 'afd', t: 'AfD gegründet (Februar)', d: 'Zuerst als Partei gegen die Euro-Rettungspolitik.' },
+  { j: 2017, bahn: 'recht', reihe: 0, t: 'NPD-Urteil (17. Januar)', d: 'Verfassungsfeindlich, aber zu unbedeutend für ein Verbot.' },
+  { j: 2024, bahn: 'bsw', t: 'BSW gegründet (8. Januar)', d: 'Im Juli setzt das Bundesverfassungsgericht die Grundmandatsklausel wieder ein.' },
+  { j: 2025, bahn: 'recht', reihe: 1, t: 'Bundestagswahl (23. Februar)', d: 'Erstmals 630 feste Sitze und Zweitstimmendeckung.' }
+];

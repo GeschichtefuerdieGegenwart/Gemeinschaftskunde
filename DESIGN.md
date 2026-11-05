@@ -307,3 +307,12 @@ Grundlage sind die beiden Designsysteme **Gemeinschaftskunde** (die Beschreibung
 - Anker ist die Szene, nicht die Reihenfolge. Rückmeldung je Verwechslung (Artikulation/Aggregation/Transmission, Partizipation/Mobilisierung/Sozialisation, Herrschaft/Legitimation u. a.). Spickzettel (Schaubild als PNG) erst nach dem ersten Prüfen.
 - Stufen: A Begriff + Definition, B nur Begriff, C nur Bildzeichen am Weg.
 - Layout: Raster 4 × 3 ab 760 px, darunter eine Spalte mit dem Weg links; der gepunktete Weg wird per SVG durch die Kreismitten gezeichnet und läuft an den Reihenenden außen herum.
+
+## v7 (05.11.2026): Organizer, Urteilslinie, Waage, Klausurtraining, Caja, Zeitstrahl in Bahnen
+
+- **AA Der Weg durch die Einheit:** Advance Organizer auf der Startseite (sechs Spalten ab 1100 px, sonst eine Spalte) und als Kurzfassung im Merkzettel. Daten in `PW.einheit` (daten.js). Linie 440 ms, einmal je Sitzung, nur wenn der Weg beim Laden unter dem Bildschirm liegt – Ausnahme über 300 ms, weil die Linie den ganzen Weg in einem Zug zeigt.
+- **AB Urteilslinie mit Klassenbild:** sieben Stellen zur Hürden-Frage, vorher (Startseite) und nachher (Station 5); Marke gleitet 300 ms von »vorher« zu »jetzt«, beim Bedienen mit der Tastatur ohne Gleiten. Lehrkraftgerät sammelt nur Summen je Stelle und Paar. Named Rule: *Keine Stelle ist richtig.* Kein Text darf eine Stelle als Ziel oder Bewegung als Erfolg darstellen.
+- **AC Argumente-Waage:** acht belegte Argumente, Gewichte 0–3, Balken bis ±14° (300 ms). Urteilsfelder erst ab sechs Gewichten. Named Rule: *Die Waage entscheidet nicht.*
+- **AD Klausurtraining:** eigene Seite mit Seitenton Gelb; Erwartungshorizont erst nach 40 Wörtern, Niveaus Grundlegend · Sicher · Souverän, nur in Worten.
+- **Caja:** erfundene Figur (19, jobbt nach dem Abitur im Supermarkt, ohne Partei) in Film, Schaubild und den Stationen 1, 3, 4, 5. `aside.caja` mit Papierfigur aus Tokens (`PW.cajaBild`).
+- **Y2 Zeitstrahl in Bahnen:** aus Station 3 in die Vertiefung, Entwurf aus Claude Design. Der Block 1933–1945 bleibt in allen Ansichten schwarz, weil der Text »der schwarze Block« sagt.

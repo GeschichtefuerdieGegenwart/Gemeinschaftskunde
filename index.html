@@ -47,6 +47,26 @@
     </li>
   </ol>
 
+  <section class="organizer" aria-labelledby="org-titel">
+    <h2 id="org-titel">Dein Weg durch die Einheit</h2>
+    <p>Fünf Stationen, eine Linie: Jede Station beantwortet eine Leitfrage und gibt dir etwas mit, das du für die nächste brauchst. Am Ende steht dein eigenes Urteil.</p>
+    <div id="organizer">
+      <ol class="org-weg org-weg--ohne-js">
+        <li><a href="parteien-wahlen/station1.html">1 Grundlagen</a> – Warum braucht eine Demokratie Parteien, und was genau leisten sie?</li>
+        <li><a href="parteien-wahlen/station2.html">2 Erkennen</a> – Welche Funktion erfüllt eine Partei hier gerade?</li>
+        <li><a href="parteien-wahlen/station3.html">3 Positionen</a> – Wie würde Partei X entscheiden, und woher weiß man das?</li>
+        <li><a href="parteien-wahlen/station4.html">4 Wählen</a> – Wie wird aus Stimmen ein Bundestag, und was ändert die 5-%-Hürde?</li>
+        <li><a href="parteien-wahlen/station5.html">5 Warum so?</a> – Wählen Junge anders als Alte, Frauen anders als Männer – und was folgt daraus?</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="urteil-start" aria-labelledby="ul-titel">
+    <h2 id="ul-titel">Bevor es losgeht: Wo stehst du?</h2>
+    <p>Eine Streitfrage begleitet die Einheit. Stell dich auf die Linie, so wie du jetzt denkst. Am Ende von Station 5 stellst du dich noch einmal auf und siehst, ob du dich bewegt hast.</p>
+    <div id="urteil-vorher"><p class="klein">Die Urteilslinie braucht JavaScript.</p></div>
+  </section>
+
   <p class="knopfzeile knopfzeile--mitte"><a class="knopf knopf--akzent knopf--gross" href="parteien-wahlen/station1.html">Einheit starten</a> <a class="knopf" href="zusammenfassung.html">Zusammenfassung</a></p>
 
   <p class="hinweis kein-druck" style="margin-top:28px"><strong>Was diese Seite nicht tut:</strong> Sie empfiehlt keine Partei, berechnet keine Übereinstimmung und speichert nichts außerhalb deines Geräts. Positionen stehen wörtlich mit Seitenzahl im Programm; Einordnungen anderer sind davon getrennt und mit Datum und Quelle angegeben.</p>
@@ -58,8 +78,10 @@
 <script src="assets/js/motion.js"></script>
 <script src="assets/js/faecher.js"></script>
 <script src="assets/js/merkzettel.js"></script>
+<script src="assets/js/organizer.js"></script>
+<script src="assets/js/urteil.js"></script>
 <script src="assets/js/intro.js"></script>
 <script src="assets/js/lernstand.js"></script>
-<script>PW.rahmen('start', ''); PW.merkzettel(''); PW.intro(document.getElementById('intro'));</script>
+<script>PW.rahmen('start', ''); PW.merkzettel(''); PW.organizer(''); PW.urteilslinie(document.getElementById('urteil-vorher'), 'vorher', ''); PW.intro(document.getElementById('intro'));</script>
 </body>
 </html>

@@ -20,6 +20,7 @@
 <main id="inhalt">
   <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">5</span><h1>Warum wählen Menschen so?</h1><p class="leitfrage">Wählen Junge anders als Alte, Frauen anders als Männer – und was folgt daraus?</p><p class="klein" style="margin:0">Erst vermuten, dann die amtliche Wahlstatistik 2025 aufdecken. Zum Schluss beurteilst du die 5-%-Hürde.</p><div class="kz"><div><b>27,3 %</b><span>stärkste Partei bei 18–24</span></div><div><b>41,4 %</b><span>stärkste Partei bei 70+</span></div><div><b>?</b><span>Erst vermuten</span></div></div></div></div>
   <ol class="fort" aria-label="Fortschritt"></ol>
+  <aside class="caja" aria-label="Caja, eine erfundene Figur"><p>Caja ist 19, ihre Großmutter ist 74. Beide waren am 23. Februar 2025 wählen. Haben sie anders gewählt – und wenn ja: Liegt das am Alter?</p><p>Erst vermutest du, dann deckst du die amtliche Wahlstatistik auf. Am Ende urteilst du über die 5-%-Hürde.</p></aside>
 
   <section class="karte">
     <h2>1. Vermuten: Die 18- bis 24-Jährigen</h2>
@@ -73,10 +74,17 @@
       <div class="karte karte--leise"><h3>Kriterium: Gleichheit der Wahl</h3><p class="klein">Zählt jede Stimme gleich? Beleg: Art. 38 GG; Grundmandatsklausel; Ausnahme SSW.</p></div>
       <div class="karte karte--leise"><h3>Kriterium: Alternativen</h3><p class="klein">3-%-Hürde (wie in einigen Ländern), Ersatzstimme, keine Hürde. Welche Folgen hätte jede Variante?</p></div>
     </div>
+    <h3 style="margin-top:24px">Die Argumente-Waage</h3>
+    <div id="waage" class="waage"><p class="klein">Die Waage braucht JavaScript. Ohne: Notiere je zwei Argumente für und gegen die Hürde, gib jedem 0 bis 3 Punkte und vergleiche die Summen.</p></div>
     <details style="margin-top:16px"><summary>Satzbausteine für das schriftliche Urteil</summary>
       <ul class="klein"><li>Sachurteil: »Gemessen am Kriterium … wirkt die Hürde …, wie das Beispiel … zeigt (Beleg).«</li><li>Abwägung: »Dem steht gegenüber, dass … Daher wiegt … schwerer, weil …«</li><li>Werturteil: »Ich halte die Hürde für …, weil mir … wichtiger ist als …; eine Alternative wäre …«</li></ul>
     </details>
-    <p class="knopfzeile knopfzeile--rechts"><a class="knopf" href="station4.html">Zurück</a> <a class="knopf knopf--voll" href="../zusammenfassung.html" onclick="PW.stationFertig(5)">Zur Zusammenfassung</a></p>
+    <div class="urteil-nachher">
+      <h3>Und jetzt: Wo stehst du?</h3>
+      <p>Am Anfang der Einheit hast du dich auf diese Linie gestellt. Stell dich noch einmal auf – ehrlich, nicht wie du glaubst, dass man stehen sollte.</p>
+      <div id="urteil-nachher"></div>
+    </div>
+    <p class="knopfzeile knopfzeile--rechts"><a class="knopf" href="station4.html">Zurück</a> <a class="knopf" href="../klausurtraining.html#ziel4">Klausurtraining zu Ziel 4</a> <a class="knopf knopf--voll" href="../zusammenfassung.html" onclick="PW.stationFertig(5)">Zur Zusammenfassung</a></p>
   </section>
 </main>
 <footer class="fuss"><div class="fuss-innen"></div></footer>
@@ -87,8 +95,11 @@
 <script src="../assets/js/merkzettel.js"></script>
 <script src="../assets/js/lernstand.js"></script>
 <script src="../assets/js/hilfen.js"></script>
+<script src="../assets/js/waage.js"></script>
+<script src="../assets/js/urteil.js"></script>
 <script>
 PW.rahmen('st5', '../'); PW.merkzettel('../');
+PW.waage(document.getElementById('waage')); PW.urteilslinie(document.getElementById('urteil-nachher'), 'nachher', '../');
 (function () {
   var namen = Object.keys(PW.alter.werte);
   /* 1. Vermutung */

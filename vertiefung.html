@@ -10,7 +10,7 @@
 <body>
 <header class="kopf"><div class="kopf-innen"></div></header>
 <main id="inhalt">
-  <h1>Vertiefung: Vertrauen und Mitglieder</h1>
+  <h1>Vertiefung: Herkunft, Vertrauen und Mitglieder</h1>
   <p><strong>Zwei Befunde, die nicht zusammenpassen?</strong></p>
   <p>Optional, für schnelle Gruppen oder als Hausaufgabe. Leitfrage: <strong>Wie kann es sein, dass Parteien so wenig Vertrauen genießen und gleichzeitig so viele neue Mitglieder gewinnen?</strong></p>
   <div class="raster raster--2">
@@ -34,6 +34,15 @@
       <p class="klein">Durchschnittsalter der Mitglieder: SPD 62, CDU 61, Linke 39 Jahre (2024 noch 45). Rund 1,2 Millionen Menschen sind Mitglied einer Bundestagspartei, etwa 2 % der Wahlberechtigten.</p>
     </section>
   </div>
+  <section class="karte" id="zeitstrahl">
+    <h2>Woher die Parteien kommen: 1863 bis 2025</h2>
+    <p class="stimme-frage zb-intro" style="font-size:1.25rem;margin:0 0 8px">Welche Partei ist die älteste – und wann gab es gar keine freien Parteien?</p>
+    <p class="zb-intro">Zieh den Regler durch die Zeit oder tippe ein Ereignis. Bis zum gewählten Jahr füllen sich die Bahnen. Der schwarze Block zeigt die Zeit, in der es keine freien Parteien gab.</p>
+    <div id="zeitbahnen"><p class="klein">Der Zeitstrahl braucht JavaScript.</p></div>
+    <p><strong>Aufgabe (beschreiben, AFB I):</strong> Nenne die älteste und die jüngste Partei im Bundestag 2025. Wie lange gab es in Deutschland keine freien Parteien, und welche Partei gründete sich danach neu? <strong>Weiterdenken:</strong> Warum steht das Parteienrecht als eigene Bahn neben den Parteien?</p>
+    <p class="klein" style="color:var(--leise)">Quellen: Bundeszentrale für politische Bildung, LeMO (Deutsches Historisches Museum), Bundesverfassungsgericht, Bundeswahlleiterin. Sitze nach der Wahl 2025. Nur Parteien, die 2025 im Bundestag sind oder knapp scheiterten, und die Eckpunkte des Parteienrechts – kein vollständiges Verzeichnis.</p>
+  </section>
+
   <section class="karte">
     <h2>Aufgaben</h2>
     <ol>
@@ -52,8 +61,9 @@
 <script src="assets/js/motion.js"></script>
 <script src="assets/js/faecher.js"></script>
 <script src="assets/js/merkzettel.js"></script>
+<script src="assets/js/zeitbahnen.js"></script>
 <script>
-PW.rahmen('vert', ''); PW.merkzettel('');
+PW.rahmen('vert', ''); PW.merkzettel(''); PW.zeitbahnen(document.getElementById('zeitbahnen'), 1949);
 (function () {
   var v = [['Polizei', 81], ['Bundesverfassungsgericht', 76], ['Bundestag', 34], ['Bundesregierung', 22], ['Politische Parteien', 15]];
   var box = document.getElementById('vertrauen');

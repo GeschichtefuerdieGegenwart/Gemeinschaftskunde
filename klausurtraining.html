@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="de" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klausurtraining · Politik-Werkstatt</title>
+<meta name="description" content="Je Ziel eine materialgestützte Aufgabe mit Operator, Erwartungshorizont nach dem eigenen Text und Selbsteinschätzung.">
+<script>try{var a=localStorage.getItem("pw:ansicht");if(a){a=JSON.parse(a);if(a==="hell"||a==="dunkel"||a==="beamer")document.documentElement.setAttribute("data-ansicht",a)}}catch(e){}</script>
+<link rel="stylesheet" href="assets/css/werkstatt.css">
+</head>
+<body data-ton="gelb">
+<header class="kopf"><div class="kopf-innen"></div></header>
+<main id="inhalt">
+  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">§</span><h1>Klausurtraining</h1><p class="leitfrage">Kann ich das schon so, wie es in der Klausur verlangt wird?</p><p class="klein" style="margin:0">Vier Aufgaben, eine je Ziel, mit Material wie in der Klassenarbeit. Erst schreibst du, dann vergleichst du mit dem Erwartungshorizont und schätzt dich selbst ein. Nur auf diesem Gerät, keine Note.</p></div></div>
+
+  <nav class="klausur-nav" aria-label="Aufgaben">
+    <a class="knopf knopf--leise" href="#ziel1">Ziel 1 · erläutern</a>
+    <a class="knopf knopf--leise" href="#ziel2">Ziel 2 · vergleichen</a>
+    <a class="knopf knopf--leise" href="#ziel3">Ziel 3 · analysieren</a>
+    <a class="knopf knopf--leise" href="#ziel4">Ziel 4 · beurteilen</a>
+  </nav>
+
+  <section class="karte karte--leise klausur-niveaus">
+    <h2>Drei Niveaus</h2>
+    <dl>
+      <dt>Grundlegend</dt><dd>Ich gebe die wichtigsten Inhalte richtig wieder und nutze die Fachbegriffe.</dd>
+      <dt>Sicher</dt><dd>Ich gehe so vor, wie der Operator es verlangt, belege mit dem Material und erkläre Zusammenhänge.</dd>
+      <dt>Souverän</dt><dd>Dazu wäge ich ab, nenne Grenzen oder Gegenargumente und komme zu einem klar begründeten Ergebnis.</dd>
+    </dl>
+    <p class="klein" style="color:var(--leise);margin:0">So schreibst du: Behauptung → Beleg (Zahl, Artikel, Programmseite) → Erklärung → Gegenargument → Abwägung. Etwa 25 Minuten je Aufgabe.</p>
+  </section>
+
+  <div id="klausur"><p>Das Klausurtraining braucht JavaScript. Die Aufgaben stehen auch auf der <a href="zusammenfassung.html">Zusammenfassung</a>.</p></div>
+
+  <p class="knopfzeile"><a class="knopf" href="ziele.html">Mein Stand</a> <a class="knopf knopf--leise" href="zusammenfassung.html">Zusammenfassung</a></p>
+</main>
+<footer class="fuss"><div class="fuss-innen"></div>
+    <p class="urheberzeile" style="font-size:1rem;opacity:.72;margin-top:1.5rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></footer>
+<script src="assets/js/daten.js"></script>
+<script src="assets/js/werkstatt.js"></script>
+<script src="assets/js/motion.js"></script>
+<script src="assets/js/faecher.js"></script>
+<script src="assets/js/merkzettel.js"></script>
+<script src="assets/js/klausur.js"></script>
+<script>
+PW.rahmen('klausur', ''); PW.merkzettel('');
+PW.klausurtraining(document.getElementById('klausur'));
+</script>
+</body>
+</html>
