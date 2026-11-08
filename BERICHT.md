@@ -212,3 +212,16 @@ Prüfkette v4.1: taste-skill lint 0 FAIL/0 WARN; inspect der geänderten Seiten 
 **Prüfkette (gelaufen):** `tools/pruefen.py` zwölf Seiten × fünf Breiten: 0 Befunde. Hell, Dunkel, Beamer ohne Fehler und ohne waagerechtes Scrollen. Browser-Tests: Sortieren (4 Karten gesperrt, 5 prüfbar, Falsche zurück, Stand nach Neuladen), Den Weg legen (dasselbe, fünf richtige nach Neuladen), Film (Startkarte, Szenen 1–7). **Nicht gelaufen:** iPad mit dem Finger, Beamer, VoiceOver.
 
 **Offen:** Film als Storyboard mit Claude Design weiter ausbauen (die Animation ist jetzt klarer, aber im Stil gleich geblieben); Station »Behauptung prüfen« (laterales Lesen, Vorschlag aus dem Forschungsbericht); Abruf-Antworten fachlich gegenlesen.
+
+## v9 (08.11.2026): Bewegung als Lernmittel – Pull Request, nicht zusammengeführt
+
+**Auftrag:** zwei Stellen mit Bewegung, die einen Ablauf zeigt (Vorlage: Artifact »Motion-Entwürfe Politik und Galerie«, Teile A und B).
+
+1. **AG Scroll-Fassung »Der Weg einer Forderung«** (neue Seite, verlinkt aus Station 1 unter dem Film und aus der Vertiefung): acht Stationen Wunsch · Partei · Koalition · Ministerium · Regierung · Bundestag · Bundesrat · Gesetz; Cajas Zettel »15 €« wandert auf der Bühne; je Station die Partei-Funktion aus dem Lernvideo; Vermutung davor, Modellgrenze und Vergleich danach. Das Lernvideo in Station 1 bleibt unverändert.
+2. **AH Parteikarten** in der Vertiefung über dem Zeitstrahl: sieben Karten, Detail mit allen Ereignissen aus `daten.js` und den Sitzen 2025.
+
+**Abweichung von der Vorlage:** Die Stationen folgen der Vorlage (acht Stationen, »Station 3 von 8: Koalition«), beginnen aber bei Cajas Wunsch statt bei einem Verband; die Kurztexte und »Anlass«-Sätze der Vorlage für den Zeitstrahl sind nicht übernommen, weil sie ohne Quelle waren – die Karten nutzen nur `PW.zeitBahnen` und `PW.zeitEreignisse`.
+
+**Prüfkette (gelaufen):** `tools/pruefen.py` dreizehn Seiten × fünf Breiten: 0 Befunde. Hell, Dunkel, Beamer: keine Fehler. Maus, Tastatur (Sprung per Enter, Escape schließt, Fokus zurück auf die Karte), Touch-Emulation iPad (gen 7), Beamer 1280 × 720 (Bühne 496 px hoch), »weniger Bewegung« (Marke ohne Übergang, Abschnitte ohne Animation, Detail sofort). **Nicht gelaufen:** echtes iPad, echter Beamer, VoiceOver.
+
+**Zum Prüfen:** Texte der acht Stationen (Art. 76–78, 82 GG); die Zuordnung der Partei-Funktionen je Station ist eine didaktische Zuordnung, keine Quelle.

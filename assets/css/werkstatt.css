@@ -1080,3 +1080,82 @@ html[data-ansicht=dunkel] .zb-ns,html[data-ansicht=dunkel] .zb-l-ns{box-shadow:i
 .abruf-wahl{display:flex;flex-wrap:wrap;gap:6px}
 .abruf-wahl .knopf[aria-pressed=true]{background:var(--text);color:var(--flaeche);border-color:var(--text)}
 .abruf-stand{margin:6px 0 0}
+
+/* ===== v9 · Muster AG · Der Weg einer Forderung als Scroll-Fassung =====
+   Reglerweg statt Dauer (die Person scrollt). Marke gleitet 300 ms ease-out, nur transform. Abschnitte über animation-timeline: view(). */
+.sy-vorher{display:grid;gap:8px}
+.sy-vorher h2{margin:0}
+.sy-vorher label{font-weight:700}
+.scrolly{display:grid;grid-template-columns:1fr;gap:16px;margin:0 0 32px}
+@media (min-width:900px){.scrolly{grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:40px;align-items:start}}
+.sy-buehne{position:sticky;top:0;z-index:4;background:var(--flaeche);border:2px solid var(--text);border-radius:var(--radius);padding:12px 14px;display:grid;gap:8px;box-shadow:var(--platte)} /* taste-skill-ignore: versetzte Platte */
+@media (min-width:900px){.sy-buehne{top:16px;padding:16px 18px}}
+.sy-buehne-titel{margin:0;font-size:1rem}
+.sy-spur-rahmen{position:relative;--sy-dx:0px;--sy-dy:-34px;padding-top:34px}
+@media (min-width:900px){.sy-spur-rahmen{--sy-dx:-50px;--sy-dy:0px;padding:0 0 0 58px}}
+.sy-spur{list-style:none;margin:0;padding:0;display:flex;justify-content:space-between;position:relative}
+.sy-spur::before{content:'';position:absolute;left:18px;right:18px;top:21px;height:3px;background:var(--karton)}
+@media (min-width:900px){.sy-spur{flex-direction:column;gap:6px}.sy-spur::before{left:19px;right:auto;top:20px;bottom:20px;width:3px;height:auto}}
+.sy-knoten{position:relative;display:flex;align-items:center;gap:12px;min-height:44px;min-width:36px;font-size:1rem;color:var(--leise)}
+.sy-kreis{position:relative;z-index:1;flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:2px solid var(--stahl);background:var(--flaeche);font:700 1rem var(--schrift-titel);color:var(--text)}
+.sy-name{display:none}
+@media (min-width:900px){.sy-name{display:inline}}
+.sy-knoten.ist-erledigt .sy-kreis{background:var(--text);border-color:var(--text);color:var(--flaeche)}
+.sy-knoten.ist-jetzt{color:var(--text);font-weight:700}
+.sy-knoten.ist-jetzt .sy-kreis{border:3px solid var(--akzent)}
+.sy-sprung{position:absolute;inset:0;z-index:2;border-radius:var(--radius)}
+.sy-sprung:focus-visible{outline:3px solid var(--text);outline-offset:2px}
+.sy-marke{position:absolute;left:0;top:0;z-index:3;display:grid;place-items:center;width:48px;height:30px;margin:-15px 0 0 -24px;padding:0 4px;background:var(--ton-gelb);border:2px solid var(--text);border-radius:2px;box-shadow:3px 3px 0 0 var(--ton-gelb-tief);font:700 1rem var(--schrift-titel);white-space:nowrap;pointer-events:none;transition:transform var(--dauer-langsam) var(--ease-out)} /* taste-skill-ignore: Zettel mit harter Platte */
+.sy-marke.ohne-gleiten{transition:none}
+@media (prefers-reduced-motion:reduce){.sy-marke{transition:none}}
+html[data-bewegung=weniger] .sy-marke{transition:none}
+.sy-stand{margin:0;font-size:1rem;font-weight:700}
+.sy-schritte{display:grid;gap:28vh;padding:4vh 0 34vh}
+@media (min-width:900px){.sy-schritte{gap:30vh;padding:10vh 0 40vh}}
+.sy-liste{margin:0;padding-left:1.2em;display:grid;gap:8px}
+.sy-schritt{background:var(--flaeche);border-radius:var(--radius);padding:18px 20px;display:grid;gap:8px;max-width:60ch;scroll-margin-top:140px;outline:2px solid transparent;outline-offset:0}
+.sy-schritt h2{margin:0;font-size:clamp(1.25rem,2.2vw,1.5rem)}
+.sy-schritt p{margin:0}
+.sy-nr{font-weight:700;font-size:1rem;color:var(--blau)}
+.sy-funktion{color:var(--leise);font-size:1rem}
+.sy-schritt.ist-aktiv{outline-color:var(--text)}
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion:no-preference){
+    html:not([data-bewegung=weniger]) .sy-schritt{animation:sy-auf linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
+  }
+}
+@keyframes sy-auf{from{opacity:.3;transform:translateY(24px)}to{opacity:1;transform:none}}
+@media print{.sy-schritt{animation:none!important}.sy-buehne{position:static}}
+.sy-ende ul{margin:0 0 12px;padding-left:1.2em}
+.sy-ende label{display:block;margin:0 0 6px}
+
+/* ===== v9 · Muster AH · Parteikarten mit Ansichtswechsel ===== */
+::view-transition-group(pw-wechsel){animation-duration:var(--dauer-langsam);animation-timing-function:var(--ease-out)}
+::view-transition-old(pw-wechsel),::view-transition-new(pw-wechsel){animation-duration:var(--dauer-langsam);animation-timing-function:var(--ease-out)}
+.pk-ueber{margin:12px 0 4px;font-size:1.125rem}
+.pk-raster{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.pk-raster.ist-zu{display:none}
+.pk-karte{width:100%;height:100%;display:grid;gap:4px;align-content:start;text-align:left;min-height:120px;padding:12px 14px;border:2px solid var(--text);border-radius:var(--radius);background:var(--flaeche);color:var(--text);font:inherit;cursor:pointer;transition:transform var(--dauer-druck) var(--ease-out)}
+.pk-karte:active{transform:scale(.98)}
+.pk-karte:focus-visible{outline:3px solid var(--text);outline-offset:3px}
+@media (hover:hover) and (pointer:fine){.pk-karte:hover{background:var(--grund)}}
+.pk-karte.ist-weg{visibility:hidden}
+.pk-jahr{font:700 1.5rem/1 var(--schrift-titel);font-variant-numeric:tabular-nums}
+.pk-jahr--gross{font-size:2.5rem}
+.pk-name{display:block;padding-left:10px;border-left:6px solid var(--pk-kante,var(--stahl));font-weight:700;font-size:1.0625rem;line-height:1.2}
+h3.pk-name{margin:0;font-family:var(--schrift-titel);font-size:1.5rem}
+h3.pk-name:focus{outline:none}
+h3.pk-name:focus-visible{outline:3px solid var(--text);outline-offset:3px}
+.pk-kurz{font-size:1rem;color:var(--leise);line-height:1.3}
+.pk-detail{background:var(--flaeche);border:2px solid var(--text);border-radius:var(--radius);padding:18px 20px;display:grid;gap:10px;margin:0 0 16px;box-shadow:var(--platte)} /* taste-skill-ignore: versetzte Platte */
+.pk-detail-kopf{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.pk-seit,.pk-sitze,.pk-impuls{margin:0;max-width:62ch}
+.pk-ereignisse{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.pk-ereignisse li{display:grid;gap:2px;padding:8px 12px;background:var(--grund);border-radius:var(--radius)}
+.pk-impuls{color:var(--leise)}
+.pk-quelle{color:var(--leise);margin:0}
+.pk-detail>.knopf{justify-self:start}
+.film-scroll-link{margin:8px 0 0}
+@media (prefers-reduced-motion:reduce){.sy-marke,.pk-karte{transition:none!important}}
+html[data-bewegung=weniger] .sy-marke{transition:none!important}
+.sy-schritt:focus{outline:2px solid var(--text)}

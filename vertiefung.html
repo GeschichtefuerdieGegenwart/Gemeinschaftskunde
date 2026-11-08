@@ -38,6 +38,10 @@
     <h2>Woher die Parteien kommen: 1863 bis 2025</h2>
     <p class="stimme-frage zb-intro" style="font-size:1.25rem;margin:0 0 8px">Welche Partei ist die älteste – und wann gab es gar keine freien Parteien?</p>
     <p class="zb-intro">Zieh den Regler durch die Zeit oder tippe ein Ereignis. Bis zum gewählten Jahr füllen sich die Bahnen. Der schwarze Block zeigt die Zeit, in der es keine freien Parteien gab.</p>
+    <h3 class="pk-ueber">Erst die Parteien im Überblick</h3>
+    <p class="klein" style="margin:0 0 8px">Tipp eine Karte an: Sie öffnet sich zur Detailansicht mit allen Ereignissen dieser Partei. »Zurück« bringt dich an dieselbe Stelle.</p>
+    <div id="parteikarten"></div>
+    <h3 class="pk-ueber">Dann der Zeitstrahl</h3>
     <div id="zeitbahnen"><p class="klein">Der Zeitstrahl braucht JavaScript.</p></div>
     <p><strong>Aufgabe (beschreiben, AFB I):</strong> Nenne die älteste und die jüngste Partei im Bundestag 2025. Wie lange gab es in Deutschland keine freien Parteien, und welche Partei gründete sich danach neu? <strong>Weiterdenken:</strong> Warum steht das Parteienrecht als eigene Bahn neben den Parteien?</p>
     <p class="klein" style="color:var(--leise)">Quellen: Bundeszentrale für politische Bildung, LeMO (Deutsches Historisches Museum), Bundesverfassungsgericht, Bundeswahlleiterin. Sitze nach der Wahl 2025. Nur Parteien, die 2025 im Bundestag sind oder knapp scheiterten, und die Eckpunkte des Parteienrechts – kein vollständiges Verzeichnis.</p>
@@ -52,7 +56,7 @@
       <li><strong>Stellung nehmen (AFB III):</strong> »Wer Parteien misstraut, sollte eintreten statt wegzubleiben.« Nimm begründet Stellung.</li>
     </ol>
   </section>
-  <p class="knopfzeile"><a class="knopf" href="zusammenfassung.html">Zur Zusammenfassung</a> <a class="knopf knopf--leise" href="index.html">Zur Startseite</a></p>
+  <p class="knopfzeile"><a class="knopf" href="weg-einer-forderung.html">Der Weg einer Forderung (Scroll-Fassung)</a> <a class="knopf" href="zusammenfassung.html">Zur Zusammenfassung</a> <a class="knopf knopf--leise" href="index.html">Zur Startseite</a></p>
 </main>
 <footer class="fuss"><div class="fuss-innen"></div>
     <p class="urheberzeile" style="font-size:1rem;opacity:.72;margin-top:1.5rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></footer>
@@ -62,8 +66,9 @@
 <script src="assets/js/faecher.js"></script>
 <script src="assets/js/merkzettel.js"></script>
 <script src="assets/js/zeitbahnen.js"></script>
+<script src="assets/js/parteikarten.js"></script>
 <script>
-PW.rahmen('vert', ''); PW.merkzettel(''); PW.zeitbahnen(document.getElementById('zeitbahnen'), 1949);
+PW.rahmen('vert', ''); PW.merkzettel(''); PW.zeitbahnen(document.getElementById('zeitbahnen'), 1949); PW.parteiKarten(document.getElementById('parteikarten'));
 (function () {
   var v = [['Polizei', 81], ['Bundesverfassungsgericht', 76], ['Bundestag', 34], ['Bundesregierung', 22], ['Politische Parteien', 15]];
   var box = document.getElementById('vertrauen');
