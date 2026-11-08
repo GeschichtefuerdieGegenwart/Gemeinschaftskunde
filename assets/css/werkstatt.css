@@ -1009,3 +1009,74 @@ html[data-ansicht=dunkel] .zb,html[data-ansicht=dunkel] .zb-legende{--zb-schwarz
 @media (prefers-color-scheme:dark){html:not([data-ansicht]) .zb{--zb-schwarz:#000000;--zb-schwarz-text:#F3EADB}}
 html[data-ansicht=dunkel] .zb-ns,html[data-ansicht=dunkel] .zb-l-ns{box-shadow:inset 0 0 0 2px var(--stahl)}
 @media (prefers-color-scheme:dark){html:not([data-ansicht]) .zb-ns,html:not([data-ansicht]) .zb-l-ns{box-shadow:inset 0 0 0 2px var(--stahl)}}
+
+/* ===== v8 · nach der Erprobung: Sortieren mit Zwischenstand ===== */
+.sort-gespeichert{margin:0 0 6px;color:var(--leise)}
+.sort-stand{font-weight:700}
+.sort-karte.ist-fest .sort-griff{cursor:default}
+.sort-karte.ist-fest .sort-nr{background:var(--erfolg);border-color:var(--erfolg);color:var(--flaeche)}
+.sort-karte.ist-auch.ist-fest .sort-nr{background:var(--warnung);border-color:var(--warnung)}
+
+/* ===== v8 · Film: Anleitung und Startkarte ===== */
+.film-anleitung{background:var(--grund);border-radius:var(--radius);padding:12px 16px;margin:0 0 14px}
+.film-anleitung>p{margin:0 0 8px;max-width:none}
+.film-anleitung ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+@media (min-width:900px){.film-anleitung ul{grid-template-columns:1fr 1fr}}
+.film-anleitung li{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:start;font-size:1rem}
+.film-anl-zeichen{display:grid;place-items:center;min-height:32px;border-radius:var(--radius);background:var(--flaeche);font-family:var(--schrift-titel);font-weight:700;font-size:1rem;white-space:nowrap}
+.film-buehne{position:relative}
+.film-start{position:absolute;inset:0;line-height:1.4;display:grid;place-content:center;justify-items:center;gap:12px;padding:16px;text-align:center;background:color-mix(in srgb,var(--flaeche) 88%,transparent)}
+.film-start[hidden]{display:none}
+.film-start p{margin:0;font-size:1rem;line-height:1.4;max-width:34ch;position:static;display:block;background:var(--flaeche);padding:4px 10px;border-radius:var(--radius)}
+.film-start-knopf{display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:10px 24px 10px 16px;border:0;border-radius:999px;background:var(--akzent);color:var(--flaeche);font:700 1.25rem var(--schrift-titel);cursor:pointer;transition:transform var(--dauer-druck) var(--ease-out)}
+.film-start-knopf:active{transform:scale(.97)}
+.film-start-knopf:focus-visible{outline:3px solid var(--text);outline-offset:3px}
+.film-start-dreieck{width:0;height:0;border-left:16px solid currentColor;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:6px}
+@media (hover:hover) and (pointer:fine){.film-start-knopf:hover{transform:scale(1.03)}}
+
+/* ===== v8 · Klarheit: weniger Linien (Rückmeldung der Lernenden, 08.11.2026) =====
+   Named Rule »Eine Linie je Ebene«: Nur die äußere Karte trägt Rand und Platte. Innen gliedern Flächen und Abstand,
+   keine Trennlinien, keine gestrichelten Rahmen. Bedienelemente behalten ihre Grenze (WCAG 1.4.11). */
+.karte .karte{border:0;box-shadow:none;background:var(--grund);padding:18px}
+.film-status{border-top:0;padding-top:0}
+.merk h3,.detail-blatt h3{border-bottom:0;padding-bottom:0}
+.wichtig-zeile{border-bottom:0;padding:6px 0}
+.ul-vorteil{border-top:0;margin-top:16px}
+.ul-reihe{border-bottom:0;padding-bottom:4px}
+.urteil-nachher{border-top:0;padding-top:8px}
+.klausur-eh{border-top:0;padding-top:4px}
+.zb-aktiv{border-top:0;padding-top:4px}
+.zb-spur::before{display:none}
+.klausur-material{border:0}
+/* Sortieren: Karten auf Karton, Felder als Flächen, »Hierhin« als ruhiger Knopf */
+.sort-ablage{border:0;background:var(--karton);padding:12px}
+.sort-griff{border-color:transparent;background:var(--flaeche)}
+.sort-nr{border:0;background:var(--grund)}
+.sort-feld{border:0;background:var(--grund)}
+.sort-ziel{border:2px solid var(--stahl);background:var(--flaeche)}
+.sort-karte.ist-gewaehlt .sort-griff{border-color:var(--kuli)}
+/* Antwortzeilen: Fläche statt Rahmen; der Kreis bleibt die Grenze des Bedienelements. Gewählt und Rückmeldung zeigen den Rand. */
+.opt{border-color:transparent;background:var(--grund)}
+.karte .karte .opt,.fieldset-karte .opt{background:var(--flaeche)}
+.opt:has(input:checked){border-color:var(--text)}
+@media (hover:hover) and (pointer:fine){.opt:hover{border-color:var(--stahl)}}
+/* Den Weg legen: Begriffe auf Karton, leere Plätze als ruhige Knöpfe; die gepunktete Linie bleibt – sie ist der Weg */
+.weg-ablage{border:0;background:var(--karton)}
+.weg-karte{border-color:transparent;background:var(--flaeche)}
+.weg-karte.ist-gewaehlt,.weg-karte[aria-pressed=true]{border-color:var(--kuli)}
+.weg-leer{border:2px solid var(--stahl);background:var(--flaeche)}
+.film-kopf{border:0;background:var(--grund)}
+
+/* ===== v8 · Muster AF · Erst erinnern ===== */
+.abruf>h2{margin:0 0 4px;font-size:1.375rem}
+.abruf>p{margin:0 0 10px;max-width:62ch}
+.abruf-liste{margin:0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:abruf}
+.abruf-frage{counter-increment:abruf;display:grid;gap:6px;padding:10px 12px 12px 48px;position:relative;background:var(--grund);border-radius:var(--radius)}
+.abruf-frage::before{content:counter(abruf);position:absolute;left:12px;top:10px;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--text);color:var(--flaeche);font:700 1rem var(--schrift-titel)}
+.abruf-text{margin:0;font-weight:700;max-width:none}
+.abruf-frage>.knopf{justify-self:start}
+.abruf-antwort p{margin:0 0 6px;max-width:none}
+.abruf-label{color:var(--leise)}
+.abruf-wahl{display:flex;flex-wrap:wrap;gap:6px}
+.abruf-wahl .knopf[aria-pressed=true]{background:var(--text);color:var(--flaeche);border-color:var(--text)}
+.abruf-stand{margin:6px 0 0}

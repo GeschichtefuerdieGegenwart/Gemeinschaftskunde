@@ -63,7 +63,7 @@
     opt = opt || {};
     var KEY = opt.schluessel || 'st1-weg';
     var st = PW.lies(KEY, null) || {};
-    st.lage = st.lage || {}; st.farbe = st.farbe || {}; st.stufe = st.stufe || 'A';
+    st.lage = st.lage || {}; st.farbe = st.farbe || {}; st.stufe = st.stufe || 'A'; st.ok = st.ok || {}; st.versucht = st.versucht || {};
     function speichern() { PW.merke(KEY, st); }
 
     var w = PW.el('div', { 'class': 'weg', 'data-stufe': st.stufe });
@@ -111,8 +111,9 @@
     w.appendChild(buehne);
 
     /* Knöpfe und Rückmeldung */
-    var pruefen = PW.el('button', { type: 'button', 'class': 'knopf knopf--voll', text: 'Weg prüfen', disabled: '' });
+    var pruefen = PW.el('button', { type: 'button', 'class': 'knopf knopf--voll', text: 'Zwischenstand prüfen', disabled: '' });
     var neu = PW.el('button', { type: 'button', 'class': 'knopf knopf--leise', text: 'Falsche zurücklegen' , hidden: '' });
+    neu.classList.remove('knopf--leise'); neu.classList.add('knopf--akzent');
     var alle = PW.el('button', { type: 'button', 'class': 'knopf knopf--leise', text: 'Alle zurücklegen' });
     var spick = PW.el('details', { 'class': 'weg-spick', hidden: '' }, [PW.el('summary', { text: 'Spickzettel: das Schaubild' })]);
     spick.appendChild(PW.el('img', { src: opt.bild || '../assets/img/Funktionen_Weg_einer_Forderung.png', alt: 'Schaubild »Der Weg einer Forderung« mit allen elf Funktionen, ihren Definitionen und den Farben der vier Aufgaben der Politik.', loading: 'lazy' }));
@@ -140,29 +141,38 @@
     container.appendChild(w);
 
     /* ---------- Logik ---------- */
-    var gewaehlt = null, geprueft = false;
+    var gewaehlt = null;
     function setLeer(s) {
       var i = FOLGE.indexOf(s); plaetze[s].innerHTML = '';
       var b = PW.el('button', { type: 'button', 'class': 'weg-leer', 'aria-label': 'Station ' + (i + 1) + ': ' + SZENE[s] + ' – Begriff hierher legen', text: 'Begriff hierher' });
-      b.addEventListener('click', function () { if (geprueft) return; if (gewaehlt) lege(gewaehlt, s); else hinweis.textContent = 'Tippe zuerst einen Begriff an.'; });
+      b.addEventListener('click', function () { if (gewaehlt) lege(gewaehlt, s); else hinweis.textContent = 'Tippe zuerst einen Begriff an.'; });
       plaetze[s].appendChild(b);
     }
     FOLGE.forEach(setLeer);
     function waehle(id) { Object.keys(karten).forEach(function (k) { karten[k].classList.toggle('ist-gewaehlt', k === id); karten[k].setAttribute('aria-pressed', k === id ? 'true' : 'false'); }); gewaehlt = id; hinweis.textContent = id ? '»' + fn(id).name + '« gewählt – jetzt die Station antippen.' : 'Zieh einen Begriff auf die passende Station – oder tippe erst den Begriff, dann die Station.'; }
     function stationVon(k) { for (var s in st.lage) if (st.lage[s] === k) return s; return null; }
-    function zurueck(k) { var s = stationVon(k); if (s) { delete st.lage[s]; setLeer(s); stationen[s].classList.remove('ist-belegt', 'ist-richtig', 'ist-falsch'); } ablage.appendChild(karten[k]); karten[k].classList.remove('ist-gelegt'); }
+    function zurueck(k) { var s = stationVon(k); if (s) { delete st.lage[s]; delete st.ok[s]; setLeer(s); stationen[s].classList.remove('ist-belegt', 'ist-richtig', 'ist-falsch'); stationen[s].querySelector('.weg-rueck').innerHTML = ''; } ablage.appendChild(karten[k]); karten[k].classList.remove('ist-gelegt'); }
     function lege(k, s) {
       if (st.lage[s] && st.lage[s] !== k) zurueck(st.lage[s]);
       var alt = stationVon(k); if (alt) { delete st.lage[alt]; setLeer(alt); stationen[alt].classList.remove('ist-belegt'); }
-      st.lage[s] = k; plaetze[s].innerHTML = ''; plaetze[s].appendChild(karten[k]); karten[k].classList.add('ist-gelegt'); stationen[s].classList.add('ist-belegt');
+      stationen[s].classList.remove('ist-falsch'); stationen[s].querySelector('.weg-rueck').innerHTML = ''; st.lage[s] = k; plaetze[s].innerHTML = ''; plaetze[s].appendChild(karten[k]); karten[k].classList.add('ist-gelegt'); stationen[s].classList.add('ist-belegt');
       if (!weniger()) { stationen[s].classList.add('ist-gelandet'); setTimeout(function () { stationen[s].classList.remove('ist-gelandet'); }, 260); }
       waehle(null); speichern(); stand();
     }
-    function stand() { var n = Object.keys(st.lage).length; pruefen.disabled = n < FOLGE.length || geprueft; if (!geprueft) hinweis.textContent = n + ' von 11 Begriffen liegen.' + (n < 11 ? '' : ' Jetzt prüfen.'); }
+    function offenListe() { return FOLGE.filter(function (s) { return st.lage[s] && !stationen[s].classList.contains('ist-richtig') && !stationen[s].classList.contains('ist-falsch'); }); }
+    function fest(k) { var s = stationVon(k); return !!(s && stationen[s].classList.contains('ist-richtig')); }
+    function stand() {
+      var n = Object.keys(st.lage).length, offen = offenListe(), ok = Object.keys(st.ok).length;
+      var nurNeu = offen.length > 0 && offen.every(function (s) { return st.versucht[s]; });
+      pruefen.disabled = !(offen.length >= 5 || (n === FOLGE.length && offen.length > 0) || nurNeu);
+      pruefen.textContent = n === FOLGE.length ? 'Weg prüfen' : 'Zwischenstand prüfen';
+      neu.hidden = !FOLGE.some(function (s) { return stationen[s].classList.contains('ist-falsch'); });
+      hinweis.textContent = n + ' von 11 Begriffen liegen' + (ok ? ', ' + ok + ' davon geprüft und passend' : '') + '.' + (offen.length && offen.length < 5 && n < 11 && !nurNeu ? ' Prüfen geht ab fünf neu gelegten Begriffen.' : '');
+    }
     Object.keys(karten).forEach(function (k) {
       var kn = karten[k], start = null;
-      kn.addEventListener('click', function (e) { if (geprueft || kn.getAttribute('data-gezogen')) { kn.removeAttribute('data-gezogen'); return; } if (stationVon(k)) { zurueck(k); waehle(k); return; } waehle(gewaehlt === k ? null : k); });
-      kn.addEventListener('pointerdown', function (e) { if (geprueft || (e.pointerType === 'mouse' && e.button !== 0)) return; start = { x: e.clientX, y: e.clientY }; });
+      kn.addEventListener('click', function (e) { if (fest(k)) return; if (kn.getAttribute('data-gezogen')) { kn.removeAttribute('data-gezogen'); return; } if (stationVon(k)) { zurueck(k); waehle(k); return; } waehle(gewaehlt === k ? null : k); });
+      kn.addEventListener('pointerdown', function (e) { if (fest(k) || (e.pointerType === 'mouse' && e.button !== 0)) return; start = { x: e.clientX, y: e.clientY }; });
       kn.addEventListener('pointermove', function (e) {
         if (!start) return; var dx = e.clientX - start.x, dy = e.clientY - start.y;
         if (!kn.classList.contains('ist-gezogen')) { if (Math.hypot(dx, dy) < 8) return; kn.classList.add('ist-gezogen'); try { kn.setPointerCapture(e.pointerId); } catch (x) {} waehle(k); }
@@ -174,21 +184,24 @@
       kn.addEventListener('pointerup', ende); kn.addEventListener('pointercancel', ende);
     });
     pruefen.addEventListener('click', function () {
-      geprueft = true; pruefen.disabled = true; var ok = 0, falsch = [];
-      FOLGE.forEach(function (s) {
+      var ok = 0, liste = offenListe();
+      liste.forEach(function (s) {
         var k = st.lage[s], r = stationen[s].querySelector('.weg-rueck'); var richtig = k === s;
+        st.versucht[s] = true;
         stationen[s].classList.toggle('ist-richtig', richtig); stationen[s].classList.toggle('ist-falsch', !richtig);
-        if (richtig) { ok++; r.innerHTML = '<strong>Passt.</strong>'; }
-        else { falsch.push(s); var gelegt = fn(k); var erkl = (VERW[s] && VERW[s][k]) || ('»' + gelegt.name + '« heißt: ' + gelegt.kurz + ' Passt das zu dieser Szene? Lies die Szene noch einmal.'); r.innerHTML = '<strong>Passt nicht.</strong> ' + erkl; }
+        if (richtig) { ok++; st.ok[s] = true; r.innerHTML = '<strong>Passt.</strong>'; }
+        else { var gelegt = fn(k); var erkl = (VERW[s] && VERW[s][k]) || ('»' + gelegt.name + '« heißt: ' + gelegt.kurz + ' Passt das zu dieser Szene? Lies die Szene noch einmal.'); r.innerHTML = '<strong>Passt nicht.</strong> ' + erkl; }
         if (PW.notiere) PW.notiere(1, 'weg-' + s, richtig, 'Funktion erkennen: ' + fn(s).name);
       });
       st.versuche = (st.versuche || 0) + 1; speichern();
       spick.hidden = false;
-      if (ok === FOLGE.length) { ergebnis.className = 'rueck rueck--gut'; ergebnis.innerHTML = '<strong>Alle elf passen.</strong> Jetzt färbst du den Weg ein.'; neu.hidden = true; zeigePhase2(); }
-      else { ergebnis.className = 'rueck rueck--nein'; ergebnis.innerHTML = '<strong>' + ok + ' von 11 passen.</strong> Lies bei den markierten Stationen die Erklärung, dann lege die falschen Begriffe neu. Der Spickzettel unten hilft – aber versuch es erst ohne.'; neu.hidden = false; }
+      var alleOk = Object.keys(st.ok).length === FOLGE.length;
+      if (alleOk) { ergebnis.className = 'rueck rueck--gut'; ergebnis.innerHTML = '<strong>Alle elf passen.</strong> Jetzt färbst du den Weg ein.'; zeigePhase2(); }
+      else { ergebnis.className = 'rueck'; ergebnis.innerHTML = '<strong>Zwischenstand: ' + ok + ' von ' + liste.length + ' geprüften Begriffen passen.</strong> ' + (liste.length - ok ? 'Lies bei den markierten Stationen die Erklärung, dann leg die falschen Begriffe mit dem Knopf zurück. Der Spickzettel unten hilft – aber versuch es erst ohne.' : 'Leg die nächsten Begriffe.'); }
+      stand();
     });
-    neu.addEventListener('click', function () { geprueft = false; FOLGE.forEach(function (s) { if (stationen[s].classList.contains('ist-falsch')) zurueck(st.lage[s]); stationen[s].querySelector('.weg-rueck').innerHTML = stationen[s].classList.contains('ist-richtig') ? '<strong>Passt.</strong>' : ''; }); neu.hidden = true; ergebnis.className = 'rueck'; ergebnis.textContent = ''; speichern(); stand(); });
-    alle.addEventListener('click', function () { geprueft = false; FOLGE.forEach(function (s) { if (st.lage[s]) zurueck(st.lage[s]); stationen[s].querySelector('.weg-rueck').innerHTML = ''; stationen[s].classList.remove('ist-richtig', 'ist-falsch'); }); st.lage = {}; st.farbe = {}; FOLGE.forEach(zeigeFarbe); phase2.hidden = true; neu.hidden = true; ergebnis.className = 'rueck'; ergebnis.textContent = ''; speichern(); stand(); });
+    neu.addEventListener('click', function () { FOLGE.forEach(function (s) { if (stationen[s].classList.contains('ist-falsch')) zurueck(st.lage[s]); }); ergebnis.className = 'rueck'; ergebnis.textContent = 'Zurückgelegt. Die passenden Begriffe bleiben liegen.'; speichern(); stand(); });
+    alle.addEventListener('click', function () { st.ok = {}; st.versucht = {}; FOLGE.forEach(function (s) { if (st.lage[s]) zurueck(st.lage[s]); stationen[s].querySelector('.weg-rueck').innerHTML = ''; stationen[s].classList.remove('ist-richtig', 'ist-falsch'); }); st.lage = {}; st.farbe = {}; FOLGE.forEach(zeigeFarbe); phase2.hidden = true; neu.hidden = true; ergebnis.className = 'rueck'; ergebnis.textContent = ''; speichern(); stand(); });
     function zeigePhase2() { phase2.hidden = false; FOLGE.forEach(function (s) { stationen[s].querySelector('.weg-farbe').hidden = false; zeigeFarbe(s); }); farbePruefenKn.disabled = FOLGE.some(function (x) { return !st.farbe[x]; }); }
     function zeigeFarbe(s) { var a = AUFGABEN.filter(function (x) { return x.id === st.farbe[s]; })[0]; var kreis = stationen[s].querySelector('.weg-kreis'); kreis.style.background = a ? a.farbe : ''; kreis.classList.toggle('ist-gefaerbt', !!a); stationen[s].querySelector('.weg-farbe').textContent = a ? a.name : 'Aufgabe wählen'; stationen[s].classList.remove('farbe-ok', 'farbe-falsch'); }
     farbePruefenKn.addEventListener('click', function () {
@@ -219,7 +232,8 @@
     setTimeout(zeichne, 50);
 
     /* Gespeicherten Stand wiederherstellen */
-    Object.keys(st.lage).forEach(function (s) { if (karten[st.lage[s]] && stationen[s]) { var k = st.lage[s]; plaetze[s].innerHTML = ''; plaetze[s].appendChild(karten[k]); karten[k].classList.add('ist-gelegt'); stationen[s].classList.add('ist-belegt'); } });
+    Object.keys(st.lage).forEach(function (s) { if (karten[st.lage[s]] && stationen[s]) { var k = st.lage[s]; plaetze[s].innerHTML = ''; plaetze[s].appendChild(karten[k]); karten[k].classList.add('ist-gelegt'); stationen[s].classList.add('ist-belegt'); if (st.ok[s] && st.lage[s] === s) { stationen[s].classList.add('ist-richtig'); stationen[s].querySelector('.weg-rueck').innerHTML = '<strong>Passt.</strong>'; } } });
+    if (Object.keys(st.ok).length === FOLGE.length) zeigePhase2();
     stand();
   };
 })();

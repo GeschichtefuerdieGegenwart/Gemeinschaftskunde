@@ -33,6 +33,7 @@
   <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">4</span><h1>Wählen und auszählen</h1><p class="leitfrage">Wie wird aus Stimmen ein Bundestag, und was ändert die 5-%-Hürde?</p><p class="klein" style="margin:0">Fünf Reiter: Stimmzettel üben · die Klasse wählen lassen · Sitze rechnen · Koalition bilden · mit der Wirklichkeit abgleichen.</p><div class="kz"><div><b>630</b><span>Sitze</span></div><div><b>316</b><span>Mehrheit</span></div><div><b>5 %</b><span>Hürde</span></div></div></div></div>
   <ol class="fort" aria-label="Fortschritt"></ol>
   <aside class="caja" aria-label="Caja, eine erfundene Figur"><p>Caja steht in der Wahlkabine: ein Zettel, zwei Kreuze. Sie fragt sich: Was passiert mit meiner Zweitstimme, wenn die Partei unter 5 % bleibt – und wer regiert am Ende?</p><p>Das findest du in dieser Station heraus.</p></aside>
+  <section class="karte karte--leise abruf" id="abruf"><noscript><p>Erst erinnern: Was weißt du noch aus der letzten Station?</p></noscript></section>
   <ul class="reiter" id="reiter"></ul>
 
   <section id="wahl">
@@ -150,13 +151,14 @@
 <script src="../assets/js/motion.js"></script>
 <script src="../assets/js/faecher.js"></script>
 <script src="../assets/js/merkzettel.js"></script>
+<script src="../assets/js/abruf.js"></script>
 <script src="../assets/js/lernstand.js"></script>
 <script src="../assets/js/hilfen.js"></script>
 <script src="../assets/js/urne.js"></script>
 <script src="../assets/js/koalition.js"></script>
 <script src="../assets/js/bausteine.js"></script>
 <script>
-PW.rahmen('st4', '../'); PW.merkzettel('../');
+PW.rahmen('st4', '../'); PW.abrufZeigen(document.getElementById('abruf'), 4); PW.merkzettel('../');
 var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel', urne: 'Klassenwahl', rechner: 'Sitzrechner', koalition: 'Koalition', abgleich: 'Abgleich' });
 (function () {
   /* 1. Stimmzettel */

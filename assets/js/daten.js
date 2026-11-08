@@ -322,3 +322,27 @@ PW.zeitEreignisse = [
   { j: 2024, bahn: 'bsw', t: 'BSW gegründet (8. Januar)', d: 'Im Juli setzt das Bundesverfassungsgericht die Grundmandatsklausel wieder ein.' },
   { j: 2025, bahn: 'recht', reihe: 1, t: 'Bundestagswahl (23. Februar)', d: 'Erstmals 630 feste Sitze und Zweitstimmendeckung.' }
 ];
+
+/* v8 · Muster AF »Erst erinnern«: drei Fragen zur vorigen Station, zuerst ohne Gerät beantworten (Abruf; Papierprobe »Was bleibt ohne Gerät?«). */
+PW.abruf = {
+  2: [
+    ['Was sagt Art. 21 Abs. 1 GG über Parteien? Ein Satz genügt.', 'Parteien wirken bei der politischen Willensbildung des Volkes mit. Ihre Gründung ist frei, ihre innere Ordnung muss demokratisch sein, und sie legen öffentlich Rechenschaft über ihre Mittel ab.'],
+    ['Nenne die vier Aufgaben der Politik.', 'Politikformulierung, Politikimplementation, Politikkontrolle, Personalrekrutierung.'],
+    ['Eine Partei schreibt einen Wunsch vieler Menschen in ihr Programm. Welche Funktion ist das?', 'Interessenartikulation – Wünsche und Bedürfnisse ausdrücken.']
+  ],
+  3: [
+    ['Die Opposition stellt eine Kleine Anfrage. Welche Funktion erfüllt sie?', 'Die Kontrollfunktion – sie kontrolliert die Regierung (Aufgabe: Politikkontrolle).'],
+    ['Was ist der Unterschied zwischen Artikulation und Aggregation?', 'Artikulation: Interessen ausdrücken. Aggregation: verschiedene Interessen bündeln und gewichten, bis eine gemeinsame Linie steht.'],
+    ['Zu welcher Aufgabe der Politik gehört die Rekrutierung?', 'Zur Personalrekrutierung – Personal für Ämter und Mandate auswählen.']
+  ],
+  4: [
+    ['Woran erkennst du, dass eine Aussage über eine Partei belegt ist?', 'An einem wörtlichen Zitat aus dem Wahlprogramm mit Seitenzahl – nicht an einer Zusammenfassung oder einem Eindruck.'],
+    ['Wie unterscheiden sich SPD und CDU/CSU beim Mindestlohn?', 'SPD: Er muss spätestens ab 2026 bei 15 Euro liegen (S. 23). CDU/CSU: Lohnfindung ist Sache der Sozialpartner, einen »politischen Mindestlohn« lehnen sie ab (S. 32). Strittig ist also, wer über die Höhe entscheidet.'],
+    ['Warum gibt dir die Werkstatt keine Wahlempfehlung?', 'Weil du selbst urteilen sollst (Überwältigungsverbot). Die Seite zeigt Positionen mit Beleg, die Entscheidung bleibt bei dir.']
+  ],
+  5: [
+    ['Wofür ist die Zweitstimme da?', 'Sie entscheidet, wie viele Sitze jede Partei im Bundestag bekommt.'],
+    ['Was bedeutet die 5-%-Hürde?', 'Eine Partei unter 5 % der Zweitstimmen bekommt keine Sitze nach Zweitstimmen. Ausnahmen: drei Direktmandate (Grundmandatsklausel) und Parteien nationaler Minderheiten wie der SSW.'],
+    ['Ab wie vielen Sitzen hat eine Koalition 2025 die Mehrheit?', 'Ab 316 von 630 Sitzen.']
+  ]
+};

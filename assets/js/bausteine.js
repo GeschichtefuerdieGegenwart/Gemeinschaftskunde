@@ -173,49 +173,111 @@
   };
 
   /* ---------- Z · Sortieren mit der Hand: Beispiele auf die vier Aufgaben ziehen (oder tippen, oder Tastatur) ---------- */
+  /* v8 nach der Erprobung (08.11.2026): Zwischenstand ab fünf gelegten Karten prüfen, falsch gelegte zurücklegen,
+     Lage und geprüfte Karten bleiben auf dem Gerät gespeichert. Passende Karten bleiben liegen und sind fest. */
   PW.sortieren = function (container, beispiele, aufgaben, funktionen, opt) {
     opt = opt || {};
+    var SCHL = opt.schluessel || 'sortierung', AB = opt.ab || 5;
     var w = PW.el('div', { 'class': 'sortieren' });
     var ablage = PW.el('div', { 'class': 'sort-ablage', 'aria-label': 'Noch nicht zugeordnet' });
     var felder = {}; var felderBox = PW.el('div', { 'class': 'sort-felder' });
     aufgaben.forEach(function (a) { var f = PW.el('div', { 'class': 'sort-feld', 'data-aufgabe': a.id, role: 'group', 'aria-label': a.name }); f.appendChild(PW.el('h4', { text: a.name })); f.appendChild(PW.el('p', { 'class': 'klein', text: a.text })); var ziel = PW.el('button', { type: 'button', 'class': 'sort-ziel', text: 'Hierhin' }); ziel.addEventListener('click', function () { if (gewaehlt) lege(gewaehlt, a.id); }); f.appendChild(ziel); f.appendChild(PW.el('div', { 'class': 'sort-inhalt' })); felderBox.appendChild(f); felder[a.id] = f; });
-    var gewaehlt = null, zuordnung = {}, geprueft = false;
+    var gewaehlt = null, zuordnung = {}, status = {}, versucht = {}, fertigGemeldet = false;
     function fnVon(id) { return funktionen.filter(function (f) { return f.id === id; })[0]; }
+    function fest(i) { return status[i] === 'richtig' || status[i] === 'auch'; }
+    function sichern() { PW.merke(SCHL, { z: zuordnung, s: status, v: versucht }); }
     var karten = beispiele.map(function (b, i) {
       var k = PW.el('div', { 'class': 'sort-karte', 'data-i': i });
       var kn = PW.el('button', { type: 'button', 'class': 'sort-griff', 'aria-pressed': 'false', 'aria-label': 'Beispiel ' + (i + 1) + ' wählen: ' + b.text }); kn.appendChild(PW.el('span', { 'class': 'sort-nr', text: String(i + 1) })); kn.appendChild(PW.el('span', { text: b.text }));
-      kn.addEventListener('click', function () { if (geprueft) return; waehle(k); });
+      kn.addEventListener('click', function () { if (fest(i)) return; waehle(k); });
       var r = PW.el('div', { 'class': 'sort-rueck', 'aria-live': 'polite' });
       k.appendChild(kn); k.appendChild(r); ablage.appendChild(k);
-      /* Ziehen mit dem Finger oder der Maus */
       var start = null;
-      kn.addEventListener('pointerdown', function (e) { if (geprueft || e.pointerType === 'mouse' && e.button !== 0) return; start = { x: e.clientX, y: e.clientY, id: e.pointerId }; });
-      kn.addEventListener('pointermove', function (e) { if (!start || geprueft) return; var dx = e.clientX - start.x, dy = e.clientY - start.y; if (!k.classList.contains('ist-gezogen') && Math.hypot(dx, dy) < 6) return; if (!k.classList.contains('ist-gezogen')) { k.classList.add('ist-gezogen'); kn.setPointerCapture(e.pointerId); waehle(k, true); } k.style.transform = 'translate(' + dx + 'px,' + dy + 'px)'; var el = document.elementFromPoint(e.clientX, e.clientY); var f = el && el.closest ? el.closest('.sort-feld') : null; Object.keys(felder).forEach(function (id) { felder[id].classList.toggle('ist-ziel', f === felder[id]); }); });
+      kn.addEventListener('pointerdown', function (e) { if (fest(i) || e.pointerType === 'mouse' && e.button !== 0) return; start = { x: e.clientX, y: e.clientY, id: e.pointerId }; });
+      kn.addEventListener('pointermove', function (e) { if (!start) return; var dx = e.clientX - start.x, dy = e.clientY - start.y; if (!k.classList.contains('ist-gezogen') && Math.hypot(dx, dy) < 6) return; if (!k.classList.contains('ist-gezogen')) { k.classList.add('ist-gezogen'); kn.setPointerCapture(e.pointerId); waehle(k, true); } k.style.transform = 'translate(' + dx + 'px,' + dy + 'px)'; var el = document.elementFromPoint(e.clientX, e.clientY); var f = el && el.closest ? el.closest('.sort-feld') : null; Object.keys(felder).forEach(function (id) { felder[id].classList.toggle('ist-ziel', f === felder[id]); }); });
       function ende(e) { if (!start) return; var war = k.classList.contains('ist-gezogen'); k.classList.remove('ist-gezogen'); k.style.transform = ''; start = null; Object.keys(felder).forEach(function (id) { felder[id].classList.remove('ist-ziel'); }); if (!war) return; var el = document.elementFromPoint(e.clientX, e.clientY); var f = el && el.closest ? el.closest('.sort-feld') : null; if (f) lege(k, f.getAttribute('data-aufgabe')); else waehle(null); e.preventDefault(); kn.addEventListener('click', function stop(ev) { ev.stopImmediatePropagation(); kn.removeEventListener('click', stop, true); }, true); }
       kn.addEventListener('pointerup', ende); kn.addEventListener('pointercancel', ende);
       return k;
     });
     function waehle(k, still) { karten.forEach(function (x) { x.classList.toggle('ist-gewaehlt', x === k); x.querySelector('.sort-griff').setAttribute('aria-pressed', x === k ? 'true' : 'false'); }); gewaehlt = k; hinweis.textContent = k ? (still ? '' : 'Jetzt ein Feld antippen: »Hierhin«.') : ''; }
-    function lege(k, aufgabe) { felder[aufgabe].querySelector('.sort-inhalt').appendChild(k); zuordnung[k.getAttribute('data-i')] = aufgabe; waehle(null); PW.merke(opt.schluessel || 'sortierung', zuordnung); pruefen.disabled = Object.keys(zuordnung).length < beispiele.length; stand.textContent = Object.keys(zuordnung).length + ' von ' + beispiele.length + ' zugeordnet.'; if (!weniger()) { k.classList.add('ist-gelandet'); setTimeout(function () { k.classList.remove('ist-gelandet'); }, 300); } }
+    function zeige(i) {
+      var k = karten[i], r = k.querySelector('.sort-rueck'), b = beispiele[i];
+      k.classList.remove('ist-richtig', 'ist-auch', 'ist-falsch');
+      k.classList.toggle('ist-fest', fest(i));
+      if (!status[i]) { r.innerHTML = ''; return; }
+      var fnR = fnVon(b.richtig[0]); var aufR = aufgaben.filter(function (a) { return a.id === fnR.aufgabe; })[0];
+      k.classList.add('ist-' + status[i]);
+      if (status[i] === 'richtig') r.innerHTML = '<strong>Passt.</strong> ' + fnR.name + ' gehört zu ' + aufR.name + '.';
+      else if (status[i] === 'auch') r.innerHTML = '<strong>Passt auch.</strong> Am deutlichsten ist aber ' + aufR.name + ' (' + fnR.name + ').';
+      else r.innerHTML = '<strong>Passt nicht.</strong> Lies das Beispiel noch einmal: Wer tut hier was – und wozu? Leg die Karte zurück und versuch es neu.';
+    }
+    function lege(k, aufgabe) {
+      var i = +k.getAttribute('data-i');
+      felder[aufgabe].querySelector('.sort-inhalt').appendChild(k); zuordnung[i] = aufgabe;
+      if (status[i] === 'falsch') status[i] = '';
+      zeige(i); waehle(null); sichern(); aktualisiere();
+      if (!weniger()) { k.classList.add('ist-gelandet'); setTimeout(function () { k.classList.remove('ist-gelandet'); }, 300); }
+    }
+    function ungeprueft() { return Object.keys(zuordnung).filter(function (i) { return !status[i]; }); }
+    function falsche() { return Object.keys(status).filter(function (i) { return status[i] === 'falsch'; }); }
+    function aktualisiere() {
+      var gelegt = Object.keys(zuordnung).length, offen = ungeprueft().length, n = beispiele.length;
+      var passend = Object.keys(status).filter(fest).length;
+      var allesGelegt = gelegt === n;
+      var nurNeuGelegt = ungeprueft().every(function (i) { return versucht[i]; });
+      pruefen.disabled = !(offen > 0 && (offen >= AB || allesGelegt || nurNeuGelegt));
+      pruefen.textContent = allesGelegt ? 'Alles prüfen' : 'Zwischenstand prüfen';
+      zurueckF.hidden = falsche().length === 0;
+      zurueckF.textContent = falsche().length === 1 ? 'Falsche Karte zurücklegen' : 'Falsche zurücklegen (' + falsche().length + ')';
+      stand.textContent = gelegt + ' von ' + n + ' gelegt · ' + passend + ' geprüft und passend' + (falsche().length ? ' · ' + falsche().length + ' noch einmal' : '') + '. ' + (offen && !allesGelegt && offen < AB && !nurNeuGelegt ? 'Prüfen geht ab ' + AB + ' neu gelegten Karten.' : '');
+      if (passend === n && !fertigGemeldet) {
+        fertigGemeldet = true;
+        ergebnis.className = 'rueck rueck--eigen';
+        ergebnis.innerHTML = '<strong>Alle zwölf liegen auf einem passenden Feld.</strong> Jetzt wird es genauer: Unten bestimmst du zu jedem Beispiel die Funktion – nicht nur die Aufgabe.';
+        if (opt.danach) opt.danach(passend);
+      }
+    }
     var hinweis = PW.el('p', { 'class': 'klein sort-hinweis', 'aria-live': 'polite' });
-    var stand = PW.el('p', { 'class': 'klein', text: '0 von ' + beispiele.length + ' zugeordnet.' });
-    var pruefen = PW.el('button', { type: 'button', 'class': 'knopf knopf--voll', text: 'Prüfen', disabled: '' });
-    var zurueck = PW.el('button', { type: 'button', 'class': 'knopf knopf--leise', text: 'Alle zurücklegen' });
+    var stand = PW.el('p', { 'class': 'klein sort-stand', 'aria-live': 'polite' });
+    var pruefen = PW.el('button', { type: 'button', 'class': 'knopf knopf--voll', text: 'Zwischenstand prüfen', disabled: '' });
+    var zurueckF = PW.el('button', { type: 'button', 'class': 'knopf knopf--akzent', text: 'Falsche zurücklegen', hidden: 'hidden' });
+    var zurueck = PW.el('button', { type: 'button', 'class': 'knopf knopf--leise', text: 'Von vorn' });
     var ergebnis = PW.el('div', { 'class': 'rueck', 'aria-live': 'polite' });
     pruefen.addEventListener('click', function () {
-      geprueft = true; pruefen.disabled = true; var ok = 0;
-      beispiele.forEach(function (b, i) { var k = karten[i], r = k.querySelector('.sort-rueck'); var passende = b.richtig.map(function (id) { return fnVon(id).aufgabe; }), auch = b.auch.map(function (id) { return fnVon(id).aufgabe; }); var z = zuordnung[i]; var fnR = fnVon(b.richtig[0]); var aufR = aufgaben.filter(function (a) { return a.id === fnR.aufgabe; })[0];
-        if (passende.indexOf(z) >= 0) { ok++; k.classList.add('ist-richtig'); r.innerHTML = '<strong>Passt.</strong> ' + fnR.name + ' gehört zu ' + aufR.name + '.'; }
-        else if (auch.indexOf(z) >= 0) { ok++; k.classList.add('ist-auch'); r.innerHTML = '<strong>Passt auch.</strong> Am deutlichsten ist aber ' + aufR.name + ' (' + fnR.name + ').'; }
-        else { k.classList.add('ist-falsch'); r.innerHTML = '<strong>Passt nicht.</strong> ' + b.warum.split(':')[0] + ' – das ist ' + aufR.name + '.'; }
-        if (PW.notiere) PW.notiere(2, 'sort-' + i, passende.indexOf(z) >= 0 || auch.indexOf(z) >= 0, 'Aufgabe erkennen: ' + aufR.name);
+      var liste = ungeprueft(), neuOk = 0;
+      liste.forEach(function (i) {
+        var b = beispiele[i], z = zuordnung[i];
+        var passende = b.richtig.map(function (id) { return fnVon(id).aufgabe; }), auch = b.auch.map(function (id) { return fnVon(id).aufgabe; });
+        versucht[i] = true;
+        status[i] = passende.indexOf(z) >= 0 ? 'richtig' : auch.indexOf(z) >= 0 ? 'auch' : 'falsch';
+        if (status[i] !== 'falsch') neuOk++;
+        var aufR = aufgaben.filter(function (a) { return a.id === fnVon(b.richtig[0]).aufgabe; })[0];
+        if (PW.notiere) PW.notiere(2, 'sort-' + i, status[i] !== 'falsch', 'Aufgabe erkennen: ' + aufR.name);
+        zeige(i);
       });
-      ergebnis.className = 'rueck rueck--eigen'; ergebnis.innerHTML = '<strong>' + ok + ' von ' + beispiele.length + '</strong> auf dem richtigen Feld. Jetzt wird es genauer: Unten bestimmst du zu jedem Beispiel die Funktion – nicht nur die Aufgabe.';
-      if (opt.danach) opt.danach(ok);
+      sichern();
+      if (Object.keys(status).filter(fest).length < beispiele.length) {
+        ergebnis.className = 'rueck';
+        ergebnis.innerHTML = '<strong>Zwischenstand:</strong> ' + neuOk + ' von ' + liste.length + ' geprüften Karten passen. ' + (falsche().length ? 'Die rot markierten kannst du mit einem Knopf zurücklegen.' : 'Leg die nächsten Karten.');
+      }
+      aktualisiere();
     });
-    zurueck.addEventListener('click', function () { geprueft = false; zuordnung = {}; PW.merke(opt.schluessel || 'sortierung', {}); karten.forEach(function (k) { k.classList.remove('ist-richtig', 'ist-auch', 'ist-falsch'); k.querySelector('.sort-rueck').innerHTML = ''; ablage.appendChild(k); }); pruefen.disabled = true; ergebnis.className = 'rueck'; ergebnis.textContent = ''; stand.textContent = '0 von ' + beispiele.length + ' zugeordnet.'; });
-    var alt = PW.lies(opt.schluessel || 'sortierung', {}) || {}; Object.keys(alt).forEach(function (i) { if (karten[i] && felder[alt[i]]) { felder[alt[i]].querySelector('.sort-inhalt').appendChild(karten[i]); zuordnung[i] = alt[i]; } });
-    if (Object.keys(zuordnung).length) { stand.textContent = Object.keys(zuordnung).length + ' von ' + beispiele.length + ' zugeordnet.'; pruefen.disabled = Object.keys(zuordnung).length < beispiele.length; }
-    w.appendChild(hinweis); w.appendChild(ablage); w.appendChild(felderBox); w.appendChild(stand); w.appendChild(PW.el('div', { 'class': 'knopfzeile' }, [pruefen, zurueck])); w.appendChild(ergebnis); container.appendChild(w);
+    zurueckF.addEventListener('click', function () {
+      falsche().forEach(function (i) { delete zuordnung[i]; status[i] = ''; ablage.appendChild(karten[i]); zeige(i); });
+      sichern(); aktualisiere(); hinweis.textContent = 'Zurückgelegt. Die passenden Karten bleiben liegen.';
+    });
+    zurueck.addEventListener('click', function () {
+      zuordnung = {}; status = {}; versucht = {}; fertigGemeldet = false; sichern();
+      karten.forEach(function (k, i) { ablage.appendChild(k); zeige(i); });
+      ergebnis.className = 'rueck'; ergebnis.textContent = ''; aktualisiere();
+    });
+    /* Gespeicherten Stand laden (auch das alte Format: nur Zuordnung) */
+    var alt = PW.lies(SCHL, {}) || {};
+    var az = alt.z || (alt.s ? {} : alt), as = alt.s || {}; versucht = alt.v || {};
+    Object.keys(az).forEach(function (i) { if (karten[i] && felder[az[i]]) { felder[az[i]].querySelector('.sort-inhalt').appendChild(karten[i]); zuordnung[i] = az[i]; status[i] = as[i] || ''; zeige(+i); } });
+    var gespeichert = PW.el('p', { 'class': 'klein sort-gespeichert', text: Object.keys(zuordnung).length ? 'Dein Zwischenstand von vorhin ist wieder da (gespeichert nur auf diesem Gerät).' : 'Dein Stand wird auf diesem Gerät gespeichert – du kannst jederzeit unterbrechen.' });
+    w.appendChild(gespeichert); w.appendChild(hinweis); w.appendChild(ablage); w.appendChild(felderBox); w.appendChild(stand); w.appendChild(PW.el('div', { 'class': 'knopfzeile' }, [pruefen, zurueckF, zurueck])); w.appendChild(ergebnis); container.appendChild(w);
+    if (Object.keys(status).filter(fest).length === beispiele.length) fertigGemeldet = true;
+    aktualisiere();
   };
 })();

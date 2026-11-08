@@ -193,3 +193,22 @@ Prüfkette v4.1: taste-skill lint 0 FAIL/0 WARN; inspect der geänderten Seiten 
 **Prüfkette (gelaufen):** `tools/pruefen.py` bei 1440/1280/1024/768/390 auf zwölf Seiten: 0 Befunde (nach einer Korrektur: Links im Organizer auf 44 px). Hell, Dunkel, Beamer bei 1280 und 390 auf sechs Seiten: keine Konsolenfehler, kein waagerechtes Scrollen. Browser-Test Wahllokal: 12 Stimmen vorher, 11 nachher, Summen und Paare stimmen. Taste-Lint nicht gelaufen (Skript nicht im Container).
 
 **Nicht gelaufen:** echter Beamer, Finger am iPad (Linie, Waage, Zeitstrahl), VoiceOver.
+
+## v8 (08.11.2026): nach der Erprobung
+
+**Anlass:** Rückmeldung der Lernenden zur Stunde (Beobachtung im Arbeitsgedächtnis: »Nach der Stunde 2026-11-08«): sehr gut angekommen; verbessern: Film (Anleitung, Visualisierung), weniger Linien, beim Ziehen Zwischenstände prüfen, Falsche zurücklegen, Stand speichern. Dazu Ideen aus Hilde Digital (Papierprobe »Was bleibt ohne Gerät?«, hybrid mit festen Stellen im Plenum, Lernende und KI).
+
+| Was | Wo |
+|---|---|
+| Zwischenstand ab fünf Karten, »Falsche zurücklegen«, passende bleiben fest, Stand gespeichert (Z2) | Station 2 Sortieren; dasselbe in Station 1 »Den Weg legen« |
+| Anleitung vor dem Film, Startkarte, Caja als Figur, Weg-Band, keine gestrichelten Linien (T2) | Station 1 |
+| »Eine Linie je Ebene«: innere Rahmen, Trennlinien und gestrichelte Kästen entfernt | alle Seiten (CSS) |
+| Erst erinnern: drei Abruffragen ohne Gerät (AF) | Stationen 2–5 |
+| Feste Stellen im Plenum (1d) | Lehrkraft |
+| »Ohne KI, ohne Nachschlagen« | Klausurtraining |
+
+**Gemessen:** Elemente mit sichtbarem Rand im Hauptbereich (bei 1280 px, ohne transparente Ränder): Station 1 231 → 156, Station 2 347 → 186, Station 3 646 → 426, Station 4 73 → 63, Station 5 127 → 116.
+
+**Prüfkette (gelaufen):** `tools/pruefen.py` zwölf Seiten × fünf Breiten: 0 Befunde. Hell, Dunkel, Beamer ohne Fehler und ohne waagerechtes Scrollen. Browser-Tests: Sortieren (4 Karten gesperrt, 5 prüfbar, Falsche zurück, Stand nach Neuladen), Den Weg legen (dasselbe, fünf richtige nach Neuladen), Film (Startkarte, Szenen 1–7). **Nicht gelaufen:** iPad mit dem Finger, Beamer, VoiceOver.
+
+**Offen:** Film als Storyboard mit Claude Design weiter ausbauen (die Animation ist jetzt klarer, aber im Stil gleich geblieben); Station »Behauptung prüfen« (laterales Lesen, Vorschlag aus dem Forschungsbericht); Abruf-Antworten fachlich gegenlesen.
