@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="de" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Der Weg einer Forderung · Politik-Werkstatt</title>
+<meta name="description" content="Scroll-Fassung zum Lernvideo: Wie aus Cajas Forderung »15 Euro Mindestlohn« im Modell ein Gesetz wird – in acht Stationen.">
+<script>try{var a=localStorage.getItem("pw:ansicht");if(a){a=JSON.parse(a);if(a==="hell"||a==="dunkel"||a==="beamer")document.documentElement.setAttribute("data-ansicht",a)}}catch(e){}</script>
+<link rel="stylesheet" href="assets/css/werkstatt.css">
+</head>
+<body data-ton="warm">
+<header class="kopf"><div class="kopf-innen"></div></header>
+<main id="inhalt">
+  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">§</span><h1>Der Weg einer Forderung</h1><p class="leitfrage">Wie wird aus einer Forderung ein Gesetz?</p><p class="klein" style="margin:0">Die Scroll-Fassung zum Lernvideo in Station 1. Das Video zeigt die elf Funktionen der Parteien, diese Seite den Weg durch die Gesetzgebung.</p></div></div>
+
+  <aside class="caja" aria-label="Caja, eine erfundene Figur"><p>Caja ist 19 und wünscht sich einen Mindestlohn von 15 Euro. Ihre Forderung ist der kleine Zettel links auf der Bühne: Er wandert mit, während du scrollst.</p><p>Caja ist erfunden und gehört keiner Partei an.</p></aside>
+
+  <section class="karte karte--leise sy-vorher">
+    <h2>Erst vermuten</h2>
+    <label for="sy-vermutung">Welche Stationen muss die Forderung durchlaufen, bis sie Gesetz ist? Schreib so viele auf, wie dir einfallen.</label>
+    <textarea id="sy-vermutung" class="schreibfeld" rows="3" placeholder="Partei, …"></textarea>
+    <p class="klein" style="color:var(--leise);margin:6px 0 0">Dann scroll langsam nach unten. Du bestimmst das Tempo; zurückscrollen geht jederzeit. Die Ziffern links springen direkt zu einer Station.</p>
+  </section>
+
+  <div class="scrolly">
+    <div class="sy-buehne">
+      <p class="sy-buehne-titel"><strong>Cajas Forderung:</strong> 15 € Mindestlohn</p>
+      <div class="sy-spur-rahmen">
+        <ol class="sy-spur" aria-label="Acht Stationen"></ol>
+        <span class="sy-marke" aria-hidden="true">15 €</span>
+      </div>
+      <p class="sy-stand" aria-live="polite">Station 1 von 8: Wunsch</p>
+    </div>
+    <div class="sy-schritte">
+      <ol class="sy-liste">
+        <li><strong>1 · Wunsch:</strong> Caja und viele andere wünschen sich 15 Euro</li>
+        <li><strong>2 · Partei:</strong> Eine Partei nimmt die Forderung auf</li>
+        <li><strong>3 · Koalition:</strong> Nach der Wahl: der Koalitionsvertrag</li>
+        <li><strong>4 · Ministerium:</strong> Das Ministerium schreibt einen Entwurf</li>
+        <li><strong>5 · Regierung:</strong> Die Bundesregierung beschließt den Gesetzentwurf</li>
+        <li><strong>6 · Bundestag:</strong> Der Bundestag berät und stimmt ab</li>
+        <li><strong>7 · Bundesrat:</strong> Die Länder sind noch einmal dran</li>
+        <li><strong>8 · Gesetz:</strong> Ausgefertigt und verkündet</li>
+      </ol>
+    </div>
+  </div>
+
+  <section class="karte sy-ende" id="sy-modell">
+    <h2>Was lässt dieses Modell weg?</h2>
+    <ul>
+      <li>Gesetzentwürfe kommen nicht nur von der Bundesregierung, sondern auch aus der Mitte des Bundestags oder vom Bundesrat.</li>
+      <li>Viele Forderungen scheitern unterwegs – im Programm, in der Koalition, im Bundestag oder im Bundesrat.</li>
+      <li>Beim Mindestlohn ist der übliche Weg ein anderer: Die Mindestlohnkommission schlägt die Höhe vor, die Bundesregierung setzt sie per Verordnung fest.</li>
+      <li>Manche Gesetze landen später vor dem Bundesverfassungsgericht.</li>
+    </ul>
+    <label for="sy-nachher"><strong>Vergleiche mit deiner Vermutung:</strong> Welche Station hattest du nicht auf dem Zettel? An welcher Station scheitert eine Forderung am ehesten – und warum?</label>
+    <textarea id="sy-nachher" class="schreibfeld" rows="3"></textarea>
+    <p class="klein" style="color:var(--leise)">Modell, keine Abbildung echter Abläufe. Grundlage: Art. 76–78 und 82 GG; bpb, »Gesetzgebung«. Der Programmsatz der SPD ist wörtlich (Wahlprogramm 2025, S. 23).</p>
+  </section>
+
+  <p class="knopfzeile"><a class="knopf" href="parteien-wahlen/station1.html#film">Zum Lernvideo in Station 1</a> <a class="knopf knopf--leise" href="vertiefung.html">Vertiefung</a></p>
+</main>
+<footer class="fuss"><div class="fuss-innen"></div>
+    <p class="urheberzeile" style="font-size:1rem;opacity:.72;margin-top:1.5rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></footer>
+<script src="assets/js/daten.js"></script>
+<script src="assets/js/werkstatt.js"></script>
+<script src="assets/js/motion.js"></script>
+<script src="assets/js/faecher.js"></script>
+<script src="assets/js/merkzettel.js"></script>
+<script src="assets/js/scrolly.js"></script>
+<script>
+PW.rahmen('weg', ''); PW.merkzettel('');
+PW.scrolly(document.querySelector('.scrolly'));
+['sy-vermutung', 'sy-nachher'].forEach(function (id) { var f = document.getElementById(id); f.value = PW.lies(id, '') || ''; f.addEventListener('input', function () { PW.merke(id, f.value); }); });
+</script>
+</body>
+</html>

@@ -324,3 +324,15 @@ Grundlage sind die beiden Designsysteme **Gemeinschaftskunde** (die Beschreibung
 - **T2 Film:** Anleitung in vier Zeilen vor dem Film, Startkarte auf der Leinwand, Caja als Figur, Band als kleiner Weg, gestrichelte Linien entfernt.
 - **AF Erst erinnern:** drei Abruffragen ohne Gerät am Anfang der Stationen 2–5 (aus Hilde Digital: »Was bleibt ohne Gerät?«).
 - **Hybrid:** Lehrkraftseite 1d »Feste Stellen im Plenum«; Klausurtraining »ohne KI, ohne Nachschlagen«.
+
+## v9 (08.11.2026): Bewegung als Lernmittel
+
+| Muster | Form (Skill »Bewegung als Lernmittel«) | Dauer / Reglerweg | eingebaut |
+|---|---|---|---|
+| AG Der Weg einer Forderung als Scroll-Fassung (`weg-einer-forderung.html`) | Ziehen (Scrollen) – der Ablauf der Gesetzgebung ist der Lerngegenstand | Reglerweg; Marke 300 ms ease-out; Abschnitte über `animation-timeline: view()` | ja |
+| AH Parteikarten mit Ansichtswechsel (Vertiefung) | Ansichtswechsel – dasselbe Ding von der Übersicht ins Detail | 300 ms ease-out, `view-transition-name: pw-wechsel` | ja |
+
+- Frage davor (»Wie wird aus einer Forderung ein Gesetz?«, Vermutung), Modellgrenze danach. Kein Autoplay. Stand-Zeile mit `aria-live`.
+- Static Grid Rule: Ohne IntersectionObserver, ohne View Transitions, ohne `animation-timeline` oder bei »weniger Bewegung« wechselt alles sofort; die Inhalte stehen vollständig da.
+- Ballot-Colour Rule: Parteifarbe in AH nur als 6-px-Kante neben dem Namen.
+- **Rückblick fällig:** zwei bis drei Wochen nach dem ersten Einsatz (Skill `signatur-design`, Schritt 6): Hat die Bewegung beim Verstehen geholfen? Sonst die ruhige Fassung setzen.

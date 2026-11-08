@@ -135,7 +135,8 @@
     { id: 'zus', url: 'zusammenfassung.html', name: 'Zusammenfassung' },
     { id: 'vert', url: 'vertiefung.html', name: 'Vertiefung' },
     { id: 'lehr', url: 'lehrkraft.html', name: 'Lehrkraft' },
-    { id: 'klausur', url: 'klausurtraining.html', name: 'Klausurtraining' }
+    { id: 'klausur', url: 'klausurtraining.html', name: 'Klausurtraining' },
+    { id: 'weg', url: 'weg-einer-forderung.html', name: 'Weg einer Forderung' }
   ];
   PW.rahmen = function (aktuell, wurzel) {
     wurzel = wurzel || '';
