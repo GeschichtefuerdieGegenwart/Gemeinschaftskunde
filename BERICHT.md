@@ -225,3 +225,11 @@ Prüfkette v4.1: taste-skill lint 0 FAIL/0 WARN; inspect der geänderten Seiten 
 **Prüfkette (gelaufen):** `tools/pruefen.py` dreizehn Seiten × fünf Breiten: 0 Befunde. Hell, Dunkel, Beamer: keine Fehler. Maus, Tastatur (Sprung per Enter, Escape schließt, Fokus zurück auf die Karte), Touch-Emulation iPad (gen 7), Beamer 1280 × 720 (Bühne 496 px hoch), »weniger Bewegung« (Marke ohne Übergang, Abschnitte ohne Animation, Detail sofort). **Nicht gelaufen:** echtes iPad, echter Beamer, VoiceOver.
 
 **Zum Prüfen:** Texte der acht Stationen (Art. 76–78, 82 GG); die Zuordnung der Partei-Funktionen je Station ist eine didaktische Zuordnung, keine Quelle.
+
+## v10 (08.11.2026): Klassenwahl sichern und wieder laden – Pull Request
+
+**Anlass:** Das Ergebnis der Klassenwahl war nach der Stunde weg (nur ein Bildschirmfoto blieb). Eine Stimme schien »verloren«: Sie ging an eine kleine Partei des Stimmzettels und zählte im Sitzrechner als »Sonstige« ohne Sitz, obwohl sie mit 1 von 15 Stimmen über 5 % lag.
+
+**Umgesetzt:** Wahlarchiv mit Name, automatischer Sicherung, Datei herunterladen und laden, Textrückfall; kleine Parteien einzeln im Sitzrechner; Hinweise auf der Lehrkraftseite (Sichern, Wahlgeheimnis). Dazu eine aus dem Bildschirmfoto rekonstruierte Datei (nur Zweitstimmen in Prozent).
+
+**Prüfung (gelaufen):** Browser-Test: 15 Stimmzettel, Auszählen → automatisch gesichert; Datei »Klassenwahl_Bundestagswahl-2026-J1_2026-11-08.json« heruntergeladen; Gerät geleert; Datei geladen → Sitzrechner, Abgleich, Liste wieder da; FREIE WÄHLER mit 6,7 % einzeln mit Sitzen; rekonstruierte Datei geladen. `tools/pruefen.py` siehe Pull Request.

@@ -32,7 +32,8 @@
     if (!alle.gesamt) return null;
     var proz = {};
     IDS.forEach(function (id) { proz[id] = Math.round((zweit[id] || 0) / alle.gesamt * 1000) / 10; });
-    PW.merke('klasse', proz);
+    var klein = {}; Object.keys(zweit).forEach(function (pid) { if (IDS.indexOf(pid) < 0 && zweit[pid]) klein[pid] = Math.round(zweit[pid] / alle.gesamt * 1000) / 10; });
+    PW.merke('klasse', proz); PW.merke('klasse-sonst', klein);
     return proz;
   };
 
@@ -147,7 +148,7 @@
           '<br>Das Direktmandat der Klasse ginge an <strong>' + (k ? k.name + ' (' + k.partei + ')' : '—') + '</strong>. 2025 gewann es Marc Biadacz (CDU) mit 37,3 %.';
       }
       ergebnis.className = 'rueck rueck--gut';
-      ergebnis.innerHTML = text + '<span class="beleg">Die Zweitstimmen stehen jetzt im Reiter »Sitzrechner« und im »Abgleich« bereit' + (zSumme.sonst ? ' (' + zSumme.sonst + (zSumme.sonst === 1 ? ' Stimme' : ' Stimmen') + ' für kleine Parteien zählt dort als »Sonstige«)' : '') + '.</span>';
+      ergebnis.innerHTML = text + '<span class="beleg">Die Zweitstimmen stehen jetzt im Reiter »Sitzrechner« und im »Abgleich« bereit' + (zSumme.sonst ? ' (' + zSumme.sonst + (zSumme.sonst === 1 ? ' Stimme' : ' Stimmen') + ' für kleine Parteien steht dort einzeln, weil in einer Klasse schon eine Stimme über 5 % liegen kann)' : '') + '.</span>';
       if (fertig) fertig(proz);
     });
     zuruecksetzen.addEventListener('click', function () {
@@ -180,7 +181,7 @@
       if (summe > 100.5) { PW.urneIds.forEach(function (id) { if (w[id] !== undefined) proz[id] = Math.round(w[id] / summe * 1000) / 10; }); }
       else if (Math.abs(summe - 100) < 5) { proz = w; }
       else { PW.urneIds.forEach(function (id) { if (w[id] !== undefined) proz[id] = Math.round(w[id] / summe * 1000) / 10; }); }
-      PW.merke('klasse', proz);
+      PW.merke('klasse', proz); PW.merke('klasse-sonst', {});
       r.className = 'rueck rueck--gut';
       r.innerHTML = '<strong>Übernommen:</strong> ' + Object.keys(proz).map(function (id) { return PW.partei(id).name + ' ' + PW.fmt(proz[id]) + ' %'; }).join(' · ') +
         '<span class="beleg">Prüfe die Werte, bevor du sie am Beamer zeigst.</span>';
