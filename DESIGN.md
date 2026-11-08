@@ -316,3 +316,11 @@ Grundlage sind die beiden Designsysteme **Gemeinschaftskunde** (die Beschreibung
 - **AD Klausurtraining:** eigene Seite mit Seitenton Gelb; Erwartungshorizont erst nach 40 Wörtern, Niveaus Grundlegend · Sicher · Souverän, nur in Worten.
 - **Caja:** erfundene Figur (19, jobbt nach dem Abitur im Supermarkt, ohne Partei) in Film, Schaubild und den Stationen 1, 3, 4, 5. `aside.caja` mit Papierfigur aus Tokens (`PW.cajaBild`).
 - **Y2 Zeitstrahl in Bahnen:** aus Station 3 in die Vertiefung, Entwurf aus Claude Design. Der Block 1933–1945 bleibt in allen Ansichten schwarz, weil der Text »der schwarze Block« sagt.
+
+## v8 (08.11.2026): nach der Erprobung
+
+- **Named Rule »Eine Linie je Ebene«:** Nur die äußere Karte trägt Rand und Platte. Innen gliedern Flächen (`--grund`, `--karton`) und Abstand – keine Trennlinien, keine gestrichelten Rahmen. Bedienelemente behalten ihre Grenze (Kreis der Antwort, »Hierhin«, »Begriff hierher«). Die gepunktete Linie des Wegs bleibt, weil sie der Weg ist. Anlass: Rückmeldung der Lernenden »manchmal unübersichtlich, weniger Linien«.
+- **Z2 Sortieren mit Zwischenstand** (Station 2) und dasselbe für **Ä Den Weg legen** (Station 1): Prüfen ab fünf neu gelegten Karten, »Falsche zurücklegen«, passende bleiben fest, Stand gespeichert.
+- **T2 Film:** Anleitung in vier Zeilen vor dem Film, Startkarte auf der Leinwand, Caja als Figur, Band als kleiner Weg, gestrichelte Linien entfernt.
+- **AF Erst erinnern:** drei Abruffragen ohne Gerät am Anfang der Stationen 2–5 (aus Hilde Digital: »Was bleibt ohne Gerät?«).
+- **Hybrid:** Lehrkraftseite 1d »Feste Stellen im Plenum«; Klausurtraining »ohne KI, ohne Nachschlagen«.

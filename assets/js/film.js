@@ -10,12 +10,12 @@
   /* Szenenfolge als Erzählung (Reihenfolge weicht bewusst von der Liste ab; die Liste bleibt die fachliche Ordnung) */
   var FOLGE = ['artikulation', 'aggregation', 'partizipation', 'information', 'mobilisierung', 'sozialisation', 'rekrutierung', 'legitimation', 'herrschaft', 'transmission', 'kontrolle'];
   var SATZ = {
-    artikulation: 'Menschen wollen etwas. Die Partei greift den Wunsch »Mindestlohn 15 €« auf und schreibt ihn ins Programm.',
+    artikulation: 'Caja und viele andere wollen etwas. Die Partei greift den Wunsch »Mindestlohn 15 €« auf und schreibt ihn ins Programm.',
     aggregation: 'In der Partei gibt es mehrere Vorstellungen – 14, 15, 16 Euro. Sie werden zu einer Linie gebündelt.',
-    partizipation: 'Menschen treten ein, stimmen mit ab, diskutieren im Ortsverband: Die Partei macht Mitmachen möglich.',
+    partizipation: 'Auch Caja tritt ein, stimmt mit ab und diskutiert im Ortsverband: Die Partei macht Mitmachen möglich.',
     information: 'Die Partei erklärt nach außen, was die Forderung bedeutet und wie sie wirken soll.',
     mobilisierung: 'Wahlkampf: Plakate und Videos holen Menschen an die Urne – für die Partei und ihre Ziele.',
-    sozialisation: 'Ein Neumitglied lernt, wie Anträge, Parteitage und Abstimmungen funktionieren – es wächst in die Politik hinein.',
+    sozialisation: 'Caja lernt als Neumitglied, wie Anträge, Parteitage und Abstimmungen funktionieren – sie wächst in die Politik hinein.',
     rekrutierung: 'Die Partei stellt eine Kandidatin für den Wahlkreis auf. Aus einem Mitglied wird ein Mandat.',
     legitimation: 'Die Wahl verteilt die Sitze. Auch wer unterliegt, erkennt das Ergebnis an – das trägt das System.',
     herrschaft: 'Die Mehrheit im Bundestag beschließt. Parteien üben Herrschaft aus: Ihre Entscheidung gilt für alle.',
@@ -63,12 +63,22 @@
     var regler = PW.el('input', { type: 'range', min: 0, max: String(FOLGE.length * 1000), step: 1, value: 0, 'aria-label': 'Film ziehen: Szene und Zeitpunkt' });
     reglerZeile.appendChild(PW.el('span', { 'class': 'klein', text: 'Ziehen' })); reglerZeile.appendChild(regler);
     var status = PW.el('p', { 'class': 'film-status klein', html: '<strong>Modell.</strong> Ein durchgespielter Beispielweg – in Wirklichkeit laufen die Funktionen gleichzeitig und ohne feste Reihenfolge. Die Forderung »Mindestlohn 15 €« steht so im SPD-Programm 2025 (Beleg in Station 2); ob sie Gesetz wird, zeigt der Film als Modell, nicht als Tatsache.' });
+    /* v8 nach der Erprobung: Startkarte auf der Leinwand, bis der Film einmal gestartet wurde */
+    var start = PW.el('div', { 'class': 'film-start' }, [
+      PW.el('button', { type: 'button', 'class': 'film-start-knopf', 'aria-label': 'Film starten: alle elf Szenen nacheinander' }, [PW.el('span', { 'class': 'film-start-dreieck', 'aria-hidden': 'true' }), PW.el('span', { text: 'Film starten' })]),
+      PW.el('p', { text: '11 Szenen · eine je Funktion · etwa 40 Sekunden · jederzeit anhalten, zurückspulen, ziehen' })
+    ]);
+    var schonGesehen = false; try { schonGesehen = PW.lies && PW.lies('film-gestartet', false); } catch (e) {}
+    if (schonGesehen) start.hidden = true;
+    buehne.appendChild(start);
+    function startWeg() { if (start.hidden) return; start.hidden = true; if (PW.merke) PW.merke('film-gestartet', true); }
+    start.querySelector('button').addEventListener('click', function () { startWeg(); if (weniger()) { zeige(0, 1, true); return; } auto = true; alle.setAttribute('aria-pressed', 'true'); alle.textContent = 'Anhalten'; zeige(0, 0, true); });
     wurzel.appendChild(buehne); wurzel.appendChild(punkte); wurzel.appendChild(reglerZeile); wurzel.appendChild(kopf); wurzel.appendChild(steuer); wurzel.appendChild(stand); wurzel.appendChild(status);
     container.appendChild(wurzel);
 
     var knoepfe = FOLGE.map(function (id, i) {
       var b = PW.el('button', { type: 'button', 'aria-label': 'Szene ' + (i + 1) + ': ' + fn(id).name, text: String(i + 1) });
-      b.addEventListener('click', function (ev) { autoAus(); zeige(i, ev && ev.detail === 0 ? 1 : 0, true); });
+      b.addEventListener('click', function (ev) { startWeg(); autoAus(); zeige(i, ev && ev.detail === 0 ? 1 : 0, true); });
       punkte.appendChild(PW.el('li', {}, [b])); return b;
     });
 
@@ -79,6 +89,7 @@
 
     var rnd = zufall(21);
     var leute = []; for (var i = 0; i < 36; i++) leute.push({ x: 60 + (i % 12) * 48 + (rnd() - .5) * 16, y: 400 + Math.floor(i / 12) * 44 + (rnd() - .5) * 12 });
+    var CAJA = 3;
     var PL = { x: 220, y: 180, w: 330, h: 140 };           /* Partei-Platte */
     var URNE = { x: 470, y: 262, w: 100, h: 84 };
     var BT = { cx: 790, cy: 285, r0: 72, dr: 24, reihen: 4 };
@@ -93,7 +104,9 @@
     function linie(x1, y1, x2, y2, col, lw, strich) { ctx.save(); ctx.beginPath(); ctx.moveTo(sc(x1), sc(y1)); ctx.lineTo(sc(x2), sc(y2)); ctx.strokeStyle = col; ctx.lineWidth = sc(lw || 1.5); if (strich) ctx.setLineDash([sc(5), sc(5)]); ctx.stroke(); ctx.restore(); }
 
     function platte(label, sub, alpha, marke) { ctx.save(); ctx.globalAlpha = alpha === undefined ? 1 : alpha; rect(PL.x + 6, PL.y + 6, PL.w, PL.h, farbe('blau-zart')); rect(PL.x, PL.y, PL.w, PL.h, farbe('flaeche'), farbe('blau'), 2.5); if (marke) { rect(PL.x + PL.w - 96, PL.y - 16, 96, 32, farbe('flaeche'), farbe('text'), 1.5); text('15 €', PL.x + PL.w - 48, PL.y, 22, farbe('text'), 'center', true); } text('Partei', PL.x + 16, PL.y + 26, 24, farbe('blau'), 'left', true); if (label) text(label, PL.x + PL.w / 2, PL.y + 72, 26, farbe('text'), 'center', true); if (sub) text(sub, PL.x + PL.w / 2, PL.y + 108, 24, farbe('leise'), 'center'); ctx.restore(); }
-    function menge(aus, mitglieder) { leute.forEach(function (p, i) { if (aus && aus.indexOf(i) >= 0) return; kreis(p.x, p.y, 10, mitglieder && mitglieder.indexOf(i) >= 0 ? farbe('blau') : farbe('text')); }); }
+    function menge(aus, mitglieder) { leute.forEach(function (p, i) { if (aus && aus.indexOf(i) >= 0) return; if (i === CAJA) { caja(p.x, p.y); return; } kreis(p.x, p.y, 10, mitglieder && mitglieder.indexOf(i) >= 0 ? farbe('blau') : farbe('text')); }); }
+    /* Caja: die erfundene Figur aus Film und Stationen, als größerer Punkt in Ocker mit Namen */
+    function caja(x, y, gr) { gr = gr || 1; kreis(x, y, 13 * gr, farbe('ton-gelb-tief'), farbe('text'), 2); text('Caja', x, y - 26 * gr, 22, farbe('text'), 'center', true); }
     function urne(alpha, dx) { dx = dx || 0; ctx.save(); ctx.globalAlpha = alpha === undefined ? 1 : alpha; rect(URNE.x + dx, URNE.y, URNE.w, URNE.h, farbe('flaeche'), farbe('text')); rect(URNE.x + dx + 22, URNE.y - 7, URNE.w - 44, 7, farbe('text')); text('Urne', URNE.x + dx + URNE.w / 2, URNE.y + URNE.h + 22, 24, farbe('leise'), 'center'); ctx.restore(); }
     function bundestag(fuellung, alpha, heben) { ctx.save(); ctx.globalAlpha = alpha === undefined ? 1 : alpha; var n = btPunkte.length, mehrheit = Math.round(n * .58); btPunkte.forEach(function (p, i) { var voll = fuellung !== undefined && i < Math.round(fuellung * n); var reg = i < mehrheit; var r = 7.5; if (heben && ((heben === 'reg' && reg) || (heben === 'opp' && !reg))) r = 9.5; kreis(p.x, p.y, r, voll ? (reg ? farbe('blau') : farbe('stahl')) : farbe('partei-leer'), farbe('text'), .6); }); text('Bundestag', BT.cx, BT.cy + 28, 24, farbe('leise'), 'center'); ctx.restore(); }
     function gesetz(x, y, s, alpha) { ctx.save(); ctx.globalAlpha = Math.max(0, Math.min(1, alpha)); rect(x + 4, y + 4, 300, 56, farbe('karton')); rect(x, y, 300, 56, farbe('flaeche'), farbe('text')); text('§', x + 22, y + 28, 30, farbe('akzent'), 'center', true); text(s, x + 40 + 260 / 2 - 10, y + 28, 24, farbe('text'), 'center', true); ctx.restore(); }
@@ -118,15 +131,16 @@
         return 'Drei Vorschläge werden zu einer Linie.';
       },
       partizipation: function (t) {
-        var rein = [0, 5, 9, 14, 20, 26, 31, 35]; var mitgl = [];
+        var rein = [3, 5, 9, 14, 20, 26, 31, 35]; var mitgl = [];
         menge(rein);
-        rein.forEach(function (q, k) { var p = leute[q]; var a = seg(t, .05 + k * .06, .55 + k * .06); var x = lerp(p.x, PL.x + 34 + k * 34, a), y = lerp(p.y, PL.y + PL.h - 22, a); kreis(x, y, 10, a > .95 ? farbe('blau') : farbe('text')); if (a > .95) mitgl.push(q); });
-        platte('Mitglieder: ' + mitgl.length, t > .9 ? 'stimmen ab · diskutieren' : '', .9, true);
+        rein.forEach(function (q, k) { if (seg(t, .05 + k * .06, .55 + k * .06) > .95) mitgl.push(q); });
+        platte('Mitglieder: ' + mitgl.length, '', .9, true); if (t > .9) text('stimmen ab · diskutieren', PL.x + PL.w / 2, PL.y + PL.h + 26, 24, farbe('leise'), 'center');
+        rein.forEach(function (q, k) { var p = leute[q]; var a = seg(t, .05 + k * .06, .55 + k * .06); var x = lerp(p.x, PL.x + 34 + k * 37, a), y = lerp(p.y, PL.y + PL.h - 26, a); if (q === CAJA) caja(x, y, .8); else kreis(x, y, 10, a > .95 ? farbe('blau') : farbe('text')); });
         return mitgl.length + ' Menschen sind eingetreten.';
       },
       information: function (t) {
         menge(); platte('Erklärt:', '15 € für alle Beschäftigten', 1, true);
-        var ziele = [2, 8, 13, 19, 24, 29, 34]; ziele.forEach(function (q, k) { var p = leute[q]; var a = seg(t, .05 + k * .07, .5 + k * .07); if (a <= 0) return; linie(PL.x + PL.w / 2, PL.y + PL.h, lerp(PL.x + PL.w / 2, p.x, a), lerp(PL.y + PL.h, p.y - 10, a), farbe('blau'), 1.5, true); if (a > .98) kreis(p.x, p.y, 15, null, farbe('blau'), 2.5); });
+        var ziele = [2, 8, 13, 19, 24, 29, 34]; ziele.forEach(function (q, k) { var p = leute[q]; var a = seg(t, .05 + k * .07, .5 + k * .07); if (a <= 0) return; var x = lerp(PL.x + PL.w / 2, p.x, a), y = lerp(PL.y + PL.h, p.y - 34, a); ctx.save(); ctx.globalAlpha = 1 - seg(t, .85, 1) * 0; rect(x - 14, y - 10, 28, 20, farbe('blau-zart'), farbe('blau'), 1.5); ctx.restore(); if (a > .98) kreis(p.x, p.y, 15, null, farbe('blau'), 2.5); });
         return 'Erklärungen gehen von der Partei zu den Menschen.';
       },
       mobilisierung: function (t) {
@@ -137,10 +151,10 @@
         return 'Ein Plakat ruft, sieben Menschen gehen zur Urne.';
       },
       sozialisation: function (t) {
-        menge(); platte('Neumitglied lernt', '', .9, true);
-        var cx = PL.x + PL.w + 240, cy = PL.y + 60; var r = lerp(5, 12, seg(t, .1, .9));
-        var lern = ['Antrag', 'Parteitag', 'Abstimmung']; lern.forEach(function (s, k) { var a = seg(t, .15 + k * .22, .4 + k * .22); var ang = -Math.PI / 2 + k * (2 * Math.PI / 3); var x = cx + 110 * Math.cos(ang), y = cy + 80 * Math.sin(ang); linie(cx, cy, lerp(cx, x, a), lerp(cy, y, a), farbe('linie'), 2); zettel(x - 70, y - 22, 140, 44, s, a); });
-        kreis(cx, cy, r, t > .9 ? farbe('blau') : farbe('text'));
+        menge([CAJA]); platte('Caja lernt', '', .9, true);
+        var cx = PL.x + PL.w + 210, cy = PL.y + 70; var r = lerp(5, 12, seg(t, .1, .9));
+        var lern = ['Antrag', 'Parteitag', 'Abstimmung']; lern.forEach(function (s, k) { var a = seg(t, .15 + k * .22, .4 + k * .22); var ang = -Math.PI / 2 + k * (2 * Math.PI / 3); var x = cx + 105 * Math.cos(ang), y = cy + 90 * Math.sin(ang); zettel(lerp(cx, x, a) - 70, lerp(cy, y, a) - 22, 140, 44, s, a); });
+        caja(cx, cy + 4, lerp(.7, 1.1, seg(t, .1, .9)));
         return 'Ein neues Mitglied wächst in Regeln und Abläufe hinein.';
       },
       rekrutierung: function (t) {
@@ -168,7 +182,6 @@
         var m = seg(t, .1, .7); var x = lerp(PL.x + PL.w / 2 - 105, BT.cx - 110, m), y = lerp(PL.y + 48, BT.cy + 105, m);
         gesetz(BT.cx - 150, BT.cy + 100, m > .95 ? 'Mindestlohn 15 €' : 'Gesetz', 1);
         if (m < .95) zettel(x, y, 210, 46, 'Mindestlohn 15 €', 1);
-        linie(PL.x + PL.w, PL.y + 70, BT.cx - 155, BT.cy + 125, farbe('linie'), 2, true);
         return 'Die Programmforderung steht jetzt im Gesetz.';
       },
       kontrolle: function (t) {
@@ -199,8 +212,10 @@
       ctx.font = '700 ' + sc(30) + 'px "Bricolage Grotesque", "Atkinson Hyperlegible Next", sans-serif'; ctx.fillStyle = farbe('text'); ctx.textAlign = 'right'; ctx.textBaseline = 'middle'; ctx.fillText(f.name, sc(W - 24 + dx), sc(34));
       text(AUFGABEN[f.aufgabe], W - 24 + dx, 64, 24, farbe('leise'), 'right'); ctx.restore();
       /* Band: elf Felder, gesehene gefüllt, aktuelles in Akzent */
-      for (var b = 0; b < FOLGE.length; b++) { rect(24 + b * 30, 54, 24, 8, b < szene ? farbe('text') : b === szene ? farbe('akzent') : farbe('karton')); }
-      text((szene + 1) + ' / 11', 24, 30, 24, farbe('leise'), 'left');
+      rect(30, 62, 32 * (FOLGE.length - 1), 3, farbe('karton'));
+      rect(30, 62, 32 * szene, 3, farbe('text'));
+      for (var b = 0; b < FOLGE.length; b++) { var bx = 30 + b * 32; if (b === szene) kreis(bx, 63, 11, farbe('akzent'), farbe('flaeche'), 3); else kreis(bx, 63, 7, b < szene ? farbe('text') : farbe('flaeche'), farbe('text'), 1.5); }
+      text('Szene ' + (szene + 1) + ' von 11', 24, 30, 24, farbe('leise'), 'left');
       canvas.setAttribute('aria-label', 'Szene ' + (szene + 1) + ' von 11, ' + fn(id).name + ': ' + s);
       return s;
     }
@@ -227,13 +242,13 @@
       if (szene === FOLGE.length - 1 && t >= 1 && opt.amEnde) opt.amEnde();
     }
     function autoAus() { auto = false; alle.setAttribute('aria-pressed', 'false'); alle.textContent = 'Alle elf abspielen'; }
-    zurueck.addEventListener('click', function (ev) { autoAus(); zeige(szene - 1, ev.detail === 0 ? 1 : 0, true); });
-    weiter.addEventListener('click', function (ev) { autoAus(); if (szene === FOLGE.length - 1) { if (opt.amEnde) opt.amEnde(); return; } zeige(szene + 1, ev.detail === 0 ? 1 : 0, true); });
+    zurueck.addEventListener('click', function (ev) { startWeg(); autoAus(); zeige(szene - 1, ev.detail === 0 ? 1 : 0, true); });
+    weiter.addEventListener('click', function (ev) { startWeg(); autoAus(); if (szene === FOLGE.length - 1) { if (opt.amEnde) opt.amEnde(); return; } zeige(szene + 1, ev.detail === 0 ? 1 : 0, true); });
     nochmal.addEventListener('click', function () { autoAus(); zeige(szene, 0, false); });
-    alle.addEventListener('click', function () { if (auto) { autoAus(); if (laeuft) { cancelAnimationFrame(laeuft); laeuft = null; t = 1; stand.textContent = male(); } return; } if (weniger()) return; auto = true; alle.setAttribute('aria-pressed', 'true'); alle.textContent = 'Anhalten'; zeige(szene === FOLGE.length - 1 ? 0 : szene, 0, true); });
+    alle.addEventListener('click', function () { startWeg(); if (auto) { autoAus(); if (laeuft) { cancelAnimationFrame(laeuft); laeuft = null; t = 1; stand.textContent = male(); } return; } if (weniger()) return; auto = true; alle.setAttribute('aria-pressed', 'true'); alle.textContent = 'Anhalten'; zeige(szene === FOLGE.length - 1 ? 0 : szene, 0, true); });
     function tempoZeigen() { tempo.setAttribute('aria-pressed', langsam ? 'true' : 'false'); tempo.textContent = langsam ? 'Normales Tempo' : 'Langsamer (Beamer)'; }
     tempo.addEventListener('click', function () { langsam = !langsam; if (PW.merke) PW.merke('film-tempo', langsam ? 'langsam' : 'normal'); tempoZeigen(); }); tempoZeigen();
-    regler.addEventListener('input', function () { autoAus(); if (laeuft) { cancelAnimationFrame(laeuft); laeuft = null; } var v = parseInt(regler.value, 10); var i = Math.min(FOLGE.length - 1, Math.floor(v / 1000)); if (i !== szene) { szene = i; beschrifte(); } t = Math.min(1, (v - i * 1000) / 1000); stand.textContent = male(); });
+    regler.addEventListener('input', function () { startWeg(); autoAus(); if (laeuft) { cancelAnimationFrame(laeuft); laeuft = null; } var v = parseInt(regler.value, 10); var i = Math.min(FOLGE.length - 1, Math.floor(v / 1000)); if (i !== szene) { szene = i; beschrifte(); } t = Math.min(1, (v - i * 1000) / 1000); stand.textContent = male(); });
     wurzel.addEventListener('keydown', function (e) { if (e.target === regler) return; if (e.key === 'ArrowRight') { e.preventDefault(); autoAus(); zeige(szene + 1, 1, true); } if (e.key === 'ArrowLeft') { e.preventDefault(); autoAus(); zeige(szene - 1, 1, true); } if (e.key === ' ' && e.target === canvas) { e.preventDefault(); alle.click(); } });
     canvas.addEventListener('click', function () { if (laeuft) return; autoAus(); zeige(szene, 0, false); });
     if (window.IntersectionObserver) new IntersectionObserver(function (es) { es.forEach(function (e) { sichtbar = e.isIntersecting; }); }, { threshold: .2 }).observe(buehne);

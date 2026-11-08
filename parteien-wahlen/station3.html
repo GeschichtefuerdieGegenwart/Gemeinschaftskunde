@@ -22,6 +22,7 @@
   <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">3</span><h1>Wofür stehen die Parteien?</h1><p class="leitfrage">Wie würde Partei X entscheiden, und woher weiß man das?</p><p class="klein" style="margin:0">Drei Schritte: erst klären, was dir wichtig ist · dann nachlesen, was die Parteien dazu schreiben · dann prüfen, ob du ihre Positionen triffst.</p><div class="kz"><div><b>8</b><span>Parteien</span></div><div><b>8</b><span>Streitfragen</span></div><div><b>3</b><span>passen zu dir</span></div></div></div></div>
   <ol class="fort" aria-label="Fortschritt"></ol>
   <aside class="caja" aria-label="Caja, eine erfundene Figur"><p>Caja darf am 23. Februar 2025 zum ersten Mal den Bundestag wählen. Was ihr wichtig ist, weiß sie: bezahlbares Wohnen, ein Lohn, von dem man leben kann. Welche Partei was dazu schreibt, weiß sie noch nicht.</p><p>Mach es wie Caja: erst klären, was dir wichtig ist, dann in den Programmen nachlesen. Eine Empfehlung gibt dir die Seite nicht.</p></aside>
+  <section class="karte karte--leise abruf" id="abruf"><noscript><p>Erst erinnern: Was weißt du noch aus der letzten Station?</p></noscript></section>
   <p class="hinweis"><strong>Zwei Ebenen, getrennt:</strong> Was eine Partei über sich sagt (Programm) und was andere über sie feststellen (Gerichte, Verfassungsschutz, Recherchen). Beides steht hier, aber nie vermischt und immer mit Datum und Quelle. Die Seite sagt dir nicht, was du wählen sollst, und rechnet keine Übereinstimmung aus.</p>
 
   <section class="schritt" id="schritt1">
@@ -78,12 +79,13 @@
 <script src="../assets/js/motion.js"></script>
 <script src="../assets/js/faecher.js"></script>
 <script src="../assets/js/merkzettel.js"></script>
+<script src="../assets/js/abruf.js"></script>
 <script src="../assets/js/profile.js"></script>
 <script src="../assets/js/bausteine.js"></script>
 <script src="../assets/js/lernstand.js"></script>
 <script src="../assets/js/hilfen.js"></script>
 <script>
-PW.rahmen('st3', '../'); PW.merkzettel('../');
+PW.rahmen('st3', '../'); PW.abrufZeigen(document.getElementById('abruf'), 3); PW.merkzettel('../');
 (function () {
   var reihenfolge = ['cdu', 'csu', 'spd', 'gruene', 'fdp', 'afd', 'linke', 'bsw'];
   var prof = document.getElementById('profile');
