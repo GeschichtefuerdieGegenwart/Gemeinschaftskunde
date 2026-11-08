@@ -336,3 +336,8 @@ Grundlage sind die beiden Designsysteme **Gemeinschaftskunde** (die Beschreibung
 - Static Grid Rule: Ohne IntersectionObserver, ohne View Transitions, ohne `animation-timeline` oder bei »weniger Bewegung« wechselt alles sofort; die Inhalte stehen vollständig da.
 - Ballot-Colour Rule: Parteifarbe in AH nur als 6-px-Kante neben dem Namen.
 - **Rückblick fällig:** zwei bis drei Wochen nach dem ersten Einsatz (Skill `signatur-design`, Schritt 6): Hat die Bewegung beim Verstehen geholfen? Sonst die ruhige Fassung setzen.
+
+## v10 (08.11.2026): Wahlarchiv
+
+- **AI Wahlarchiv** (Station 4): Name, automatische Sicherung nach dem Auszählen, Datei herunterladen und laden (JSON, nur Summen), Rückfall als Text. Abgleich-Spalte trägt den Namen der Wahl.
+- **Kleine Parteien einzeln:** Eine Stimme in einer Klasse von 15 sind 6,7 %. Bisher landete sie als »Sonstige« ohne Sitz; jetzt steht die Partei einzeln im Sitzrechner und bekommt über 5 % Sitze – mit dem Hinweis, wie viele Stimmen das bei der echten Wahl wären.

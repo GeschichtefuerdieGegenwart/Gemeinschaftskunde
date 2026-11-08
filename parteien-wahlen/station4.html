@@ -65,6 +65,11 @@
       <p class="klein">Wurde mit Menti, einer Moodle-Abstimmung oder einer Strichliste an der Tafel gewählt? Dann das Ergebnis hier als Text einfügen – eine Zeile je Partei mit Zahl. Prozentwerte und Stimmenzahlen werden beide erkannt.</p>
       <div id="einfuege-box"></div>
     </div>
+    <div class="karte" id="archiv-karte">
+      <h3>Ergebnis sichern und wieder laden</h3>
+      <p class="klein">Nach dem Auszählen sichert die Seite das Ergebnis automatisch auf diesem Gerät. Damit es nicht verloren geht – anderes Gerät, anderer Browser, gelöschter Verlauf –, lade es zusätzlich <strong>als Datei</strong> herunter und gib ihm einen Namen, zum Beispiel »Bundestagswahl 2026 · J1«. Die Datei enthält nur Summen je Partei und Kandidat, keine Namen.</p>
+      <div id="wahlarchiv"></div>
+    </div>
     <p class="hinweis"><strong>Warum nicht direkt aus Menti?</strong> Diese Seite läuft ohne eigenen Server – auch wenn sie in Moodle liegt. Sie kann deshalb keine Eingaben von vielen Geräten zusammenführen, und Menti bietet für Ergebnisse keine offene Schnittstelle an. Alles, was eine statische Seite tun kann, ist selbst auszuzählen (Weg 1) oder ein fertiges Ergebnis zu übernehmen (Weg 2).</p>
   </section>
 
@@ -155,6 +160,7 @@
 <script src="../assets/js/lernstand.js"></script>
 <script src="../assets/js/hilfen.js"></script>
 <script src="../assets/js/urne.js"></script>
+<script src="../assets/js/wahlarchiv.js"></script>
 <script src="../assets/js/koalition.js"></script>
 <script src="../assets/js/bausteine.js"></script>
 <script>
@@ -200,13 +206,18 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
   var farben = ids.map(function (id) { var p = PW.partei(id); return { id: id, name: p.name, farbe: p.farbe }; });
   farben.push({ id: 'ssw', name: 'SSW', farbe: 'var(--partei-ssw)' });
   var letzteSitze = {};
+  /* v10: kleine Parteien aus der Klassenwahl einzeln (in kleinen Klassen ist eine Stimme schnell über 5 %) */
+  var extra = {};
   function werte() { var w = {}; ids.forEach(function (id) { var v = parseFloat(felder[id].value.replace(',', '.')); w[id] = isNaN(v) ? null : v; }); return w; }
   function rechne(animiert) {
     var w = werte(); var s = parseFloat((felder.sonst.value || '0').replace(',', '.')) || 0;
     var summe = s; ids.forEach(function (id) { summe += w[id] || 0; });
     document.getElementById('summe-hinweis').textContent = summe ? 'Summe: ' + PW.fmt(summe) + ' %' + (Math.abs(summe - 100) > 0.6 ? ' (sollte etwa 100 sein)' : '') : 'Noch keine Werte.';
     var opts = { huerde: huerde.checked ? 5 : 0, grundmandate: gm.checked ? { linke: 3 } : {}, ssw: huerde.checked && Math.abs(summe - 100) < 1 && w.cdu === 22.6 };
-    var sitze = PW.sitze(w, opts); letzteSitze = sitze;
+    var wAlle = {}; Object.keys(w).forEach(function (id) { wAlle[id] = w[id]; });
+    var extraSumme = 0; Object.keys(extra).forEach(function (pid) { wAlle[pid] = extra[pid]; extraSumme += extra[pid]; });
+    var sitze = PW.sitze(wAlle, opts); letzteSitze = sitze;
+    var farbenAlle = farben.concat(Object.keys(extra).map(function (pid) { return { id: pid, name: PW.listenName(pid), farbe: 'var(--stahl)' }; }));
     /* Balken */
     var b = document.getElementById('balken'); b.innerHTML = '';
     var maxw = 50;
@@ -216,16 +227,24 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
       var row = PW.el('div', { 'class': 'balken' }, [PW.el('span', { text: p.name }), PW.el('div', { 'class': 'spur huerde' }, [PW.el('div', { 'class': 'fuellung', 'data-wert': (Math.min(v, maxw) / maxw).toFixed(3), style: 'background:' + (drin ? p.farbe : 'var(--partei-sonstige)') }), huerde.checked ? PW.el('div', { 'class': 'huerde-linie', style: 'left:' + (5 / maxw * 100) + '%', title: '5-%-Hürde' }) : PW.el('span')]), PW.el('span', { 'class': 'zahl', text: PW.fmt(v) + ' %' })]);
       b.appendChild(row);
     });
+    Object.keys(extra).forEach(function (pid) {
+      var v = extra[pid], drin = (sitze[pid] || 0) > 0;
+      b.appendChild(PW.el('div', { 'class': 'balken balken--klein' }, [PW.el('span', { text: PW.listenName(pid) + ' (kleine Partei)' }), PW.el('div', { 'class': 'spur huerde' }, [PW.el('div', { 'class': 'fuellung', 'data-wert': (Math.min(v, maxw) / maxw).toFixed(3), style: 'background:' + (drin ? 'var(--stahl)' : 'var(--partei-sonstige)') }), huerde.checked ? PW.el('div', { 'class': 'huerde-linie', style: 'left:' + (5 / maxw * 100) + '%', title: '5-%-Hürde' }) : PW.el('span')]), PW.el('span', { 'class': 'zahl', text: PW.fmt(v) + ' %' })]));
+    });
     PW.balkenWachsen(b);
-    PW.halbrund(document.getElementById('halbrund'), sitze, farben, animiert === true);
-    var rr = document.getElementById('rechner-rueck'); var raus = ids.filter(function (id) { return w[id] !== null && w[id] > 0 && !sitze[id]; });
-    var verloren = 0; raus.forEach(function (id) { verloren += w[id]; });
-    rr.className = 'rueck'; rr.innerHTML = summe ? ('<strong>Ohne Sitz:</strong> ' + (raus.length ? raus.map(function (id) { return PW.partei(id).name + ' (' + PW.fmt(w[id]) + ' %)'; }).join(', ') + ' – zusammen ' + PW.fmt(verloren + s) + ' % der Stimmen, die keinen Sitz bekommen.' : 'keine der eingetragenen Parteien.') + (huerde.checked ? '' : ' <strong>Ohne Hürde</strong> bekommt jede Partei Sitze nach ihrem Anteil. Vergleiche: Wie viele Fraktionen gäbe es, und wie leicht wäre eine Mehrheit?')) : '';
+    PW.halbrund(document.getElementById('halbrund'), sitze, farbenAlle, animiert === true);
+    var rr = document.getElementById('rechner-rueck'); var raus = ids.concat(Object.keys(extra)).filter(function (id) { return wAlle[id] !== null && wAlle[id] > 0 && !sitze[id]; });
+    var verloren = 0; raus.forEach(function (id) { verloren += wAlle[id]; });
+    var sRest = Math.max(0, s - extraSumme);
+    rr.className = 'rueck'; rr.innerHTML = summe ? ('<strong>Ohne Sitz:</strong> ' + (raus.length ? raus.map(function (id) { return PW.listenName(id) + ' (' + PW.fmt(wAlle[id]) + ' %)'; }).join(', ') + ' – zusammen ' + PW.fmt(verloren + sRest) + ' % der Stimmen, die keinen Sitz bekommen.' : (sRest ? 'Sonstige (' + PW.fmt(sRest) + ' %) – Stimmen für kleine Parteien, die hier nicht einzeln stehen.' : 'keine der eingetragenen Parteien.')) + (huerde.checked ? '' : ' <strong>Ohne Hürde</strong> bekommt jede Partei Sitze nach ihrem Anteil. Vergleiche: Wie viele Fraktionen gäbe es, und wie leicht wäre eine Mehrheit?')) : '';
+    var drinKlein = Object.keys(extra).filter(function (pid) { return sitze[pid]; });
+    if (drinKlein.length && summe) rr.innerHTML += '<span class="beleg"><strong>Kleine Klasse, große Wirkung:</strong> ' + drinKlein.map(PW.listenName).join(', ') + (drinKlein.length === 1 ? ' liegt' : ' liegen') + ' über 5 % und bekommt Sitze. In einer Klasse macht eine einzige Stimme schnell mehr als 5 % aus – bei der echten Wahl wären dafür rund 2,5 Millionen Zweitstimmen nötig.</span>';
     baueKoalition(sitze); baueAbgleich();
   }
   function lade(art) {
     var q = {};
     if (art === 'bund') q = PW.ergebnisse.bund.werte; else if (art === 'wahlkreis') q = PW.ergebnisse.wahlkreis.werte; else if (art === 'klasse') q = PW.lies('klasse', null) || {};
+    extra = art === 'klasse' ? (PW.lies('klasse-sonst', {}) || {}) : {};
     ids.forEach(function (id) { felder[id].value = (q[id] === null || q[id] === undefined) ? '' : q[id]; });
     var summe = 0; ids.forEach(function (id) { summe += parseFloat(felder[id].value) || 0; });
     felder.sonst.value = art === 'leer' || !summe ? '' : Math.max(0, 100 - summe).toFixed(1);
@@ -281,7 +300,7 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
   function baueAbgleich() {
     var box = document.getElementById('abgleich-tab'); box.innerHTML = '';
     var klasse = PW.lies('klasse', null);
-    var spalten = [{ titel: 'Klasse (Menti)', werte: klasse || {}, beteiligung: null }, PW.ergebnisse.herrenberg, PW.ergebnisse.wahlkreis, PW.ergebnisse.land, PW.ergebnisse.bund];
+    var spalten = [{ titel: PW.lies('klasse-name', '') || 'Klasse', werte: klasse || {}, beteiligung: null }, PW.ergebnisse.herrenberg, PW.ergebnisse.wahlkreis, PW.ergebnisse.land, PW.ergebnisse.bund];
     var t = PW.el('table'); var tr = PW.el('tr', {}, [PW.el('th', { text: 'Partei' })]);
     spalten.forEach(function (s) { tr.appendChild(PW.el('th', { 'class': 'zahl', text: s.titel })); }); t.appendChild(PW.el('thead', {}, [tr]));
     var tb = PW.el('tbody');
@@ -293,7 +312,7 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
     var bet = PW.el('tr', {}, [PW.el('th', { scope: 'row', text: 'Wahlbeteiligung' })]);
     spalten.forEach(function (s) { bet.appendChild(PW.el('td', { 'class': 'zahl', text: s.beteiligung ? PW.fmt(s.beteiligung) + ' %' : '–' })); });
     tb.appendChild(bet); t.appendChild(tb); box.appendChild(t);
-    box.appendChild(PW.el('p', { 'class': 'klein', style: 'color:var(--leise)', text: 'Quellen: Bundeswahlleiterin (Bund, Land, Wahlkreis 260); SWR-Wahlportal und Stadt Herrenberg (Herrenberg; CSU tritt nur in Bayern an). Klasse: anonyme Menti-Abstimmung, von der Lehrkraft eingetragen.' }));
+    box.appendChild(PW.el('p', { 'class': 'klein', style: 'color:var(--leise)', text: 'Quellen: Bundeswahlleiterin (Bund, Land, Wahlkreis 260); SWR-Wahlportal und Stadt Herrenberg (Herrenberg; CSU tritt nur in Bayern an). Klasse: anonyme Klassenwahl (Wahllokal oder eingefügtes Ergebnis).' }));
   }
   lade('bund');
   document.querySelectorAll('input[name=hf]').forEach(function (i) {
@@ -307,8 +326,9 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
     });
   });
   /* Klassenwahl: Urne und Einfüge-Import */
-  PW.urne(document.getElementById('urne-box'), function () { klassenKnopf(); lade('klasse'); });
-  PW.einfuegen(document.getElementById('einfuege-box'), function () { klassenKnopf(); lade('klasse'); });
+  var archiv = PW.wahlarchiv(document.getElementById('wahlarchiv'), function () { klassenKnopf(); lade('klasse'); });
+  PW.urne(document.getElementById('urne-box'), function () { if (archiv) archiv.autoSichern(); klassenKnopf(); lade('klasse'); });
+  PW.einfuegen(document.getElementById('einfuege-box'), function () { if (archiv) archiv.autoSichern(); klassenKnopf(); lade('klasse'); });
   PW.lernstandAnzeigen(4);
   document.getElementById('reiter').addEventListener('reiter:wechsel', function (e) { if (e.detail.id === 'rechner') rechne(true); });
 })();
