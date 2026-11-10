@@ -191,8 +191,8 @@
     var rand = PW.el('aside', { 'class': 'gb-rand' });
     box.appendChild(kopf);
     box.appendChild(PW.el('div', { 'class': 'gb-buehne' }, [blatt, rand]));
-    function zeige(i, gleiten) {
-      st.stufe = i; PW.merke('zucker', st); regler.value = String(i);
+    function zeige(i, gleiten, still) {
+      st.stufe = i; if (!still) PW.merke('zucker', st); regler.value = String(i);
       zurueck.disabled = i === 0; vor.disabled = i === N - 1;
       var f = F[i], s = stand[i], alt = i ? stand[i - 1] : null;
       blatt.textContent = '';
@@ -244,7 +244,7 @@
     regler.addEventListener('input', function () { zeige(+regler.value, true); });
     zurueck.addEventListener('click', function (e) { zeige(Math.max(0, st.stufe - 1), e.detail !== 0); });
     vor.addEventListener('click', function (e) { zeige(Math.min(N - 1, st.stufe + 1), e.detail !== 0); });
-    zeige(Math.min(st.stufe || 0, N - 1), false);
+    zeige(Math.min(st.stufe || 0, N - 1), false, true);
   };
 
   /* ---------- AR · Akteure und Machtressourcen ---------- */

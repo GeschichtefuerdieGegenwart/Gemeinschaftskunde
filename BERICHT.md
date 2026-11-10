@@ -255,3 +255,9 @@ Prüfkette v4.1: taste-skill lint 0 FAIL/0 WARN; inspect der geänderten Seiten 
 Eine Doppelstunde (`verbaende.html`), roter Faden Zuckersteuer 2026, Kernfrage »Stimme der Gesellschaft – oder gekaufte Politik?«. Sieben Schritte mit den sechs Hebeln (verdecken, variieren, rückmelden, stufen, bündeln; das Urteil im Raum). Muster AP–AT. GK-Labor: Modul 2 als »Entwurf« verlinkt.
 
 **Prüfung (gelaufen):** `tools/pruefen.py` für GK-Labor und Modul 2: nur der bekannte Befund (H1 im Labor, 390 px). Hell, Dunkel, Beamer bei 1280 und 390 px ohne Fehler und ohne waagerechtes Scrollen. Browser-Test aller Bausteine samt Stand nach Neuladen. **Nicht gelaufen:** iPad, Beamer im Raum.
+
+## v13 (10.11.2026): Eingaben je Modul löschen – Pull Request
+
+»Eingaben löschen …« im Fuß öffnet ein Feld statt eines Browser-Dialogs: Eingaben im aktuellen Modul löschen (im GK-Labor: Modul 1 oder Modul 2 wählen), Klassenergebnisse von Modul 1 nur mit eigenem Schalter, »Alles auf diesem Gerät löschen« als letzte Wahl; jede Löschung braucht ein zweites Tippen, Escape schließt. Ansicht und Bewegung bleiben immer. Der Lernstand wird je Modul getrennt (Modul 2: st12). Fußzeile neutral für alle Module.
+
+**Prüfung (gelaufen):** Browser-Test mit Schlüsseln aus beiden Modulen: Modul 2 löschen lässt Modul 1, Klassenwahl, Wahlarchiv, Hypothesen und Ansicht stehen; Modul 1 löschen ohne Schalter lässt Klassenwahl und Wahlarchiv stehen; kein Browser-Dialog. `tools/pruefen.py`: nur der bekannte Befund (H1 im Labor, 390 px).
