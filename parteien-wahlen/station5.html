@@ -23,6 +23,12 @@
   <aside class="caja" aria-label="Caja, eine erfundene Figur"><p>Caja ist 19, ihre Großmutter ist 74. Beide waren am 23. Februar 2025 wählen. Haben sie anders gewählt – und wenn ja: Liegt das am Alter?</p><p>Erst vermutest du, dann deckst du die amtliche Wahlstatistik auf. Am Ende urteilst du über die 5-%-Hürde.</p></aside>
   <section class="karte karte--leise abruf" id="abruf"><noscript><p>Erst erinnern: Was weißt du noch aus der letzten Station?</p></noscript></section>
 
+  <section class="karte dw-einstieg" aria-labelledby="dw-titel">
+    <h2 id="dw-titel">Einstieg: Drei Menschen, drei Wahlen?</h2>
+    <p>Caja, ihr Mitschüler aus dem Gemeinschaftskundekurs und ihre Großeltern waren am 23. Februar 2025 wählen. Jede Person steht für eine Gruppe in der amtlichen Wahlstatistik. Tippe für jede Gruppe, welche Partei dort vorn lag. Aufgedeckt wird erst später.</p>
+    <div id="dreiwahlen"><noscript><p>Ohne JavaScript: Notiere für Frauen 18–24, Männer 18–24 und Menschen über 70 je eine Partei, die dort vermutlich vorn lag.</p></noscript></div>
+  </section>
+
   <section class="karte">
     <h2>1. Vermuten: Die 18- bis 24-Jährigen</h2>
     <p>Welche Partei hat bei den 18- bis 24-Jährigen 2025 die meisten Zweitstimmen bekommen? Trag deine Schätzung in Prozent ein, mindestens für drei Parteien. Dann aufdecken.</p>
@@ -50,6 +56,12 @@
         <li>Shell Jugendstudie 2024: Seit 2019 ist vor allem der Anteil männlicher Jugendlicher gestiegen, die sich als »eher rechts« oder »rechts« einordnen (jeder vierte; 2019 weniger als jeder fünfte). Bei den weiblichen Jugendlichen sind es 11 Prozent, ohne Anstieg. 50 Prozent der Jugendlichen nennen sich politisch interessiert (2002: 34 Prozent).</li>
         <li>Erklärungsansätze in der Forschung (keine gesicherten Ursachen): unterschiedliche Mediennutzung (TikTok, YouTube), unterschiedliche Erfahrungen mit Bildung und Arbeitsmarkt, Themen wie Gleichstellung und Migration, die jeweils anders bewertet werden. Welche Erklärung überzeugt dich, und was spricht dagegen?</li>
       </ul>
+  </section>
+
+  <section class="karte" aria-labelledby="dw-auf-titel">
+    <h2 id="dw-auf-titel">Zurück zu den drei Menschen</h2>
+    <p>Du kennst jetzt die Zahlen nach Alter und nach Geschlecht. Löse deine Tipps vom Anfang auf.</p>
+    <div id="dreiwahlen-auf"></div>
   </section>
 
   <section class="karte">
@@ -85,7 +97,7 @@
       <p>Am Anfang der Einheit hast du dich auf diese Linie gestellt. Stell dich noch einmal auf – ehrlich, nicht wie du glaubst, dass man stehen sollte.</p>
       <div id="urteil-nachher"></div>
     </div>
-    <p class="knopfzeile knopfzeile--rechts"><a class="knopf" href="station4.html">Zurück</a> <a class="knopf" href="../klausurtraining.html#ziel4">Klausurtraining zu Ziel 4</a> <a class="knopf knopf--voll" href="../zusammenfassung.html" onclick="PW.stationFertig(5)">Zur Zusammenfassung</a></p>
+    <p class="knopfzeile knopfzeile--rechts"><a class="knopf" href="station4.html">Zurück</a> <a class="knopf" href="../klausurtraining.html#ziel4">Klausurtraining zu Ziel 4</a> <a class="knopf knopf--voll" href="station6.html" onclick="PW.stationFertig(5)">Weiter zu Station 6: Europa wählt</a></p>
   </section>
 </main>
 <footer class="fuss"><div class="fuss-innen"></div></footer>
@@ -99,8 +111,10 @@
 <script src="../assets/js/hilfen.js"></script>
 <script src="../assets/js/waage.js"></script>
 <script src="../assets/js/urteil.js"></script>
+<script src="../assets/js/dreiwahlen.js"></script>
 <script>
 PW.rahmen('st5', '../'); PW.abrufZeigen(document.getElementById('abruf'), 5); PW.merkzettel('../');
+PW.dreiWahlen(document.getElementById('dreiwahlen')); PW.dreiWahlenAufloesen(document.getElementById('dreiwahlen-auf'));
 PW.waage(document.getElementById('waage')); PW.urteilslinie(document.getElementById('urteil-nachher'), 'nachher', '../');
 (function () {
   var namen = Object.keys(PW.alter.werte);

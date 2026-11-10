@@ -289,7 +289,12 @@ PW.einheit = [
     frage: 'Wählen Junge anders als Alte, Frauen anders als Männer – und was folgt daraus?',
     caja: 'Caja und ihre Großmutter: anders gewählt?',
     begriffe: ['Wahlstatistik', 'Sachurteil', 'Werturteil'],
-    mit: 'Ein begründetes Urteil zur 5-%-Hürde' }
+    mit: 'Ein begründetes Urteil zur 5-%-Hürde' },
+  { nr: 6, name: 'Europa wählt', url: 'parteien-wahlen/station6.html', ton: 'gelb', ziel: 5,
+    frage: 'Wie wird das Europäische Parlament gewählt – und was ist anders als bei der Bundestagswahl?',
+    caja: 'Caja durfte mit 17 Europa wählen.',
+    begriffe: ['Europäisches Parlament', 'degressive Proportionalität', 'Fraktion', 'Sperrklausel'],
+    mit: 'Bundestags- und Europawahl vergleichen und die Hürde beurteilen' }
 ];
 
 /* v7 · Zeitstrahl in Bahnen (Vertiefung, Entwurf aus Claude Design »Zeitstrahl Parteien 1863–2025«).
@@ -344,5 +349,10 @@ PW.abruf = {
     ['Wofür ist die Zweitstimme da?', 'Sie entscheidet, wie viele Sitze jede Partei im Bundestag bekommt.'],
     ['Was bedeutet die 5-%-Hürde?', 'Eine Partei unter 5 % der Zweitstimmen bekommt keine Sitze nach Zweitstimmen. Ausnahmen: drei Direktmandate (Grundmandatsklausel) und Parteien nationaler Minderheiten wie der SSW.'],
     ['Ab wie vielen Sitzen hat eine Koalition 2025 die Mehrheit?', 'Ab 316 von 630 Sitzen.']
+  ],
+  6: [
+    ['Welche Partei lag 2025 bei den 18- bis 24-Jährigen vorn, welche bei den über 70-Jährigen?', 'Bei den 18- bis 24-Jährigen Die Linke (27,3 %), bei den über 70-Jährigen CDU/CSU (41,4 %).'],
+    ['Was meint »Political Gender Gap«?', 'Junge Frauen und junge Männer wählen und denken politisch unterschiedlich – 2025 etwa Linke 37,1 % zu 17,6 %, AfD 12,6 % zu 25,2 %.'],
+    ['Was ist der Unterschied zwischen Sachurteil und Werturteil?', 'Das Sachurteil prüft, was zutrifft und was folgt (mit Belegen). Das Werturteil sagt, was man selbst für richtig hält – und nach welchem Wert.']
   ]
 };

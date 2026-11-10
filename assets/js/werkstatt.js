@@ -58,10 +58,16 @@
     var gesamtSitze = (opts && opts.gesamt) || PW.sitzeGesamt, mehrheit = (opts && opts.mehrheit) || PW.mehrheit;
     var gesamt = 0; reihenfolge.forEach(function (r) { gesamt += sitzeJeId[r.id] || 0; });
     var rest = gesamtSitze - gesamt;
-    var reihen = 9, r0 = 150, dr = 24, W = 720, H = 390, cx = 360, cy = 372;
+    var reihen = 9, r0 = 150, dr = 24, W = 720, H = 390, cx = 360, cy = 372, abst = 10.6, pr = 5;
+    /* v11: andere Parlamentsgrößen (96 deutsche Sitze im EP, 720 im EP) – Reihen und Abstand aus der Sitzzahl */
+    if (gesamtSitze !== PW.sitzeGesamt) {
+      reihen = gesamtSitze < 200 ? 5 : 9; dr = 216 / reihen;
+      var summeRad = 0; for (var rr = 0; rr < reihen; rr++) summeRad += r0 + rr * dr;
+      abst = Math.PI * summeRad / gesamtSitze; pr = Math.min(abst * 0.42, dr * 0.42, 11);
+    }
     var punkte = [];
     for (var r = 0; r < reihen; r++) {
-      var rad = r0 + r * dr, n = Math.round(Math.PI * rad / 10.6);
+      var rad = r0 + r * dr, n = Math.round(Math.PI * rad / abst);
       for (var i = 0; i < n; i++) { var a = Math.PI - Math.PI * (i + 0.5) / n; punkte.push({ x: cx + rad * Math.cos(a), y: cy - rad * Math.sin(a), a: a }); }
     }
     punkte.sort(function (p, q) { return q.a - p.a; });
@@ -77,7 +83,7 @@
       var n = sitzeJeId[r.id] || 0;
       for (var i = 0; i < n && idx < punkte.length; i++, idx++) {
         var c = document.createElementNS(ns, 'circle'); var p = punkte[idx];
-        c.setAttribute('cx', p.x.toFixed(1)); c.setAttribute('cy', p.y.toFixed(1)); c.setAttribute('r', 5);
+        c.setAttribute('cx', p.x.toFixed(1)); c.setAttribute('cy', p.y.toFixed(1)); c.setAttribute('r', pr.toFixed(1));
         c.style.fill = animiert ? 'var(--partei-leer)' : r.farbe; c.style.stroke = 'var(--text)'; c.setAttribute('stroke-width', '.6');
         if (animiert) { (function (c, farbe, d) { setTimeout(function () { c.style.fill = farbe; }, d); })(c, r.farbe, Math.min(440, (k++ / gesamtSitze) * 440)); }
         svg.appendChild(c);
@@ -85,12 +91,14 @@
     });
     for (; idx < punkte.length; idx++) {
       var c2 = document.createElementNS(ns, 'circle'); var p2 = punkte[idx];
-      c2.setAttribute('cx', p2.x.toFixed(1)); c2.setAttribute('cy', p2.y.toFixed(1)); c2.setAttribute('r', 5); c2.style.fill = 'var(--partei-leer)'; c2.style.stroke = 'var(--partei-sonstige)'; c2.setAttribute('stroke-width', '.6');
+      c2.setAttribute('cx', p2.x.toFixed(1)); c2.setAttribute('cy', p2.y.toFixed(1)); c2.setAttribute('r', pr.toFixed(1)); c2.style.fill = 'var(--partei-leer)'; c2.style.stroke = 'var(--partei-sonstige)'; c2.setAttribute('stroke-width', '.6');
       svg.appendChild(c2);
     }
-    /* Mehrheitsmarke */
+    /* Mehrheitsmarke (entfällt bei opts.ohneMehrheit, etwa für die deutsche Delegation im EP) */
+    if (!(opts && opts.ohneMehrheit)) {
     var l = document.createElementNS(ns, 'line'); l.setAttribute('x1', cx); l.setAttribute('x2', cx); l.setAttribute('y1', cy - r0 - dr * reihen + 2); l.setAttribute('y2', cy - 44); l.style.stroke = 'var(--text)'; l.setAttribute('stroke-width', 2); l.setAttribute('stroke-dasharray', '6 4'); svg.appendChild(l);
     var t = document.createElementNS(ns, 'text'); t.setAttribute('x', cx); t.setAttribute('y', cy - 14); t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', '18'); t.setAttribute('font-family', 'Atkinson Hyperlegible Next, sans-serif'); t.style.fill = 'var(--text)'; t.textContent = 'Mehrheit ab ' + mehrheit + ' Sitzen'; svg.appendChild(t);
+    }
     container.appendChild(svg);
     var leg = PW.el('ul', { 'class': 'legende' });
     reihenfolge.forEach(function (r) { if (!sitzeJeId[r.id]) return; leg.appendChild(PW.el('li', {}, [PW.el('span', { 'class': 'punkt', style: 'background:' + r.farbe }), r.name + ' ' + sitzeJeId[r.id] + (sitzeJeId[r.id] === 1 ? ' Sitz' : ' Sitze')])); });
@@ -132,6 +140,7 @@
     { id: 'st3', url: 'parteien-wahlen/station3.html', name: 'Positionen', station: 3 },
     { id: 'st4', url: 'parteien-wahlen/station4.html', name: 'Wählen', station: 4 },
     { id: 'st5', url: 'parteien-wahlen/station5.html', name: 'Warum so?', station: 5 },
+    { id: 'st6', url: 'parteien-wahlen/station6.html', name: 'Europa', station: 6 },
     { id: 'zus', url: 'zusammenfassung.html', name: 'Zusammenfassung' },
     { id: 'vert', url: 'vertiefung.html', name: 'Vertiefung' },
     { id: 'lehr', url: 'lehrkraft.html', name: 'Lehrkraft' },
@@ -143,7 +152,7 @@
     var kopf = document.querySelector('.kopf-innen'); if (!kopf) return;
     kopf.appendChild(PW.el('a', { 'class': 'marke', href: wurzel + 'index.html' }, [PW.el('span', { 'class': 'kreuz', 'aria-hidden': 'true' }), 'Politik-Werkstatt']));
     var nav = PW.el('nav', { 'class': 'nav', 'aria-label': 'Hauptnavigation' });
-    [seiten[0], seiten[1], seiten[10], seiten[7], seiten[9]].forEach(function (s) { var a = PW.el('a', { href: wurzel + s.url, text: s.name }); if (s.id === aktuell) a.setAttribute('aria-current', 'page'); nav.appendChild(a); });
+    ['start', 'ziele', 'klausur', 'zus', 'lehr'].map(function (id) { return seiten.filter(function (x) { return x.id === id; })[0]; }).forEach(function (s) { var a = PW.el('a', { href: wurzel + s.url, text: s.name }); if (s.id === aktuell) a.setAttribute('aria-current', 'page'); nav.appendChild(a); });
     kopf.appendChild(nav);
     var fort = document.querySelector('.fort');
     if (fort) {
