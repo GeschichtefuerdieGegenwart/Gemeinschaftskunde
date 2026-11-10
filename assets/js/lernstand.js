@@ -9,7 +9,8 @@
     { nr: 1, text: 'Sie kennen Aufgaben und Funktionen von Parteien.', kurz: 'Was Parteien tun – und woran man es erkennt.', stationen: [1, 2], seite: 'parteien-wahlen/station1.html' },
     { nr: 2, text: 'Sie bilden eine fundierte Meinung über die aktuelle Parteienlandschaft in Deutschland.', kurz: 'Positionen mit wörtlichen Belegen vergleichen.', stationen: [3], seite: 'parteien-wahlen/station3.html' },
     { nr: 3, text: 'Sie geben ihre Stimme ab und werten die Ergebnisse aus.', kurz: 'Stimmzettel, Sitzrechner, Koalitionen.', stationen: [4], seite: 'parteien-wahlen/station4.html' },
-    { nr: 4, text: 'Sie beurteilen, welchen Einfluss das Alter bei einer Wahl spielt.', kurz: 'Wahlverhalten nach Alter und Geschlecht beurteilen.', stationen: [5], seite: 'parteien-wahlen/station5.html' }
+    { nr: 4, text: 'Sie beurteilen, welchen Einfluss das Alter bei einer Wahl spielt.', kurz: 'Wahlverhalten nach Alter und Geschlecht beurteilen.', stationen: [5], seite: 'parteien-wahlen/station5.html' },
+    { nr: 5, text: 'Sie erklären die Wahl zum Europäischen Parlament und vergleichen sie mit der Bundestagswahl.', kurz: 'Europawahl: Regeln, Sitze, Fraktionen, Hürde.', stationen: [6], seite: 'parteien-wahlen/station6.html' }
   ];
   PW.stufenNamen = { A: 'A · Lesen und zuordnen', B: 'B · Selbst erklären', C: 'C · Eigenes Beispiel' };
 

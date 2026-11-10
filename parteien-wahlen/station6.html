@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="de" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Station 6 · Europa wählt</title>
+<script>try{var a=localStorage.getItem("pw:ansicht");if(a){a=JSON.parse(a);if(a==="hell"||a==="dunkel"||a==="beamer")document.documentElement.setAttribute("data-ansicht",a)}}catch(e){}</script>
+<link rel="stylesheet" href="../assets/css/werkstatt.css">
+<style>
+.vermutung{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:0 0 12px}
+.vermutung label{display:block;font-size:1rem;font-weight:700;margin-bottom:4px}
+.vermutung input{min-height:44px;padding:6px 10px;border:2px solid var(--stahl);border-radius:4px;background:var(--flaeche);font-size:1.125rem;width:100%}
+.vgl td,.vgl th{vertical-align:top}
+.koal label{display:flex;align-items:center;gap:8px;min-height:44px;font-weight:700}
+.raster-2{display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:768px){.raster-2{grid-template-columns:1fr 1fr}}
+.koal{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:4px 12px;margin:8px 0}
+</style>
+</head>
+<body data-ton="gelb">
+<header class="kopf"><div class="kopf-innen"></div></header>
+<main id="inhalt">
+  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">6</span><h1>Europa wählt</h1><p class="leitfrage">Wie wird das Europäische Parlament gewählt – und was ist anders als bei der Bundestagswahl?</p><p class="klein" style="margin:0">Fünf Reiter: So wird gewählt · Sitze je Land · Ergebnis 2024 · Fraktionen · Was das Parlament tut und dein Urteil.</p><div class="kz"><div><b>720</b><span>Sitze im EP</span></div><div><b>96</b><span>aus Deutschland</span></div><div><b>0 %</b><span>Hürde in Deutschland</span></div></div></div></div>
+  <ol class="fort" aria-label="Fortschritt"></ol>
+  <aside class="caja" aria-label="Caja, eine erfundene Figur"><p>Bei der Europawahl am 9. Juni 2024 war Caja 17 – und durfte trotzdem wählen. Ihr Mitschüler fragt: »Wozu? Brüssel ist doch weit weg.«</p><p>In dieser Station findest du heraus, wie die Wahl funktioniert, wer gewonnen hat und was das Parlament entscheidet.</p></aside>
+  <section class="karte karte--leise abruf" id="abruf"><noscript><p>Erst erinnern: Was weißt du noch aus der letzten Station?</p></noscript></section>
+  <ul class="reiter" id="reiter"></ul>
+
+  <section id="wahl">
+    <h2>So wird gewählt</h2>
+    <p><strong>Erst vermuten:</strong> Notiere drei Unterschiede zwischen Europawahl und Bundestagswahl, die du schon kennst oder vermutest. Dann aufdecken.</p>
+    <label class="klein vh-label" for="ep-vermutung">Drei Unterschiede, die ich vermute:</label>
+    <textarea id="ep-vermutung" class="schreibfeld" rows="3"></textarea>
+    <div class="deck" id="deck-vgl" style="margin-top:12px"><div class="decke"><button type="button">Vergleich aufdecken</button></div>
+      <div class="tab-roll"><table class="vgl">
+        <thead><tr><th>Merkmal</th><th>Bundestagswahl 2025</th><th>Europawahl 2024 in Deutschland</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Wahltag</th><td>23. Februar 2025</td><td>9. Juni 2024 (EU-weit 6. bis 9. Juni)</td></tr>
+          <tr><th scope="row">Wahlperiode</th><td>4 Jahre</td><td>5 Jahre</td></tr>
+          <tr><th scope="row">Wählen ab</th><td>18 Jahren</td><td><strong>16 Jahren</strong> (erstmals 2024)</td></tr>
+          <tr><th scope="row">Stimmen</th><td>zwei: Erststimme und Zweitstimme</td><td><strong>eine</strong> Stimme für eine Liste (Bundesliste oder Landesliste einer Partei)</td></tr>
+          <tr><th scope="row">Sitze</th><td>630</td><td>96 der 720 Sitze</td></tr>
+          <tr><th scope="row">Verteilung</th><td>Sainte-Laguë/Schepers</td><td>Sainte-Laguë/Schepers, bundesweit</td></tr>
+          <tr><th scope="row">Sperrklausel</th><td>5 % (oder drei Direktmandate)</td><td><strong>keine</strong> – das Bundesverfassungsgericht hat 5 % (2011) und 3 % (2014) gekippt</td></tr>
+          <tr><th scope="row">Wahlbeteiligung</th><td>82,5 %</td><td>64,7 %</td></tr>
+          <tr><th scope="row">Wer regiert danach?</th><td>Der Bundestag wählt die Kanzlerin oder den Kanzler.</td><td>Das EP wählt die Präsidentin oder den Präsidenten der Kommission – auf Vorschlag des Europäischen Rates (Art. 17 Abs. 7 EUV).</td></tr>
+        </tbody>
+      </table></div>
+      <p class="klein" style="color:var(--leise)">Quellen: Die Bundeswahlleiterin (Ergebnisse und Wahlbeteiligung 2024 und 2025); Europawahlgesetz; Vertrag über die Europäische Union. Die Regeln für die Wahl legt jedes Land selbst fest, im Rahmen des EU-Direktwahlakts – deshalb gelten in anderen Ländern zum Teil andere Wahlalter und Hürden.</p>
+    </div>
+    <p style="margin-top:16px"><strong>Aufgabe (vergleichen, AFB II):</strong> Vergleiche Bundestagswahl und Europawahl in drei Merkmalen. Erkläre bei einem Unterschied, warum er sinnvoll sein könnte.</p>
+  </section>
+
+  <section id="laender">
+    <h2>Sitze je Land</h2>
+    <div id="ep-waage"></div>
+    <details style="margin-top:16px"><summary>Alle 27 Länder: Sitze 2024–2029</summary><div id="ep-laender" style="margin-top:8px"></div></details>
+  </section>
+
+  <section id="ergebnis">
+    <h2>Das Ergebnis 2024 in Deutschland</h2>
+    <p>96 Sitze, 15 Parteien. <strong>Vermute zuerst:</strong> Wie viele Parteien hätten mit einer 5-%-Hürde noch Sitze? Dann schalte um.</p>
+    <div class="ansicht-wahl" role="group" aria-label="Sperrklausel wählen" id="ep-huerde-wahl">
+      <button type="button" class="knopf knopf--leise" data-h="0" aria-pressed="true">Keine Hürde (geltendes Recht)</button>
+      <button type="button" class="knopf knopf--leise" data-h="2" aria-pressed="false">2 % (beschlossen, noch nicht in Kraft)</button>
+      <button type="button" class="knopf knopf--leise" data-h="5" aria-pressed="false">5 % (wie im Bundestag)</button>
+    </div>
+    <div id="ep-halbrund" style="margin-top:12px"></div>
+    <p id="ep-satz" aria-live="polite"></p>
+    <details><summary>Warum »beschlossen, noch nicht in Kraft«?</summary>
+      <p class="klein">Die EU hat 2018 den Direktwahlakt geändert: Länder mit mehr als 35 Sitzen sollen eine Hürde zwischen 2 % und 5 % einführen. Gültig wird das erst, wenn alle Mitgliedstaaten zustimmen. Deutschland und Spanien haben das noch nicht abgeschlossen. Das Bundesverfassungsgericht hat am 6. Februar 2024 eine Klage dagegen als unzulässig verworfen. Ob die Hürde zur Europawahl 2029 gilt, ist <strong>noch offen</strong> (Stand dieser Seite: November 2026).</p>
+    </details>
+    <p class="klein" style="color:var(--leise)" id="ep-quelle"></p>
+  </section>
+
+  <section id="fraktionen">
+    <h2>Fraktionen im Europäischen Parlament</h2>
+    <p>Im EP sitzen die Abgeordneten nicht nach Ländern, sondern in <strong>Fraktionen</strong>: Parteien aus vielen Ländern mit ähnlichen Zielen schließen sich zusammen. Die CDU sitzt zum Beispiel mit Parteien aus Polen, Spanien und Griechenland in der EVP.</p>
+    <div id="ep-fraktionen"></div>
+    <div class="tab-roll"><table>
+      <thead><tr><th>Fraktion</th><th>Voller Name</th><th class="zahl">Sitze</th><th>Deutsche Parteien darin</th></tr></thead>
+      <tbody id="ep-fr-tab"></tbody>
+    </table></div>
+    <p class="klein" style="color:var(--leise)" id="ep-fr-quelle"></p>
+    <h3>Mehrheit suchen</h3>
+    <p>Für viele Beschlüsse braucht das EP die Mehrheit der abgegebenen Stimmen, für manche (etwa die Wahl der Kommissionspräsidentin) die Mehrheit seiner Mitglieder: <strong>361 von 720</strong>. Kreuze Fraktionen an, bis die Mehrheit steht.</p>
+    <div class="koal" id="ep-koal"></div>
+    <div class="rueck" id="ep-koal-rueck" aria-live="polite"></div>
+    <p class="klein">Zum Vergleich: Ursula von der Leyen wurde am 18. Juli 2024 mit 401 Stimmen erneut zur Kommissionspräsidentin gewählt. Die Wahl war geheim – welche Abgeordneten zugestimmt haben, weiß man nicht genau.</p>
+  </section>
+
+  <section id="parlament">
+    <h2>Was das Parlament tut – und dein Urteil</h2>
+    <div class="raster-2">
+      <div class="karte karte--leise"><h3>Gesetze beschließen</h3><p class="klein">Im ordentlichen Gesetzgebungsverfahren entscheidet das EP gleichberechtigt mit dem Rat der EU (den Ministerinnen und Ministern der Länder). Den Vorschlag macht die Kommission; das EP kann sie dazu auffordern (Art. 225 AEUV).</p></div>
+      <div class="karte karte--leise"><h3>Haushalt</h3><p class="klein">Das EP beschließt den jährlichen Haushalt der EU gemeinsam mit dem Rat.</p></div>
+      <div class="karte karte--leise"><h3>Kommission wählen und kontrollieren</h3><p class="klein">Es wählt die Präsidentin oder den Präsidenten der Kommission, stimmt der ganzen Kommission zu und kann ihr mit Zweidrittelmehrheit das Misstrauen aussprechen.</p></div>
+      <div class="karte karte--leise"><h3>Was es nicht kann</h3><p class="klein">Anders als der Bundestag kann das EP keine eigenen Gesetzentwürfe einbringen. Und es gibt keine Regierung, die von einer festen Koalition im Parlament getragen wird.</p></div>
+    </div>
+    <h3 style="margin-top:24px">Urteilen: Braucht die Europawahl in Deutschland eine Hürde?</h3>
+    <p>Trenne zuerst das <strong>Sachurteil</strong> (Was folgt aus einer Hürde? Belege aus dem Reiter »Ergebnis 2024«) vom <strong>Werturteil</strong> (Was ist dir wichtiger – und warum?).</p>
+    <div class="raster-2">
+      <div class="karte karte--leise"><h3>Dafür wird angeführt</h3><ul class="klein"><li>Viele Kleinstparteien erschweren die Arbeit im Parlament und in den Fraktionen.</li><li>Die EU selbst hat 2018 eine Hürde von mindestens 2 % für große Länder beschlossen.</li><li>Auch das EP muss Mehrheiten finden, etwa für die Wahl der Kommission.</li></ul></div>
+      <div class="karte karte--leise"><h3>Dagegen wird angeführt</h3><ul class="klein"><li>Jede Stimme soll gleich zählen (Wahlgleichheit, Chancengleichheit der Parteien).</li><li>Das Bundesverfassungsgericht (2011, 2014): Anders als der Bundestag muss das EP keine stabile Regierung tragen.</li><li>Mit 5 % hätten 2024 acht Parteien ihre Sitze verloren – gewählt von rund 13 % der Wählerinnen und Wähler.</li></ul></div>
+    </div>
+    <label class="klein vh-label" for="ep-urteil">Dein Urteil (Stellung nehmen, AFB III) – Satzbausteine: »Gemessen am Kriterium … zeigt das Ergebnis 2024, dass … Dem steht gegenüber … Ich halte … für …, weil mir … wichtiger ist als …«</label>
+    <textarea id="ep-urteil" class="schreibfeld" rows="5"></textarea>
+    <p class="klein" style="color:var(--leise)">Die Werkstatt sagt dir nicht, welches Urteil richtig ist. Bewertet wird, ob du Sach- und Werturteil trennst, Belege nutzt und die Gegenseite ernst nimmst.</p>
+    <p class="knopfzeile knopfzeile--rechts"><a class="knopf" href="station5.html">Zurück</a> <a class="knopf knopf--voll" href="../zusammenfassung.html" onclick="PW.stationFertig(6)">Zur Zusammenfassung</a></p>
+  </section>
+</main>
+<footer class="fuss"><div class="fuss-innen"></div></footer>
+<script src="../assets/js/daten.js"></script>
+<script src="../assets/js/werkstatt.js"></script>
+<script src="../assets/js/motion.js"></script>
+<script src="../assets/js/merkzettel.js"></script>
+<script src="../assets/js/abruf.js"></script>
+<script src="../assets/js/lernstand.js"></script>
+<script src="../assets/js/europa.js"></script>
+<script>
+document.documentElement.classList.add('js'); document.documentElement.classList.remove('no-js');
+PW.rahmen('st6', '../'); PW.abrufZeigen(document.getElementById('abruf'), 6); PW.merkzettel('../');
+var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'So wird gewählt', laender: 'Sitze je Land', ergebnis: 'Ergebnis 2024', fraktionen: 'Fraktionen', parlament: 'Was das EP tut' });
+(function () {
+  function feld(id, key) { var t = document.getElementById(id); t.value = PW.lies(key, '') || ''; t.addEventListener('input', function () { PW.merke(key, t.value); }); }
+  feld('ep-vermutung', 'ep-vermutung'); feld('ep-urteil', 'ep-urteil');
+  document.querySelector('#deck-vgl button').addEventListener('click', function (ev) { PW.aufdecken(document.getElementById('deck-vgl'), ev); });
+  PW.epWaage(document.getElementById('ep-waage')); PW.epLaenderListe(document.getElementById('ep-laender'));
+  var h = PW.epHuerde(document.getElementById('ep-halbrund'), document.getElementById('ep-satz'));
+  var aktiv = 0, gezeigt = false;
+  document.querySelectorAll('#ep-huerde-wahl button').forEach(function (b) {
+    b.addEventListener('click', function (ev) {
+      aktiv = +b.getAttribute('data-h');
+      document.querySelectorAll('#ep-huerde-wahl button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      h.zeige(aktiv, ev.detail !== 0 && !PW.wenigerBewegung());
+    });
+  });
+  document.getElementById('ep-quelle').textContent = 'Quelle: ' + PW.ep2024Quelle;
+  /* Fraktionen */
+  var fr = PW.epFraktionen, s = {}; fr.forEach(function (f) { s[f.id] = f.sitze; });
+  var tb = document.getElementById('ep-fr-tab');
+  fr.forEach(function (f) { tb.appendChild(PW.el('tr', {}, [PW.el('th', { scope: 'row', text: f.name }), PW.el('td', { text: f.lang }), PW.el('td', { 'class': 'zahl', text: String(f.sitze) }), PW.el('td', { text: f.de })])); });
+  document.getElementById('ep-fr-quelle').textContent = 'Quelle: ' + PW.epFraktionenQuelle + ' Zuordnung der deutschen Parteien nach der Konstituierung im Juli 2024; kleinere Parteien (Die PARTEI, Tierschutzpartei, ÖDP, FAMILIE, PdF) hier nicht aufgeführt.';
+  PW.epMehrheit(document.getElementById('ep-koal'), document.getElementById('ep-koal-rueck'));
+  document.getElementById('reiter').addEventListener('reiter:wechsel', function (e) {
+    if (e.detail.id === 'ergebnis' && !gezeigt) { gezeigt = true; h.zeige(aktiv, !PW.wenigerBewegung()); }
+    if (e.detail.id === 'fraktionen' && !document.querySelector('#ep-fraktionen svg')) PW.halbrund(document.getElementById('ep-fraktionen'), s, fr, !PW.wenigerBewegung(), { gesamt: 720, mehrheit: 361 });
+  });
+  var start = (location.hash || '').replace('#', '');
+  if (start === 'ergebnis') { gezeigt = true; h.zeige(0, false); }
+  if (start === 'fraktionen') PW.halbrund(document.getElementById('ep-fraktionen'), s, fr, false, { gesamt: 720, mehrheit: 361 });
+  if (PW.lernstandAnzeigen) PW.lernstandAnzeigen(6);
+})();
+</script>
+</body>
+</html>

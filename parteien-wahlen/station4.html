@@ -117,6 +117,11 @@
       <div id="koal-pruefung"></div>
     </div>
 
+    <div class="karte" id="koal-verhandeln-karte">
+      <h3>Koalitionsverhandlung: Was kommt in den Vertrag?</h3>
+      <div id="koal-verhandeln"></div>
+    </div>
+
     <section class="karte karte--leise">
       <h3>Aufgaben</h3>
       <ol>
@@ -161,6 +166,7 @@
 <script src="../assets/js/hilfen.js"></script>
 <script src="../assets/js/urne.js"></script>
 <script src="../assets/js/wahlarchiv.js"></script>
+<script src="../assets/js/verhandeln.js"></script>
 <script src="../assets/js/koalition.js"></script>
 <script src="../assets/js/bausteine.js"></script>
 <script>
@@ -277,7 +283,7 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
   function baueKoalition(sitze) {
     var k = document.getElementById('koal'); k.innerHTML = '';
     var ids2 = ids.filter(function (id) { return sitze[id]; });
-    if (!ids2.length) { k.appendChild(PW.el('p', { 'class': 'klein', text: 'Lade zuerst ein Ergebnis im Sitzrechner.' })); PW.koalPruefung(document.getElementById('koal-pruefung'), [], sitze); summe(); return; }
+    if (!ids2.length) { k.appendChild(PW.el('p', { 'class': 'klein', text: 'Lade zuerst ein Ergebnis im Sitzrechner.' })); PW.koalPruefung(document.getElementById('koal-pruefung'), [], sitze); if (PW.koalVerhandeln) PW.koalVerhandeln(document.getElementById('koal-verhandeln'), [], sitze); summe(); return; }
     ids2.forEach(function (id) {
       var p = PW.partei(id); var inp = PW.el('input', { type: 'checkbox', value: id });
       inp.addEventListener('change', summe);
@@ -293,6 +299,7 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
       else { r.className = 'rueck rueck--nein'; r.innerHTML = '<strong>Keine Mehrheit.</strong> ' + namen.join(' + ') + ' hätten ' + s + ' Sitze; es fehlen ' + (PW.mehrheit - s) + '.'; }
       var gewaehlt = []; k.querySelectorAll('input:checked').forEach(function (i) { gewaehlt.push(i.value); });
       PW.koalPruefung(document.getElementById('koal-pruefung'), gewaehlt, sitze);
+      if (PW.koalVerhandeln) PW.koalVerhandeln(document.getElementById('koal-verhandeln'), gewaehlt, sitze);
     }
   }
 
