@@ -340,4 +340,10 @@ Grundlage sind die beiden Designsysteme **Gemeinschaftskunde** (die Beschreibung
 ## v10 (08.11.2026): Wahlarchiv
 
 - **AI Wahlarchiv** (Station 4): Name, automatische Sicherung nach dem Auszählen, Datei herunterladen und laden (JSON, nur Summen), Rückfall als Text. Abgleich-Spalte trägt den Namen der Wahl.
+- **AJ Verhandlungstisch** (Station 4, Koalition): strittige Streitfragen verhandeln – Position, Kompromiss oder Prüfauftrag; Bilanz in Worten; Entwurf als Datei. Keine Bewegung.
+- **AK Drei Menschen, drei Wahlen?** (Station 5): Einstieg Political Gender Gap mit drei Personen; Tipp und Vermutung vorne, Auflösung erst nach der Datenarbeit; Balken 440 ms (Muster E).
+- **AL Sitze-Waage** (Station 6): Bevölkerungs- gegen Sitzanteil, erst schätzen; Balken 440 ms.
+- **AM Hürden-Schalter** (Station 6): 0/2/5 % am Europawahlergebnis 2024, Halbrund 96 Sitze (440 ms, Muster D); `PW.halbrund` kann jetzt andere Sitzzahlen und `ohneMehrheit`.
+- **AN Mehrheit im EP suchen** (Station 6): Fraktionen ankreuzen bis 361. Keine Bewegung.
+- **AO Die Karte des Halbjahres** (GK-Labor, index.html): drei Zonen Einbringen → Entscheiden und kontrollieren → Schützen, fünf Module. Statisch. Neue Tokens `--fr-pfe`, `--fr-esn`, `--fr-ekr`, `--partei-fw`, `--partei-volt` in allen drei Ansichten (nur mit Name und Zahl, Ballot-Colour Rule).
 - **Kleine Parteien einzeln:** Eine Stimme in einer Klasse von 15 sind 6,7 %. Bisher landete sie als »Sonstige« ohne Sitz; jetzt steht die Partei einzeln im Sitzrechner und bekommt über 5 % Sitze – mit dem Hinweis, wie viele Stimmen das bei der echten Wahl wären.

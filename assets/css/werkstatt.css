@@ -1236,3 +1236,49 @@ label.knopf{cursor:pointer}
 .epl .fuellung{background:var(--stahl)}
 .epl--de .fuellung{background:var(--ton-gelb-tief)}
 .epl--de>span:first-child{font-weight:700;font-style:normal}
+
+/* v11 · Muster AO · Die Karte des Halbjahres (GK-Labor, index.html)
+   Drei Zonen nach dem Weg einer politischen Frage: A Einbringen → B Entscheiden und kontrollieren → C Schützen, darunter der Rückweg.
+   Module als Platten im Zonenton; verfügbare Module mit Teilen als Links, geplante leise. Keine Bewegung nötig: Die Karte ist statisch lesbar. */
+.labor{margin:0 0 32px}
+.lab-lesehilfe{max-width:70ch}
+.lab-kreis{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:40px;grid-template-columns:1fr}
+.lab-zone{position:relative;background:var(--zt);border:2px solid var(--text);border-radius:var(--radius);padding:14px}
+.lab-zone:not(:last-child)::after{content:"";position:absolute;left:50%;bottom:-34px;width:0;height:0;margin-left:-14px;border-left:14px solid transparent;border-right:14px solid transparent;border-top:20px solid var(--text)}
+.lab-zonen-name{margin:0 0 12px;font-family:var(--schrift-titel);font-weight:700;font-size:1.375rem;line-height:1.15;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;max-width:none}
+.lab-zonen-nr{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--zt-tief);color:var(--flaeche);font-size:1.25rem}
+.lab-zonen-frage{flex-basis:100%;font-family:var(--schrift-stimme);font-style:italic;font-weight:600;font-size:1.0625rem;color:var(--text)}
+.lab-module{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.lab-modul{background:var(--flaeche);border:2px solid var(--text);border-radius:var(--radius);padding:12px 14px;box-shadow:5px 5px 0 0 var(--zt-tief)} /* taste-skill-ignore: versetzte Platte im Zonenton */
+.lab-modul:not(.lab-modul--offen){border-style:dashed;box-shadow:none}
+.lab-meta{margin:0 0 2px;font-size:1rem;color:var(--leise);font-weight:700;max-width:none}
+.lab-modul--offen .lab-status{color:var(--erfolg)}
+.lab-modul h3{margin:0 0 4px;font-size:1.25rem;line-height:1.15}
+.lab-modul h3 a{display:inline-block;min-height:44px;padding-top:8px;margin-top:-8px;color:var(--text);text-decoration-thickness:2px;text-underline-offset:3px}
+.lab-frage{margin:0 0 8px;font-family:var(--schrift-stimme);font-style:italic;font-weight:600;font-size:1.0625rem;color:var(--zt-tief);max-width:none}
+.lab-themen{margin:0;font-size:1rem;max-width:none}
+.lab-begriffe{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.lab-begriffe li{font-size:1rem;line-height:1.25;padding:3px 8px;border:2px solid var(--stahl);border-radius:var(--radius);background:var(--grund)}
+.lab-teile{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:teil}
+.lab-teile a{display:grid;gap:2px;min-height:44px;padding:8px 12px 8px 46px;position:relative;border:2px solid var(--text);border-radius:var(--radius);background:var(--grund);color:var(--text);text-decoration:none;transition:transform var(--dauer-druck) var(--ease-out)}
+.lab-teile a::before{counter-increment:teil;content:counter(teil);position:absolute;left:10px;top:50%;margin-top:-14px;width:28px;height:28px;border-radius:50%;background:var(--zt-tief);color:var(--flaeche);display:grid;place-items:center;font-weight:700}
+.lab-teile a b{font-size:1.0625rem}
+.lab-teile a span{font-size:1rem;color:var(--leise)}
+.lab-teile a:active{transform:scale(.98)}
+@media (hover:hover) and (pointer:fine){.lab-teile a:hover{background:var(--flaeche)}.lab-teile a:hover b{text-decoration:underline;text-decoration-thickness:2px}}
+.lab-teile a:focus-visible{outline:3px solid var(--text);outline-offset:2px}
+.lab-fort{margin:8px 0 0;font-size:1rem;color:var(--leise);max-width:none}
+.lab-rueck{margin:20px 0 8px;padding:12px 16px;border:2px dashed var(--text);border-radius:var(--radius);font-weight:700;max-width:none}
+.lab-rueck span{font-size:1.5rem;margin-right:6px}
+.lab-hypo{margin:0 0 24px;max-width:70ch}
+@media (min-width:1024px){
+  .lab-kreis{grid-template-columns:2fr 1fr 1fr;gap:44px;align-items:stretch}
+  .lab-zone:not(:last-child)::after{left:auto;right:-36px;bottom:auto;top:50%;margin:-14px 0 0;border-top:14px solid transparent;border-bottom:14px solid transparent;border-left:20px solid var(--text);border-right:0}
+  .lab-zone--ein .lab-module{grid-template-columns:1fr 1fr}
+  .lab-zone--ein #modul-1{grid-column:1/-1}
+}
+@media (min-width:1400px){.lab-teile{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.labor-seite .auftakt{max-width:none}
+.labor-seite .auftakt .gross{max-width:64ch}
+.labor-seite .auftakt .grundfrage{font-size:clamp(1.875rem,4.2vw,3.25rem)}
+.labor-seite .auftakt .grundfrage .akzent{display:inline}

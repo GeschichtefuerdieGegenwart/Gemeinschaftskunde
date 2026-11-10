@@ -233,3 +233,19 @@ Prüfkette v4.1: taste-skill lint 0 FAIL/0 WARN; inspect der geänderten Seiten 
 **Umgesetzt:** Wahlarchiv mit Name, automatischer Sicherung, Datei herunterladen und laden, Textrückfall; kleine Parteien einzeln im Sitzrechner; Hinweise auf der Lehrkraftseite (Sichern, Wahlgeheimnis). Dazu eine aus dem Bildschirmfoto rekonstruierte Datei (nur Zweitstimmen in Prozent).
 
 **Prüfung (gelaufen):** Browser-Test: 15 Stimmzettel, Auszählen → automatisch gesichert; Datei »Klassenwahl_Bundestagswahl-2026-J1_2026-11-08.json« heruntergeladen; Gerät geleert; Datei geladen → Sitzrechner, Abgleich, Liste wieder da; FREIE WÄHLER mit 6,7 % einzeln mit Sitzen; rekonstruierte Datei geladen. `tools/pruefen.py` siehe Pull Request.
+
+## v11 (10.11.2026): GK-Labor, Koalitionsverhandlung, Gender Gap, Europawahl – Pull Request, nicht zusammengeführt
+
+**Auftrag:** Koalitionsverhandlungen (»was passt, was nicht«), Einfluss von Alter und Geschlecht mit induktivem Einstieg zum Political Gender Gap, Europawahl als eigene Station, ein GK-Labor als Übersicht der ganzen Reihe.
+
+**Umgesetzt:**
+1. **GK-Labor** (`index.html`, Muster AO): Leitfrage der Reihe »Was braucht eine Demokratie, um nicht zu scheitern?«; Karte mit drei Zonen (Einbringen → Entscheiden und kontrollieren → Schützen) und fünf Modulen nach BPE 2.1/2.2. Modul 1 ist verfügbar und öffnet seine drei Teile (Parteien · Wahlen zum Bundestag · Wahlen zum Europäischen Parlament); Module 2–5 stehen als »in Planung« mit Leitfrage aus der Grobplanung. Hypothesenliste »Was braucht eine Demokratie?« auf dem Gerät. Die bisherige Startseite heißt jetzt `parteien.html` (Modul 1); der Moodle-Link auf `index.html` bleibt gültig und führt jetzt ins Labor. Marke im Kopf: »GK-Labor«.
+2. **Koalitionsverhandlung** (Station 4, Muster AJ): nach der Programmprüfung die strittigen Fragen verhandeln, Bilanz, Vertragsentwurf als Datei.
+3. **Drei Menschen, drei Wahlen?** (Station 5, Muster AK): Einstieg mit Caja, Mitschüler, Großeltern; Auflösung nach Abschnitt 2 mit Vergleichsaufgabe und Streitfrage (FT 2024 gegen KAS 2026).
+4. **Station 6 »Europa wählt«** mit fünf Reitern: Vergleich Bundestags- und Europawahl (aufdecken), Sitze je Land (AL), Ergebnis 2024 mit Hürden-Schalter (AM), Fraktionen und Mehrheit suchen (AN), Aufgaben des EP und Urteil zur Sperrklausel (Sach- und Werturteil getrennt). Erst-erinnern-Fragen zu Station 5, Ziel 5, Organizer mit sechs Stationen.
+
+**Bewusste Entscheidung:** Der Gender-Einstieg deckt nicht sofort auf, weil Abschnitt 1 und 2 dieselben Zahlen erst vermuten lassen (Lehre »Prüfen, ob die Übersicht etwas vorwegnimmt«).
+
+**Prüfkette (gelaufen):** `tools/pruefen.py` fünfzehn Seiten × fünf Breiten: ein Befund – H1 des GK-Labors bei 390 px dreizeilig (bewusst: die Leitfrage bleibt ganz stehen). Hell, Dunkel, Beamer ohne Fehler und ohne waagerechtes Scrollen (GK-Labor, Modul 1, Stationen 4–6). Browser-Tests: Verhandlung CDU+SPD und CDU+CSU+SPD (fünf strittige Fragen, Optionen, Bilanz, Download, Stand nach Neuladen), Drei Menschen (Tipps, Vermutung, Auflösung, Stand nach Neuladen, 390 px), Station 6 (Aufdecken, Malta-Schätzung, 0/2/5 %: 15/10/7 Parteien, Fraktionen 720 Punkte, EVP+S&D+Renew = 401). **Nicht gelaufen:** echtes iPad, echter Beamer, VoiceOver.
+
+**Zum Prüfen vor dem Einsatz:** Zuordnung der deutschen Parteien zu den EP-Fraktionen (AfD → ESN, BSW fraktionslos, FREIE WÄHLER → Renew, Volt → Grüne/EFA); Stand der 2-%-Hürde (Direktwahlakt 2018, Ratifizierung Deutschland und Spanien); Bevölkerungsanteile 1.1.2024.

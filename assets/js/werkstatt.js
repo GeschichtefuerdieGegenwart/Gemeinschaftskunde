@@ -133,7 +133,8 @@
 
   /* Kopf, Fortschritt, Fuß */
   var seiten = [
-    { id: 'start', url: 'index.html', name: 'Start' },
+    { id: 'labor', url: 'index.html', name: 'GK-Labor' },
+    { id: 'start', url: 'parteien.html', name: 'Modul 1' },
     { id: 'ziele', url: 'ziele.html', name: 'Mein Stand' },
     { id: 'st1', url: 'parteien-wahlen/station1.html', name: 'Grundlagen', station: 1 },
     { id: 'st2', url: 'parteien-wahlen/station2.html', name: 'Erkennen', station: 2 },
@@ -150,7 +151,7 @@
   PW.rahmen = function (aktuell, wurzel) {
     wurzel = wurzel || '';
     var kopf = document.querySelector('.kopf-innen'); if (!kopf) return;
-    kopf.appendChild(PW.el('a', { 'class': 'marke', href: wurzel + 'index.html' }, [PW.el('span', { 'class': 'kreuz', 'aria-hidden': 'true' }), 'Politik-Werkstatt']));
+    kopf.appendChild(PW.el('a', { 'class': 'marke', href: wurzel + 'index.html' }, [PW.el('span', { 'class': 'kreuz', 'aria-hidden': 'true' }), 'GK-Labor']));
     var nav = PW.el('nav', { 'class': 'nav', 'aria-label': 'Hauptnavigation' });
     ['start', 'ziele', 'klausur', 'zus', 'lehr'].map(function (id) { return seiten.filter(function (x) { return x.id === id; })[0]; }).forEach(function (s) { var a = PW.el('a', { href: wurzel + s.url, text: s.name }); if (s.id === aktuell) a.setAttribute('aria-current', 'page'); nav.appendChild(a); });
     kopf.appendChild(nav);
@@ -169,7 +170,7 @@
     if (lf && PW.aufbauen) { var schon = false; try { schon = sessionStorage.getItem('pw:lf:' + aktuell) === '1'; sessionStorage.setItem('pw:lf:' + aktuell, '1'); } catch (e) {} PW.aufbauen(lf, { sofort: schon }); }
     var fuss = document.querySelector('.fuss-innen');
     if (fuss) {
-      fuss.appendChild(PW.el('span', { text: 'Politik-Werkstatt · Einheit »Parteien und Wahlen« · Stand 27.10.2026 · Daten: Bundeswahlleiterin, Wahlprogramme 2025 (Quellen auf der Zusammenfassung)' }));
+      fuss.appendChild(PW.el('span', { text: 'GK-Labor · Modul 1 »Parteien und Wahlen« · Stand 10.11.2026 · Daten: Bundeswahlleiterin, Wahlprogramme 2025, Organe der EU (Quellen auf den Seiten)' }));
       var einst = PW.el('div', { 'class': 'einstellungen' });
       /* Ansicht: Hell · Dunkel · Beamer */
       var ans = PW.el('div', { 'class': 'ansicht-wahl', role: 'group', 'aria-label': 'Ansicht' });
