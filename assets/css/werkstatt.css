@@ -1385,3 +1385,12 @@ html[data-bewegung=weniger] .gb-kommt{animation:none}
 @media (min-width:768px){.m2-begriffe{grid-template-columns:minmax(140px,200px) 1fr}}
 .m2-begriffe dt{font-weight:700}.m2-begriffe dd{margin:0 0 8px}
 .m2-lehrkraft summary{min-height:44px;cursor:pointer}
+
+/* v13 · Eingaben je Modul löschen (Fuß) */
+.loesch-huelle{margin-top:12px;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.loesch-feld{width:100%;max-width:640px;background:var(--flaeche);border:2px solid var(--text);border-radius:var(--radius);padding:14px 16px;text-align:left}
+.loesch-titel{margin:0 0 8px;font-weight:700;max-width:none}
+.loesch-zeile{padding:8px 0;border-bottom:2px solid var(--linie)}
+.loesch-info{margin:0 0 6px;max-width:none}
+.loesch-klasse{display:flex;gap:8px;align-items:center;min-height:44px}
+.loesch-feld .knopfzeile{margin:8px 0 0}

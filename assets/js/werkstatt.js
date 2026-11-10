@@ -7,6 +7,75 @@
   PW.lies = function (k, standard) { try { var v = localStorage.getItem('pw:' + k); return v === null ? standard : JSON.parse(v); } catch (e) { return standard; } };
   PW.merke = function (k, v) { try { localStorage.setItem('pw:' + k, JSON.stringify(v)); } catch (e) { /* privates Fenster o. ä. */ } };
   PW.loescheAlles = function () { try { Object.keys(localStorage).filter(function (k) { return k.indexOf('pw:') === 0; }).forEach(function (k) { localStorage.removeItem(k); }); } catch (e) {} location.reload(); };
+  /* v13 · Eingaben je Modul löschen. Einstellungen (Ansicht, Bewegung) bleiben immer.
+     Modul 2: Schlüssel lobby-*, zucker, m2-* und Lernstand st12. Labor: hypothesen. Alles andere gehört zu Modul 1.
+     Klassenergebnisse in Modul 1 (Klassenwahl, Urne, Wahlarchiv, Klassenbild der Urteilslinie) nur auf ausdrücklichen Wunsch. */
+  PW.module = { m1: 'Modul 1 · Parteien und Wahlen', m2: 'Modul 2 · Verbände und Lobbyismus' };
+  var EINSTELLUNG = ['ansicht', 'bewegung'];
+  var M2_LERN = ['st12'];
+  function istKlasse(k) { return k === 'wahlarchiv' || k === 'urne' || k.indexOf('klasse') === 0 || k === 'urteil-klasse' || k === 'urteil-runde'; }
+  PW.modulVon = function (k) {
+    if (EINSTELLUNG.indexOf(k) >= 0) return null;
+    if (k === 'hypothesen') return 'labor';
+    if (k.indexOf('lobby-') === 0 || k === 'zucker' || k.indexOf('m2-') === 0) return 'm2';
+    return 'm1';
+  };
+  PW.loescheModul = function (m, mitKlasse) {
+    try {
+      Object.keys(localStorage).filter(function (k) { return k.indexOf('pw:') === 0; }).forEach(function (pk) {
+        var k = pk.slice(3);
+        if (k === 'lernstand') {
+          var a = PW.lies('lernstand', {}) || {};
+          Object.keys(a).forEach(function (st) { var zuM2 = M2_LERN.indexOf(st) >= 0; if ((m === 'm2' && zuM2) || (m === 'm1' && !zuM2)) delete a[st]; });
+          if (Object.keys(a).length) PW.merke('lernstand', a); else localStorage.removeItem(pk);
+          return;
+        }
+        if (PW.modulVon(k) !== m) return;
+        if (m === 'm1' && istKlasse(k) && !mitKlasse) return;
+        localStorage.removeItem(pk);
+      });
+    } catch (e) {}
+    location.reload();
+  };
+  /* Bedienfeld im Fuß: erst wählen, dann bestätigen – ohne Browser-Dialog */
+  PW.loeschFeld = function (aktuell) {
+    var hier = aktuell === 'm2' ? 'm2' : aktuell === 'labor' ? 'labor' : 'm1';
+    var huelle = PW.el('div', { 'class': 'loesch-huelle' });
+    var knopf = PW.el('button', { 'class': 'knopf knopf--leise', type: 'button', 'aria-expanded': 'false', 'aria-controls': 'loesch-feld', text: 'Eingaben löschen …' });
+    var feld = PW.el('div', { 'class': 'loesch-feld', id: 'loesch-feld', hidden: 'hidden', role: 'group', 'aria-label': 'Eingaben löschen' });
+    feld.appendChild(PW.el('p', { 'class': 'loesch-titel', text: 'Was soll weg? Gelöscht wird nur auf diesem Gerät. Ansicht und Bewegung bleiben.' }));
+    function modulKnopf(m) {
+      var zeile = PW.el('div', { 'class': 'loesch-zeile' });
+      var cb = null;
+      var b = PW.el('button', { 'class': 'knopf', type: 'button', text: 'Eingaben in ' + PW.module[m].split(' · ')[0] + ' löschen' });
+      zeile.appendChild(PW.el('p', { 'class': 'loesch-info', html: '<strong>' + PW.module[m] + '</strong> – ' + (m === 'm1' ? 'Antworten, Tipps, Lernstand der Stationen 1–6. Modul 2 bleibt unverändert.' : 'Schätzungen, Tipps, Rückmeldungen, Barometer, Urteile. Modul 1 und eure Klassenwahl bleiben unverändert.') }));
+      if (m === 'm1') {
+        cb = PW.el('input', { type: 'checkbox' });
+        zeile.appendChild(PW.el('label', { 'class': 'schalter schalter--klein loesch-klasse' }, [cb, document.createTextNode('auch Klassenergebnisse löschen (Klassenwahl, Wahlarchiv, Klassenbild der Urteilslinie)')]));
+      }
+      b.addEventListener('click', function () {
+        if (b.getAttribute('data-sicher') !== '1') { b.setAttribute('data-sicher', '1'); b.textContent = 'Wirklich? Noch einmal tippen'; return; }
+        PW.loescheModul(m, cb ? cb.checked : false);
+      });
+      zeile.appendChild(PW.el('p', { 'class': 'knopfzeile' }, [b]));
+      return zeile;
+    }
+    if (hier === 'labor') { feld.appendChild(modulKnopf('m1')); feld.appendChild(modulKnopf('m2')); }
+    else feld.appendChild(modulKnopf(hier));
+    var alles = PW.el('button', { 'class': 'knopf knopf--leise', type: 'button', text: 'Alles auf diesem Gerät löschen' });
+    alles.addEventListener('click', function () {
+      if (alles.getAttribute('data-sicher') !== '1') { alles.setAttribute('data-sicher', '1'); alles.textContent = 'Wirklich alles, in allen Modulen? Noch einmal tippen'; return; }
+      PW.loescheAlles();
+    });
+    var zu = PW.el('button', { 'class': 'knopf knopf--leise', type: 'button', text: 'Abbrechen' });
+    feld.appendChild(PW.el('p', { 'class': 'knopfzeile' }, [alles, zu]));
+    function auf(offen) { feld.hidden = !offen; knopf.setAttribute('aria-expanded', offen ? 'true' : 'false'); if (!offen) feld.querySelectorAll('[data-sicher]').forEach(function (x) { x.removeAttribute('data-sicher'); }); if (!offen) { feld.textContent = ''; var neu = PW.loeschFeld(aktuell); huelle.parentNode.replaceChild(neu, huelle); neu.querySelector('button').focus(); } }
+    knopf.addEventListener('click', function () { auf(feld.hidden); if (!feld.hidden) { var f = feld.querySelector('button'); if (f) f.focus(); } });
+    zu.addEventListener('click', function () { auf(false); });
+    feld.addEventListener('keydown', function (e) { if (e.key === 'Escape') auf(false); });
+    huelle.appendChild(knopf); huelle.appendChild(feld);
+    return huelle;
+  };
 
   /* Farben nur aus Tokens (drei Ansichten): liefert den aktuellen Wert einer CSS-Variablen */
   PW.farbe = function (name) { try { return getComputedStyle(document.documentElement).getPropertyValue('--' + name).trim(); } catch (e) { return ''; } };
@@ -171,7 +240,7 @@
     if (lf && PW.aufbauen) { var schon = false; try { schon = sessionStorage.getItem('pw:lf:' + aktuell) === '1'; sessionStorage.setItem('pw:lf:' + aktuell, '1'); } catch (e) {} PW.aufbauen(lf, { sofort: schon }); }
     var fuss = document.querySelector('.fuss-innen');
     if (fuss) {
-      fuss.appendChild(PW.el('span', { text: 'GK-Labor · Modul 1 »Parteien und Wahlen« · Stand 10.11.2026 · Daten: Bundeswahlleiterin, Wahlprogramme 2025, Organe der EU (Quellen auf den Seiten)' }));
+      fuss.appendChild(PW.el('span', { text: 'GK-Labor · Gemeinschaftskunde J1 · Stand 10.11.2026 · Quellen stehen auf den Seiten' }));
       var einst = PW.el('div', { 'class': 'einstellungen' });
       /* Ansicht: Hell · Dunkel · Beamer */
       var ans = PW.el('div', { 'class': 'ansicht-wahl', role: 'group', 'aria-label': 'Ansicht' });
@@ -188,10 +257,8 @@
       cb.addEventListener('change', function () { if (PW.schalteBewegung) PW.schalteBewegung(!cb.checked); });
       sw.appendChild(cb); sw.appendChild(document.createTextNode('Weniger Bewegung'));
       einst.appendChild(sw);
-      var b = PW.el('button', { 'class': 'knopf knopf--leise', type: 'button', text: 'Eingaben löschen' });
-      b.addEventListener('click', function () { if (confirm('Alle gespeicherten Eingaben auf diesem Gerät löschen?')) PW.loescheAlles(); });
-      einst.appendChild(b);
       fuss.appendChild(einst);
+      fuss.appendChild(PW.loeschFeld(aktuell));
     }
   };
   /* Reiter (Muster J): <ul class="reiter" data-fuer="a,b,c"> + Abschnitte mit id. Hash öffnet den passenden Reiter. */
