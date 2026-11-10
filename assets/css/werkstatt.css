@@ -1282,3 +1282,106 @@ label.knopf{cursor:pointer}
 .labor-seite .auftakt .gross{max-width:64ch}
 .labor-seite .auftakt .grundfrage{font-size:clamp(1.875rem,4.2vw,3.25rem)}
 .labor-seite .auftakt .grundfrage .akzent{display:inline}
+
+/* v12 · Modul 2 »Verbände und Lobbyismus« (Entwurf) · Muster AP–AT */
+.modul2 .raster-2{display:grid;gap:12px;grid-template-columns:1fr}
+.modul2 .raster-3{display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:768px){.modul2 .raster-2{grid-template-columns:1fr 1fr}}
+@media (min-width:1024px){.modul2 .raster-3{grid-template-columns:repeat(3,1fr)}}
+.modul2 .raster-2>.karte,.modul2 .raster-3>.karte{margin:0}
+.m2-weg ol{list-style:none;margin:0 0 20px;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.m2-weg a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:6px 12px;border:2px solid var(--text);border-radius:var(--radius);background:var(--flaeche);color:var(--text);text-decoration:none;font-weight:700}
+.m2-weg a b{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ton-blau-tief);color:var(--flaeche)}
+@media (hover:hover) and (pointer:fine){.m2-weg a:hover{background:var(--grund)}}
+.m2-zuspitzung{margin:0 0 24px}
+.m2-zeit{margin:0 0 4px;font-size:1rem;font-weight:700;color:var(--leise);max-width:none}
+.m2-plenum{margin:16px 0 0;padding:12px 16px;background:var(--ton-gelb);border-left:6px solid var(--ton-gelb-tief)}
+.m2-plenum p{margin:0;max-width:none}
+/* AP · Schätz mal */
+.lz-liste{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:900px){.lz-liste{grid-template-columns:repeat(3,1fr)}}
+.lz-zahl{background:var(--grund);border-radius:var(--radius);padding:12px;display:grid;gap:8px;align-content:start}
+.lz-zahl label{font-weight:700;font-size:1rem}
+.lz-eingabe{display:flex;align-items:center;gap:8px}
+.lz-eingabe input{min-height:44px;width:100%;padding:6px 10px;border:2px solid var(--stahl);border-radius:4px;background:var(--flaeche);font-size:1.125rem}
+.lz-einheit{font-weight:700;white-space:nowrap}
+.lz-wert{margin:0;font-family:var(--schrift-titel);font-weight:700;font-size:1.75rem;line-height:1.1;color:var(--ton-blau-tief)}
+.lz-aufl p.klein{margin:4px 0 0}
+.lz-knall{font-family:var(--schrift-stimme);font-style:italic;font-weight:600;font-size:clamp(1.375rem,3vw,2rem);line-height:1.2;margin:8px 0;max-width:none;color:var(--akzent)}
+/* AT · Haltungslinie */
+.hl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:8px 0}
+.hl-stelle{cursor:pointer}
+.hl-stelle span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:56px;height:100%;padding:6px;border:2px solid var(--stahl);border-radius:var(--radius);background:var(--flaeche);font-size:1rem;font-weight:700;line-height:1.2;transition:transform var(--dauer-druck) var(--ease-out)}
+.hl-stelle:active span{transform:scale(.97)}
+.hl-stelle input:checked+span{background:var(--text);color:var(--flaeche);border-color:var(--text)}
+.hl-stelle input:focus-visible+span{outline:3px solid var(--text);outline-offset:2px}
+.hl-stelle--vorher span{border-style:dashed;border-color:var(--text)}
+@media (max-width:560px){.hl{grid-template-columns:1fr}.hl-stelle span{min-height:44px}}
+/* AQ · Gesetz im Änderungsmodus */
+.gb-reglerzeile{display:grid;gap:4px}
+.gb-regler{width:100%;min-height:44px;accent-color:var(--ton-blau-tief)}
+.gb-marken{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));font-size:1rem;color:var(--leise)}
+.gb-marken li{text-align:center}.gb-marken li:first-child{text-align:left}.gb-marken li:last-child{text-align:right}
+@media (max-width:560px){.gb-marken{display:none}}
+.gb-buehne{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:1024px){.gb-buehne{grid-template-columns:1.35fr 1fr;align-items:start}}
+.gb-blatt{background:var(--flaeche);border:2px solid var(--text);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--platte)} /* taste-skill-ignore: versetzte Platte wie Karte */
+.gb-stand{margin:0;font-size:1rem;font-weight:700;color:var(--leise);max-width:none}
+.gb-blatt h3{margin:2px 0 6px}
+.gb-para{margin:0 0 10px;font-family:var(--schrift-stimme);font-style:italic;font-weight:600;max-width:none}
+.gb-zeilen{display:grid;grid-template-columns:minmax(110px,170px) 1fr;gap:8px 14px;margin:0}
+.gb-zeilen dt{font-weight:700}
+.gb-zeilen dd{margin:0}
+.gb-zeilen del{display:block;color:var(--fehler-tief);text-decoration-thickness:2px}
+.gb-zeilen ins{display:block;text-decoration:underline;text-decoration-thickness:3px;text-decoration-color:var(--ton-blau-tief);text-underline-offset:3px;font-weight:700}
+.gb-neu{background:var(--ton-blau);margin:0 -6px;padding:2px 6px;border-radius:2px}
+.gb-kommt{animation:gb-kommt var(--dauer-mittel) var(--ease-out) both}
+@keyframes gb-kommt{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+html[data-bewegung=weniger] .gb-kommt{animation:none}
+@media (prefers-reduced-motion:reduce){.gb-kommt{animation:none}}
+.gb-quelle{margin:10px 0 0;color:var(--leise)}
+@media (max-width:560px){.gb-zeilen{grid-template-columns:1fr;gap:2px}.gb-zeilen dd{margin-bottom:8px}}
+.gb-rand{background:var(--grund);border-radius:var(--radius);padding:14px}
+.gb-frage{font-weight:700;margin:0 0 8px;max-width:none}
+.gb-tipp{display:flex;flex-wrap:wrap;gap:6px}
+.gb-tipp label{cursor:pointer}
+.gb-tipp span{display:inline-flex;align-items:center;min-height:44px;padding:6px 12px;border:2px solid var(--stahl);border-radius:var(--radius);background:var(--flaeche);font-size:1rem;font-weight:700;transition:transform var(--dauer-druck) var(--ease-out)}
+.gb-tipp label:active span{transform:scale(.97)}
+.gb-tipp input:checked+span{background:var(--text);color:var(--flaeche);border-color:var(--text)}
+.gb-tipp input:focus-visible+span{outline:3px solid var(--text);outline-offset:2px}
+.gb-tipp input:disabled+span{cursor:default}
+.gb-hinter p{max-width:none}
+/* AR · Akteure */
+.ak-raster{display:grid;gap:14px;grid-template-columns:1fr}
+@media (min-width:900px){.ak-raster{grid-template-columns:1fr 1fr}}
+@media (min-width:1400px){.ak-raster{grid-template-columns:repeat(3,1fr)}}
+.ak-karte{background:var(--flaeche);border:2px solid var(--text);border-radius:var(--radius);padding:14px 16px;display:grid;gap:6px;align-content:start}
+.ak-karte h3{margin:0;font-size:1.1875rem;line-height:1.2}
+.ak-meta{margin:0;font-size:1rem;color:var(--leise);font-weight:700;max-width:none}
+.ak-beleg{margin:0;max-width:none}
+.ak-quelle{margin:0;color:var(--leise)}
+.ak-auftrag{margin:6px 0 0;max-width:none}
+.ak-liste{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ak-liste li{padding:8px 12px;border-radius:var(--radius);border-left:6px solid var(--stahl);background:var(--grund)}
+.ak-liste .ak-passt{border-left-color:var(--erfolg)}.ak-liste .ak-auch{border-left-color:var(--warnung)}.ak-liste .ak-nein{border-left-color:var(--fehler)}
+.ak-dreh{margin:8px 0 0;padding:10px 14px;background:var(--ton-gelb);border-left:6px solid var(--ton-gelb-tief);font-weight:700;max-width:none}
+/* AS · Barometer */
+.bm-zeile{display:grid;grid-template-columns:1fr;gap:4px 12px;align-items:center;padding:8px 0}
+@media (min-width:900px){.bm-zeile{grid-template-columns:minmax(220px,1.3fr) 160px 1fr 90px}}
+.bm-name{font-weight:700}
+.bm-zeile input{min-height:44px;width:100%;accent-color:var(--ton-blau-tief)}
+.bm-zeile .spur{height:22px;background:var(--karton);border-radius:2px;overflow:hidden}
+.bm-zeile .fuellung{height:100%;background:var(--ton-blau-tief);transform-origin:left;transition:transform var(--dauer-mittel) var(--ease-out)}
+.bm-wert{font-weight:700}
+/* Funktionen */
+.fn-liste{margin:0 0 16px;padding-left:1.4em;display:grid;gap:12px}
+.fn-text{margin:0 0 6px;max-width:none}
+.fn-wahl{min-height:44px;padding:6px 10px;border:2px solid var(--stahl);border-radius:4px;background:var(--flaeche);font-size:1rem;max-width:100%}
+.fn-rueck{margin:6px 0 0}
+.fn-rueck:empty{display:none}
+.m2-grau summary{min-height:44px;font-weight:700;cursor:pointer}
+.m2-handeln li,.m2-medien li{margin-bottom:8px}
+.m2-begriffe{display:grid;grid-template-columns:1fr;gap:4px 16px}
+@media (min-width:768px){.m2-begriffe{grid-template-columns:minmax(140px,200px) 1fr}}
+.m2-begriffe dt{font-weight:700}.m2-begriffe dd{margin:0 0 8px}
+.m2-lehrkraft summary{min-height:44px;cursor:pointer}
