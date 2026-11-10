@@ -347,3 +347,8 @@ Grundlage sind die beiden Designsysteme **Gemeinschaftskunde** (die Beschreibung
 - **AN Mehrheit im EP suchen** (Station 6): Fraktionen ankreuzen bis 361. Keine Bewegung.
 - **AO Die Karte des Halbjahres** (GK-Labor, index.html): drei Zonen Einbringen → Entscheiden und kontrollieren → Schützen, fünf Module. Statisch. Neue Tokens `--fr-pfe`, `--fr-esn`, `--fr-ekr`, `--partei-fw`, `--partei-volt` in allen drei Ansichten (nur mit Name und Zahl, Ballot-Colour Rule).
 - **Kleine Parteien einzeln:** Eine Stimme in einer Klasse von 15 sind 6,7 %. Bisher landete sie als »Sonstige« ohne Sitz; jetzt steht die Partei einzeln im Sitzrechner und bekommt über 5 % Sitze – mit dem Hinweis, wie viele Stimmen das bei der echten Wahl wären.
+- **AP Schätz mal** (Modul 2): drei Zahlen aus dem Lobbyregister erst schätzen, dann aufdecken; Satz zum Kontrast (910 Mio. € gegen 660 € Bußgeld). Keine Bewegung.
+- **AQ Gesetz im Änderungsmodus** (Modul 2): fünf Fassungen der Zuckersteuer am Regler; Gestrichenes als `del`, Eingefügtes als `ins`, das Eingefügte erscheint mit Opazität und 6 px (200 ms, `--dauer-mittel`); vor dem Hintergrund tippen, wer ein Interesse hatte. Bei weniger Bewegung sofort.
+- **AR Akteure und Machtressourcen** (Modul 2): sechs Akteurskarten, bis zu drei Ressourcen, Rückmeldung Passt / Passt auch / Passt nicht / Nicht belegt.
+- **AS Einflussbarometer** (Modul 2): ein Gerät vorne, Regler 0–4 je Akteur. Füllung 200 ms.
+- **AT Haltungslinie** (Modul 2): fünf Stellen vorher und nachher, die Stelle von vorher gestrichelt.

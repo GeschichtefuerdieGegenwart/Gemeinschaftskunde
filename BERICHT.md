@@ -249,3 +249,9 @@ Prüfkette v4.1: taste-skill lint 0 FAIL/0 WARN; inspect der geänderten Seiten 
 **Prüfkette (gelaufen):** `tools/pruefen.py` fünfzehn Seiten × fünf Breiten: ein Befund – H1 des GK-Labors bei 390 px dreizeilig (bewusst: die Leitfrage bleibt ganz stehen). Hell, Dunkel, Beamer ohne Fehler und ohne waagerechtes Scrollen (GK-Labor, Modul 1, Stationen 4–6). Browser-Tests: Verhandlung CDU+SPD und CDU+CSU+SPD (fünf strittige Fragen, Optionen, Bilanz, Download, Stand nach Neuladen), Drei Menschen (Tipps, Vermutung, Auflösung, Stand nach Neuladen, 390 px), Station 6 (Aufdecken, Malta-Schätzung, 0/2/5 %: 15/10/7 Parteien, Fraktionen 720 Punkte, EVP+S&D+Renew = 401). **Nicht gelaufen:** echtes iPad, echter Beamer, VoiceOver.
 
 **Zum Prüfen vor dem Einsatz:** Zuordnung der deutschen Parteien zu den EP-Fraktionen (AfD → ESN, BSW fraktionslos, FREIE WÄHLER → Renew, Volt → Grüne/EFA); Stand der 2-%-Hürde (Direktwahlakt 2018, Ratifizierung Deutschland und Spanien); Bevölkerungsanteile 1.1.2024.
+
+## v12 (10.11.2026): Modul 2 »Verbände und Lobbyismus« – Entwurf, Pull Request
+
+Eine Doppelstunde (`verbaende.html`), roter Faden Zuckersteuer 2026, Kernfrage »Stimme der Gesellschaft – oder gekaufte Politik?«. Sieben Schritte mit den sechs Hebeln (verdecken, variieren, rückmelden, stufen, bündeln; das Urteil im Raum). Muster AP–AT. GK-Labor: Modul 2 als »Entwurf« verlinkt.
+
+**Prüfung (gelaufen):** `tools/pruefen.py` für GK-Labor und Modul 2: nur der bekannte Befund (H1 im Labor, 390 px). Hell, Dunkel, Beamer bei 1280 und 390 px ohne Fehler und ohne waagerechtes Scrollen. Browser-Test aller Bausteine samt Stand nach Neuladen. **Nicht gelaufen:** iPad, Beamer im Raum.
