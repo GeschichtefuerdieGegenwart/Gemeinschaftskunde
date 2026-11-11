@@ -272,3 +272,7 @@ Eine Doppelstunde (`verbaende.html`), roter Faden Zuckersteuer 2026, Kernfrage �
 **Prüfung (gelaufen):** `tools/pruefen.py` 17 Seiten × 5 Breiten; Rechenkern des Spiels über alle Pakete für zwölf Bündnisse durchgezählt (je nach Bündnis 2 bis 31 Lösungen, Bündnisse ohne Streit sofort einig); Browser-Tests: Spiel (zu hart, Lösung, zu weich, Opposition, Stand nach Neuladen), Anker `#klasse-2627`, Wahlarchiv, Figuren. **Nicht gelaufen:** iPad, Beamer im Raum, Erprobung mit Lernenden (Schwierigkeit des Spiels).
 
 **Vor dem Einsatz prüfen:** Gewichte der Themen je Partei (Annahme); Aussagen »lehnt jede Zusammenarbeit mit der AfD ab« für SPD, Grüne, Linke, FDP (belegt ist in der Werkstatt nur der CDU-Beschluss 2018); Lindner-Zitat 2017; ob 6,6 % des Klassenergebnisses eine nicht zugeordnete Stimme sind.
+
+## v15 (11.11.2026): Startseite reduziert – drei farbige Säulen
+
+Die Startseite zeigt nur noch die Leitfrage und darunter die drei Schritte als Säulen in drei Tönen (Einbringen · Entscheiden · Schützen), verbunden durch Pfeilspitzen im Band. Module als Kacheln: vorhanden voll mit Link, geplant gestrichelt. Modul 1 mit drei Teilen als Griffe und zwei Direktlinks (Klassenergebnis 2026/27, Koalitionsspiel). Entfallen: Lesehilfe, »Menschen mit Interessen«, Haltestellen, Rückweg, Legende; Hypothesenliste eingeklappt. **Prüfung:** `pruefen.py` für die Startseite (nur der bekannte H1-Befund bei 390 px), Hell/Dunkel/Beamer angesehen.
