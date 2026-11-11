@@ -13,6 +13,13 @@ PW.parteien = [
   { id: 'bsw',   name: 'BSW',   lang: 'Bündnis Soziale Gerechtigkeit und Wirtschaftliche Vernunft (bis 30.09.2026: Bündnis Sahra Wagenknecht)', farbe: 'var(--partei-bsw)', gruendung: '2024 (08.01.2024)', vorsitz: 'Fabio De Masi, Amira Mohamed Ali (seit 06.12.2025)', btw: 4.98, sitze: 0, rolle: 'nicht im Bundestag (4,98 %, 9.529 Stimmen unter der Hürde)', programm: 'Unser Land verdient mehr. Wahlprogramm des BSW 2025' }
 ];
 PW.sonstige = { name: 'Sonstige', farbe: 'var(--partei-sonstige)' };
+/* Fest eingetragene Klassenergebnisse (von der Lehrkraft genannt, nur Summen in Prozent, keine Namen).
+   2026/27: Die vier Werte ergeben zusammen 93,4 %; der Rest ist in der Angabe nicht zugeordnet. */
+PW.klassenErgebnisse = [
+  { id: '2627', name: 'Klassenergebnis 2026/27', prozent: { cdu: 26.7, linke: 26.7, gruene: 20, fdp: 20 },
+    hinweis: 'Von der Lehrkraft eingetragen. Die vier Werte ergeben 93,4 %; 6,6 % sind nicht zugeordnet.' }
+];
+PW.klassenErgebnis = function (id) { for (var i = 0; i < PW.klassenErgebnisse.length; i++) if (PW.klassenErgebnisse[i].id === id) return PW.klassenErgebnisse[i]; return null; };
 PW.sitzeGesamt = 630;
 PW.mehrheit = 316;
 PW.ssw = { name: 'SSW', sitze: 1, hinweis: 'Partei der dänischen Minderheit, von der 5-%-Hürde befreit' };

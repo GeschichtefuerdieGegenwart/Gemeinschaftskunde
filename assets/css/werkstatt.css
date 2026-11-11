@@ -1394,3 +1394,73 @@ html[data-bewegung=weniger] .gb-kommt{animation:none}
 .loesch-info{margin:0 0 6px;max-width:none}
 .loesch-klasse{display:flex;gap:8px;align-items:center;min-height:44px}
 .loesch-feld .knopfzeile{margin:8px 0 0}
+
+/* v14 · Muster AU · Koalitionsspiel (parteien-wahlen/koalition.html)
+   Vier Schritte in einem Arbeitsfenster. Parteifarbe nur als Kante (Ballot-Colour Rule). Bewegung: nur der Stempel am Ende. */
+.sp-leiste{list-style:none;margin:0 0 14px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.sp-leiste li{padding:6px 8px;border-bottom:6px solid var(--linie);font-size:1rem;font-weight:700;color:var(--leise);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp-leiste li b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--stahl);color:var(--flaeche);margin-right:4px}
+.sp-leiste .ist-jetzt{border-bottom-color:var(--ton-lila-tief);color:var(--text)}
+.sp-leiste .ist-jetzt b{background:var(--ton-lila-tief)}
+.sp-leiste .ist-fertig{border-bottom-color:var(--text);color:var(--text)}
+.sp-leiste .ist-fertig b{background:var(--text)}
+@media (max-width:560px){.sp-leiste li{font-size:0;padding:6px 2px;text-align:center}.sp-leiste li b{margin:0;font-size:1rem}}
+.sp-titel{margin:0 0 8px}
+.sp-titel:focus{outline:none}
+.sp-label{margin:8px 0 4px;font-weight:700}
+.sp-ergebnis{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.sp-ergebnis .knopf[aria-pressed=true]{background:var(--text);color:var(--flaeche);border-color:var(--text)}
+.sp-parteien{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));margin:0 0 12px}
+.sp-partei{display:grid;gap:2px;text-align:left;min-height:72px;padding:10px 14px;border:2px solid var(--text);border-left:12px solid var(--sp-farbe,var(--stahl));border-radius:var(--radius);background:var(--flaeche);color:var(--text);font:inherit;cursor:pointer;transition:transform var(--dauer-druck) var(--ease-out)}
+.sp-partei strong{font-size:1.25rem;line-height:1.15}
+.sp-partei span{font-size:1rem;color:var(--leise)}
+.sp-partei:active{transform:scale(.98)}
+@media (hover:hover) and (pointer:fine){.sp-partei:hover{background:var(--grund)}}
+.sp-partei:focus-visible,.sp-partei:has(input:focus-visible){outline:3px solid var(--text);outline-offset:2px}
+.sp-partei:has(input:checked){background:var(--text);color:var(--flaeche)}
+.sp-partei:has(input:checked) span{color:var(--flaeche)}
+.sp-chip{display:inline-flex;align-items:center;gap:5px;font-weight:700;white-space:nowrap}
+.sp-chip i{width:12px;height:12px;border-radius:50%;border:1px solid var(--text);display:inline-block}
+.sp-befund{padding:12px 16px;background:var(--grund);border-radius:var(--radius)}
+.sp-befund p{max-width:none;margin:0 0 6px}
+.sp-warn{padding:8px 12px;background:var(--ton-gelb);border-left:6px solid var(--ton-gelb-tief)}
+.sp-zurueck{margin-top:16px}
+.sp-einig{padding:8px 12px;background:var(--grund);border-radius:var(--radius);max-width:none}
+.sp-tisch{list-style:none;margin:12px 0;padding:0;display:grid;gap:14px}
+.sp-thema h3{margin:0;font-size:1.1875rem}
+.sp-wichtig{margin:0 0 6px;color:var(--leise);max-width:none}
+.sp-optionen{display:grid;gap:8px;grid-template-columns:1fr}
+@media (min-width:768px){.sp-optionen{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.sp-option{cursor:pointer;display:block}
+.sp-option>span{display:grid;gap:4px;align-content:start;height:100%;min-height:64px;padding:8px 12px;border:2px solid var(--stahl);border-radius:var(--radius);background:var(--flaeche);transition:transform var(--dauer-druck) var(--ease-out)}
+.sp-option b{font-size:1rem;line-height:1.25}
+.sp-option small{font-size:1rem;color:var(--leise);display:flex;flex-wrap:wrap;gap:4px 10px}
+.sp-option--meine>span{border-style:solid;border-color:var(--text)}
+.sp-option:active>span{transform:scale(.98)}
+.sp-option input:checked+span{background:var(--text);color:var(--flaeche);border-color:var(--text)}
+.sp-option input:checked+span small{color:var(--flaeche)}
+.sp-option input:focus-visible+span{outline:3px solid var(--text);outline-offset:2px}
+.sp-basis{margin:12px 0 0;padding:10px 14px;background:var(--grund);border-left:6px solid var(--ton-lila-tief);max-width:none}
+.sp-antwort{margin-top:10px}
+.sp-antwort .rueck{margin:0 0 8px}
+.sp-vertrag{position:relative;background:var(--flaeche);border:2px solid var(--text);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--platte);margin:0 0 16px} /* taste-skill-ignore: versetzte Platte */
+.sp-vertrag h3{margin:0 0 2px;padding-right:150px}
+.sp-punkte{margin:10px 0 0;padding-left:1.2em;display:grid;gap:6px}
+.sp-punkte small{color:var(--leise);font-size:1rem}
+.sp-stempel{position:absolute;top:14px;right:14px;margin:0;padding:4px 12px;border:3px solid var(--akzent);color:var(--akzent);font-family:var(--schrift-titel);font-weight:700;font-size:1.125rem;letter-spacing:0;transform:rotate(-6deg);border-radius:4px}
+.sp-stempel--neu{animation:sp-stempel 300ms var(--ease-out) both}
+@keyframes sp-stempel{from{opacity:0;transform:rotate(-6deg) scale(1.6)}to{opacity:1;transform:rotate(-6deg) scale(1)}}
+html[data-bewegung=weniger] .sp-stempel--neu{animation:none}
+@media (prefers-reduced-motion:reduce){.sp-stempel--neu{animation:none}}
+@media (max-width:560px){.sp-stempel{position:static;display:inline-block;margin-bottom:8px}.sp-vertrag h3{padding-right:0}}
+.sp-hand{margin:0 0 16px}
+.sp-handzeile{grid-template-columns:minmax(90px,130px) 1fr minmax(96px,150px)}
+.sp-handzeile .spur{position:relative}
+.sp-marke{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--text);outline:2px solid var(--flaeche)}
+.sp-handzeile .spur{overflow:visible}
+.sp-preis{padding:10px 14px;background:var(--ton-gelb);border-left:6px solid var(--ton-gelb-tief);max-width:none}
+.sp-opposition{margin:0 0 16px;padding:14px 18px;background:var(--grund);border-left:6px solid var(--stahl);border-radius:var(--radius)}
+.sp-opposition h3{margin-top:0}
+.sp-opposition p{max-width:none}
+.sp-nach{margin:0 0 12px}
+.sp-teaser{border-left:12px solid var(--ton-lila-tief)}

@@ -62,6 +62,20 @@
     box.appendChild(PW.el('p', { 'class': 'knopfzeile' }, [merken, datei, laden, ladenKn]));
     box.appendChild(meldung);
     var ul = PW.el('ul', { 'class': 'wa-liste', 'aria-label': 'Gesicherte Wahlen' });
+    if (PW.klassenErgebnisse && PW.klassenErgebnisse.length) {
+      box.appendChild(PW.el('h4', { text: 'Fest eingetragen' }));
+      var festUl = PW.el('ul', { 'class': 'wa-liste', 'aria-label': 'Fest eingetragene Klassenergebnisse' });
+      PW.klassenErgebnisse.forEach(function (f) {
+        var li = PW.el('li', { 'class': 'wa-eintrag' }, [PW.el('p', { 'class': 'wa-titel' }, [PW.el('strong', { text: f.name })])]);
+        li.appendChild(PW.el('p', { 'class': 'klein wa-kurz', text: 'Zweitstimmen: ' + Object.keys(f.prozent).sort(function (a, b) { return f.prozent[b] - f.prozent[a]; }).map(function (k) { return PW.listenName(k) + ' ' + PW.fmt(f.prozent[k]) + ' %'; }).join(' · ') }));
+        if (f.hinweis) li.appendChild(PW.el('p', { 'class': 'klein wa-kurz', text: f.hinweis }));
+        var lf = PW.el('button', { type: 'button', 'class': 'knopf knopf--voll', text: 'Laden' });
+        lf.addEventListener('click', function () { aktivieren({ name: f.name, prozent: f.prozent }); melde('gut', '<strong>Geladen:</strong> »' + esc(f.name) + '«. Das Ergebnis steht jetzt im Sitzrechner und im Abgleich.'); });
+        li.appendChild(PW.el('p', { 'class': 'knopfzeile' }, [lf]));
+        festUl.appendChild(li);
+      });
+      box.appendChild(festUl);
+    }
     box.appendChild(PW.el('h4', { text: 'Auf diesem Gerät gesichert' }));
     box.appendChild(ul);
     /* Rückfall ohne Download (z. B. in einem gesperrten Moodle-Rahmen): als Text kopieren und einfügen */

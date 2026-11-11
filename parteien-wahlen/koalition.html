@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Koalitionsspiel · Wer regiert mit wem?</title>
+<script>try{var a=localStorage.getItem("pw:ansicht");if(a){a=JSON.parse(a);if(a==="hell"||a==="dunkel"||a==="beamer")document.documentElement.setAttribute("data-ansicht",a)}}catch(e){}</script>
+<link rel="stylesheet" href="../assets/css/werkstatt.css">
+</head>
+<body data-ton="lila" class="spielseite">
+<header class="kopf"><div class="kopf-innen"></div></header>
+<main id="inhalt">
+  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">4</span><h1>Das Koalitionsspiel</h1><p class="leitfrage">Wie viel vom eigenen Programm bleibt übrig, wenn man regieren will?</p><p class="klein" style="margin:0">Zu zweit an einem Gerät · etwa 15 Minuten · danach Plenum. <a href="station4.html#koalition">Zurück zu Station 4</a></p></div></div>
+  <aside class="caja" data-pose="denkt" aria-label="Caja, eine erfundene Figur"><p>Caja hat gewählt – aber keine Partei hat allein die Mehrheit. »Und jetzt? Wer bestimmt, was von den Versprechen übrig bleibt?«</p></aside>
+  <section class="karte sp" id="spiel" aria-live="off"><noscript><p>Das Spiel braucht JavaScript. Ohne: Wählt zu zweit je eine Partei, vergleicht ihre Positionen in Station 3 und handelt auf Papier einen Vertrag zu drei strittigen Fragen aus.</p></noscript></section>
+  <details class="karte karte--leise"><summary><strong>So rechnet das Spiel</strong> (Modell)</summary>
+    <ul class="klein">
+      <li><strong>Positionen:</strong> aus den Wahlprogrammen 2025, mit Zitat und Seite in Station 3.</li>
+      <li><strong>Wichtigkeit:</strong> Wie wichtig ein Thema einer Partei ist (weniger wichtig, wichtig, Kernthema), hat die Werkstatt angenommen. Das steht in keinem Programm – prüft, ob ihr es anders seht.</li>
+      <li><strong>Kompromisse:</strong> Die Kompromisstexte sind für das Spiel erfunden.</li>
+      <li><strong>Annehmen oder ablehnen:</strong> Jede Partei zählt, wie viel von ihrem gewichteten Programm im Vertrag steht. Ein Kompromiss zählt weniger als die halbe eigene Linie. Je größer eine Partei im Bündnis ist, desto mehr verlangt sie. Ein Kernthema gibt keine Partei ganz auf.</li>
+      <li><strong>Drei Runden:</strong> Lehnt dein Gegenüber dreimal ab, platzen die Gespräche. Stimmt es zu, aber deine eigene Partei nicht, scheitert der Vertrag am Parteitag.</li>
+    </ul>
+  </details>
+  <p class="knopfzeile knopfzeile--rechts"><a class="knopf" href="station4.html#koalition">Zurück zu Station 4</a> <a class="knopf knopf--voll" href="station5.html">Weiter zu Station 5</a></p>
+</main>
+<footer class="fuss"><div class="fuss-innen"></div></footer>
+<script src="../assets/js/daten.js"></script>
+<script src="../assets/js/werkstatt.js"></script>
+<script src="../assets/js/motion.js"></script>
+<script src="../assets/js/merkzettel.js"></script>
+<script src="../assets/js/lernstand.js"></script>
+<script src="../assets/js/koalitionsspiel.js"></script>
+<script>
+document.documentElement.classList.add('js'); document.documentElement.classList.remove('no-js');
+PW.rahmen('spiel', '../'); PW.merkzettel('../');
+PW.koalitionsspiel(document.getElementById('spiel'));
+</script>
+</body>
+</html>

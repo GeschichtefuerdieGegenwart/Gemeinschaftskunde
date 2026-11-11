@@ -209,6 +209,7 @@
     { id: 'st2', url: 'parteien-wahlen/station2.html', name: 'Erkennen', station: 2 },
     { id: 'st3', url: 'parteien-wahlen/station3.html', name: 'Positionen', station: 3 },
     { id: 'st4', url: 'parteien-wahlen/station4.html', name: 'Wählen', station: 4 },
+    { id: 'spiel', url: 'parteien-wahlen/koalition.html', name: 'Koalitionsspiel' },
     { id: 'st5', url: 'parteien-wahlen/station5.html', name: 'Warum so?', station: 5 },
     { id: 'st6', url: 'parteien-wahlen/station6.html', name: 'Europa', station: 6 },
     { id: 'm2', url: 'verbaende.html', name: 'Modul 2' },
