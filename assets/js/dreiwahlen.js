@@ -21,26 +21,10 @@
     });
     return w;
   }
-  /* Figuren im Stil von PW.cajaBild: Karton-Grund, flache Formen, nur Tokens (Hell, Dunkel, Beamer). */
-  function kopf(x, y, r, haar, kurz, grau) {
-    var h = kurz
-      ? '<path d="M' + (x - r) + ' ' + (y - 2) + 'c0-' + (r * .9).toFixed(0) + ' ' + (r * .5).toFixed(0) + '-' + (r * 1.1).toFixed(0) + ' ' + r + '-' + (r * 1.1).toFixed(0) + 's' + r + ' ' + (r * .2).toFixed(0) + ' ' + r + ' ' + (r * 1.1).toFixed(0) + 'z" style="fill:' + haar + '"/>'
-      : '<path d="M' + (x - r - 4) + ' ' + (y + 2) + 'c0-' + (r * 1.2).toFixed(0) + ' ' + (r * .6).toFixed(0) + '-' + (r * 1.8).toFixed(0) + ' ' + (r + 4) + '-' + (r * 1.8).toFixed(0) + 's' + (r + 4) + ' ' + (r * .6).toFixed(0) + ' ' + (r + 4) + ' ' + (r * 1.8).toFixed(0) + 'c0 ' + (r * .5).toFixed(0) + '-1 ' + r + '-3 ' + (r * 1.3).toFixed(0) + 'H' + (x - r - 1) + 'c-2-' + (r * .3).toFixed(0) + '-3-' + (r * .8).toFixed(0) + '-3-' + (r * 1.3).toFixed(0) + 'z" style="fill:' + haar + '"/>';
-    return h + '<ellipse cx="' + x + '" cy="' + (y + 2) + '" rx="' + (r - 1) + '" ry="' + (r + 2) + '" style="fill:var(--flaeche);stroke:var(--text);stroke-width:2"/>' +
-      '<circle cx="' + (x - r / 3).toFixed(1) + '" cy="' + (y + 2) + '" r="1.8" style="fill:var(--text)"/><circle cx="' + (x + r / 3).toFixed(1) + '" cy="' + (y + 2) + '" r="1.8" style="fill:var(--text)"/>' +
-      '<path d="M' + (x - 4) + ' ' + (y + r * .65).toFixed(1) + 'c3 2 5 2 8 0" style="fill:none;stroke:var(--text);stroke-width:2;stroke-linecap:round"/>' +
-      (grau ? '<path d="M' + (x - r + 2) + ' ' + (y + 1) + 'h' + (r * 2 - 4) + '" style="fill:none;stroke:var(--text);stroke-width:1.5"/>' : '');
-  }
+  /* Figuren aus der Bildfamilie (assets/js/figuren.js); ohne sie bleibt die Karte ohne Bild vollständig. */
   function figur(art) {
-    if (art === 'frau' && PW.cajaBild) return PW.cajaBild().replace('class="caja-bild"', 'class="caja-bild dw-bild"');
-    var grund = '<rect x="6" y="8" width="84" height="100" style="fill:var(--karton)"/>';
-    if (art === 'mann') return '<svg class="dw-bild" viewBox="0 0 96 112" aria-hidden="true">' + grund +
-      '<path d="M18 112c2-26 14-38 30-38s28 12 30 38z" style="fill:var(--ton-blau-tief)"/>' +
-      '<path d="M40 74h16l-8 10z" style="fill:var(--flaeche)"/>' + kopf(48, 44, 16, 'var(--text)', true) + '</svg>';
-    return '<svg class="dw-bild" viewBox="0 0 96 112" aria-hidden="true">' + grund +
-      '<path d="M8 112c1-20 9-30 22-30s21 10 22 30z" style="fill:var(--ton-warm-tief)"/>' +
-      '<path d="M44 112c1-22 10-32 24-32s23 10 24 32z" style="fill:var(--ton-gruen-tief)"/>' +
-      kopf(30, 58, 12, 'var(--stahl)', false, true) + kopf(68, 54, 13, 'var(--stahl)', true, true) + '</svg>';
+    if (!PW.figur) return '';
+    return PW.figur(art === 'frau' ? 'caja' : art === 'mann' ? 'mitschueler' : 'grosseltern').replace('class="fig ', 'class="dw-bild fig ');
   }
 
   var PERSONEN = [

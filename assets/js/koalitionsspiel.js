@@ -318,7 +318,7 @@
         var opp = PW.el('aside', { 'class': 'sp-opposition' });
         opp.innerHTML = '<h3>Die Alternative: Opposition</h3>' +
           '<p>Ohne Regierungsamt bleibt deiner Fraktion die Kontrolle: Fragen an die Regierung, Reden im Bundestag, eigene Gesetzentwürfe, Arbeit in den Ausschüssen.</p>' +
-          '<p><strong>Mit einem Viertel der Abgeordneten (' + viertel + ' von 630)</strong> kann die Opposition einen Untersuchungsausschuss erzwingen (Art. 44 GG) und ein Gesetz vom Bundesverfassungsgericht prüfen lassen (Art. 93 GG). ' + esc(ich.name) + ' hat ' + ich.sitze + ' Sitze: ' + (ich.sitze >= viertel ? 'Das reicht allein.' : 'Das reicht allein nicht – ihr braucht andere Fraktionen. Zum Vergleich: Auch 120 Sitze, so viele wie die SPD 2025, lägen darunter.') + '</p>' +
+          '<p><strong>Mit einem Viertel der Abgeordneten (' + viertel + ' von 630)</strong> kann die Opposition einen Untersuchungsausschuss erzwingen (Art. 44 GG) und ein Gesetz vom Bundesverfassungsgericht prüfen lassen (Art. 93 GG). ' + esc(ich.name) + ' hat ' + ich.sitze + ' Sitze: ' + (ich.sitze >= viertel ? 'Das reicht allein.' : 'Das reicht allein nicht – ihr braucht andere Fraktionen.' + (st.art === 'bund' && st.ich === 'spd' ? '' : ' Zum Vergleich: Auch 120 Sitze, so viele wie die SPD 2025, lägen darunter.')) + '</p>' +
           '<p><strong>Was man dir vorwerfen kann:</strong> Wer gewählt wurde und nicht regieren will, drückt sich vor der Verantwortung. <strong>Was du antworten kannst:</strong> »Es ist besser, nicht zu regieren, als falsch zu regieren« – so begründete FDP-Chef Christian Lindner 2017 den Abbruch der Jamaika-Gespräche.</p>';
         box.appendChild(opp);
       }
