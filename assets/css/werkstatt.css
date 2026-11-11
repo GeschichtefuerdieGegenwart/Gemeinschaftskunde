@@ -1238,76 +1238,6 @@ label.knopf{cursor:pointer}
 .epl--de .fuellung{background:var(--ton-gelb-tief)}
 .epl--de>span:first-child{font-weight:700;font-style:normal}
 
-/* v14 · Muster AO (neu) · Die Karte des Halbjahres als Linienplan (GK-Labor, index.html)
-   Advance Organizer: eine Linie = der Weg einer politischen Frage; drei Haltestellen A–C mit Verb und Frage (übergeordnete Begriffe zuerst),
-   Module hängen an ihrer Haltestelle, Verbindungen sind beschriftet (»daraus wird«, »braucht Schutz«), der Rückweg schließt den Kreis.
-   Status doppelt kodiert: Rahmen (durchgezogen/gestrichelt) und Wort. Statisch lesbar, keine Bewegung. */
-.km{margin:0 0 32px}
-.km-lesehilfe{max-width:72ch}
-.km-plan{position:relative;margin:20px 0 12px;padding-left:34px}
-.km-plan::before{content:"";position:absolute;left:10px;top:30px;bottom:34px;width:8px;background:var(--text);border-radius:4px}
-.km-start{position:relative;display:flex;align-items:center;gap:12px;margin:0 0 18px;max-width:none}
-.km-start::before{content:"";position:absolute;left:-32px;top:50%;width:24px;height:24px;margin-top:-12px;border-radius:50%;background:var(--text);border:5px solid var(--grund)}
-.km-figur{display:block;width:64px;flex:none}
-.km-linie{list-style:none;margin:0;padding:0;display:grid;gap:22px}
-.km-halt{position:relative}
-.km-knoten{position:relative;margin:0 0 10px;display:grid;gap:0 10px;max-width:none}
-.km-punkt{position:absolute;left:-46px;top:-2px;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--zt-tief);color:var(--flaeche);border:4px solid var(--grund);font-family:var(--schrift-titel);font-weight:700;font-size:1.25rem}
-.km-wort{font-family:var(--schrift-titel);font-weight:700;font-size:1.5rem;line-height:1.15}
-.km-frage{font-family:var(--schrift-stimme);font-style:italic;font-weight:600;font-size:1.0625rem;color:var(--zt-tief)}
-.km-halt[data-weiter]::after{content:"↓ " attr(data-weiter);display:block;margin:12px 0 0;font-weight:700;font-size:1rem;color:var(--leise)}
-.km-module{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-.km-modul{position:relative;background:var(--flaeche);border:2px dashed var(--stahl);border-radius:var(--radius);padding:12px 14px}
-.km-modul--offen{border:2px solid var(--text);box-shadow:5px 5px 0 0 var(--zt-tief)} /* taste-skill-ignore: versetzte Platte im Ton der Haltestelle */
-.km-meta{margin:0 0 2px;font-size:1rem;color:var(--leise);max-width:none;display:flex;flex-wrap:wrap;gap:0 6px;align-items:center}
-.km-meta b{color:var(--text)}
-.km-modul--offen .km-status{color:var(--erfolg);font-weight:700}
-.km-hier{margin-left:auto;padding:2px 10px;background:var(--akzent);color:var(--flaeche);font-weight:700;border-radius:2px}
-.km-modul h3{margin:0 0 2px;font-size:1.25rem;line-height:1.2}
-.km-modul h3 a{display:inline-block;min-height:44px;padding-top:8px;margin-top:-8px;color:var(--text);text-decoration-thickness:2px;text-underline-offset:3px}
-.km-leit{margin:0 0 8px;font-family:var(--schrift-stimme);font-style:italic;font-weight:600;font-size:1.0625rem;color:var(--zt-tief);max-width:none}
-.km-themen{margin:0;font-size:1rem;max-width:none}
-.km-begriffe{list-style:none;margin:0;padding:0;display:grid;gap:4px}
-.km-begriffe li{font-size:1rem;line-height:1.3;padding-left:14px;position:relative}
-.km-begriffe li::before{content:"";position:absolute;left:0;top:.55em;width:7px;height:7px;border-radius:50%;background:var(--zt-tief)}
-.km-teile{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:teil}
-.km-teile>li{counter-increment:teil}
-.km-teile a{display:grid;gap:2px;min-height:44px;padding:8px 12px 8px 46px;position:relative;border:2px solid var(--text);border-radius:var(--radius);background:var(--grund);color:var(--text);text-decoration:none;transition:transform var(--dauer-druck) var(--ease-out)}
-.km-teile>li>a::before{content:counter(teil);position:absolute;left:10px;top:50%;margin-top:-14px;width:28px;height:28px;border-radius:50%;background:var(--zt-tief);color:var(--flaeche);display:grid;place-items:center;font-weight:700}
-.km-teile a b{font-size:1.0625rem}
-.km-teile a span{font-size:1rem;color:var(--leise)}
-.km-teile a:active{transform:scale(.98)}
-@media (hover:hover) and (pointer:fine){.km-teile a:hover{background:var(--flaeche)}.km-teile a:hover b{text-decoration:underline;text-decoration-thickness:2px}}
-.km-teile a:focus-visible{outline:3px solid var(--text);outline-offset:2px}
-.km-unter{list-style:none;margin:6px 0 0 22px;padding:0 0 0 14px;border-left:4px solid var(--zt-tief);display:grid;gap:6px}
-.km-unter a{padding-left:12px;border-style:solid;border-width:2px;border-color:var(--stahl);background:var(--flaeche)}
-.km-fort{margin:8px 0 0;font-size:1rem;color:var(--leise);max-width:none}
-.km-rueck{position:relative;display:flex;gap:10px;align-items:center;margin:22px 0 0;max-width:none}
-.km-rueck::before{content:"";position:absolute;left:-32px;top:50%;width:24px;height:24px;margin-top:-12px;border-radius:50%;background:var(--grund);border:5px solid var(--text)}
-.km-rueck-pfeil{flex:none;width:0;height:0;border-top:11px solid transparent;border-bottom:11px solid transparent;border-right:16px solid var(--text)}
-.km-legende{list-style:none;margin:16px 0 8px;padding:0;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:1rem}
-.km-legende li{display:flex;align-items:center;gap:8px}
-.km-probe{display:inline-grid;place-items:center;width:34px;height:22px;border:2px dashed var(--stahl);border-radius:2px;background:var(--flaeche)}
-.km-probe--offen{border:2px solid var(--text)}
-.km-probe--punkt{width:26px;height:26px;border-radius:50%;border:0;background:var(--text);color:var(--flaeche);font-weight:700;font-size:1rem}
-@media (min-width:1100px){
-  .km-plan{padding:0 0 0 0}
-  .km-plan::before{left:0;right:0;top:auto;bottom:auto;width:auto;height:8px;margin-top:0}
-  .km-plan{display:grid;grid-template-columns:1fr;row-gap:0}
-  .km-plan::before{top:117px}
-  .km-start{margin:0 0 0 0;height:84px;padding-left:0}
-  .km-start::before{display:none}
-  .km-linie{grid-template-columns:2.1fr 1fr 1fr;gap:28px;align-items:start;margin-top:14px}
-  .km-knoten{padding-top:54px;min-height:158px;align-content:start}
-  .km-punkt{left:0;top:0;width:46px;height:46px}
-  .km-halt[data-weiter]::after{position:absolute;right:-22px;top:10px;margin:0;transform:translateX(50%);content:attr(data-weiter) " →";background:var(--grund);padding:2px 8px;white-space:nowrap;z-index:1}
-  .km-halt:nth-child(1)[data-weiter]::after{right:8px;transform:none}
-  .km-halt:nth-child(2)[data-weiter]::after{right:8px;transform:none}
-  .km-halt:first-child .km-module{grid-template-columns:1fr 1fr}
-  .km-modul--gross{grid-column:1/-1}
-  .km-rueck{margin:26px 0 0;padding:12px 16px;border:2px dashed var(--text);border-radius:var(--radius)}
-  .km-rueck::before{display:none}
-}
 .lab-hypo{margin:0 0 24px;max-width:70ch}
 @media (min-width:1024px){
   .lab-kreis{grid-template-columns:2fr 1fr 1fr;gap:44px;align-items:stretch}
@@ -1508,3 +1438,55 @@ html[data-bewegung=weniger] .sp-stempel--neu{animation:none}
   --haar-1:#43302A;--haar-1-l:#6B4D42;--haar-2:#23262D;--haar-2-l:#474C57;--haar-grau:#CFCBC4;--haar-grau-l:#EDEAE4;--haar-grau-s:#9C978F;
   --fig-linie:#26211E;--fig-wange:#D9644A}
 .fig{display:block;width:100%;height:auto}
+
+/* v15 · Muster AO (reduziert) · Startseite des GK-Labors: drei farbige Säulen
+   Eine Frage oben, darunter drei Schritte als Säulen in drei Tönen (blau · grün · lila), verbunden durch Pfeilspitzen im Band.
+   Module als Kacheln: vorhanden = volle Kachel mit Link, geplant = gestrichelt und gedämpft (Rahmen plus Wort). Keine Bewegung. */
+.hs-kopf{margin:8px 0 28px}
+.hs-dach{margin:0 0 8px;color:var(--leise);font-size:1rem;font-weight:700}
+.labor-seite .hs-kopf .grundfrage{font-size:clamp(2rem,5vw,3.75rem);max-width:none;margin:0}
+.labor-seite .auftakt.hs-kopf{margin:8px 0 28px}
+.labor-seite .hs-kopf .grundfrage .akzent{display:inline}
+.hs{list-style:none;margin:0;padding:0;display:grid;gap:18px;grid-template-columns:1fr}
+.hs-schritt{display:flex;flex-direction:column;border-radius:var(--radius);overflow:hidden;background:var(--zt);border:2px solid var(--zt-tief)}
+.hs-schritt--a{--zt:var(--ton-blau);--zt-tief:var(--ton-blau-tief)}
+.hs-schritt--b{--zt:var(--ton-gruen);--zt-tief:var(--ton-gruen-tief)}
+.hs-schritt--c{--zt:var(--ton-lila);--zt-tief:var(--ton-lila-tief)}
+.hs-band{position:relative;margin:0;display:flex;gap:14px;align-items:center;padding:16px 18px;background:var(--zt-tief);color:var(--flaeche)}
+.hs-band b{display:block;font-family:var(--schrift-titel);font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.05}
+.hs-band small{display:block;margin-top:4px;font-family:var(--schrift-stimme);font-style:italic;font-weight:600;font-size:1.0625rem;line-height:1.25;opacity:.95}
+.hs-nr{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--flaeche);color:var(--zt-tief);font-family:var(--schrift-titel);font-weight:700;font-size:1.75rem}
+.hs-module{list-style:none;margin:0;padding:14px;display:grid;gap:12px;align-content:start;flex:1}
+.hs-modul{background:var(--flaeche);border:2px solid var(--zt-tief);border-radius:var(--radius)}
+.hs-modul:not(.hs-modul--da){background:transparent;border-style:dashed;opacity:.85}
+.hs-link{display:grid;gap:2px;margin:0;padding:12px 14px;color:var(--text);text-decoration:none;max-width:none;position:relative}
+a.hs-link{min-height:44px;transition:transform var(--dauer-druck) var(--ease-out)}
+a.hs-link:active{transform:scale(.99)}
+@media (hover:hover) and (pointer:fine){a.hs-link:hover b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}}
+a.hs-link:focus-visible{outline:3px solid var(--text);outline-offset:-3px}
+.hs-m{font-size:1rem;font-weight:700;color:var(--zt-tief)}
+.hs-link b{font-family:var(--schrift-titel);font-size:1.375rem;line-height:1.15}
+.hs-hier{position:absolute;top:10px;right:10px;padding:2px 10px;background:var(--akzent);color:var(--flaeche);font-weight:700;font-size:1rem;border-radius:2px}
+.hs-teile{list-style:none;margin:0;padding:0 14px 10px;display:flex;flex-wrap:wrap;gap:8px}
+.hs-teile a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border-radius:999px;background:var(--zt-tief);color:var(--flaeche);font-weight:700;text-decoration:none} /* taste-skill-ignore: Teile als Haltegriffe, kein Etikett */
+.hs-teile a:focus-visible,.hs-extra a:focus-visible{outline:3px solid var(--text);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.hs-teile a:hover{background:var(--text)}}
+.hs-extra{list-style:none;margin:0;padding:0 14px 12px;display:flex;flex-wrap:wrap;gap:4px 18px}
+.hs-extra a{display:inline-flex;align-items:center;min-height:44px;color:var(--text);font-weight:700;text-decoration-thickness:2px;text-underline-offset:3px}
+.hs-extra a::before{content:"→";margin-right:6px;color:var(--zt-tief)}
+.hs-fort{margin:0;padding:0 14px 12px;font-size:1rem;color:var(--leise)}
+.hs-fort:empty{display:none}
+.hs-stich{margin:0;padding:0 14px 12px;font-size:1rem;max-width:none}
+.hs-fuss{margin:16px 0 8px;color:var(--leise);font-size:1rem;max-width:none}
+.hs-hypo{margin:0 0 24px;max-width:70ch}
+.hs-hypo summary{min-height:44px;display:flex;align-items:center;font-weight:700;cursor:pointer}
+@media (min-width:1024px){
+  .hs{grid-template-columns:1.5fr 1fr 1fr;gap:0}
+  .hs-schritt{border-radius:0;border-left-width:0;overflow:visible}
+  .hs-band{min-height:112px}
+  .hs-schritt:first-child{border-left-width:2px;border-radius:var(--radius) 0 0 var(--radius)}
+  .hs-schritt:last-child{border-radius:0 var(--radius) var(--radius) 0}
+  .hs-band{padding-right:34px}
+  .hs-schritt:not(:last-child) .hs-band::after{content:"";position:absolute;right:-22px;top:0;bottom:0;width:22px;background:var(--zt-tief);clip-path:polygon(0 0,100% 50%,0 100%);z-index:1}
+  .hs-schritt:not(:first-child) .hs-band{padding-left:38px}
+}
