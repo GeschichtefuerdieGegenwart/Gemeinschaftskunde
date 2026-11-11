@@ -261,3 +261,14 @@ Eine Doppelstunde (`verbaende.html`), roter Faden Zuckersteuer 2026, Kernfrage �
 »Eingaben löschen …« im Fuß öffnet ein Feld statt eines Browser-Dialogs: Eingaben im aktuellen Modul löschen (im GK-Labor: Modul 1 oder Modul 2 wählen), Klassenergebnisse von Modul 1 nur mit eigenem Schalter, »Alles auf diesem Gerät löschen« als letzte Wahl; jede Löschung braucht ein zweites Tippen, Escape schließt. Ansicht und Bewegung bleiben immer. Der Lernstand wird je Modul getrennt (Modul 2: st12). Fußzeile neutral für alle Module.
 
 **Prüfung (gelaufen):** Browser-Test mit Schlüsseln aus beiden Modulen: Modul 2 löschen lässt Modul 1, Klassenwahl, Wahlarchiv, Hypothesen und Ansicht stehen; Modul 1 löschen ohne Schalter lässt Klassenwahl und Wahlarchiv stehen; kein Browser-Dialog. `tools/pruefen.py`: nur der bekannte Befund (H1 im Labor, 390 px).
+
+## v14 (11.11.2026): Karte als Linienplan, Klassenergebnis 2026/27, Koalitionsspiel, neue Figuren – Pull Request
+
+1. **Karte des Halbjahres** neu als Linienplan (Advance Organizer): übergeordnete Schritte zuerst (Einbringen → Entscheiden und kontrollieren → Schützen), beschriftete Verbindungen, Rückweg, Legende, »Du bist hier«. Unter »Wahlen zum Bundestag« neu: Klassenergebnis 2026/27 und Koalitionsspiel.
+2. **Klassenergebnis 2026/27** fest eingetragen (CDU 26,7 · Die Linke 26,7 · GRÜNE 20 · FDP 20; 6,6 % nicht zugeordnet): Knopf im Sitzrechner, Eintrag im Wahlarchiv, Anker `station4.html#klasse-2627`. Ein eigenes Klassenergebnis auf dem Gerät wird dabei nicht überschrieben.
+3. **Koalitionsspiel** (Muster AU): Partei wählen → Partner vermuten, sondieren → drei Runden verhandeln → Vertrag, Scheitern oder Opposition. Kodierung im Kopf von `koalitionsspiel.js` und auf der Seite (»So rechnet das Spiel«).
+4. **Figuren** (Muster AV): Caja mit drei Posen, Mitschüler, Großeltern; größere Caja-Kärtchen.
+
+**Prüfung (gelaufen):** `tools/pruefen.py` 17 Seiten × 5 Breiten; Rechenkern des Spiels über alle Pakete für zwölf Bündnisse durchgezählt (je nach Bündnis 2 bis 31 Lösungen, Bündnisse ohne Streit sofort einig); Browser-Tests: Spiel (zu hart, Lösung, zu weich, Opposition, Stand nach Neuladen), Anker `#klasse-2627`, Wahlarchiv, Figuren. **Nicht gelaufen:** iPad, Beamer im Raum, Erprobung mit Lernenden (Schwierigkeit des Spiels).
+
+**Vor dem Einsatz prüfen:** Gewichte der Themen je Partei (Annahme); Aussagen »lehnt jede Zusammenarbeit mit der AfD ab« für SPD, Grüne, Linke, FDP (belegt ist in der Werkstatt nur der CDU-Beschluss 2018); Lindner-Zitat 2017; ob 6,6 % des Klassenergebnisses eine nicht zugeordnete Stimme sind.

@@ -32,7 +32,7 @@
 <main id="inhalt">
   <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">4</span><h1>Wählen und auszählen</h1><p class="leitfrage">Wie wird aus Stimmen ein Bundestag, und was ändert die 5-%-Hürde?</p><p class="klein" style="margin:0">Fünf Reiter: Stimmzettel üben · die Klasse wählen lassen · Sitze rechnen · Koalition bilden · mit der Wirklichkeit abgleichen.</p><div class="kz"><div><b>630</b><span>Sitze</span></div><div><b>316</b><span>Mehrheit</span></div><div><b>5 %</b><span>Hürde</span></div></div></div></div>
   <ol class="fort" aria-label="Fortschritt"></ol>
-  <aside class="caja" aria-label="Caja, eine erfundene Figur"><p>Caja steht in der Wahlkabine: ein Zettel, zwei Kreuze. Sie fragt sich: Was passiert mit meiner Zweitstimme, wenn die Partei unter 5 % bleibt – und wer regiert am Ende?</p><p>Das findest du in dieser Station heraus.</p></aside>
+  <aside class="caja" data-pose="waehlt" aria-label="Caja, eine erfundene Figur"><p>Caja steht in der Wahlkabine: ein Zettel, zwei Kreuze. Sie fragt sich: Was passiert mit meiner Zweitstimme, wenn die Partei unter 5 % bleibt – und wer regiert am Ende?</p><p>Das findest du in dieser Station heraus.</p></aside>
   <section class="karte karte--leise abruf" id="abruf"><noscript><p>Erst erinnern: Was weißt du noch aus der letzten Station?</p></noscript></section>
   <ul class="reiter" id="reiter"></ul>
 
@@ -76,7 +76,7 @@
   <section id="rechner">
     <h2>Der Sitzrechner</h2>
     <p>Trage Zweitstimmen in Prozent ein oder lade ein echtes Ergebnis. Der Rechner verteilt 630 Sitze nach dem Verfahren Sainte-Laguë/Schepers. <strong>Regeln 2025:</strong> Nur Parteien mit mindestens 5 % der Zweitstimmen oder drei Direktmandaten (Grundmandatsklausel) bekommen Sitze; der SSW ist als Minderheitenpartei befreit; Überhangmandate gibt es nicht mehr (Zweitstimmendeckung).</p>
-    <p class="knopfzeile"><button class="knopf" type="button" data-lade="bund">Bundesergebnis 2025 (vorgeladen)</button> <button class="knopf" type="button" data-lade="wahlkreis">Wahlkreis 260</button> <button class="knopf" type="button" data-lade="klasse" id="klasse-knopf">Klassenergebnis</button> <button class="knopf knopf--leise" type="button" data-lade="leer">Leeren</button></p>
+    <p class="knopfzeile"><button class="knopf" type="button" data-lade="bund">Bundesergebnis 2025 (vorgeladen)</button> <button class="knopf" type="button" data-lade="wahlkreis">Wahlkreis 260</button> <button class="knopf" type="button" data-lade="klasse" id="klasse-knopf">Klassenergebnis</button> <button class="knopf" type="button" data-lade="fest:2627">Klassenergebnis 2026/27</button> <button class="knopf knopf--leise" type="button" data-lade="leer">Leeren</button></p>
     <div class="eingaben" id="eingaben"></div>
     <p class="klein" id="summe-hinweis" aria-live="polite"></p>
     <p><label class="schalter"><input type="checkbox" id="huerde" checked> 5-%-Hürde anwenden</label> &nbsp;&nbsp; <label class="schalter"><input type="checkbox" id="grundmandat"> Grundmandatsklausel: Die Linke mit 3 Direktmandaten (wie 2025)</label></p>
@@ -115,6 +115,12 @@
     <div class="karte" id="koal-pruefung-karte">
       <h3>Drei Kriterien prüfen</h3>
       <div id="koal-pruefung"></div>
+    </div>
+
+    <div class="karte sp-teaser">
+      <h3>Das Koalitionsspiel: Verhandle selbst</h3>
+      <p>Wähle eine Partei, suche Partner und verhandle gegen ein Gegenüber, das eigene Grenzen hat. Wer zu hart verhandelt, steht ohne Partner da. Wer zu weich verhandelt, scheitert an der eigenen Partei.</p>
+      <p class="knopfzeile"><a class="knopf knopf--akzent" href="koalition.html">Zum Koalitionsspiel</a></p>
     </div>
 
     <div class="karte" id="koal-verhandeln-karte">
@@ -158,6 +164,7 @@
 <footer class="fuss"><div class="fuss-innen"></div></footer>
 <script src="../assets/js/daten.js"></script>
 <script src="../assets/js/werkstatt.js"></script>
+<script src="../assets/js/figuren.js"></script>
 <script src="../assets/js/motion.js"></script>
 <script src="../assets/js/faecher.js"></script>
 <script src="../assets/js/merkzettel.js"></script>
@@ -249,7 +256,8 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
   }
   function lade(art) {
     var q = {};
-    if (art === 'bund') q = PW.ergebnisse.bund.werte; else if (art === 'wahlkreis') q = PW.ergebnisse.wahlkreis.werte; else if (art === 'klasse') q = PW.lies('klasse', null) || {};
+    var fest = art.indexOf('fest:') === 0 ? PW.klassenErgebnis(art.slice(5)) : null;
+    if (art === 'bund') q = PW.ergebnisse.bund.werte; else if (art === 'wahlkreis') q = PW.ergebnisse.wahlkreis.werte; else if (art === 'klasse') q = PW.lies('klasse', null) || {}; else if (fest) q = fest.prozent;
     extra = art === 'klasse' ? (PW.lies('klasse-sonst', {}) || {}) : {};
     ids.forEach(function (id) { felder[id].value = (q[id] === null || q[id] === undefined) ? '' : q[id]; });
     var summe = 0; ids.forEach(function (id) { summe += parseFloat(felder[id].value) || 0; });
@@ -337,6 +345,8 @@ var reiter = PW.reiter(document.getElementById('reiter'), { wahl: 'Stimmzettel',
   PW.urne(document.getElementById('urne-box'), function () { if (archiv) archiv.autoSichern(); klassenKnopf(); lade('klasse'); });
   PW.einfuegen(document.getElementById('einfuege-box'), function () { if (archiv) archiv.autoSichern(); klassenKnopf(); lade('klasse'); });
   PW.lernstandAnzeigen(4);
+  /* v14: fest eingetragenes Klassenergebnis per Anker laden (aus dem GK-Labor): #klasse-2627 */
+  (function () { var m = /^#klasse-(\w+)$/.exec(location.hash || ''); if (!m || !PW.klassenErgebnis(m[1])) return; var t = document.getElementById('tab-rechner'); if (t) t.click(); lade('fest:' + m[1]); var r = document.getElementById('rechner'); if (r) r.scrollIntoView({ block: 'start' }); })();
   document.getElementById('reiter').addEventListener('reiter:wechsel', function (e) { if (e.detail.id === 'rechner') rechne(true); });
 })();
 </script>

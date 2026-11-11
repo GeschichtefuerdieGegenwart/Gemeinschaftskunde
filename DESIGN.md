@@ -352,3 +352,6 @@ Grundlage sind die beiden Designsysteme **Gemeinschaftskunde** (die Beschreibung
 - **AR Akteure und Machtressourcen** (Modul 2): sechs Akteurskarten, bis zu drei Ressourcen, Rückmeldung Passt / Passt auch / Passt nicht / Nicht belegt.
 - **AS Einflussbarometer** (Modul 2): ein Gerät vorne, Regler 0–4 je Akteur. Füllung 200 ms.
 - **AT Haltungslinie** (Modul 2): fünf Stellen vorher und nachher, die Stelle von vorher gestrichelt.
+- **AO (neu, v14) Karte des Halbjahres als Linienplan** (index.html): Advance Organizer – eine Linie, drei Haltestellen A–C mit Verb und Frage, beschriftete Verbindungen (»daraus wird«, »braucht Schutz«), Rückweg; Status doppelt kodiert (Rahmen und Wort); Marke »Du bist hier«. Statisch.
+- **AU Koalitionsspiel** (parteien-wahlen/koalition.html): vier Schritte, kodiertes Gegenüber; einzige Bewegung der Stempel (300 ms, ease-out).
+- **AV Figurenfamilie** (assets/js/figuren.js): Caja (drei Posen), Mitschüler, Großeltern; Tokens `--haut-*`, `--haar-*`, `--fig-linie`, `--fig-wange` gelten in allen Ansichten gleich. Schaubild-Zeile: Figuren · alle Stationen · ausgedachte Personen · 11.11.2026.
