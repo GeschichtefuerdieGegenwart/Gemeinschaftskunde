@@ -213,6 +213,7 @@
     { id: 'st5', url: 'parteien-wahlen/station5.html', name: 'Warum so?', station: 5 },
     { id: 'st6', url: 'parteien-wahlen/station6.html', name: 'Europa', station: 6 },
     { id: 'm2', url: 'verbaende.html', name: 'Modul 2' },
+    { id: 'wdh', url: 'klassenarbeit/index.html', name: 'Klassenarbeit' },
     { id: 'zus', url: 'zusammenfassung.html', name: 'Zusammenfassung' },
     { id: 'vert', url: 'vertiefung.html', name: 'Vertiefung' },
     { id: 'lehr', url: 'lehrkraft.html', name: 'Lehrkraft' },
@@ -224,7 +225,7 @@
     var kopf = document.querySelector('.kopf-innen'); if (!kopf) return;
     kopf.appendChild(PW.el('a', { 'class': 'marke', href: wurzel + 'index.html' }, [PW.el('span', { 'class': 'kreuz', 'aria-hidden': 'true' }), 'GK-Labor']));
     var nav = PW.el('nav', { 'class': 'nav', 'aria-label': 'Hauptnavigation' });
-    ['start', 'ziele', 'klausur', 'zus', 'lehr'].map(function (id) { return seiten.filter(function (x) { return x.id === id; })[0]; }).forEach(function (s) { var a = PW.el('a', { href: wurzel + s.url, text: s.name }); if (s.id === aktuell) a.setAttribute('aria-current', 'page'); nav.appendChild(a); });
+    ['start', 'ziele', 'wdh', 'zus', 'lehr'].map(function (id) { return seiten.filter(function (x) { return x.id === id; })[0]; }).forEach(function (s) { var a = PW.el('a', { href: wurzel + s.url, text: s.name }); if (s.id === aktuell) a.setAttribute('aria-current', 'page'); nav.appendChild(a); });
     kopf.appendChild(nav);
     var fort = document.querySelector('.fort');
     if (fort) {

@@ -276,3 +276,15 @@ Eine Doppelstunde (`verbaende.html`), roter Faden Zuckersteuer 2026, Kernfrage �
 ## v15 (11.11.2026): Startseite reduziert – drei farbige Säulen
 
 Die Startseite zeigt nur noch die Leitfrage und darunter die drei Schritte als Säulen in drei Tönen (Einbringen · Entscheiden · Schützen), verbunden durch Pfeilspitzen im Band. Module als Kacheln: vorhanden voll mit Link, geplant gestrichelt. Modul 1 mit drei Teilen als Griffe und zwei Direktlinks (Klassenergebnis 2026/27, Koalitionsspiel). Entfallen: Lesehilfe, »Menschen mit Interessen«, Haltestellen, Rückweg, Legende; Hypothesenliste eingeklappt. **Prüfung:** `pruefen.py` für die Startseite (nur der bekannte H1-Befund bei 390 px), Hell/Dunkel/Beamer angesehen.
+
+## v16 (16.11.2026): Wiederholung vor der Klassenarbeit
+
+Neuer Bereich `klassenarbeit/` (in der Navigation »Klassenarbeit«): **Wiederholung** am Tablet (`index.html`, Muster Einfachwahl mit Erklärung je Option): Brain-Dump ohne Heft, dann vier Bereiche mit 20 Fragen – Demokratie und Regierungssysteme (AB1 · Repubblica Nova), Grundrechte und Rechtsstaat, Parteien und Bundestagswahl (Modul 1), Europawahl (Station 6). Antwort wird nach dem ersten Tipp gesperrt, Rückmeldung »Passt. / Passt nicht.« mit Erklärung und passender Antwort; der Merkkasten »Das musst du wissen« erscheint erst, wenn der Bereich fertig ist; am Ende Liste »Noch einmal ansehen« mit Sprungmarken. Richtige Option nie die längste, Position gestreut (0×5, 1×8, 2×4, 3×3). Speicher `pw:wdh-kopf`, `pw:wdh-<bereich>`; Lernstand-Station 7.
+
+Druckblätter (je **2 Seiten A4**, gemessen per PDF, `assets/css/druck.css` im Stil der GGK-Arbeit: Kopftabelle, graue Materialkästen, Arial): **Zusammenfassung** (Wissen · Können: Operatoren, Sach- und Werturteil, Aufbau einer Stellungnahme, typische Fehler), **Probeklausur** (»Sie«, 90 Min., 40 P., ausgedachter Verfassungsentwurf »Valdora« und ausgedachte Probewahl; Aufgaben AFB I 10 · II 16 · III 14 = 25 / 40 / 35 %), **Erwartungshorizont** (Teilpunkte, Argumente beider Seiten, Werturteil offen).
+
+Maßgaben aus früheren Arbeiten: nur Behandeltes (Psycho), Kopf und Stil wie GGK, 40 Punkte mit rund einem Drittel AFB III, Zusammenfassung höchstens zwei Seiten in zwei Teilen (GGK), nicht überladen (Wahlfach Demokratie). **Zeit:** Wiederholung rund 1 040 Wörter → bei 150 W/min etwa 7 Min. Lesen + 20 Entscheidungen + 5 Min. Brain-Dump ≈ 30–35 Min.
+
+**Prüfung:** Playwright (alle 20 Fragen, Merkkästen, Endliste, keine Konsolenfehler, 390 px ohne Querscrollen); PDF-Seitenzahl 2 / 2 / 2; `pruefen.py` mit den vier neuen Seiten ohne neue Befunde. **Nicht gelaufen:** echtes iPad, VoiceOver.
+
+**Vor dem Einsatz prüfen:** Inhalte des Bereichs 1 mit AB1 (Repubblica Nova) abgleichen – AB1 lag nicht vor, die Fragen folgen dem Standardstoff; Stand der EU-Sperrklausel (Direktwahlakt 2018: beschlossen, noch nicht in Kraft?); dass nichts aus der echten Klassenarbeit vorweggenommen wird; Schullogo im Kopf fehlt.

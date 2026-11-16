@@ -1490,3 +1490,37 @@ a.hs-link:focus-visible{outline:3px solid var(--text);outline-offset:-3px}
   .hs-schritt:not(:last-child) .hs-band::after{content:"";position:absolute;right:-22px;top:0;bottom:0;width:22px;background:var(--zt-tief);clip-path:polygon(0 0,100% 50%,0 100%);z-index:1}
   .hs-schritt:not(:first-child) .hs-band{padding-left:38px}
 }
+
+/* v16 · Wiederholung vor der Klassenarbeit (klassenarbeit/index.html) */
+.wdh-vier{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:10px;grid-template-columns:1fr}
+@media (min-width:768px){.wdh-vier{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.wdh-vier{grid-template-columns:repeat(4,1fr)}}
+.wdh-vier a{display:grid;grid-template-columns:auto 1fr;gap:0 10px;align-items:center;min-height:64px;padding:10px 14px;border:2px solid var(--text);border-radius:var(--radius);background:var(--flaeche);color:var(--text);text-decoration:none}
+.wdh-vier b{grid-row:1/span 2;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--text);color:var(--flaeche);font-family:var(--schrift-titel);font-size:1.25rem}
+.wdh-vier span{font-weight:700;line-height:1.2}
+.wdh-vier small{font-size:1rem;color:var(--leise)}
+.wdh-vier a:focus-visible{outline:3px solid var(--text);outline-offset:2px}
+.wdh-bereich{border-top:8px solid var(--zt-tief)}
+.wdh-fragen{margin:0;padding-left:1.4em;display:grid;gap:18px}
+.wdh-f{margin:0 0 8px;font-weight:700;max-width:none}
+.wdh-optionen{display:grid;gap:8px;grid-template-columns:1fr}
+@media (min-width:900px){.wdh-optionen{grid-template-columns:1fr 1fr}}
+.wdh-option{cursor:pointer;display:block}
+.wdh-option span{display:flex;align-items:center;height:100%;min-height:52px;padding:8px 12px;border:2px solid var(--stahl);border-radius:var(--radius);background:var(--flaeche);transition:transform var(--dauer-druck) var(--ease-out)}
+.wdh-option:active span{transform:scale(.98)}
+.wdh-option input:checked+span{background:var(--text);color:var(--flaeche);border-color:var(--text)}
+.wdh-option input:focus-visible+span{outline:3px solid var(--text);outline-offset:2px}
+.wdh-option input:disabled+span{cursor:default}
+.wdh-option input:disabled:not(:checked)+span{opacity:.7}
+.wdh-rueck:empty{display:none}
+.wdh-rueck{margin:8px 0 0}
+.wdh-merk{margin-top:18px;padding:14px 18px;background:var(--zt);border-left:8px solid var(--zt-tief);border-radius:var(--radius)}
+.wdh-merk h3{margin-top:0}
+.wdh-merk ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.wdh-merk li{max-width:none}
+.wdh-plan{list-style:none;margin:12px 0;padding:0;display:grid;gap:12px}
+.wdh-plan li{display:grid;gap:4px 14px;grid-template-columns:1fr;align-items:center}
+@media (min-width:768px){.wdh-plan li{grid-template-columns:260px 1fr}}
+.wdh-plan .knopf{justify-content:center}
+.wdh-nochmal{margin:0 0 12px;padding-left:1.2em}
+.wdh-nochmal a{display:inline-block;min-height:44px;padding-top:10px}
