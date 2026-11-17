@@ -288,3 +288,15 @@ Maßgaben aus früheren Arbeiten: nur Behandeltes (Psycho), Kopf und Stil wie GG
 **Prüfung:** Playwright (alle 20 Fragen, Merkkästen, Endliste, keine Konsolenfehler, 390 px ohne Querscrollen); PDF-Seitenzahl 2 / 2 / 2; `pruefen.py` mit den vier neuen Seiten ohne neue Befunde. **Nicht gelaufen:** echtes iPad, VoiceOver.
 
 **Vor dem Einsatz prüfen:** Inhalte des Bereichs 1 mit AB1 (Repubblica Nova) abgleichen – AB1 lag nicht vor, die Fragen folgen dem Standardstoff; Stand der EU-Sperrklausel (Direktwahlakt 2018: beschlossen, noch nicht in Kraft?); dass nichts aus der echten Klassenarbeit vorweggenommen wird; Schullogo im Kopf fehlt.
+
+### Nachtrag v16 (17.11.2026): Parteifunktionen, Wahlentscheidung, Europawahl, Güterabwägung
+
+Auf Rückmeldung der Lehrkraft erweitert. **Wiederholung** jetzt in fünf Bereichen mit 24 Fragen (etwa 35 Minuten, gerechnet: rund 2 150 Wörter bei 150 W/min ≈ 14 Min. Lesen + 24 Entscheidungen + 5 Min. »Aus dem Kopf«): Demokratie und Regierungssysteme (neu: direkte und indirekte Demokratie) · **Grundrechte und Güterabwägung** (neu: Schritt »angemessen« als Güterabwägung, Kette der Prüfschritte) · **Parteien: Aufgaben und Funktionen** (Begriffe wörtlich aus Station 1: vier Aufgaben, elf Funktionen; Funktion und Aufgabe zuordnen) · **Bundestagswahl und Wahlentscheidung** (neu: Merkmale einer begründeten Entscheidung, Bedeutung von »Verdachtsfall«) · **Europawahl** (neu: Wahlregeln, Befugnisse des Parlaments). Vermerk der Lehrkraft an Wiederholung, Zusammenfassung und Probeklausur: Alle zugelassenen Parteien sind wählbar; die AfD ist als rechtsextremistischer Verdachtsfall eingestuft; bewertet wird die Argumentation. Richtige Option nie die längste, Position gestreut (5/6/7/6).
+
+**Probeklausur** neu zugeschnitten, drei Aufgaben wie in der Klassenarbeit: 1 Wiedergeben (Aufgaben und Funktionen, Europawahl; 10 P.) · 2 Einordnen (Valdora, Verhältnismäßigkeit bis »erforderlich« an einem ausgedachten Demo-Fall; 16 P.) · 3 Urteilen (Güterabwägung als Sachurteil, begründete Wahlentscheidung als Werturteil mit M3 – Positionen aus Station 3; 14 P.). Operatoren nur aus der BG-Liste (»zuordnen« ersetzt). **Erwartungshorizont** mit Lösungen in beide Richtungen; zu 3b: Die gewählte Partei wird nicht bewertet, der stärkste Einwand gegen die eigene Wahl gehört in die Abwägung. **Zusammenfassung** Seite 2 mit »Güterabwägung durchführen« und »Begründete Wahlentscheidung treffen«.
+
+**Eingaben löschen:** Auf der Klassenarbeitsseite löscht der Knopf nur noch die Wiederholung (`wdh-*`, Lernstand `st7`); vorher hätte er Modul 1 mitgelöscht. Im Labor steht die Wiederholung als dritte Wahl.
+
+**Stand der AfD-Einstufung** (geprüft 17.11.2026): Verdachtsfall, rechtskräftig seit dem Beschluss des BVerwG 2025; Hochstufung vom Mai 2025 durch VG Köln am 26.02.2026 vorläufig untersagt (13 L 1109/25); BMI verzichtet auf Beschwerde; Hauptsacheverfahren ab 10. März. Vor dem Einsatz erneut prüfen.
+
+**Prüfung:** Playwright (24 Fragen, fünf Merkkästen, Endliste, Löschen nur der Wiederholung, keine Konsolenfehler, 390 px ohne Querscrollen); PDF 2 / 2 / 2 Seiten mit mindestens 20 mm Rand unten; `pruefen.py` ohne neue Befunde.

@@ -8,16 +8,19 @@
   PW.merke = function (k, v) { try { localStorage.setItem('pw:' + k, JSON.stringify(v)); } catch (e) { /* privates Fenster o. ä. */ } };
   PW.loescheAlles = function () { try { Object.keys(localStorage).filter(function (k) { return k.indexOf('pw:') === 0; }).forEach(function (k) { localStorage.removeItem(k); }); } catch (e) {} location.reload(); };
   /* v13 · Eingaben je Modul löschen. Einstellungen (Ansicht, Bewegung) bleiben immer.
-     Modul 2: Schlüssel lobby-*, zucker, m2-* und Lernstand st12. Labor: hypothesen. Alles andere gehört zu Modul 1.
+     Modul 2: Schlüssel lobby-*, zucker, m2-* und Lernstand st12. Wiederholung (v16): wdh-* und Lernstand st7.
+     Labor: hypothesen. Alles andere gehört zu Modul 1.
      Klassenergebnisse in Modul 1 (Klassenwahl, Urne, Wahlarchiv, Klassenbild der Urteilslinie) nur auf ausdrücklichen Wunsch. */
-  PW.module = { m1: 'Modul 1 · Parteien und Wahlen', m2: 'Modul 2 · Verbände und Lobbyismus' };
+  PW.module = { m1: 'Modul 1 · Parteien und Wahlen', m2: 'Modul 2 · Verbände und Lobbyismus', ka: 'Klassenarbeit · Wiederholung' };
   var EINSTELLUNG = ['ansicht', 'bewegung'];
-  var M2_LERN = ['st12'];
+  var M2_LERN = ['st12'], KA_LERN = ['st7'];
+  function modulDesLernstands(st) { var b = st.replace(/-stufen$/, ''); return M2_LERN.indexOf(b) >= 0 ? 'm2' : KA_LERN.indexOf(b) >= 0 ? 'ka' : 'm1'; }
   function istKlasse(k) { return k === 'wahlarchiv' || k === 'urne' || k.indexOf('klasse') === 0 || k === 'urteil-klasse' || k === 'urteil-runde'; }
   PW.modulVon = function (k) {
     if (EINSTELLUNG.indexOf(k) >= 0) return null;
     if (k === 'hypothesen') return 'labor';
     if (k.indexOf('lobby-') === 0 || k === 'zucker' || k.indexOf('m2-') === 0) return 'm2';
+    if (k.indexOf('wdh-') === 0) return 'ka';
     return 'm1';
   };
   PW.loescheModul = function (m, mitKlasse) {
@@ -26,7 +29,7 @@
         var k = pk.slice(3);
         if (k === 'lernstand') {
           var a = PW.lies('lernstand', {}) || {};
-          Object.keys(a).forEach(function (st) { var zuM2 = M2_LERN.indexOf(st) >= 0; if ((m === 'm2' && zuM2) || (m === 'm1' && !zuM2)) delete a[st]; });
+          Object.keys(a).forEach(function (st) { if (modulDesLernstands(st) === m) delete a[st]; });
           if (Object.keys(a).length) PW.merke('lernstand', a); else localStorage.removeItem(pk);
           return;
         }
@@ -39,7 +42,7 @@
   };
   /* Bedienfeld im Fuß: erst wählen, dann bestätigen – ohne Browser-Dialog */
   PW.loeschFeld = function (aktuell) {
-    var hier = aktuell === 'm2' ? 'm2' : aktuell === 'labor' ? 'labor' : 'm1';
+    var hier = aktuell === 'm2' ? 'm2' : aktuell === 'labor' ? 'labor' : aktuell === 'wdh' ? 'ka' : 'm1';
     var huelle = PW.el('div', { 'class': 'loesch-huelle' });
     var knopf = PW.el('button', { 'class': 'knopf knopf--leise', type: 'button', 'aria-expanded': 'false', 'aria-controls': 'loesch-feld', text: 'Eingaben löschen …' });
     var feld = PW.el('div', { 'class': 'loesch-feld', id: 'loesch-feld', hidden: 'hidden', role: 'group', 'aria-label': 'Eingaben löschen' });
@@ -47,8 +50,9 @@
     function modulKnopf(m) {
       var zeile = PW.el('div', { 'class': 'loesch-zeile' });
       var cb = null;
-      var b = PW.el('button', { 'class': 'knopf', type: 'button', text: 'Eingaben in ' + PW.module[m].split(' · ')[0] + ' löschen' });
-      zeile.appendChild(PW.el('p', { 'class': 'loesch-info', html: '<strong>' + PW.module[m] + '</strong> – ' + (m === 'm1' ? 'Antworten, Tipps, Lernstand der Stationen 1–6. Modul 2 bleibt unverändert.' : 'Schätzungen, Tipps, Rückmeldungen, Barometer, Urteile. Modul 1 und eure Klassenwahl bleiben unverändert.') }));
+      var b = PW.el('button', { 'class': 'knopf', type: 'button', text: m === 'ka' ? 'Eingaben der Wiederholung löschen' : 'Eingaben in ' + PW.module[m].split(' · ')[0] + ' löschen' });
+      var info = { m1: 'Antworten, Tipps, Lernstand der Stationen 1–6. Modul 2 und die Wiederholung bleiben unverändert.', m2: 'Schätzungen, Tipps, Rückmeldungen, Barometer, Urteile. Modul 1 und eure Klassenwahl bleiben unverändert.', ka: 'Antworten der Wiederholung und dein Text »Aus dem Kopf«. Modul 1 und Modul 2 bleiben unverändert.' };
+      zeile.appendChild(PW.el('p', { 'class': 'loesch-info', html: '<strong>' + PW.module[m] + '</strong> – ' + info[m] }));
       if (m === 'm1') {
         cb = PW.el('input', { type: 'checkbox' });
         zeile.appendChild(PW.el('label', { 'class': 'schalter schalter--klein loesch-klasse' }, [cb, document.createTextNode('auch Klassenergebnisse löschen (Klassenwahl, Wahlarchiv, Klassenbild der Urteilslinie)')]));
@@ -60,7 +64,7 @@
       zeile.appendChild(PW.el('p', { 'class': 'knopfzeile' }, [b]));
       return zeile;
     }
-    if (hier === 'labor') { feld.appendChild(modulKnopf('m1')); feld.appendChild(modulKnopf('m2')); }
+    if (hier === 'labor') { feld.appendChild(modulKnopf('m1')); feld.appendChild(modulKnopf('m2')); feld.appendChild(modulKnopf('ka')); }
     else feld.appendChild(modulKnopf(hier));
     var alles = PW.el('button', { 'class': 'knopf knopf--leise', type: 'button', text: 'Alles auf diesem Gerät löschen' });
     alles.addEventListener('click', function () {
