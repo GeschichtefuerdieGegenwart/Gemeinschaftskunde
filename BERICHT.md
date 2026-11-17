@@ -300,3 +300,12 @@ Auf Rückmeldung der Lehrkraft erweitert. **Wiederholung** jetzt in fünf Bereic
 **Stand der AfD-Einstufung** (geprüft 17.11.2026): Verdachtsfall, rechtskräftig seit dem Beschluss des BVerwG 2025; Hochstufung vom Mai 2025 durch VG Köln am 26.02.2026 vorläufig untersagt (13 L 1109/25); BMI verzichtet auf Beschwerde; Hauptsacheverfahren ab 10. März. Vor dem Einsatz erneut prüfen.
 
 **Prüfung:** Playwright (24 Fragen, fünf Merkkästen, Endliste, Löschen nur der Wiederholung, keine Konsolenfehler, 390 px ohne Querscrollen); PDF 2 / 2 / 2 Seiten mit mindestens 20 mm Rand unten; `pruefen.py` ohne neue Befunde.
+
+## v17 (17.11.2026): Ich-kann-Liste und Zusammenfassung mit Schaubildern
+
+Auf Wunsch der Lehrkraft, ausgerichtet an der Klassenarbeit (deren Fälle und Materialien stehen nicht im Repository und werden hier nicht verraten).
+
+- **Ich-kann-Liste** (`klassenarbeit/ich-kann.html`, 1 Seite A4): zwölf Aussagen in vier Gruppen (Wissen wiedergeben · Einordnen · Urteilen · Arbeiten in der Klassenarbeit), je mit AFB und »Hier üben« (Wiederholungsbereich, Station, Zusammenfassung, Probeklausur). Am Tablet ankreuzbar (sicher · teilweise · noch nicht, Tippziele 44 px, auf dem Telefon als Karten); darunter »Das übst du noch« mit Links. Speicher `pw:wdh-ichkann` – »Kreuze löschen« auf der Seite (zweites Tippen), außerdem löscht »Eingaben der Wiederholung löschen« mit. Im Druck leere Kästchen.
+- **Zusammenfassung neu** (2 Seiten A4, gemessen per PDF): Seite 1 Wissen – drei Schaubilder der Regierungssysteme (wer wählt wen, wer kann wen abwählen oder auflösen), vier Aufgaben mit den elf Funktionen (Politikimplementation bewusst ohne Parteifunktion, wie in Station 1), Vergleich Bundestag · Europäisches Parlament mit Stimmzettel-Zeichen. Seite 2 Können – Aufbau der Klassenarbeit mit Zeitleiste (10 · 15 · 30 · 30 · 5 Minuten), Prüftreppe mit Waage der Güterabwägung, Weg zur begründeten Wahlentscheidung in fünf Schritten mit Vermerk, typische Fehler.
+- `druck.css`: Druck mit Hintergrundfarben (`print-color-adjust: exact`, damit die grauen Materialkästen auch gedruckt erscheinen); Mindestgröße 16 px am Bildschirm gilt nicht mehr für Text in Schaubildern (SVG); Bausteine `zf-*` und `ik-*`.
+- **Prüfung:** Playwright (Ankreuzen, Neuladen, Löschen auf der Seite und über die Wiederholung, keine Konsolenfehler), 390 px ohne Querscrollen, PDF 2 / 1 Seiten, `pruefen.py` ohne neue Befunde (Ich-kann-Seite ergänzt). Nicht gelaufen: echtes iPad, VoiceOver, Druck am Schulkopierer.
