@@ -3,8 +3,9 @@
 :root{--d-text:#1a1a1a;--d-leise:#555;--d-linie:#999;--d-grau:#ececec;--d-grau2:#f6f6f6}
 *{box-sizing:border-box}
 html,body{margin:0;background:#fff;color:var(--d-text)}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 body.blatt{font:16px/1.45 Arial,Helvetica,sans-serif}
-@media screen{body.blatt *,body.blatt .kopf-tab b,body.blatt .quelle,body.blatt .hinweis{font-size:max(16px,1em)}.blatt h1{font-size:24px}.blatt h2{font-size:19px}}
+@media screen{body.blatt :not(svg):not(svg *),body.blatt .kopf-tab b,body.blatt .quelle,body.blatt .hinweis{font-size:max(16px,1em)}.blatt h1{font-size:24px}.blatt h2{font-size:19px}}
 @media print{body.blatt{font:10.5pt/1.38 Arial,Helvetica,sans-serif}}
 .blatt-leiste{position:sticky;top:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:10px 16px;background:#f0f0f0;border-bottom:1px solid #ccc;font:16px/1.3 Arial,Helvetica,sans-serif}
 .blatt-leiste a,.blatt-leiste button{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border:2px solid #333;border-radius:4px;background:#fff;color:#111;font:inherit;font-weight:700;text-decoration:none;cursor:pointer}
@@ -44,3 +45,98 @@ li{margin:0 0 1.5pt}
 .eh li{margin-bottom:2pt}
 .punkte-summe{font-weight:700;text-align:right;margin-top:4pt}
 .lsg{display:inline-block;min-width:22mm;border-bottom:1px solid #777}
+
+/* v17 · Zusammenfassung mit Schaubildern (zf-) und Ich-kann-Liste (ik-). Feste helle Töne, weil Druckblätter immer hell sind. */
+.blatt{--z-blau:#DCE6F3;--z-blau-t:#163A69;--z-gruen:#DBEAE6;--z-gruen-t:#0F4F4B;--z-gelb:#F5E8CF;--z-gelb-t:#7A4F12;--z-warm:#F3DFD8;--z-warm-t:#7A2E1F;--z-lila:#EAE1F0;--z-lila-t:#4A2A66}
+.zf-teil{border-left:4pt solid var(--zt,#999);padding:0 0 0 7pt;margin:0 0 7pt;break-inside:avoid}
+.zf-teil>h2{margin:0 0 3pt;color:var(--ztt,#111)}
+.zf-kopf{display:flex;justify-content:space-between;align-items:baseline;gap:8pt;flex-wrap:wrap}
+.zf-drei{display:grid;grid-template-columns:repeat(3,1fr);gap:6pt;margin:3pt 0 2pt}
+.zf-drei figure{margin:0;padding:4pt;background:var(--z-blau);border-radius:3pt}
+.zf-drei figcaption{font-size:8.5pt;line-height:1.3;margin-top:2pt}
+.zf-drei figcaption b{display:block;font-size:9.5pt;color:var(--z-blau-t)}
+.zf-svg{display:block;width:100%;height:auto}
+.zf-svg text{font-family:Arial,Helvetica,sans-serif;font-size:10px;fill:#1a1a1a}
+.zf-svg .fett{font-weight:700}
+.zf-svg .kl{font-size:8.5px}
+.zf-svg .box{fill:#fff;stroke:#163A69;stroke-width:1.2}
+.zf-svg .box-v{fill:#163A69}
+.zf-svg .box-v+text,.zf-svg text.hell{fill:#fff}
+.zf-svg .pfeil{stroke:#222;stroke-width:1.3;fill:none}
+.zf-fn{display:grid;grid-template-columns:repeat(3,1fr);gap:4pt;margin:3pt 0}
+.zf-fn>div:first-child{grid-column:1/-1}
+.zf-fn>div:first-child ul{columns:3}
+.zf-fn>div{background:var(--z-gelb);border-radius:3pt;padding:4pt 5pt;font-size:9pt;line-height:1.3}
+.zf-fn h3{margin:0 0 3pt;font-size:9.5pt;color:var(--z-gelb-t)}
+.zf-fn h3 small{font-weight:400;color:#333;font-size:8.5pt}
+.zf-fn ul{list-style:none;margin:0;padding:0;columns:2;column-gap:8pt}
+.zf-fn li{margin:0 0 2pt;break-inside:avoid}
+.zf-fn .leer{background:#fff;border:1px dashed var(--z-gelb-t)}
+.zf-wahl{width:100%;border-collapse:collapse;font-size:9pt;margin:3pt 0}
+.zf-wahl th,.zf-wahl td{border:1px solid #bbb;padding:2pt 4pt;text-align:left;vertical-align:middle}
+.zf-wahl thead th{background:var(--z-warm);color:var(--z-warm-t)}
+.zf-wahl thead th:last-child{background:var(--z-lila);color:var(--z-lila-t)}
+.zf-wahl thead svg{width:22pt;height:auto;vertical-align:middle;margin-right:4pt}
+.zf-wahl tbody th{width:22%;font-weight:700;background:#f6f6f6}
+.zf-afb{display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:5pt;margin:3pt 0}
+.zf-afb>div{border-radius:3pt;padding:4pt 6pt;font-size:9pt;line-height:1.3}
+.zf-afb h3{margin:0 0 2pt;font-size:10pt}
+.zf-afb .i{background:var(--z-blau)}.zf-afb .i h3{color:var(--z-blau-t)}
+.zf-afb .ii{background:var(--z-gruen)}.zf-afb .ii h3{color:var(--z-gruen-t)}
+.zf-afb .iii{background:var(--z-lila)}.zf-afb .iii h3{color:var(--z-lila-t)}
+.zf-zeit{display:flex;margin:4pt 0 1pt;border:1px solid #555;border-radius:2pt;overflow:hidden;font-size:8.5pt;line-height:1.2}
+.zf-zeit span{padding:3pt 3pt;border-right:1px solid #555;text-align:center}
+.zf-zeit span:last-child{border-right:0}
+.zf-zeit .l{background:#fff}.zf-zeit .z1{background:var(--z-blau)}.zf-zeit .z2{background:var(--z-gruen)}.zf-zeit .z3{background:var(--z-lila)}.zf-zeit .d{background:#f0f0f0}
+.zf-treppe{display:flex;align-items:flex-end;gap:3pt;margin:3pt 0 2pt}
+.zf-treppe li{list-style:none;flex:1;background:var(--z-gruen);border-radius:3pt 3pt 0 0;padding:3pt 3pt;font-size:8.5pt;line-height:1.2;margin:0}
+.zf-treppe li b{display:block;color:var(--z-gruen-t);font-size:9pt}
+.zf-treppe li.top{background:var(--z-gruen-t);color:#fff}.zf-treppe li.top b{color:#fff}
+.zf-treppe{padding:0}
+.zf-abw{display:grid;grid-template-columns:150pt 1fr;gap:8pt;align-items:center;margin:3pt 0}
+.zf-weg{display:flex;gap:0;margin:3pt 0;padding:0}
+.zf-weg li{list-style:none;flex:1;background:var(--z-warm);padding:4pt 10pt 4pt 12pt;font-size:8.5pt;line-height:1.25;clip-path:polygon(0 0,calc(100% - 8pt) 0,100% 50%,calc(100% - 8pt) 100%,0 100%,8pt 50%);margin:0 -4pt 0 0}
+.zf-weg li:first-child{clip-path:polygon(0 0,calc(100% - 8pt) 0,100% 50%,calc(100% - 8pt) 100%,0 100%);padding-left:6pt}
+.zf-weg li b{display:block;color:var(--z-warm-t);font-size:9.5pt}
+.zf-vermerk{border:1.5pt solid #333;border-radius:3pt;padding:4pt 6pt;font-size:9pt;margin:4pt 0}
+.zf-fehler{columns:2;column-gap:14pt;font-size:9pt}
+@media screen and (max-width:820px){.zf-drei,.zf-fn,.zf-afb,.zf-abw{grid-template-columns:1fr}.zf-fn ul{columns:1}.zf-treppe,.zf-weg{flex-direction:column;align-items:stretch}.zf-weg li,.zf-weg li:first-child{clip-path:none;margin:0 0 3px;padding:6px}.zf-fehler{columns:1}.zf-zeit{flex-wrap:wrap}}
+/* Ich-kann-Liste */
+.ik-tab{width:100%;border-collapse:collapse;font-size:9.5pt;margin:4pt 0}
+.ik-tab th,.ik-tab td{border:1px solid #aaa;padding:3pt 4pt;vertical-align:middle;text-align:left}
+.ik-tab thead th{background:#ececec;font-size:9pt}
+.ik-tab .afb{width:9mm;text-align:center;font-weight:700}
+.ik-tab .w{width:15mm;text-align:center}
+.ik-tab .ort{width:38mm;font-size:8.5pt}
+.ik-tab tr.grp th{background:var(--g,#eee);text-align:left;font-size:9.5pt}
+.ik-wahl{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:44px;border:1.5px solid #555;border-radius:4px;background:#fff;font:inherit;font-weight:700;cursor:pointer;color:#111}
+.ik-wahl[aria-pressed="true"]{background:#163A69;color:#fff;border-color:#163A69}
+.ik-wahl .kasten{display:none}
+@media print{.ik-wahl{min-height:0;height:11pt;width:11pt;border:1pt solid #333;border-radius:1pt;background:#fff!important;color:#111!important;padding:0;font-size:9pt}.ik-wahl .txt{display:none}.ik-wahl[aria-pressed="true"]::after{content:"✕"}.ik-tool{display:none}}
+.ik-tool{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6pt 0}
+.ik-tool button{min-height:44px;padding:6px 14px;border:2px solid #333;border-radius:4px;background:#fff;font:inherit;font-weight:700;cursor:pointer}
+.ik-ueben{border:1.5pt solid #163A69;border-radius:3pt;padding:5pt 7pt;margin:6pt 0}
+.ik-ueben:empty{display:none}
+.ik-tab td.w:empty::before{content:"";display:inline-block;width:11pt;height:11pt;border:1pt solid #333;vertical-align:middle}
+
+@media print{.ik-tool{display:none}}
+/* v17 · Bildschirm: Mindestgröße 16 px und Tippziele 44 px auch in den neuen Bausteinen (Druck bleibt kompakt) */
+@media screen{
+  body.blatt .zf-teil :not(svg):not(svg *):not(h2),body.blatt .ik-tab :not(svg):not(svg *),body.blatt .ik-ueben *{font-size:max(16px,1em)}
+  body.blatt .zf-kopf a,body.blatt .zf-teil p a,body.blatt .ik-tab .ort a,body.blatt .ik-ueben a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px}
+}
+@media screen and (max-width:820px){
+  .zf-fn>div:first-child ul{columns:1}
+  .zf-wahl{display:block;overflow-x:auto}
+  .ik-tab,.ik-tab tbody,.ik-tab tr,.ik-tab td,.ik-tab th{display:block;width:auto!important}
+  .ik-tab thead{display:none}
+  .ik-tab tr[data-ik]{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px 0;border-bottom:1px solid #aaa}
+  .ik-tab tr[data-ik] td{border:0;padding:0}
+  .ik-tab tr[data-ik] td:first-child{grid-column:1/-1}
+  .ik-tab tr[data-ik] td.afb{display:none}
+  .ik-tab tr[data-ik] td.ort{grid-column:1/-1}
+  .ik-wahl .txt::after{font-weight:400;margin-left:6px}
+  .ik-tab td.w:nth-of-type(3) .txt::after{content:"sicher"}
+  .ik-tab td.w:nth-of-type(4) .txt::after{content:"teilweise"}
+  .ik-tab td.w:nth-of-type(5) .txt::after{content:"noch nicht"}
+}

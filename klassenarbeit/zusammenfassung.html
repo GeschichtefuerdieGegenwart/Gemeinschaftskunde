@@ -10,74 +10,163 @@
 <div class="blatt-leiste"><a href="index.html">← Zur Wiederholung</a><span>Zusammenfassung · 2 Seiten</span><button type="button" onclick="window.print()">Drucken oder als PDF sichern</button></div>
 
 <section class="seite">
-  <h1>Zusammenfassung für die Klassenarbeit</h1>
-  <p class="hinweis">Seite 1: Das musst du wissen. Seite 2: Das musst du können. Geprüft wird nur, was wir gemeinsam behandelt haben.</p>
+  <div class="zf-kopf">
+    <h1>Zusammenfassung für die Klassenarbeit</h1>
+    <p class="hinweis">Seite 1: Das musst du wissen · Seite 2: Das musst du können · <a href="ich-kann.html">Ich-kann-Liste</a></p>
+  </div>
 
-  <h2>1 · Demokratie und Regierungssysteme (AB1 · Repubblica Nova)</h2>
-  <p><b>Alle Demokratien:</b> Volkssouveränität und freie Wahlen auf Zeit · Gewaltenteilung · Grundrechte und Rechtsstaat · Mehrheitsprinzip mit Minderheitenschutz und Opposition · Pluralismus.</p>
-  <table class="tab">
-    <tr><th style="width:34%">Form (Beispiel)</th><th>Kennzeichen</th></tr>
-    <tr><td>direkt (Schweiz: starke direkte Elemente)</td><td>Das Volk entscheidet Sachfragen selbst (Volksabstimmung).</td></tr>
-    <tr><td>indirekt · parlamentarisch (Deutschland)</td><td>Das Parlament wählt die Regierung und kann sie abwählen (Gewaltenverschränkung) – nur durch Wahl einer Nachfolge (konstruktives Misstrauensvotum, Art. 67 GG).</td></tr>
-    <tr><td>indirekt · präsidentiell (USA)</td><td>Der Präsident ist Staatsoberhaupt und Regierungschef; das Parlament kann ihn politisch nicht abwählen.</td></tr>
-    <tr><td>Mischform, semipräsidentiell (Frankreich)</td><td>Direkt gewählter Präsident, dazu eine Regierung, die vom Parlament abhängt.</td></tr>
-  </table>
+  <div class="zf-teil" style="--zt:var(--z-blau-t);--ztt:var(--z-blau-t)">
+    <h2>1 · Demokratie und Regierungssysteme (AB1 · Repubblica Nova)</h2>
+    <p><b>Alle Demokratien:</b> Volkssouveränität, freie Wahlen auf Zeit, Gewaltenteilung, Grundrechte, Minderheitenschutz, Pluralismus. <b>Direkt:</b> Das Volk entscheidet Sachfragen selbst (Schweiz: starke direkte Elemente). <b>Indirekt:</b> Gewählte entscheiden – in drei Formen:</p>
+    <div class="zf-drei">
+      <figure>
+        <svg class="zf-svg" viewBox="0 0 220 150" role="img" aria-label="Parlamentarisches System: Das Volk wählt das Parlament, das Parlament wählt die Regierung und kann sie abwählen.">
+          <defs><marker id="pa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#222"/></marker></defs>
+          <rect class="box" x="60" y="6" width="100" height="26" rx="3"/><text x="110" y="23" text-anchor="middle" class="fett">Regierung</text>
+          <rect class="box" x="60" y="62" width="100" height="26" rx="3"/><text x="110" y="79" text-anchor="middle" class="fett">Parlament</text>
+          <rect class="box box-v" x="60" y="118" width="100" height="26" rx="3"/><text x="110" y="135" text-anchor="middle" class="fett hell">Volk</text>
+          <line class="pfeil" x1="110" y1="118" x2="110" y2="91" marker-end="url(#pa)"/><text x="116" y="108">wählt</text>
+          <line class="pfeil" x1="110" y1="62" x2="110" y2="35" marker-end="url(#pa)"/><text x="116" y="47">wählt und</text><text x="116" y="58">kann abwählen</text>
+        </svg>
+        <figcaption><b>Parlamentarisch · Deutschland</b>Regierung braucht die Mehrheit im Parlament (Gewaltenverschränkung); Abwahl nur mit Nachfolge (Art. 67 GG).</figcaption>
+      </figure>
+      <figure>
+        <svg class="zf-svg" viewBox="0 0 220 150" role="img" aria-label="Präsidentielles System: Das Volk wählt Präsident und Parlament getrennt; keine Abwahl und keine Auflösung zwischen beiden.">
+          <defs><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#222"/></marker></defs>
+          <rect class="box" x="6" y="6" width="96" height="32" rx="3"/><text x="54" y="20" text-anchor="middle" class="fett">Präsident</text><text x="54" y="32" text-anchor="middle" class="kl">= Regierung</text>
+          <rect class="box" x="118" y="6" width="96" height="32" rx="3"/><text x="166" y="20" text-anchor="middle" class="fett">Parlament</text><text x="166" y="32" text-anchor="middle" class="kl">(Kongress)</text>
+          <rect class="box box-v" x="60" y="118" width="100" height="26" rx="3"/><text x="110" y="135" text-anchor="middle" class="fett hell">Volk</text>
+          <line class="pfeil" x1="84" y1="118" x2="46" y2="41" marker-end="url(#pb)"/><text x="10" y="84">wählt (über</text><text x="10" y="95">Wahlleute)</text>
+          <line class="pfeil" x1="136" y1="118" x2="174" y2="41" marker-end="url(#pb)"/><text x="178" y="84">wählt</text>
+          <text x="110" y="60" text-anchor="middle" class="kl fett">getrennt:</text><text x="110" y="72" text-anchor="middle" class="kl">keine Abwahl,</text><text x="110" y="83" text-anchor="middle" class="kl">keine Auflösung</text>
+        </svg>
+        <figcaption><b>Präsidentiell · USA</b>Präsident führt die Regierung; keine politische Abwahl (nur Amtsenthebung), keine Auflösung – strikte Gewaltentrennung.</figcaption>
+      </figure>
+      <figure>
+        <svg class="zf-svg" viewBox="0 0 220 150" role="img" aria-label="Semipräsidentielles System: Das Volk wählt Präsident und Parlament; der Präsident ernennt die Regierung und kann das Parlament auflösen; das Parlament kann die Regierung stürzen.">
+          <defs><marker id="pc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#222"/></marker></defs>
+          <rect class="box" x="6" y="6" width="84" height="26" rx="3"/><text x="48" y="23" text-anchor="middle" class="fett">Präsident</text>
+          <rect class="box" x="130" y="6" width="84" height="26" rx="3"/><text x="172" y="23" text-anchor="middle" class="fett">Regierung</text>
+          <rect class="box box-v" x="6" y="118" width="84" height="26" rx="3"/><text x="48" y="135" text-anchor="middle" class="fett hell">Volk</text>
+          <rect class="box" x="130" y="118" width="84" height="26" rx="3"/><text x="172" y="135" text-anchor="middle" class="fett">Parlament</text>
+          <line class="pfeil" x1="90" y1="19" x2="127" y2="19" marker-end="url(#pc)"/><text x="110" y="14" text-anchor="middle" class="kl">ernennt</text>
+          <line class="pfeil" x1="48" y1="118" x2="48" y2="35" marker-end="url(#pc)"/><text x="52" y="72" class="kl">wählt</text><text x="52" y="82" class="kl">direkt</text>
+          <line class="pfeil" x1="90" y1="131" x2="127" y2="131" marker-end="url(#pc)"/><text x="110" y="126" text-anchor="middle" class="kl">wählt</text>
+          <line class="pfeil" x1="172" y1="118" x2="172" y2="35" marker-end="url(#pc)"/><text x="177" y="72" class="kl">kann</text><text x="177" y="82" class="kl">stürzen</text>
+          <line class="pfeil" x1="86" y1="32" x2="128" y2="116" marker-end="url(#pc)"/><text x="114" y="66" class="kl">kann</text><text x="114" y="76" class="kl">auflösen</text>
+        </svg>
+        <figcaption><b>Semipräsidentiell (Mischform) · Frankreich</b>Starker, direkt gewählter Präsident und eine Regierung, die vom Parlament abhängt.</figcaption>
+      </figure>
+    </div>
+  </div>
 
-  <h2>2 · Grundrechte und Rechtsstaat</h2>
-  <p><b>Abwehrrechte</b> schützen den Einzelnen vor dem Staat. <b>Menschenrechte</b> gelten für alle (»Jeder …«, z. B. Art. 5), <b>Bürgerrechte</b> nur für Deutsche (»Alle Deutschen …«, z. B. Art. 8). <b>Rechtsweggarantie</b> (Art. 19 Abs. 4): Gegen Eingriffe der öffentlichen Gewalt kann man vor Gericht gehen. Prüfen und abwägen: Seite 2.</p>
+  <div class="zf-teil" style="--zt:var(--z-gelb-t);--ztt:var(--z-gelb-t)">
+    <h2>2 · Parteien: vier Aufgaben, elf Funktionen (Stationen 1 und 2)</h2>
+    <p><b>Art. 21 GG:</b> Parteien wirken bei der Willensbildung mit; Gründung frei, innere Ordnung demokratisch. Verbieten kann nur das Bundesverfassungsgericht; der Verfassungsschutz beobachtet und stuft ein.</p>
+    <div class="zf-fn" role="group" aria-label="Die vier Aufgaben der Politik mit den Funktionen von Parteien, die dazu gehören">
+      <div><h3>Politikformulierung <small>· entscheiden · neun Funktionen</small></h3>
+        <ul>
+          <li><b>Artikulation:</b> Interessen aussprechen</li>
+          <li><b>Aggregation:</b> Interessen bündeln und gewichten</li>
+          <li><b>Transmission:</b> in Entscheidungen einbringen</li>
+          <li><b>Partizipation:</b> Engagement ermöglichen</li>
+          <li><b>Information:</b> sachlich aufklären</li>
+          <li><b>Mobilisierung:</b> Menschen gewinnen</li>
+          <li><b>Sozialisation:</b> in Politik einführen</li>
+          <li><b>Legitimation:</b> Rückhalt für das System schaffen</li>
+          <li><b>Herrschaft:</b> verbindlich entscheiden</li>
+        </ul></div>
+      <div class="leer"><h3>Politikimplementation <small>· umsetzen</small></h3>keine Funktion von Parteien: Umsetzen tun vor allem Regierung und Verwaltung.</div>
+      <div><h3>Politikkontrolle <small>· prüfen</small></h3><b>Kontrolle:</b> Regierung und Verwaltung prüfen – vor allem die Opposition.</div>
+      <div><h3>Personalrekrutierung <small>· Personal finden</small></h3><b>Rekrutierung:</b> Personal für Ämter und Mandate auswählen.</div>
+    </div>
+    <p class="hinweis">In der Klassenarbeit: Funktion nennen → am Beispiel erklären → der Aufgabe zuordnen.</p>
+  </div>
 
-  <h2>3 · Parteien: Aufgaben und Funktionen (Stationen 1 und 2)</h2>
-  <p><b>Art. 21 GG:</b> Parteien wirken bei der Willensbildung mit; Gründung frei, innere Ordnung demokratisch, Finanzen offen. Verbot nur durch das Bundesverfassungsgericht; der Verfassungsschutz beobachtet und stuft ein.</p>
-  <p><b>Vier Aufgaben:</b> Politikformulierung · Politikimplementation · Politikkontrolle · Personalrekrutierung.</p>
-  <p><b>Elf Funktionen:</b> Interessenartikulation (Forderung im Programm) · Interessenaggregation (Flügel oder Koalition einigen sich) · Interessentransmission (Programm wird Gesetz) · Partizipation (Bürgerdialog) · Informationsvermittlung (Erklärvideo) · Mobilisierung (Wahlkampf) · Sozialisation (Neumitglieder lernen Verfahren) · Legitimation (Niederlage anerkennen) · Herrschaft (Gesetz beschließen) · Kontrolle (Anfrage der Opposition) · Rekrutierung (Kandidatin aufstellen).</p>
+  <div class="zf-teil" style="--zt:var(--z-warm-t);--ztt:var(--z-warm-t)">
+    <h2>3 · Bundestagswahl und Europawahl (Stationen 3 bis 6)</h2>
+    <table class="zf-wahl">
+      <thead><tr><th scope="col"></th>
+        <th scope="col"><svg viewBox="0 0 44 30" aria-hidden="true"><rect x="1" y="1" width="42" height="28" fill="#fff" stroke="#7A2E1F"/><line x1="22" y1="1" x2="22" y2="29" stroke="#7A2E1F"/><circle cx="11" cy="15" r="5" fill="none" stroke="#7A2E1F"/><path d="M8 12l6 6M14 12l-6 6" stroke="#7A2E1F" stroke-width="1.5"/><circle cx="33" cy="15" r="5" fill="none" stroke="#7A2E1F"/><path d="M30 12l6 6M36 12l-6 6" stroke="#7A2E1F" stroke-width="1.5"/></svg>Bundestag</th>
+        <th scope="col"><svg viewBox="0 0 44 30" aria-hidden="true"><rect x="1" y="1" width="42" height="28" fill="#fff" stroke="#4A2A66"/><circle cx="22" cy="15" r="5" fill="none" stroke="#4A2A66"/><path d="M19 12l6 6M25 12l-6 6" stroke="#4A2A66" stroke-width="1.5"/></svg>Europäisches Parlament</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Stimmen</th><td>Erststimme (Person im Wahlkreis), <b>Zweitstimme</b> (Landesliste) – sie verteilt die Sitze</td><td>eine Stimme für eine Bundes- oder Landesliste</td></tr>
+        <tr><th scope="row">Sitze</th><td>630; ein Wahlkreissieg zählt nur mit Zweitstimmendeckung</td><td>96 der 720; je Land 6 bis 96 Sitze (degressive Proportionalität)</td></tr>
+        <tr><th scope="row">Hürde</th><td>5 % oder drei Direktmandate (Grundmandatsklausel); SSW befreit</td><td>in Deutschland keine (BVerfG 2011, 2014); EU-Hürde ab 2 % beschlossen, nicht in Kraft</td></tr>
+        <tr><th scope="row">Wahlalter · Wahlperiode</th><td>ab 18 · alle vier Jahre</td><td>ab 16 · alle fünf Jahre</td></tr>
+        <tr><th scope="row">Danach</th><td>wählt die Kanzlerin oder den Kanzler (Mehrheit 316) – meist mit Koalition</td><td>wählt die Kommissionspräsidentin auf Vorschlag des Europäischen Rates; Gesetze und Haushalt mit dem Rat, kein Initiativrecht; Fraktionen nach Richtung (Mehrheit 361)</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-  <h2>4 · Bundestagswahl (Stationen 3 bis 5)</h2>
-  <p><b>Erststimme</b> für eine Person im Wahlkreis, <b>Zweitstimme</b> für eine Landesliste – sie verteilt die 630 Sitze. <b>Zweitstimmendeckung</b> (seit 2025): Ein Wahlkreissieg zählt nur, wenn die Zweitstimmen ihn decken. <b>Sperrklausel:</b> 5 % der Zweitstimmen oder drei Direktmandate (Grundmandatsklausel); der SSW ist befreit. <b>Mehrheit</b> für die Kanzlerwahl: 316 Sitze – meist nur mit Koalition.</p>
-
-  <h2>5 · Europawahl (Station 6)</h2>
-  <p><b>Wahl:</b> alle fünf Jahre, in Deutschland ab 16, eine Stimme für eine Liste; 96 der 720 Sitze. <b>Keine Sperrklausel</b> (BVerfG 2011, 2014); eine EU-Hürde von mindestens 2 % ist beschlossen, aber nicht in Kraft. <b>Degressive Proportionalität:</b> mindestens 6, höchstens 96 Sitze je Land – kleine Länder haben mehr Gewicht pro Kopf. <b>Das Parlament</b> beschließt Gesetze und Haushalt gleichberechtigt mit dem Rat, wählt die Kommissionspräsidentin auf Vorschlag des Europäischen Rates und kontrolliert die Kommission; eigene Gesetzentwürfe bringt es nicht ein. <b>Fraktionen</b> nach politischer Richtung; Mehrheit der Mitglieder: 361.</p>
 </section>
 
 <section class="seite">
-  <h2>Das musst du können: Operatoren</h2>
-  <table class="tab">
-    <tr><th>AFB</th><th>Operator</th><th>Was du tust</th></tr>
-    <tr><td>I · Wiedergeben</td><td>nennen, beschreiben, darstellen</td><td>Sachverhalte geordnet und mit Fachbegriffen wiedergeben – ohne eigene Bewertung.</td></tr>
-    <tr><td>II · Einordnen</td><td>erklären, erläutern, analysieren</td><td>Zusammenhänge begründen; mit Artikel, Beispiel oder Material belegen.</td></tr>
-    <tr><td>III · Urteilen</td><td>vergleichen, beurteilen, bewerten, erörtern, Stellung nehmen</td><td>Kriterien anlegen, Argumente beider Seiten prüfen, zu einem begründeten Urteil kommen.</td></tr>
-  </table>
-  <div class="raster2">
-    <div class="box"><h3>Sachurteil (»beurteilen«)</h3><p>Prüft ohne persönlichen Wertebezug, was etwas bewirkt und ob es zusammenpasst. Beispiel: Ist ein Eingriff verhältnismäßig?</p></div>
-    <div class="box"><h3>Werturteil (»bewerten«, »Stellung nehmen«)</h3><p>Legt eigene Wertmaßstäbe offen: Was ist mir wichtiger – und warum? Beispiel: Welche Partei wähle ich?</p></div>
+  <div class="zf-teil" style="--zt:#333;--ztt:#111">
+    <h2>So ist die Klassenarbeit aufgebaut: drei Aufgaben, drei Anforderungsbereiche</h2>
+    <div class="zf-afb">
+      <div class="i"><h3>I · Wiedergeben</h3><b>nennen, beschreiben, darstellen:</b> geordnet und mit Fachbegriffen wiedergeben – ohne eigene Bewertung.</div>
+      <div class="ii"><h3>II · Einordnen</h3><b>erklären, erläutern, analysieren:</b> in einen Zusammenhang stellen, begründen, mit Beispiel oder Material belegen.</div>
+      <div class="iii"><h3>III · Urteilen</h3><b>beurteilen</b> = Sachurteil: Was bewirkt es, stimmt es? – <b>bewerten, Stellung nehmen</b> = Werturteil: Was ist mir wichtiger, und warum? Immer mit Gegenargument.</div>
+    </div>
+    <div class="zf-zeit" role="img" aria-label="90 Minuten: 10 Minuten lesen, 15 Minuten Aufgabe 1, 30 Minuten Aufgabe 2, 30 Minuten Aufgabe 3, 5 Minuten durchlesen.">
+      <span class="l" style="flex:10">Lesen 10′</span><span class="z1" style="flex:15">Aufgabe 1 · 15′</span><span class="z2" style="flex:30">Aufgabe 2 · 30′</span><span class="z3" style="flex:30">Aufgabe 3 · 30′</span><span class="d" style="flex:5">5′</span>
+    </div>
+    <p class="hinweis">90 Minuten: erst alles lesen, dann der Reihe nach; am Ende 5 Minuten durchlesen. Bewertet wird die Qualität deiner Begründung, nicht deine Meinung.</p>
   </div>
 
-  <h2>Eine Güterabwägung durchführen (Grundrechtseingriff beurteilen)</h2>
-  <ol>
-    <li><b>Schutzbereich und Eingriff:</b> Welches Grundrecht ist betroffen, und wie greift der Staat ein?</li>
-    <li><b>Gesetzliche Grundlage und legitimer Zweck:</b> Erlaubt ein Gesetz den Eingriff? Welches Gut soll geschützt werden?</li>
-    <li><b>Geeignet:</b> Fördert die Maßnahme den Zweck? <b>Erforderlich:</b> Gibt es kein milderes, gleich wirksames Mittel?</li>
-    <li><b>Angemessen = Güterabwägung:</b> Wie schwer wiegt der Eingriff, wie gewichtig ist das geschützte Gut? Stoßen zwei Grundrechte zusammen, sollen beide so weit wie möglich gelten.</li>
-    <li><b>Sachurteil:</b> »Für die Angemessenheit spricht …, dagegen … Weil … schwerer wiegt als …, ist der Eingriff (un)verhältnismäßig.« Scheitert ein Schritt, ist der Eingriff unverhältnismäßig.</li>
-  </ol>
+  <div class="zf-teil" style="--zt:var(--z-gruen-t);--ztt:var(--z-gruen-t)">
+    <h2>Grundrechte: einen Eingriff prüfen mit der Prüftreppe</h2>
+    <p>Grundrechte sind <b>Abwehrrechte</b> gegen den Staat; <b>Menschenrechte</b> gelten für alle (»Jeder …«), <b>Bürgerrechte</b> für Deutsche (»Alle Deutschen …«). Gegen Eingriffe kann man vor Gericht gehen (<b>Rechtsweggarantie</b>, Art. 19 Abs. 4). Ob ein Eingriff erlaubt ist, prüfst du Stufe für Stufe:</p>
+    <ol class="zf-treppe" aria-label="Sieben Stufen der Prüfung">
+      <li style="min-height:30pt"><b>1</b>Schutzbereich: welches Grundrecht?</li>
+      <li style="min-height:36pt"><b>2</b>Eingriff: was tut der Staat?</li>
+      <li style="min-height:42pt"><b>3</b>gesetzliche Grundlage</li>
+      <li style="min-height:48pt"><b>4</b>legitimer Zweck: welches Gut?</li>
+      <li style="min-height:54pt"><b>5</b>geeignet: fördert es den Zweck?</li>
+      <li style="min-height:60pt"><b>6</b>erforderlich: kein milderes, gleich wirksames Mittel?</li>
+      <li class="top" style="min-height:66pt"><b>7</b>angemessen = Güterabwägung</li>
+    </ol>
+    <div class="zf-abw">
+      <svg class="zf-svg" viewBox="0 0 200 92" role="img" aria-label="Waage der Güterabwägung: links die Schwere des Eingriffs, rechts das Gewicht des geschützten Guts.">
+        <line x1="100" y1="14" x2="100" y2="80" stroke="#0F4F4B" stroke-width="3"/><rect x="70" y="80" width="60" height="6" fill="#0F4F4B"/>
+        <line x1="22" y1="20" x2="178" y2="20" stroke="#0F4F4B" stroke-width="3"/><circle cx="100" cy="17" r="4" fill="#0F4F4B"/>
+        <line x1="30" y1="20" x2="16" y2="48" stroke="#555"/><line x1="30" y1="20" x2="44" y2="48" stroke="#555"/><path d="M10 48h40a20 9 0 0 1-40 0z" fill="#DBEAE6" stroke="#0F4F4B"/>
+        <line x1="170" y1="20" x2="156" y2="48" stroke="#555"/><line x1="170" y1="20" x2="184" y2="48" stroke="#555"/><path d="M150 48h40a20 9 0 0 1-40 0z" fill="#DBEAE6" stroke="#0F4F4B"/>
+        <text x="30" y="72" text-anchor="middle" class="kl fett">Schwere des</text><text x="30" y="82" text-anchor="middle" class="kl fett">Eingriffs</text>
+        <text x="170" y="72" text-anchor="middle" class="kl fett">Gewicht des</text><text x="170" y="82" text-anchor="middle" class="kl fett">geschützten Guts</text>
+      </svg>
+      <div>
+        <p><b>Güterabwägung:</b> Je schwerer der Eingriff – wie viele sind betroffen, wie lange, wie stark? –, desto gewichtiger muss das geschützte Gut sein, etwa Leben, Gesundheit oder die Rechte anderer. Stoßen zwei Grundrechte zusammen, sollen beide so weit wie möglich gelten.</p>
+        <p><b>Sachurteil:</b> »Für die Angemessenheit spricht …, dagegen … Weil … schwerer wiegt als …, ist der Eingriff (un)verhältnismäßig.« Scheitert eine Stufe, ist der Eingriff unverhältnismäßig.</p>
+      </div>
+    </div>
+  </div>
 
-  <h2>Eine begründete Wahlentscheidung treffen</h2>
-  <ol>
-    <li><b>Kriterien offenlegen:</b> zwei oder drei Themen oder Werte, die dir am wichtigsten sind.</li>
-    <li><b>Positionen belegen:</b> Was fordern die Parteien dazu? Beleg aus Programm oder Material.</li>
-    <li><b>Abwägen:</b> Wo passt deine Partei nicht? Welches Kriterium wiegt schwerer – und warum?</li>
-    <li><b>Folgen bedenken:</b> 5-%-Hürde, mögliche Koalitionen, Regierung oder Opposition (Funktionen wie Transmission oder Kontrolle).</li>
-    <li><b>Fazit:</b> Entscheidung, die aus der Abwägung folgt – mit offengelegtem Wertmaßstab.</li>
-  </ol>
-  <p class="box"><b>Hinweis:</b> Alle zur Wahl zugelassenen Parteien sind wählbar. Die AfD ist vom Bundesamt für Verfassungsschutz als rechtsextremistischer Verdachtsfall eingestuft (Stand: November 2026). Bewertet wird nur die Qualität deiner Argumentation – nicht, welche Partei du wählst.</p>
+  <div class="zf-teil" style="--zt:var(--z-warm-t);--ztt:var(--z-warm-t)">
+    <h2>Eine begründete Wahlentscheidung treffen</h2>
+    <ol class="zf-weg" aria-label="Fünf Schritte zur begründeten Wahlentscheidung">
+      <li><b>1 Kriterien</b>zwei oder drei Themen oder Werte, die dir wichtig sind – und warum</li>
+      <li><b>2 Belege</b>Was fordern die Parteien dazu? Aus Programm oder Material</li>
+      <li><b>3 Abwägen</b>Wo passt deine Partei nicht? Was wiegt schwerer?</li>
+      <li><b>4 Folgen</b>5-%-Hürde, Koalitionen, Regierung oder Opposition</li>
+      <li><b>5 Fazit</b>Entscheidung, die aus der Abwägung folgt</li>
+    </ol>
+    <p class="zf-vermerk"><b>Hinweis:</b> Alle zur Wahl zugelassenen Parteien sind wählbar. Die AfD ist vom Bundesamt für Verfassungsschutz als rechtsextremistischer Verdachtsfall eingestuft (Stand: November 2026). Bewertet wird nur die Qualität deiner Argumentation – nicht, welche Partei du wählst.</p>
+  </div>
 
-  <h2>Typische Fehler</h2>
-  <ul>
-    <li>Bei »beschreiben« schon bewerten – oder bei »Stellung nehmen« nur beschreiben.</li>
-    <li>Eine Funktion nennen, aber kein Beispiel geben oder die Aufgabe verwechseln.</li>
-    <li>»erforderlich« und »angemessen« vermischen; nur eine Seite abwägen.</li>
-    <li>Fachbegriffe verwechseln: Erst- und Zweitstimme, Bürger- und Menschenrecht, Bundestags- und Europawahl.</li>
-  </ul>
-  <p class="hinweis"><b>Dein Plan:</b> Wiederholung am Tablet → Probeklausur in 90 Minuten ohne Hilfsmittel → erst dann mit dem Erwartungshorizont vergleichen und die Lücken gezielt wiederholen.</p>
+  <div class="zf-teil" style="--zt:#999;--ztt:#111">
+    <h2>Typische Fehler</h2>
+    <ul class="zf-fehler">
+      <li>Bei »beschreiben« schon bewerten – oder bei »Stellung nehmen« nur beschreiben.</li>
+      <li>Eine Funktion nennen, aber kein Beispiel geben oder die Aufgabe verwechseln.</li>
+      <li>»erforderlich« und »angemessen« vermischen; nur eine Seite abwägen.</li>
+      <li>Erst- und Zweitstimme, Bundestags- und Europawahl verwechseln.</li>
+      <li>Ein Urteil ohne Gegenargument – oder ein Fazit, das nicht aus der Abwägung folgt.</li>
+      <li>Zu lange an einer Aufgabe bleiben: Zeitvorschlag im Blick behalten.</li>
+    </ul>
+    <p class="hinweis"><b>Dein Plan:</b> <a href="ich-kann.html">Ich-kann-Liste</a> ankreuzen → Lücken in der <a href="index.html">Wiederholung</a> üben → <a href="probeklausur.html">Probeklausur</a> in 90 Minuten → erst dann mit dem Erwartungshorizont vergleichen.</p>
+  </div>
 </section>
 </body>
 </html>
