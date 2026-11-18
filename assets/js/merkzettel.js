@@ -25,7 +25,7 @@
     var zu = PW.el('button', { type: 'button', 'class': 'knopf knopf--leise merk-schliessen', text: 'Schließen' });
     m.appendChild(zu);
     m.appendChild(PW.el('h2', { text: 'Merkzettel' }));
-    m.appendChild(PW.el('p', { html: 'Die Kurzsicherung zum Nachschlagen während der Aufgaben. Als PDF für die Klausur: <a href="' + wurzel + 'docs/Zusammenfassung_Parteien_und_Wahlen.pdf">Zusammenfassung (2 Seiten)</a>.' }));
+    m.appendChild(PW.el('p', { html: 'Die Kurzsicherung zum Nachschlagen während der Aufgaben. Die Zusammenfassungen stehen im Reiter <a href="' + wurzel + 'zusammenfassungen.html">Zusammenfassungen</a> – jede öffnet, wenn die Einheit erledigt ist.' }));
     var kurzweg = PW.organizerKurz(wurzel);
     if (kurzweg) { m.appendChild(PW.el('h3', { text: 'Der Weg durch die Einheit' })); m.appendChild(kurzweg); }
     m.appendChild(PW.el('h3', { text: 'Art. 21 GG in einem Satz' }));

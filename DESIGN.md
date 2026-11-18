@@ -352,7 +352,17 @@ Grundlage sind die beiden Designsysteme **Gemeinschaftskunde** (die Beschreibung
 - **AR Akteure und Machtressourcen** (Modul 2): sechs Akteurskarten, bis zu drei Ressourcen, Rückmeldung Passt / Passt auch / Passt nicht / Nicht belegt.
 - **AS Einflussbarometer** (Modul 2): ein Gerät vorne, Regler 0–4 je Akteur. Füllung 200 ms.
 - **AT Haltungslinie** (Modul 2): fünf Stellen vorher und nachher, die Stelle von vorher gestrichelt.
-- **AO (v15 reduziert) Startseite als drei farbige Säulen** (ersetzt den Linienplan aus v14)
+- ~~AO (v15 reduziert) Startseite als drei farbige Säulen~~ – gestrichen in v18, ersetzt durch AW (Halbjahreskarte)
 - ~~AO (v14) Karte des Halbjahres als Linienplan~~ (index.html): Advance Organizer – eine Linie, drei Haltestellen A–C mit Verb und Frage, beschriftete Verbindungen (»daraus wird«, »braucht Schutz«), Rückweg; Status doppelt kodiert (Rahmen und Wort); Marke »Du bist hier«. Statisch.
 - **AU Koalitionsspiel** (parteien-wahlen/koalition.html): vier Schritte, kodiertes Gegenüber; einzige Bewegung der Stempel (300 ms, ease-out).
 - **AV Figurenfamilie** (assets/js/figuren.js): Caja (drei Posen), Mitschüler, Großeltern; Tokens `--haut-*`, `--haar-*`, `--fig-linie`, `--fig-wange` gelten in allen Ansichten gleich. Schaubild-Zeile: Figuren · alle Stationen · ausgedachte Personen · 11.11.2026.
+
+## v18 (18.11.2026): Halbjahreskarte und Zusammenfassungen
+
+- **AW Halbjahreskarte** (index.html, Daten und Zeichnen in `assets/js/halbjahr.js`): Leitfrage, ein Knopf »Weiter« (erste Lernseite, die noch nicht erledigt ist), darunter das **Band**: fünf Abschnitte in ihren Tönen (Grundlagen gelb · Einbringen blau · Entscheiden grün · Schützen lila · Bilanz warm), darin acht Einheiten als Kacheln; die Klassenarbeit steht als Kachel in Tinte nach Modul 1. Kästchen zeigen die Teile einer Einheit (gefüllt erledigt · Strich Papier · gestrichelt geplant), der Stand steht immer auch als Wort. Ab 1100 px eine Zeile mit gleich hohen Köpfen (`grid-template-rows: subgrid`), darunter umbrechend. Darunter **Einheiten und Stunden**: je Einheit eine Karte mit ihren Stunden – Lernseiten als Link, Papier- und geplante Stunden zum Aufklappen (Leitfrage, »Ich kann« aus dem Kompetenzraster). Eine Ordnung: die Zeit. Keine Bewegung (außer Druckrückmeldung 100 ms an Kacheln). Gemessen: Band bei 1280 × 720 bis 567 px, erster Knopf bis 265 px.
+- **AX Zusammenfassungen** (zusammenfassungen.html und Sperre auf jeder Zusammenfassung): frei, sobald die Einheit auf dem Gerät erledigt ist – Modul 1 nach allen sechs Stationen, Klassenarbeit nach allen fünf Bereichen der Wiederholung, Modul 2 nach Sach- und Werturteil –, sonst auf Ansage: Knopf »Meine Lehrkraft hat sie freigegeben« mit Rückfrage (wie im Psycho-Labor). `HJ.sperre(id)` im Kopf setzt `data-zf="zu"` vor dem ersten Zeichnen; `.zf-schutz` verborgen; ohne JavaScript alles sichtbar. Speicher `pw:frei-<einheit>`, gelöscht mit »Eingaben löschen …« der Einheit.
+- **Halbjahresleiste** auf Modul 1, Modul 2 und der Klassenarbeit: acht Einheiten als Chips mit Kante im Ton, die eigene gefüllt; am Telefon nur die Nachbarn.
+- Lehrkraft-Modus 3b: Zusammenfassungen auf diesem Gerät freigeben (für den Beamer).
+
+**The Earned-Summary Rule.** Eine Zusammenfassung öffnet nach der Einheit oder auf Ansage – erst abrufen, dann nachlesen. Merkzettel und Lernkarten bleiben während der Einheit frei; sie sind Hilfe beim Arbeiten, kein Ersatz für die Einheit.
+

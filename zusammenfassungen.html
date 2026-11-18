@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="de" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zusammenfassungen · GK-Labor</title>
+<script>try{var a=localStorage.getItem("pw:ansicht");if(a){a=JSON.parse(a);if(a==="hell"||a==="dunkel"||a==="beamer")document.documentElement.setAttribute("data-ansicht",a)}}catch(e){}</script>
+<link rel="stylesheet" href="assets/css/werkstatt.css">
+</head>
+<body data-ton="warm">
+<header class="kopf"><div class="kopf-innen"></div></header>
+<main id="inhalt">
+  <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer" aria-hidden="true">≡</span><h1>Zusammenfassungen</h1><p class="leitfrage">Erst die Einheit, dann die Zusammenfassung.</p><p class="klein" style="margin:0">Jede Zusammenfassung öffnet, sobald du die Einheit erledigt hast – oder wenn deine Lehrkraft sie freigibt. Alle in der Reihenfolge des Halbjahres.</p></div></div>
+
+  <ol class="zfh-liste" id="zfh">
+    <li class="zfh"><h2>Grundlagen</h2><p><a href="zusammenfassung-grundlagen.html">Zusammenfassung Grundlagen</a></p></li>
+    <li class="zfh"><h2>Parteien und Wahlen</h2><p><a href="zusammenfassung.html">Zusammenfassung Modul 1</a> · <a href="docs/Zusammenfassung_Parteien_und_Wahlen.pdf">PDF</a></p></li>
+    <li class="zfh"><h2>Klassenarbeit</h2><p><a href="klassenarbeit/zusammenfassung.html">Zusammenfassung für die Klassenarbeit</a></p></li>
+    <li class="zfh"><h2>Verbände und Lobbyismus</h2><p><a href="zusammenfassung-verbaende.html">Zusammenfassung Modul 2</a></p></li>
+  </ol>
+  <p class="sr-only" id="zfh-live" aria-live="polite"></p>
+
+  <p class="klein">Die Freigabe gilt nur auf diesem Gerät. »Eingaben löschen …« einer Einheit sperrt ihre Zusammenfassung wieder.</p>
+</main>
+<footer class="fuss"><div class="fuss-innen"></div></footer>
+<script src="assets/js/daten.js"></script>
+<script src="assets/js/werkstatt.js"></script>
+<script src="assets/js/figuren.js"></script>
+<script src="assets/js/motion.js"></script>
+<script src="assets/js/merkzettel.js"></script>
+<script src="assets/js/halbjahr.js"></script>
+<script>
+document.documentElement.classList.add('js'); document.documentElement.classList.remove('no-js');
+PW.rahmen('zus', ''); PW.merkzettel('');
+HJ.hub(document.getElementById('zfh'), '');
+</script>
+</body>
+</html>

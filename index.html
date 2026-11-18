@@ -16,51 +16,25 @@
     <h1 class="grundfrage">Was braucht eine Demokratie, <span class="akzent">um nicht zu scheitern?</span></h1>
   </section>
 
-  <ol class="hs" aria-label="Das Halbjahr in drei Schritten">
-    <li class="hs-schritt hs-schritt--a">
-      <h2 class="hs-band"><span class="hs-nr" aria-hidden="true">1</span><span><b>Einbringen</b><small>Wer bringt Interessen in die Politik?</small></span></h2>
-      <ul class="hs-module">
-        <li class="hs-modul hs-modul--da" id="modul-1">
-          <a class="hs-link" href="parteien.html"><span class="hs-m">Modul 1</span><b>Parteien und Wahlen</b><span class="hs-hier" id="hier-1" hidden>Du bist hier</span></a>
-          <ul class="hs-teile">
-            <li><a href="parteien-wahlen/station1.html">Parteien</a></li>
-            <li><a href="parteien-wahlen/station4.html">Bundestagswahl</a></li>
-            <li><a href="parteien-wahlen/station6.html">Europawahl</a></li>
-          </ul>
-          <ul class="hs-extra">
-            <li><a href="parteien-wahlen/station4.html#klasse-2627">Klassenergebnis 2026/27</a></li>
-            <li><a href="parteien-wahlen/koalition.html">Koalitionsspiel</a></li>
-          </ul>
-          <p class="hs-fort" id="lab-fort" aria-live="polite"></p>
-        </li>
-        <li class="hs-modul hs-modul--da" id="modul-2">
-          <a class="hs-link" href="verbaende.html"><span class="hs-m">Modul 2 · Entwurf</span><b>Verbände und Lobbyismus</b><span class="hs-hier" id="hier-2" hidden>Du bist hier</span></a>
-        </li>
-        <li class="hs-modul" id="modul-3"><p class="hs-link"><span class="hs-m">Modul 3 · geplant</span><b>Medien</b></p></li>
-      </ul>
-    </li>
-    <li class="hs-schritt hs-schritt--b">
-      <h2 class="hs-band"><span class="hs-nr" aria-hidden="true">2</span><span><b>Entscheiden</b><small>Wer entscheidet – und wer kontrolliert?</small></span></h2>
-      <ul class="hs-module">
-        <li class="hs-modul" id="modul-4"><p class="hs-link"><span class="hs-m">Modul 4 · geplant</span><b>Deutschland und die EU</b></p>
-          <p class="hs-stich">Gewaltenteilung · Kontrolle · Föderalismus · Europäisierung</p></li>
-      </ul>
-    </li>
-    <li class="hs-schritt hs-schritt--c">
-      <h2 class="hs-band"><span class="hs-nr" aria-hidden="true">3</span><span><b>Schützen</b><small>Was gefährdet die Demokratie?</small></span></h2>
-      <ul class="hs-module">
-        <li class="hs-modul" id="modul-5"><p class="hs-link"><span class="hs-m">Modul 5 · geplant</span><b>Gefährdungen der Demokratie</b></p>
-          <p class="hs-stich">Populismus · Extremismus · wehrhafte Demokratie</p></li>
-      </ul>
-    </li>
-  </ol>
+  <div id="halbjahr" class="hj"></div>
+  <noscript>
+    <ul class="hj-ohne">
+      <li>Grundlagen – drei Stunden auf Papier</li>
+      <li><a href="parteien.html">Modul 1 · Parteien und Wahlen</a></li>
+      <li><a href="klassenarbeit/index.html">Klassenarbeit · Wiederholung</a></li>
+      <li><a href="verbaende.html">Modul 2 · Verbände und Lobbyismus</a></li>
+      <li>Modul 3 · Medien · Modul 4 · Deutschland und die EU · Modul 5 · Gefährdungen der Demokratie · Bilanz – geplant</li>
+      <li><a href="zusammenfassungen.html">Zusammenfassungen</a></li>
+    </ul>
+  </noscript>
 
   <p class="hs-fuss">Nach dem Bildungsplan, BPE 2.1 und 2.2. Im zweiten Halbjahr prüft ihr eure Antworten an der Weimarer Republik.</p>
 
   <details class="hs-hypo">
     <summary>Eure Antwort sammeln: Was braucht eine Demokratie?</summary>
-    <label class="klein vh-label" for="hypo">Je Zeile eine Bedingung – nach jedem Modul eine neue. Bleibt auf diesem Gerät.</label>
+    <label class="klein vh-label" for="hypo">Je Zeile eine Bedingung – nach jeder Einheit eine neue. Bleibt auf diesem Gerät.</label>
     <textarea id="hypo" class="schreibfeld" rows="4" placeholder="Zum Beispiel: Parteien, die Interessen bündeln …"></textarea>
+    <p class="hs-hypo-akt"><button type="button" class="knopf knopf--leise" id="hypo-datei">Als Textdatei sichern</button> <span class="klein" id="hypo-status" aria-live="polite"></span></p>
   </details>
 </main>
 <footer class="fuss"><div class="fuss-innen"></div>
@@ -71,17 +45,24 @@
 <script src="assets/js/motion.js"></script>
 <script src="assets/js/merkzettel.js"></script>
 <script src="assets/js/lernstand.js"></script>
+<script src="assets/js/halbjahr.js"></script>
 <script>
 document.documentElement.classList.add('js'); document.documentElement.classList.remove('no-js');
 PW.rahmen('labor', ''); PW.merkzettel('');
+HJ.karte(document.getElementById('halbjahr'), '');
 (function () {
-  var f = PW.lies('fertig', {}) || {}, n = 0;
-  for (var i = 1; i <= 6; i++) if (f['st' + i]) n++;
-  document.getElementById('lab-fort').textContent = n ? n + ' von 6 Stationen erledigt' : '';
-  var hier = document.getElementById(n >= 6 ? 'hier-2' : 'hier-1'); if (hier) hier.hidden = false;
-  var t = document.getElementById('hypo'); t.value = PW.lies('hypothesen', '') || '';
+  var t = document.getElementById('hypo'), st = document.getElementById('hypo-status');
+  t.value = PW.lies('hypothesen', '') || '';
   t.addEventListener('input', function () { PW.merke('hypothesen', t.value); });
-})();
+  document.getElementById('hypo-datei').addEventListener('click', function () {
+    var text = 'GK-Labor · ' + HJ.leitfrage + '\n\n' + (t.value || '').trim() + '\n';
+    try {
+      var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
+      a.download = 'GK-Labor_Was-braucht-eine-Demokratie.txt'; document.body.appendChild(a); a.click(); a.remove();
+      st.textContent = 'Gesichert als Textdatei.';
+    } catch (e) { st.textContent = 'Sichern ging nicht – kopiere den Text.'; }
+  });
+})()
 </script>
 </body>
 </html>

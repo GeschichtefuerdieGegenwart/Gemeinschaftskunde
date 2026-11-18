@@ -4,12 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zusammenfassung · Klassenarbeit J1</title>
+<script src="../assets/js/halbjahr.js"></script><script>HJ.sperre('ka')</script>
 <link rel="stylesheet" href="../assets/css/druck.css">
 </head>
 <body class="blatt">
 <div class="blatt-leiste"><a href="index.html">← Zur Wiederholung</a><span>Zusammenfassung · 2 Seiten</span><button type="button" onclick="window.print()">Drucken oder als PDF sichern</button></div>
+<div class="zf-schloss" id="zf-schloss" hidden></div>
 
-<section class="seite">
+<section class="seite zf-schutz">
   <div class="zf-kopf">
     <h1>Zusammenfassung für die Klassenarbeit</h1>
     <p class="hinweis">Seite 1: Das musst du wissen · Seite 2: Das musst du können · <a href="ich-kann.html">Ich-kann-Liste</a></p>
@@ -101,7 +103,7 @@
 
 </section>
 
-<section class="seite">
+<section class="seite zf-schutz">
   <div class="zf-teil" style="--zt:#333;--ztt:#111">
     <h2>So ist die Klassenarbeit aufgebaut: drei Aufgaben, drei Anforderungsbereiche</h2>
     <div class="zf-afb">
@@ -168,5 +170,6 @@
     <p class="hinweis"><b>Dein Plan:</b> <a href="ich-kann.html">Ich-kann-Liste</a> ankreuzen → Lücken in der <a href="index.html">Wiederholung</a> üben → <a href="probeklausur.html">Probeklausur</a> in 90 Minuten → erst dann mit dem Erwartungshorizont vergleichen.</p>
   </div>
 </section>
+<script>HJ.schloss(document.getElementById('zf-schloss'), 'ka', '../');</script>
 </body>
 </html>

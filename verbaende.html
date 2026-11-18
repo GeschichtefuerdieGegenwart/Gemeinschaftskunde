@@ -12,6 +12,7 @@
 <header class="kopf"><div class="kopf-innen"></div></header>
 <main id="inhalt">
   <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer">2</span><h1>Verbände und Lobbyismus</h1><p class="leitfrage">Stimme der Gesellschaft – oder gekaufte Politik?</p><p class="klein" style="margin:0">Ein Fall zieht sich durch: die Zuckersteuer 2026 – ein Gesetz unter Druck. Eine Doppelstunde, sieben Schritte. <a href="index.html">Zurück zum GK-Labor</a></p><div class="kz"><div><b>26.998</b><span>Personen im Lobbyregister</span></div><div><b>630</b><span>Abgeordnete</span></div><div><b>?</b><span>Wer schreibt mit?</span></div></div></div></div>
+  <div id="hl"></div>
 
   <nav class="m2-weg" aria-label="Schritte dieser Stunde">
     <ol>
@@ -200,7 +201,9 @@
 <script src="assets/js/merkzettel.js"></script>
 <script src="assets/js/lernstand.js"></script>
 <script src="assets/js/lobby.js"></script>
+<script src="assets/js/halbjahr.js"></script>
 <script>
+HJ.leiste(document.getElementById('hl'), 'm2', '');
 document.documentElement.classList.add('js'); document.documentElement.classList.remove('no-js');
 PW.rahmen('m2', ''); PW.merkzettel('');
 PW.lobbySchaetzen(document.getElementById('schaetzen'));
