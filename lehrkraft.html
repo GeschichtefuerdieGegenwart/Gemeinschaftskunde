@@ -102,9 +102,16 @@
     <p class="klein">Bildungsplan Berufliches Gymnasium, Geschichte mit Gemeinschaftskunde, BPE 2.1: Parteien (Funktionen, Art. 21 GG), Bundestagswahl (Wahlrecht, Wahlsystem, 5-%-Hürde), Wahlverhalten; Operatoren beschreiben, erläutern, analysieren, vergleichen, beurteilen. Überwältigungsverbot und Kontroversitätsgebot (Beutelsbacher Konsens): keine Empfehlung, wörtliche Belege, Einordnungen Dritter mit Quelle für alle Parteien im gleichen Raster.</p>
   </section>
 
+  <section class="karte" id="freigabe">
+    <h2>3b. Zusammenfassungen freigeben</h2>
+    <p>Im Reiter <a href="zusammenfassungen.html">Zusammenfassungen</a> stehen alle Zusammenfassungen des Halbjahres. Jede öffnet sich für Lernende, sobald die Einheit auf ihrem Gerät erledigt ist: Modul 1 nach allen sechs Stationen, die Klassenarbeit nach allen fünf Bereichen der Wiederholung, Modul 2 nach Sach- und Werturteil in Schritt 6. Die Grundlagen (Papierstunden) öffnen nur auf Ansage.</p>
+    <p>Sagen Sie eine Freigabe an – etwa am Ende der Einheit, für Fehlende oder nach einem Gerätewechsel –, tippen die Lernenden auf »Meine Lehrkraft hat sie freigegeben« und bestätigen die Rückfrage. Die Sperre schützt vor dem Vorblättern, nicht vor Neugier. Für den Beamer hier auf diesem Gerät freigeben:</p>
+    <div id="zf-lk"></div>
+  </section>
+
   <section class="karte karte--leise">
     <h2>4. Datenschutz und Technik</h2>
-    <p class="klein">Die Seite lädt nichts nach, verwendet keine Cookies und keine Schriften aus dem Netz. Gespeichert werden nur: angetippte Karten, Tipps in Station 3, Lernstand (erste Versuche und Niveaustufe), Klassenergebnis und Stimmensummen der Urne, Bewegungsschalter – im localStorage des jeweiligen Geräts, löschbar über »Eingaben löschen …« im Fuß – je Modul (Klassenergebnisse nur auf ausdrücklichen Wunsch) oder alles. Die Urne speichert keine Namen, keine Reihenfolge und keine Uhrzeiten. Läuft offline über Datei-Doppelklick, über GitHub Pages und als Datei in Moodle.</p>
+    <p class="klein">Die Seite lädt nichts nach, verwendet keine Cookies und keine Schriften aus dem Netz. Gespeichert werden nur: angetippte Karten, Tipps in Station 3, Lernstand (erste Versuche und Niveaustufe), Klassenergebnis und Stimmensummen der Urne, Freigaben der Zusammenfassungen auf Ansage, Bewegungsschalter – im localStorage des jeweiligen Geräts, löschbar über »Eingaben löschen …« im Fuß – je Modul (Klassenergebnisse nur auf ausdrücklichen Wunsch) oder alles. Die Urne speichert keine Namen, keine Reihenfolge und keine Uhrzeiten. Läuft offline über Datei-Doppelklick, über GitHub Pages und als Datei in Moodle.</p>
   </section>
 </main>
 <footer class="fuss"><div class="fuss-innen"></div>
@@ -116,7 +123,9 @@
 <script src="assets/js/faecher.js"></script>
 <script src="assets/js/merkzettel.js"></script>
 <script src="assets/js/urteil.js"></script>
+<script src="assets/js/halbjahr.js"></script>
 <script>
+HJ.lehrkraft(document.getElementById('zf-lk'));
 PW.rahmen('lehr', ''); PW.merkzettel(''); PW.urteilKlasse(document.getElementById('urteil-klasse'));
 (function () {
   var ids = ['cdu', 'csu', 'spd', 'gruene', 'fdp', 'afd', 'linke', 'bsw'];

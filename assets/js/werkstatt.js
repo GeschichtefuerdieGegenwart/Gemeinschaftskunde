@@ -19,6 +19,7 @@
   PW.modulVon = function (k) {
     if (EINSTELLUNG.indexOf(k) >= 0) return null;
     if (k === 'hypothesen') return 'labor';
+    if (k.indexOf('frei-') === 0) return ({ m1: 'm1', m2: 'm2', ka: 'ka' })[k.slice(5)] || 'labor';
     if (k.indexOf('lobby-') === 0 || k === 'zucker' || k.indexOf('m2-') === 0) return 'm2';
     if (k.indexOf('wdh-') === 0) return 'ka';
     return 'm1';
@@ -218,7 +219,7 @@
     { id: 'st6', url: 'parteien-wahlen/station6.html', name: 'Europa', station: 6 },
     { id: 'm2', url: 'verbaende.html', name: 'Modul 2' },
     { id: 'wdh', url: 'klassenarbeit/index.html', name: 'Klassenarbeit' },
-    { id: 'zus', url: 'zusammenfassung.html', name: 'Zusammenfassung' },
+    { id: 'zus', url: 'zusammenfassungen.html', name: 'Zusammenfassungen' },
     { id: 'vert', url: 'vertiefung.html', name: 'Vertiefung' },
     { id: 'lehr', url: 'lehrkraft.html', name: 'Lehrkraft' },
     { id: 'klausur', url: 'klausurtraining.html', name: 'Klausurtraining' },
@@ -246,7 +247,7 @@
     if (lf && PW.aufbauen) { var schon = false; try { schon = sessionStorage.getItem('pw:lf:' + aktuell) === '1'; sessionStorage.setItem('pw:lf:' + aktuell, '1'); } catch (e) {} PW.aufbauen(lf, { sofort: schon }); }
     var fuss = document.querySelector('.fuss-innen');
     if (fuss) {
-      fuss.appendChild(PW.el('span', { text: 'GK-Labor · Gemeinschaftskunde J1 · Stand 10.11.2026 · Quellen stehen auf den Seiten' }));
+      fuss.appendChild(PW.el('span', { text: 'GK-Labor · Gemeinschaftskunde J1 · Stand 18.11.2026 · Quellen stehen auf den Seiten' }));
       var einst = PW.el('div', { 'class': 'einstellungen' });
       /* Ansicht: Hell · Dunkel · Beamer */
       var ans = PW.el('div', { 'class': 'ansicht-wahl', role: 'group', 'aria-label': 'Ansicht' });

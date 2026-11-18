@@ -38,7 +38,8 @@ Unterricht in zwei Doppelstunden (je 90 Minuten) mit iPads, Beamer und WLAN; die
 - Station 3: acht Kurzprofile (CDU, CSU, SPD, AfD, Grüne, Linke, FDP, BSW), acht Entscheidungsfragen; erst tippen, dann belegte Position (Programm 2025, Seitenzahl). Kein persönlicher Übereinstimmungswert.
 - Station 4: Stimmzettel Wahlkreis 260 Böblingen (zehn Direktkandidierende 2025, 16 Landeslisten); Sitzrechner (630 Sitze, Zweitstimmendeckung, Grundmandatsklausel) mit Schalter 5-%-Hürde; Koalitionsrechner; Realitätsabgleich Klasse · Herrenberg · Wahlkreis · Bund.
 - Station 5: Alter und Geschlecht, vermuten dann aufdecken; Diskussionsauftrag und Beurteilungsraster.
-- Zusammenfassung als druckbare Seite (höchstens zwei A4-Seiten).
+- Zusammenfassungen als druckbare Seiten (je höchstens zwei A4-Seiten), gesammelt im Reiter »Zusammenfassungen«: frei, sobald die Einheit auf dem Gerät erledigt ist, oder auf Ansage der Lehrkraft (seit v18). Merkzettel und Lernkarten bleiben während der Einheit frei.
+- Startseite: das ganze erste Halbjahr als Karte (fünf Abschnitte, acht Einheiten, alle Stunden); Papierstunden und geplante Stunden stehen mit darauf (seit v18).
 - Vertiefung (optional): Vertrauen und Mitglieder.
 - Lehrkraft-Modus: Klassenergebnis eingeben, Beamer-Ansichten.
 - Kein Server, keine Namen, keine Speicherung von Freitext außerhalb des Geräts.

@@ -17,6 +17,7 @@
 <p class="sr-only">Kurze Einleitung ohne Ton; sie lässt sich überspringen. Danach beginnt die Einheit mit der Frage: Wozu gibt es Parteien?</p>
 <header class="kopf"><div class="kopf-innen"></div></header>
 <main id="nach-intro" class="start">
+  <div id="hl"></div>
   <section class="auftakt">
     <p class="klein" style="color:var(--leise);margin:0 0 8px"><a href="index.html">GK-Labor</a> · Modul 1 · Gemeinschaftskunde J1</p>
     <h1 class="grundfrage">Wozu gibt es<span class="akzent">Parteien?</span></h1>
@@ -89,6 +90,7 @@
 <script src="assets/js/urteil.js"></script>
 <script src="assets/js/intro.js"></script>
 <script src="assets/js/lernstand.js"></script>
-<script>PW.rahmen('start', ''); PW.merkzettel(''); PW.organizer(''); PW.urteilslinie(document.getElementById('urteil-vorher'), 'vorher', ''); PW.intro(document.getElementById('intro'));</script>
+<script src="assets/js/halbjahr.js"></script>
+<script>HJ.leiste(document.getElementById('hl'), 'm1', ''); PW.rahmen('start', ''); PW.merkzettel(''); PW.organizer(''); PW.urteilslinie(document.getElementById('urteil-vorher'), 'vorher', ''); PW.intro(document.getElementById('intro'));</script>
 </body>
 </html>

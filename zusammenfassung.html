@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zusammenfassung · Parteien und Wahlen</title>
 <script>try{var a=localStorage.getItem("pw:ansicht");if(a){a=JSON.parse(a);if(a==="hell"||a==="dunkel"||a==="beamer")document.documentElement.setAttribute("data-ansicht",a)}}catch(e){}</script>
+<script src="assets/js/halbjahr.js"></script><script>HJ.sperre('m1')</script>
 <link rel="stylesheet" href="assets/css/werkstatt.css">
 <style>
 .zus h2{font-size:1.5rem;margin-top:0}
@@ -18,8 +19,9 @@
 <header class="kopf"><div class="kopf-innen"></div></header>
 <main id="inhalt" class="zus">
   <h1>Parteien und Wahlen: das Wichtigste</h1>
-  <p class="kein-druck"><a class="knopf knopf--akzent" href="docs/Zusammenfassung_Parteien_und_Wahlen.pdf">Zusammenfassung als PDF (2 Seiten)</a> <button class="knopf" type="button" onclick="window.print()">Diese Seite drucken</button> &nbsp; Für die Klausur gelten die Operatoren des Bildungsplans; die Beispiele unten sind die aus der Einheit.</p>
-  <div class="raster raster--2">
+  <div class="zf-schloss" id="zf-schloss" hidden></div>
+  <p class="kein-druck zf-schutz"><a class="knopf knopf--akzent" href="docs/Zusammenfassung_Parteien_und_Wahlen.pdf">Zusammenfassung als PDF (2 Seiten)</a> <button class="knopf" type="button" onclick="window.print()">Diese Seite drucken</button> &nbsp; Für die Klausur gelten die Operatoren des Bildungsplans; die Beispiele unten sind die aus der Einheit.</p>
+  <div class="raster raster--2 zf-schutz">
     <section class="karte">
       <h2>1 · Parteien im Grundgesetz</h2>
       <ul>
@@ -76,12 +78,12 @@
     <p>Zwölf Karten. Sag dir die Erklärung zuerst selbst, dann tippe die Karte um und vergleiche. Danach: »Kann ich erklären« oder »Noch nicht« – das ist dein eigener Stand für die Klausurvorbereitung, keine Note. Er erscheint auch unter »Mein Stand«.</p>
     <div id="wende"></div>
   </section>
-  <section class="karte">
+  <section class="karte zf-schutz">
     <h2>7 · Urteilen wie in der Klausur</h2>
     <p><strong>Sachurteil:</strong> Wirkung an Kriterien prüfen (Effektivität, Repräsentation, Gleichheit der Wahl, Legitimität). <strong>Werturteil:</strong> Kriterien gewichten und begründen, was wichtiger sein soll. Immer: Behauptung → Beleg (Zahl, Artikel, Programmseite) → Erklärung → Gegenargument → Abwägung. Beispielfrage: <em>Beurteilen Sie, ob die 5-%-Hürde angemessen ist.</em> Operatoren: beschreiben (AFB I) · erläutern, analysieren (AFB II) · vergleichen, beurteilen, bewerten, Stellung nehmen, erörtern (AFB III).</p>
   </section>
-  <details class="kein-druck"><summary>Quellen der Einheit</summary><ul id="quellen" class="klein quellen"></ul></details>
-  <p class="druck-nur klein">Quellen: Bundeswahlleiterin (Ergebnisse 2025, Repräsentative Wahlstatistik); Wahlprogramme 2025 der Parteien; SWR-Wahlportal und Stadt Herrenberg; Shell Jugendstudie 2024; KAS Monitor 2025; DHM/LeMO. Vollständige Liste: Website der Einheit.</p>
+  <details class="kein-druck zf-schutz"><summary>Quellen der Einheit</summary><ul id="quellen" class="klein quellen"></ul></details>
+  <p class="druck-nur klein zf-schutz">Quellen: Bundeswahlleiterin (Ergebnisse 2025, Repräsentative Wahlstatistik); Wahlprogramme 2025 der Parteien; SWR-Wahlportal und Stadt Herrenberg; Shell Jugendstudie 2024; KAS Monitor 2025; DHM/LeMO. Vollständige Liste: Website der Einheit.</p>
 </main>
 <footer class="fuss"><div class="fuss-innen"></div>
     <p class="urheberzeile" style="font-size:1rem;opacity:.72;margin-top:1.5rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></footer>
@@ -95,6 +97,7 @@
 <script>
 if (PW.wendekarten && document.getElementById('wende')) PW.wendekarten(document.getElementById('wende'), PW.begriffe, { schluessel: 'karten' });
 PW.rahmen('zus', ''); PW.merkzettel('');
+HJ.schloss(document.getElementById('zf-schloss'), 'm1', '');
 var q = document.getElementById('quellen'); PW.quellen.forEach(function (s) { q.appendChild(PW.el('li', {}, [s[1] ? PW.el('a', { href: s[1], text: s[0] }) : PW.el('span', { text: s[0] })])); });
 </script>
 </body>

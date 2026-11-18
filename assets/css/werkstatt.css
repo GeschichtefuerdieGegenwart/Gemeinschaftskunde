@@ -1439,57 +1439,129 @@ html[data-bewegung=weniger] .sp-stempel--neu{animation:none}
   --fig-linie:#26211E;--fig-wange:#D9644A}
 .fig{display:block;width:100%;height:auto}
 
-/* v15 · Muster AO (reduziert) · Startseite des GK-Labors: drei farbige Säulen
-   Eine Frage oben, darunter drei Schritte als Säulen in drei Tönen (blau · grün · lila), verbunden durch Pfeilspitzen im Band.
-   Module als Kacheln: vorhanden = volle Kachel mit Link, geplant = gestrichelt und gedämpft (Rahmen plus Wort). Keine Bewegung. */
-.hs-kopf{margin:8px 0 28px}
+/* v18 · Muster AW Halbjahreskarte (index.html) – ersetzt AO v15 (drei Säulen)
+   Kopf: Leitfrage, ein Knopf »Weiter«. Band: fünf Abschnitte in ihren Tönen, darin die acht Einheiten als Kacheln;
+   Kästchen = Teile der Einheit (gefüllt erledigt · Strich Papier · gestrichelt geplant), Status immer auch als Wort.
+   Darunter »Einheiten und Stunden«: je Einheit eine Karte mit ihren Stunden (Link) oder Papier- und geplanten Stunden (aufklappen).
+   Eine Ordnung (die Zeit): links nach rechts, in jeder Karte von oben nach unten. Keine Bewegung. */
+.hs-kopf{margin:8px 0 20px}
 .hs-dach{margin:0 0 8px;color:var(--leise);font-size:1rem;font-weight:700}
-.labor-seite .hs-kopf .grundfrage{font-size:clamp(2rem,5vw,3.75rem);max-width:none;margin:0}
-.labor-seite .auftakt.hs-kopf{margin:8px 0 28px}
+.labor-seite .hs-kopf .grundfrage{font-size:clamp(1.875rem,3.6vw,3rem);max-width:none;margin:0}
+.labor-seite .auftakt.hs-kopf{margin:8px 0 20px}
 .labor-seite .hs-kopf .grundfrage .akzent{display:inline}
-.hs{list-style:none;margin:0;padding:0;display:grid;gap:18px;grid-template-columns:1fr}
-.hs-schritt{display:flex;flex-direction:column;border-radius:var(--radius);overflow:hidden;background:var(--zt);border:2px solid var(--zt-tief)}
-.hs-schritt--a{--zt:var(--ton-blau);--zt-tief:var(--ton-blau-tief)}
-.hs-schritt--b{--zt:var(--ton-gruen);--zt-tief:var(--ton-gruen-tief)}
-.hs-schritt--c{--zt:var(--ton-lila);--zt-tief:var(--ton-lila-tief)}
-.hs-band{position:relative;margin:0;display:flex;gap:14px;align-items:center;padding:16px 18px;background:var(--zt-tief);color:var(--flaeche)}
-.hs-band b{display:block;font-family:var(--schrift-titel);font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.05}
-.hs-band small{display:block;margin-top:4px;font-family:var(--schrift-stimme);font-style:italic;font-weight:600;font-size:1.0625rem;line-height:1.25;opacity:.95}
-.hs-nr{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--flaeche);color:var(--zt-tief);font-family:var(--schrift-titel);font-weight:700;font-size:1.75rem}
-.hs-module{list-style:none;margin:0;padding:14px;display:grid;gap:12px;align-content:start;flex:1}
-.hs-modul{background:var(--flaeche);border:2px solid var(--zt-tief);border-radius:var(--radius)}
-.hs-modul:not(.hs-modul--da){background:transparent;border-style:dashed;opacity:.85}
-.hs-link{display:grid;gap:2px;margin:0;padding:12px 14px;color:var(--text);text-decoration:none;max-width:none;position:relative}
-a.hs-link{min-height:44px;transition:transform var(--dauer-druck) var(--ease-out)}
-a.hs-link:active{transform:scale(.99)}
-@media (hover:hover) and (pointer:fine){a.hs-link:hover b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}}
-a.hs-link:focus-visible{outline:3px solid var(--text);outline-offset:-3px}
-.hs-m{font-size:1rem;font-weight:700;color:var(--zt-tief)}
-.hs-link b{font-family:var(--schrift-titel);font-size:1.375rem;line-height:1.15}
-.hs-hier{position:absolute;top:10px;right:10px;padding:2px 10px;background:var(--akzent);color:var(--flaeche);font-weight:700;font-size:1rem;border-radius:2px}
-.hs-teile{list-style:none;margin:0;padding:0 14px 10px;display:flex;flex-wrap:wrap;gap:8px}
-.hs-teile a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border-radius:999px;background:var(--zt-tief);color:var(--flaeche);font-weight:700;text-decoration:none} /* taste-skill-ignore: Teile als Haltegriffe, kein Etikett */
-.hs-teile a:focus-visible,.hs-extra a:focus-visible{outline:3px solid var(--text);outline-offset:2px}
-@media (hover:hover) and (pointer:fine){.hs-teile a:hover{background:var(--text)}}
-.hs-extra{list-style:none;margin:0;padding:0 14px 12px;display:flex;flex-wrap:wrap;gap:4px 18px}
-.hs-extra a{display:inline-flex;align-items:center;min-height:44px;color:var(--text);font-weight:700;text-decoration-thickness:2px;text-underline-offset:3px}
-.hs-extra a::before{content:"→";margin-right:6px;color:var(--zt-tief)}
-.hs-fort{margin:0;padding:0 14px 12px;font-size:1rem;color:var(--leise)}
-.hs-fort:empty{display:none}
-.hs-stich{margin:0;padding:0 14px 12px;font-size:1rem;max-width:none}
 .hs-fuss{margin:16px 0 8px;color:var(--leise);font-size:1rem;max-width:none}
 .hs-hypo{margin:0 0 24px;max-width:70ch}
 .hs-hypo summary{min-height:44px;display:flex;align-items:center;font-weight:700;cursor:pointer}
-@media (min-width:1024px){
-  .hs{grid-template-columns:1.5fr 1fr 1fr;gap:0}
-  .hs-schritt{border-radius:0;border-left-width:0;overflow:visible}
-  .hs-band{min-height:112px}
-  .hs-schritt:first-child{border-left-width:2px;border-radius:var(--radius) 0 0 var(--radius)}
-  .hs-schritt:last-child{border-radius:0 var(--radius) var(--radius) 0}
-  .hs-band{padding-right:34px}
-  .hs-schritt:not(:last-child) .hs-band::after{content:"";position:absolute;right:-22px;top:0;bottom:0;width:22px;background:var(--zt-tief);clip-path:polygon(0 0,100% 50%,0 100%);z-index:1}
-  .hs-schritt:not(:first-child) .hs-band{padding-left:38px}
+.hs-hypo-akt{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:8px 0 0}
+.hj-weiter{margin:0 0 18px}
+.hj-ohne{margin:0 0 20px}
+.hb{list-style:none;margin:0 0 32px;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.hb-phase{flex:var(--n,1) 1 calc(var(--n,1) * 128px);min-width:0;display:flex;flex-direction:column;background:var(--zt);border:2px solid var(--zt-tief);border-radius:var(--radius)}
+.hb-kopf{margin:0;padding:8px 10px 7px;background:var(--zt-tief);color:var(--flaeche);max-width:none}
+.hb-kopf b{display:block;font-family:var(--schrift-titel);font-size:1.25rem;line-height:1.1}
+.hb-kopf small{display:block;margin-top:2px;font-family:var(--schrift-stimme);font-style:italic;font-weight:600;font-size:1rem;line-height:1.2}
+.hb-einheiten{list-style:none;margin:0;padding:8px;display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));flex:1}
+.hb-einheit{min-width:0}
+.hb-einheit a{display:flex;flex-direction:column;align-items:flex-start;gap:5px;box-sizing:border-box;height:100%;min-height:104px;padding:8px 9px;background:var(--flaeche);border:2px solid var(--zt-tief);border-radius:var(--radius);color:var(--text);text-decoration:none;transition:transform var(--dauer-druck) var(--ease-out)}
+.hb-einheit a:active{transform:scale(.98)}
+.hb-einheit--geplant a{background:transparent;border-style:dashed}
+.hb-einheit--klassenarbeit a{border-width:3px}
+.hb-einheit.is-hier a{box-shadow:0 0 0 3px var(--akzent)}
+.hb-einheit a:focus-visible{outline:3px solid var(--text);outline-offset:3px}
+@media (hover:hover) and (pointer:fine){.hb-einheit a:hover .hb-t{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}}
+.hb-nr{font-size:1rem;font-weight:700;line-height:1.1;color:var(--zt-tief)}
+.hb-t{font-family:var(--schrift-titel);font-weight:700;font-size:1rem;line-height:1.15;hyphens:manual;overflow-wrap:break-word;max-width:100%}
+.hb-k{display:flex;flex-wrap:wrap;gap:3px}
+.hb-k i{display:block;width:12px;height:12px;box-sizing:border-box;border:2px solid var(--zt-tief);border-radius:2px}
+.hb-k i.f{background:var(--zt-tief)}
+.hb-k i.p{background:linear-gradient(var(--zt-tief),var(--zt-tief)) center/6px 2px no-repeat}
+.hb-k i.g{border-style:dashed}
+.hb-s{margin-top:auto;font-size:1rem;line-height:1.2;color:var(--leise)}
+.hb-einheit.is-fertig .hb-s{color:var(--text);font-weight:700}
+.hb-hier{padding:1px 8px;background:var(--akzent);color:var(--flaeche);font-weight:700;font-size:1rem;line-height:1.3;border-radius:2px}
+.hk-titel{margin:0 0 12px}
+.hk-raster{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));align-items:start;margin:0 0 28px}
+.hk{min-width:0;background:var(--flaeche);border:2px solid var(--zt-tief);border-top-width:8px;border-radius:var(--radius);padding:10px 14px 8px;scroll-margin-top:96px}
+.hk--geplant{border-style:dashed;border-top-style:solid;background:transparent}
+.hk:target{box-shadow:0 0 0 3px var(--akzent)}
+.hk-phase{margin:0;font-size:1rem;font-weight:700;color:var(--zt-tief);max-width:none}
+.hk h3{margin:2px 0 2px;font-size:1.375rem;line-height:1.15}
+.hk h3 a{display:inline-flex;align-items:center;min-height:44px;color:var(--text);text-decoration-thickness:2px;text-underline-offset:3px}
+.hk-meta{margin:0 0 6px;font-size:1rem;color:var(--leise);max-width:none}
+.hk-stand{color:var(--text);font-weight:700}
+.hk-teile{list-style:none;margin:0;padding:0}
+.hk-teile>li>a,.hk-teile summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:4px 0;color:var(--text);font-weight:700;line-height:1.25;text-decoration:none}
+.hk-teile>li>a .hk-tt{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px}
+.hk-teile>li>a:focus-visible,.hk-teile summary:focus-visible{outline:3px solid var(--text);outline-offset:2px}
+.hk-nr{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--zt-tief);color:var(--zt);font-size:1rem}
+.hk-tt{min-width:0;overflow-wrap:break-word}
+.hk-hier{display:block;width:max-content;margin-top:3px;padding:1px 8px;background:var(--akzent);color:var(--flaeche);border-radius:2px;font-size:1rem;line-height:1.3}
+.hk-st{margin-left:auto;flex:none;padding-left:6px;font-weight:700}
+.hk-st--leise{font-weight:400;color:var(--leise)}
+.hk-teile summary{cursor:pointer;list-style:none}
+.hk-teile summary::-webkit-details-marker{display:none}
+.hk-art{margin-left:auto;flex:none;padding-left:6px;font-weight:400;font-size:1rem;color:var(--leise)}
+.hk-teile details>p{margin:0 0 8px 24px;font-size:1rem;line-height:1.4;max-width:none}
+.hk-frage{font-family:var(--schrift-stimme);font-style:italic;font-weight:600}
+.hk-wo{color:var(--leise)}
+.hk-extra{display:flex;flex-wrap:wrap;gap:0 14px;margin:2px 0 0;max-width:none}
+.hk-extra a{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--text)}
+.hk-extra a::before{content:"\2192";margin-right:6px;color:var(--zt-tief)}
+.hk-zf{margin:6px 0 0;padding-top:4px;border-top:2px solid var(--linie);font-size:1rem;max-width:none}
+.hk-zf a{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--text)}
+.hk-zf--nein{padding-top:10px;padding-bottom:6px;color:var(--leise)}
+@media (min-width:1100px){
+  /* eine Zeile: Köpfe und Kacheln stehen auf gleicher Höhe (subgrid) */
+  .hb{display:grid;grid-template-columns:1.2fr 4.4fr 1.2fr 1.2fr .9fr;grid-template-rows:auto 1fr;column-gap:10px;row-gap:0}
+  .hb-phase{grid-row:span 2;display:grid;grid-template-rows:subgrid}
+  .hb-einheiten{grid-template-columns:repeat(var(--n),minmax(0,1fr))}
+  .hb-einheit a{min-height:112px}
 }
+@media print{.hj-weiter,.hs-hypo-akt{display:none}.hb-einheit a,.hk{box-shadow:none}}
+
+/* v18 · Muster AX Zusammenfassungen: Reiter (zusammenfassungen.html), Sperre auf der Seite, Freigabe auf Ansage
+   Frei, sobald die Einheit auf dem Gerät erledigt ist – oder auf Ansage der Lehrkraft (Knopf mit Rückfrage, wie im Psycho-Labor).
+   Ohne JavaScript bleibt alles sichtbar; die Sperre schützt vor dem Vorblättern, nicht vor Neugier. */
+html[data-zf="zu"] .zf-schutz{display:none!important}
+.zfh-liste{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));align-items:start}
+.zfh{min-width:0;background:var(--flaeche);border:2px solid var(--zt-tief);border-left-width:10px;border-radius:var(--radius);padding:10px 16px 12px}
+.zfh--geplant{border-style:dashed;border-left-style:solid;background:transparent}
+.zfh h2{margin:2px 0 2px;font-size:1.375rem;line-height:1.15}
+.zfh-st{margin:0 0 6px;font-weight:700;max-width:none}
+.zfh--geplant .zfh-st{font-weight:400;color:var(--leise)}
+.zfh-akt{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0;max-width:none}
+.zf-schloss{max-width:70ch;margin:0 0 22px;padding:12px 16px 14px;border:3px solid var(--text);border-radius:var(--radius);background:var(--flaeche)}
+.zf-schloss[hidden]{display:none}
+.zs-titel{margin:0 0 6px;font-size:1.5rem}
+.zs-text,.zs-offen,.zs-weg{margin:0 0 10px;max-width:none}
+.zs-offen{margin-bottom:0}
+.zs-liste{list-style:none;margin:0 0 10px;padding:0}
+.zs-liste a,.zs-weg a{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--text)}
+.zs-ansage{margin:4px 0 0}
+.zs-rueck{margin:10px 0 0;padding:10px 12px;border-left:6px solid var(--akzent);background:var(--akzent-zart)}
+.zs-rueck[hidden]{display:none}
+.zs-rueck p{margin:0 0 8px;font-weight:700;max-width:none}
+.zs-rueck .knopf{margin:0 6px 6px 0}
+.zs-frei{margin:0;font-weight:700}
+
+/* v18 · Halbjahresleiste auf den Einheiten (Modul 1, Modul 2, Klassenarbeit): wo die Einheit im Halbjahr steht.
+   Am Telefon nur die Nachbarn; »Halbjahr« führt zur Karte. */
+.hl{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:0 0 18px}
+.hl-alle{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--text)}
+.hl-alle::before{content:"\2190";margin-right:6px}
+.hl ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.hl-e>a,.hl-e>span{display:inline-flex;align-items:center;box-sizing:border-box;min-height:44px;padding:4px 10px;border:2px solid var(--zt-tief);border-left-width:8px;border-radius:var(--radius);background:var(--flaeche);color:var(--text);font-size:1rem;font-weight:700;text-decoration:none}
+.hl-ok{margin-left:6px}
+.hl-e--geplant>a{border-style:dashed;border-left-style:solid;font-weight:400}
+.hl-e.is-hier>span{background:var(--zt-tief);color:var(--zt);border-color:var(--zt-tief)}
+.hl-e--klassenarbeit.is-hier>span{color:var(--flaeche)}
+.hl-e>a:focus-visible,.hl-alle:focus-visible{outline:3px solid var(--text);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.hl-e>a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}}
+@media (max-width:760px){.hl-fern{display:none}}
+@media print{.hl{display:none}}
+/* Lehrkraft-Modus: Zusammenfassungen auf diesem Gerät freigeben */
+.zfl{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.zfl li{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:space-between}
 
 /* v16 · Wiederholung vor der Klassenarbeit (klassenarbeit/index.html) */
 .wdh-kacheln{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:10px;grid-template-columns:1fr}

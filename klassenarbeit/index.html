@@ -11,6 +11,7 @@
 <header class="kopf"><div class="kopf-innen"></div></header>
 <main id="inhalt">
   <div class="kopfzeile"><div class="kopfzeile-innen"><span class="nummer" aria-hidden="true">✓</span><h1>Fit für die Klassenarbeit</h1><p class="leitfrage">Was weißt du schon – und wo hakt es noch?</p><p class="klein" style="margin:0">Fünf Bereiche · 24 Fragen · etwa 35 Minuten · danach die Probeklausur unter Zeitdruck. Du kannst nach jedem Bereich aufhören und später weitermachen.</p></div></div>
+  <div id="hl"></div>
 
   <section class="karte wdh-ueber" aria-labelledby="ueber-t">
     <h2 id="ueber-t">Was in der Klassenarbeit dran ist</h2>
@@ -64,7 +65,7 @@
     <div id="wdh-ende-liste" aria-live="polite"></div>
     <ol class="wdh-plan">
       <li><a class="knopf knopf--akzent" href="ich-kann.html">Ich-kann-Liste (1 Seite)</a><span>Kreuze an, was du sicher kannst – die Liste zeigt dir, wo du noch üben solltest.</span></li>
-      <li><a class="knopf knopf--akzent" href="zusammenfassung.html">Zusammenfassung (2 Seiten)</a><span>Mit Schaubildern: Das musst du wissen · Das musst du können. Zum Ausdrucken oder für GoodNotes.</span></li>
+      <li><a class="knopf knopf--akzent" href="zusammenfassung.html">Zusammenfassung (2 Seiten)</a><span>Mit Schaubildern: Das musst du wissen · Das musst du können. Sie öffnet, wenn du alle fünf Bereiche bearbeitet hast.</span></li>
       <li><a class="knopf knopf--voll" href="probeklausur.html">Probeklausur (2 Seiten)</a><span>90 Minuten, 40 Punkte, ohne Hilfsmittel – wie in der Klassenarbeit.</span></li>
       <li><a class="knopf" href="erwartungshorizont.html">Erwartungshorizont</a><span>Erst öffnen, wenn deine Probeklausur fertig ist. Dann selbst korrigieren.</span></li>
     </ol>
@@ -79,7 +80,9 @@
 <script src="../assets/js/merkzettel.js"></script>
 <script src="../assets/js/lernstand.js"></script>
 <script src="../assets/js/wiederholung.js"></script>
+<script src="../assets/js/halbjahr.js"></script>
 <script>
+HJ.leiste(document.getElementById('hl'), 'ka', '../');
 document.documentElement.classList.add('js'); document.documentElement.classList.remove('no-js');
 PW.rahmen('wdh', '../'); PW.merkzettel('../');
 PW.wdhKopf(document.getElementById('wdh-kopf-box'));
