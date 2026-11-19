@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-label="Zeichnung: ein liniertes Blatt mit drei Aufgaben und ein Stift.">
+<rect width="960" height="400" fill="#DCE6F3"/><rect x="352" y="52" width="280" height="330" fill="#B4C8E6"/><rect x="340" y="40" width="280" height="330" fill="#FAF8F3" stroke="#2A2622" stroke-width="6"/>
+<g stroke="#7D7364" stroke-width="10" stroke-linecap="round"><path d="M420 100h160M420 140h120M420 200h160M420 240h140M420 300h160M420 335h90"/></g>
+<g fill="#2A2622" font-family="Georgia,serif" font-size="40" font-weight="700"><text x="368" y="115">1</text><text x="368" y="215">2</text><text x="368" y="315">3</text></g>
+<path d="M700 300l90-200 36 16-90 200-44 26z" fill="#163A69"/>
+</svg>

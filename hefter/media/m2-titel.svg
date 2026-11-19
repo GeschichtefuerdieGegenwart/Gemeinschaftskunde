@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1260 540" role="img" aria-label="Zeichnung: ein Gesetzentwurf mit Paragrafenzeichen, gestrichenen und eingefügten Zeilen; von links und rechts drücken Pfeile darauf, unten stehen Getränkeflaschen und Zuckerwürfel.">
+<rect width="1260" height="540" fill="#DCE6F3"/>
+<g fill="none" stroke="#163A69" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+<path d="M70 150h250M270 105l55 45-55 45"/><path d="M70 270h290M310 225l55 45-55 45"/><path d="M70 390h250M270 345l55 45-55 45"/>
+<path d="M1190 150H940M990 105l-55 45 55 45"/><path d="M1190 270H900M950 225l-55 45 55 45"/><path d="M1190 390H940M990 345l-55 45 55 45"/>
+</g>
+<rect x="452" y="52" width="380" height="452" fill="#B4C8E6"/>
+<rect x="440" y="40" width="380" height="452" fill="#FAF8F3" stroke="#2A2622" stroke-width="6"/>
+<text x="630" y="150" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="110" font-weight="700" fill="#2A2622">§</text>
+<g stroke="#2A2622" stroke-width="12" stroke-linecap="round">
+<path d="M490 205h280" stroke="#7D7364"/><path d="M490 250h220" stroke="#7D7364"/>
+<path d="M490 300h250" stroke="#7D7364"/><path d="M478 300h274" stroke-width="5"/>
+<path d="M490 350h200" stroke="#163A69"/><path d="M490 372h200" stroke="#163A69" stroke-width="4"/>
+<path d="M490 415h260" stroke="#7D7364"/><path d="M490 455h150" stroke="#7D7364"/>
+</g>
+<g fill="#163A69"><rect x="118" y="452" width="40" height="64" rx="6"/><rect x="130" y="428" width="16" height="28"/><rect x="172" y="440" width="44" height="76" rx="6"/><rect x="186" y="412" width="16" height="32"/><rect x="230" y="462" width="36" height="54" rx="6"/></g>
+<g fill="#FAF8F3" stroke="#2A2622" stroke-width="5"><rect x="1000" y="476" width="40" height="40"/><rect x="1046" y="476" width="40" height="40"/><rect x="1023" y="436" width="40" height="40"/><rect x="1100" y="476" width="40" height="40"/></g>
+</svg>

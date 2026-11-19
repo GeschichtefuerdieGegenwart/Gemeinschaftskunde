@@ -1,0 +1,64 @@
+/* GK-Labor · Startbildschirm »Der Hefter« (Richtung A, gewählt am 19.11.2026) · gebaut für iPad quer 1180 × 820 */
+.st{max-width:1180px;margin:0 auto;padding:22px clamp(14px,2.4vw,28px) 56px}
+:where(.st) :where(*){margin:0;padding:0}
+.st-kopf{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,25rem);gap:16px 32px;align-items:start;margin-bottom:18px}
+.st-frage{font:italic 600 clamp(1.7rem,1.2rem + 1.7vw,2.4rem)/1.15 var(--schrift-stimme);color:var(--tief);text-wrap:balance;margin-bottom:14px}
+.st-weiter{box-shadow:4px 4px 0 0 var(--farbplatte)}
+.st-weiter:not([disabled]):hover{box-shadow:4px 4px 0 0 var(--farbplatte)}
+.st-stand{display:grid;gap:10px}
+.st-stand p{font-size:1rem;line-height:1.4}
+.st-stand b{font-weight:700}
+.st-kreise{list-style:none;display:flex;gap:10px;flex-wrap:wrap}
+.st-kreise li{display:grid;justify-items:center;gap:4px;font-size:1rem;font-weight:700;line-height:1.2}
+.st-kreis{position:relative;width:34px;height:34px;border-radius:50%;border:2px solid var(--tinte);background:var(--blatt)}
+.st-kreis.geplant{border-style:dashed;border-color:var(--stahl)}
+.st-kreis.hier{border:3px solid var(--hier)}
+.st-kreis.fertig::before,.st-kreis.fertig::after{content:"";position:absolute;left:50%;top:50%;width:22px;height:3px;background:var(--tinte);border-radius:2px;transform:translate(-50%,-50%) rotate(45deg)}
+.st-kreis.fertig::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.st-legende{color:var(--leise)}
+.st-karten{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 20px}
+.st-karte{display:flex;flex-direction:column;height:100%;min-height:236px;background:var(--blatt);border:2px solid var(--tinte);border-radius:4px;box-shadow:6px 6px 0 0 var(--karton);color:var(--tinte);text-decoration:none;overflow:hidden}
+a.st-karte{touch-action:manipulation;transition:transform 100ms var(--kurve)}
+a.st-karte:active{transform:translate(2px,2px)}
+.st-karte.hier{box-shadow:6px 6px 0 0 var(--farbplatte)}
+.st-karte.geplant{border-style:dashed;border-color:var(--stahl);box-shadow:none}
+.st-bild{position:relative;height:92px;background:var(--hauch);border-bottom:2px solid var(--tinte);flex:none}
+.st-karte.geplant .st-bild{border-bottom:2px dashed var(--stahl)}
+.st-bild img{display:block;width:100%;height:100%;object-fit:cover}
+.st-bild img.ganz{object-fit:contain;background:#FFFFFF}
+.st-nr{position:absolute;left:12px;top:12px;min-width:2.6rem;text-align:center;background:var(--tief);color:#FFFFFF;font:700 1.25rem/1 var(--schrift-titel);padding:6px 10px;border-radius:4px;box-shadow:0 0 0 2px var(--blatt)}
+.st-text{display:flex;flex-direction:column;gap:4px;padding:10px 14px 12px;flex:1}
+.st-text b{font:600 1.19rem/1.2 var(--schrift-titel);text-wrap:balance}
+.st-meta{font-size:1rem;line-height:1.3;color:var(--leise)}
+.st-wort{font-size:1rem;line-height:1.3;font-weight:700;margin-top:auto;padding-top:4px}
+.st-wort.fertig{color:#1F4A24}
+.st-wort.hier{color:var(--hier)}
+.st-wort.leise{color:var(--leise)}
+.st-unten{margin-top:34px;border-top:2px solid var(--tinte);padding-top:16px;display:grid;gap:12px}
+.st-unten h2{font:600 clamp(1.25rem,1.12rem + .5vw,1.55rem)/1.22 var(--schrift-titel)}
+.st-unten p{max-width:68ch}
+.st-unten .ab-reihe{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.st-unten .ab-reihe .ab-klein{flex-basis:100%}
+.st-unten .ab-haken{margin:0}
+.st-c{font-size:1rem;color:var(--leise)}
+@media (max-width:980px){.st-kopf{grid-template-columns:minmax(0,1fr)}.st-karten{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.st-karten{grid-template-columns:minmax(0,1fr)}.st-karte{min-height:0}}
+@media (hover:hover) and (pointer:fine){a.st-karte:hover{box-shadow:6px 6px 0 0 var(--farbplatte)}}
+@media print{.st-unten,.st-weiter{display:none}}
+
+/* ---------- Alle Blätter, nach Modulen (Schritt 5: M1 hat sieben Blätter, die Grundlagen drei) ---------- */
+.st-alle{margin-top:34px;border-top:2px solid var(--tinte);padding-top:16px;display:grid;gap:14px}
+.st-alle h2{font:600 clamp(1.25rem,1.12rem + .5vw,1.55rem)/1.22 var(--schrift-titel)}
+.st-gruppen{list-style:none;display:grid;gap:18px}
+.st-gruppe h3{font:600 1.19rem/1.2 var(--schrift-titel);margin-bottom:8px}
+.st-gnr{display:inline-block;min-width:2.4rem;text-align:center;background:var(--tief);color:#FFFFFF;font:700 1rem/1 var(--schrift-titel);padding:5px 8px;border-radius:4px;margin-right:6px}
+.st-gruppe ol{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 20px}
+.st-zeile{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:center;min-height:56px;padding:6px 10px;border:2px solid var(--tinte);border-radius:4px;background:var(--blatt);color:var(--tinte);text-decoration:none;touch-action:manipulation}
+.st-zeile.hier{border-color:var(--hier);box-shadow:3px 3px 0 0 var(--farbplatte)}
+.st-znr{font:700 1rem/1 var(--schrift-titel);min-width:2.6rem}
+.st-zeile b{display:block;font-weight:700;line-height:1.25}
+.st-zwort{display:block;font-size:1rem;line-height:1.25;color:var(--leise)}
+.st-zeile.fertig .st-zwort{color:#1F4A24;font-weight:700}
+.st-zeile.hier .st-zwort{color:var(--hier);font-weight:700}
+@media (max-width:980px){.st-gruppe ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.st-gruppe ol{grid-template-columns:1fr}}

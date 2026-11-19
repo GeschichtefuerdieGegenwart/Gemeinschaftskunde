@@ -1,0 +1,365 @@
+/* Politik-Werkstatt · Daten · Stand 19.10.2026
+   Jede Zahl hat eine Quelle (siehe QUELLEN unten). Unbekanntes ist null und wird als »noch offen« gezeigt. */
+window.PW = window.PW || {};
+
+PW.parteien = [
+  { id: 'cdu',   name: 'CDU',   lang: 'Christlich Demokratische Union Deutschlands', farbe: 'var(--partei-cdu)', gruendung: '1945 (Bundespartei 1950)', vorsitz: 'Friedrich Merz (seit 31.01.2022)', btw: 22.6, sitze: 164, rolle: 'Regierung (Kanzlerpartei seit Mai 2025)', programm: 'Politikwechsel für Deutschland. Wahlprogramm von CDU und CSU', gemeinsam: 'cdu' },
+  { id: 'csu',   name: 'CSU',   lang: 'Christlich-Soziale Union in Bayern', farbe: 'var(--partei-csu)', gruendung: '1945', vorsitz: 'Markus Söder (seit 19.01.2019)', btw: 6.0, sitze: 44, rolle: 'Regierung; tritt nur in Bayern an, Fraktionsgemeinschaft mit der CDU', programm: 'Politikwechsel für Deutschland (gemeinsam mit der CDU)', gemeinsam: 'cdu' },
+  { id: 'spd',   name: 'SPD',   lang: 'Sozialdemokratische Partei Deutschlands', farbe: 'var(--partei-spd)', gruendung: '1863 (als ADAV; Name SPD seit 1890)', vorsitz: 'Lars Klingbeil, Bärbel Bas (seit 27.06.2025)', btw: 16.4, sitze: 120, rolle: 'Regierung (Koalitionspartner)', programm: 'Mehr für Dich. Besser für Deutschland. Regierungsprogramm der SPD' },
+  { id: 'gruene', name: 'GRÜNE', lang: 'Bündnis 90/Die Grünen', farbe: 'var(--partei-gruene)', gruendung: '1980 (Die Grünen; Vereinigung mit Bündnis 90: 1993)', vorsitz: 'Franziska Brantner, Felix Banaszak (seit 16.11.2024)', btw: 11.6, sitze: 85, rolle: 'Opposition', programm: 'Zusammen wachsen. Regierungsprogramm 2025' },
+  { id: 'fdp',   name: 'FDP',   lang: 'Freie Demokratische Partei', farbe: 'var(--partei-fdp)', gruendung: '1948', vorsitz: 'Wolfgang Kubicki (seit 30.05.2026)', btw: 4.3, sitze: 0, rolle: 'nicht im Bundestag (unter 5 %)', programm: 'Alles lässt sich ändern. Wahlprogramm der FDP' },
+  { id: 'afd',   name: 'AfD',   lang: 'Alternative für Deutschland', farbe: 'var(--partei-afd)', gruendung: '2013', vorsitz: 'Alice Weidel, Tino Chrupalla (wiedergewählt 04.07.2026)', btw: 20.8, sitze: 152, rolle: 'Opposition (größte Oppositionsfraktion)', programm: 'Zeit für Deutschland. Programm der AfD für die Wahl zum 21. Deutschen Bundestag' },
+  { id: 'linke', name: 'Die Linke', lang: 'Die Linke', farbe: 'var(--partei-linke)', gruendung: '2007 (Zusammenschluss von Linkspartei.PDS und WASG am 16.06.2007; Vorgängerin PDS seit 1989/90)', vorsitz: 'Ines Schwerdtner, Luigi Pantisano (seit 20.06.2026)', btw: 8.8, sitze: 64, rolle: 'Opposition', programm: 'Alle wollen regieren, wir wollen verändern. Wahlprogramm der Linken (Langfassung)' },
+  { id: 'bsw',   name: 'BSW',   lang: 'Bündnis Soziale Gerechtigkeit und Wirtschaftliche Vernunft (bis 30.09.2026: Bündnis Sahra Wagenknecht)', farbe: 'var(--partei-bsw)', gruendung: '2024 (08.01.2024)', vorsitz: 'Fabio De Masi, Amira Mohamed Ali (seit 06.12.2025)', btw: 4.98, sitze: 0, rolle: 'nicht im Bundestag (4,98 %, 9.529 Stimmen unter der Hürde)', programm: 'Unser Land verdient mehr. Wahlprogramm des BSW 2025' }
+];
+PW.sonstige = { name: 'Sonstige', farbe: 'var(--partei-sonstige)' };
+/* Fest eingetragene Klassenergebnisse (von der Lehrkraft genannt, nur Summen in Prozent, keine Namen).
+   2026/27: Die vier Werte ergeben zusammen 93,4 %; der Rest ist in der Angabe nicht zugeordnet. */
+PW.klassenErgebnisse = [
+  { id: '2627', name: 'Klassenergebnis 2026/27', prozent: { cdu: 26.7, linke: 26.7, gruene: 20, fdp: 20 },
+    hinweis: 'Von der Lehrkraft eingetragen. Die vier Werte ergeben 93,4 %; 6,6 % sind nicht zugeordnet.' }
+];
+PW.klassenErgebnis = function (id) { for (var i = 0; i < PW.klassenErgebnisse.length; i++) if (PW.klassenErgebnisse[i].id === id) return PW.klassenErgebnisse[i]; return null; };
+PW.sitzeGesamt = 630;
+PW.mehrheit = 316;
+PW.ssw = { name: 'SSW', sitze: 1, hinweis: 'Partei der dänischen Minderheit, von der 5-%-Hürde befreit' };
+
+/* Einordnungen Dritter: nur mit Datum und Quelle. Gleiches Raster für alle Parteien. */
+PW.einordnungen = {
+  cdu: [{ text: 'Keine Beobachtung durch das Bundesamt für Verfassungsschutz.', stand: 'Stand 10/2026' }],
+  csu: [{ text: 'Keine Beobachtung durch das Bundesamt für Verfassungsschutz.', stand: 'Stand 10/2026' }],
+  spd: [{ text: 'Keine Beobachtung durch das Bundesamt für Verfassungsschutz.', stand: 'Stand 10/2026' }],
+  gruene: [{ text: 'Keine Beobachtung durch das Bundesamt für Verfassungsschutz.', stand: 'Stand 10/2026' }],
+  fdp: [{ text: 'Keine Beobachtung durch das Bundesamt für Verfassungsschutz.', stand: 'Stand 10/2026' }],
+  linke: [{ text: 'Die Gesamtpartei wird vom Bundesamt für Verfassungsschutz nicht beobachtet. Zu einzelnen innerparteilichen Zusammenschlüssen: noch offen.', stand: 'Stand 10/2026' }],
+  bsw: [{ text: 'Keine Beobachtung durch das Bundesamt für Verfassungsschutz.', stand: 'Stand 10/2026' }],
+  afd: [
+    { text: 'Bundesamt für Verfassungsschutz (BfV), 2. Mai 2025: Einstufung als »gesichert rechtsextremistische Bestrebung«. Das rund 1.100-seitige Gutachten stützt sich vor allem auf ein ethnisch-abstammungsmäßiges Volksverständnis (über 140 Seiten dazu) und auf Muslimfeindlichkeit; ausgewertet wurden Aussagen von 353 Personen, Programme und Websites. Nach Klage der AfD gab das BfV eine Stillhaltezusage ab.', stand: 'ZDFheute, 14.05.2025; Correctiv, 15.05.2025' },
+    { text: 'Verwaltungsgericht Köln, 26. Februar 2026 (Eilverfahren): Das BfV darf die AfD bis zur Entscheidung in der Hauptsache nicht als »gesichert rechtsextremistisch« einstufen. Das Gericht sah den Verdacht verfassungsfeindlicher Bestrebungen bestätigt, die verfassungsfeindliche Gesamtausrichtung der Partei aber derzeit nicht als erwiesen. Die AfD bleibt Verdachtsfall; das BfV kann vor dem OVG Münster Beschwerde einlegen.', stand: 'ZDFheute, 26.02.2026' },
+    { text: 'Correctiv, 10. Januar 2024 (»Geheimplan gegen Deutschland«): Recherche zu einem Treffen in Potsdam im November 2023, bei dem der Rechtsextremist Martin Sellner ein Konzept der »Remigration« vortrug; anwesend waren u. a. AfD-Politiker. Die Schilderung des Treffens und das Remigrationskonzept wurden vor Gericht nicht angegriffen; das Landgericht Hamburg wies im Dezember 2025 Klagen gegen die Berichterstattung ab (nicht rechtskräftig). Das Landgericht Berlin verlangte im März 2026 die Änderung zweier Sätze (nicht rechtskräftig).', stand: 'Correctiv, Einordnung vom 23.04.2026 (aktualisiert 15.06.2026)' },
+    { text: 'Das BfV-Gutachten wertet nach rund 100 Zitaten den Begriff »Remigration«, wie ihn AfD-Vertreter verwenden, als systematische Abschiebung bestimmter Gruppen ohne Einzelfallprüfung. Das Sächsische Oberverwaltungsgericht entschied im Januar 2025, dass ein abstammungsbezogener Volksbegriff mit dem Volksbegriff des Grundgesetzes und der Menschenwürde unvereinbar ist.', stand: 'Correctiv, 15.05.2025; ZDFheute, 14.05.2025' }
+  ]
+};
+
+/* Funktionen der Parteien (nach von Alemann u. a.; bpb) */
+PW.aufgaben = [
+  { id: 'formulierung', name: 'Politikformulierung', text: 'Entscheidungen müssen diskutiert und getroffen werden.' },
+  { id: 'implementation', name: 'Politikimplementation', text: 'Getroffene Entscheidungen müssen umgesetzt werden.' },
+  { id: 'kontrolle', name: 'Politikkontrolle', text: 'Der politische Prozess muss kontrolliert werden.' },
+  { id: 'rekrutierung', name: 'Personalrekrutierung', text: 'Für die Ämter braucht es Personal.' }
+];
+PW.funktionen = [
+  { id: 'artikulation', name: 'Interessenartikulation', aufgabe: 'formulierung', kurz: 'Wünsche und Bedürfnisse von Mitgliedern und Wählern ausdrücken.', beispiel: 'Eine Partei fordert in ihrem Programm einen höheren Mindestlohn.' },
+  { id: 'aggregation', name: 'Interessenaggregation', aufgabe: 'formulierung', kurz: 'Verschiedene Interessen bündeln und gewichten.', beispiel: 'Flügel einer Partei einigen sich auf eine gemeinsame Linie; Koalitionspartner schließen einen Vertrag.' },
+  { id: 'transmission', name: 'Interessentransmission', aufgabe: 'formulierung', kurz: 'Interessen direkt in Entscheidungen einbringen.', beispiel: 'Eine Regierungspartei setzt eine Forderung aus ihrem Programm als Gesetz um.' },
+  { id: 'partizipation', name: 'Partizipation', aufgabe: 'formulierung', kurz: 'Bürgerinnen und Bürgern politisches Engagement ermöglichen.', beispiel: 'Mitglieder stimmen über ein Programm ab; ein Ortsverband lädt zum Bürgerdialog.' },
+  { id: 'information', name: 'Informationsvermittlung', aufgabe: 'formulierung', kurz: 'Sachliche Informationen über Politik vermitteln.', beispiel: 'Eine Partei erklärt auf ihrer Website, wie ein Gesetz wirkt.' },
+  { id: 'mobilisierung', name: 'Mobilisierung', aufgabe: 'formulierung', kurz: 'Bürgerinnen und Bürger für die Partei und ihre Ziele gewinnen.', beispiel: 'Wahlkampf mit Plakaten und Social-Media-Videos.' },
+  { id: 'sozialisation', name: 'Sozialisation', aufgabe: 'formulierung', kurz: 'Menschen in politische Prozesse einführen und prägen.', beispiel: 'Neumitglieder lernen, wie Anträge und Parteitage funktionieren.' },
+  { id: 'legitimation', name: 'Legitimation', aufgabe: 'formulierung', kurz: 'Unterstützung für das demokratische System schaffen.', beispiel: 'Parteien bringen Menschen dazu, Entscheidungen zu akzeptieren, auch wenn sie unterlegen sind.' },
+  { id: 'herrschaft', name: 'Herrschaftsfunktion', aufgabe: 'formulierung', kurz: 'Verbindliche Entscheidungen treffen, also Herrschaft ausüben.', beispiel: 'Die Regierungsfraktionen beschließen ein Gesetz.' },
+  { id: 'kontrolle', name: 'Kontrollfunktion', aufgabe: 'kontrolle', kurz: 'Regierung und Verwaltung kontrollieren, vor allem aus der Opposition.', beispiel: 'Kleine Anfragen, Untersuchungsausschuss.' },
+  { id: 'rekrutierung', name: 'Rekrutierung', aufgabe: 'rekrutierung', kurz: 'Personal für Ämter und Mandate auswählen.', beispiel: 'Eine Partei nominiert ihre Kandidatin für das Direktmandat.' }
+];
+PW.beispiele = [
+  { text: 'Die SPD fordert im Wahlprogramm 2025 einen Mindestlohn von 15 Euro, um die Interessen von Beschäftigten mit geringem Einkommen zu vertreten.', richtig: ['artikulation'], auch: ['information'], warum: 'Ein Interesse (höherer Lohn) wird ausgesprochen und in ein Programm geschrieben: Interessenartikulation.' },
+  { text: 'In den Koalitionsverhandlungen 2025 einigen sich Union und SPD auf eine gemeinsame Linie beim Mindestlohn, obwohl ihre Programme unterschiedliche Wege vorsehen.', richtig: ['aggregation'], auch: ['transmission'], warum: 'Unterschiedliche Interessen werden gebündelt und gewichtet: Interessenaggregation. Weil daraus Regierungshandeln wird, passt auch Transmission.' },
+  { text: 'Die Grünen setzen in einer Landesregierung ein Klimaschutzgesetz um, das sie zuvor auf einem Parteitag beschlossen hatten.', richtig: ['transmission', 'herrschaft'], auch: [], warum: 'Ein Parteibeschluss wird direkt zu einer verbindlichen Entscheidung: Interessentransmission und Herrschaftsfunktion.' },
+  { text: 'Ein CDU-Kreisverband lädt zu offenen Bürgerdialogen ein; auch Nichtmitglieder dürfen Vorschläge für das Wahlprogramm einreichen.', richtig: ['partizipation'], auch: ['artikulation'], warum: 'Menschen erhalten einen Weg, sich politisch zu beteiligen: Partizipation.' },
+  { text: 'Die AfD erreicht über TikTok und YouTube besonders viele junge Menschen und wirbt dort vor Wahlen um Stimmen.', richtig: ['mobilisierung'], auch: ['information'], warum: 'Die Partei will Menschen für sich gewinnen: Mobilisierung. Sachinformation kann dabei vorkommen, der Zweck ist aber die Stimme.' },
+  { text: 'Die FDP bietet Neumitgliedern Einführungsabende an: Wie funktionieren Parteitage, Anträge und innerparteiliche Wahlen?', richtig: ['sozialisation'], auch: ['partizipation'], warum: 'Menschen werden in politische Verfahren eingeführt: Sozialisation.' },
+  { text: 'Die CSU nominiert ihren Landesvorsitzenden als Kandidaten für das Amt des Ministerpräsidenten.', richtig: ['rekrutierung'], auch: [], warum: 'Personal für ein Amt wird ausgewählt: Rekrutierung.' },
+  { text: 'Die Linke stellt im Bundestag Kleine Anfragen, um Entscheidungen der Bundesregierung offenzulegen und zu prüfen.', richtig: ['kontrolle'], auch: [], warum: 'Die Opposition kontrolliert die Regierung: Kontrollfunktion.' },
+  { text: 'Eine Partei veröffentlicht nach der Wahl eine Erklärung: »Wir haben verloren. Wir erkennen das Ergebnis an und werden als Opposition arbeiten.«', richtig: ['legitimation'], auch: [], warum: 'Die Anerkennung des Ergebnisses stützt die Akzeptanz des Systems: Legitimation.' },
+  { text: 'Das BSW schreibt in sein Programm, der Mindestlohn solle »unverzüglich auf 15 Euro« steigen, weil die bisherigen Erhöhungen »ein Hohn« seien.', richtig: ['artikulation'], auch: ['mobilisierung'], warum: 'Ein Interesse wird formuliert und zugespitzt: Interessenartikulation, mit werbendem Ton auch Mobilisierung.' },
+  { text: 'Nach der Wahl stellt die CDU-Fraktion den Bundeskanzler und besetzt mit ihren Abgeordneten Ministerien und Ausschussvorsitze.', richtig: ['rekrutierung', 'herrschaft'], auch: [], warum: 'Ämter werden mit Parteipersonal besetzt (Rekrutierung), und von dort wird regiert (Herrschaftsfunktion).' },
+  { text: 'Die Grünen erklären in einem Erklärvideo sachlich, wie die Zweitstimmendeckung im neuen Wahlrecht funktioniert.', richtig: ['information'], auch: ['sozialisation'], warum: 'Sachliche Aufklärung über ein Verfahren: Informationsvermittlung.' }
+];
+
+/* Entscheidungsfragen · Positionen wörtlich aus den Wahlprogrammen 2025 (Seitenzahl = Seite der PDF-Datei). */
+PW.fragen = [
+  { id: 'tempolimit', frage: 'Soll es ein generelles Tempolimit auf Autobahnen geben?', stufe: 1, kategorien: ['dafür', 'dagegen', 'keine Aussage'], pos: {
+    cdu: ['dagegen', '»Anti-Auto-Haltung, Fahrverbote für Innenstädte, das Umwidmen von Parkplätzen und ein generelles Tempolimit auf deutschen Autobahnen lehnen wir ab.«', 'S. 74'],
+    csu: ['dagegen', 'wie CDU (gemeinsames Programm)', 'S. 74'],
+    spd: ['dafür', '»Wir wollen ein Tempolimit von 130 km/h auf Bundesautobahnen einführen.«', 'S. 36'],
+    gruene: ['dafür', '»Ein Sicherheitstempo von 130 km/h auf Autobahnen als generelles Tempolimit ist deshalb überfällig.«', 'S. 48'],
+    fdp: ['dagegen', '»Wir Freie Demokraten lehnen ein generelles Tempolimit auf Autobahnen ab.«', 'S. 41'],
+    afd: ['dagegen', '»Die AfD lehnt ein generelles Tempolimit auf Bundesautobahnen strikt ab.«', 'S. 45'],
+    linke: ['dafür', '»Um Menschen und Klima zu schützen, brauchen wir endlich ein Tempolimit von 120 km/h auf Autobahnen und innerorts Tempo 30 – außer auf Hauptverkehrsachsen.«', 'S. 37'],
+    bsw: ['keine Aussage', 'Das Programm enthält keine Aussage zum Tempolimit.', '–'] } },
+  { id: 'mindestlohn', frage: 'Soll der gesetzliche Mindestlohn per Gesetz auf 15 Euro steigen?', stufe: 1, kategorien: ['dafür', 'dagegen', 'keine Aussage'], pos: {
+    cdu: ['dagegen', '»Lohnfindung muss weiterhin Sache der Sozialpartner sein und nicht der Politik. Einen politischen Mindestlohn lehnen wir ab.«', 'S. 32'],
+    csu: ['dagegen', 'wie CDU (gemeinsames Programm)', 'S. 32'],
+    spd: ['dafür', '»Dementsprechend muss der Mindestlohn spätestens ab 2026 bei 15 Euro liegen.«', 'S. 23'],
+    gruene: ['dafür', '»… braucht es jetzt einen schrittweise steigenden Mindestlohn von zunächst 15 Euro in 2025 und das auch für unter 18-Jährige.«', 'S. 67'],
+    fdp: ['dagegen', '»Wir respektieren die Tarifautonomie und lehnen politische Eingriffe in die Arbeit der unabhängigen Mindestlohnkommission ab.«', 'S. 18'],
+    afd: ['keine Aussage', 'Das Programm nennt keine Höhe des Mindestlohns.', '–'],
+    linke: ['dafür', '»Mit einem Mindestlohn von mindestens 15 Euro – spätestens ab 2026 16 Euro – sowie Steuerentlastungen für kleine Einkommen stellen wir sicher, dass sich Erwerbsarbeit lohnt.«', 'S. 15'],
+    bsw: ['dafür', '»Wir wollen den gesetzlichen Mindestlohn unverzüglich auf 15 Euro anheben.«', 'S. 21'] } },
+  { id: 'wahlalter', frage: 'Sollen 16-Jährige bei Bundestagswahlen wählen dürfen?', stufe: 1, kategorien: ['dafür', 'dagegen', 'keine Aussage'], pos: {
+    cdu: ['keine Aussage', 'Das Programm enthält keine Aussage zum Wahlalter.', '–'],
+    csu: ['keine Aussage', 'wie CDU (gemeinsames Programm)', '–'],
+    spd: ['dafür', '»Ab 16 Jahren sollen junge Menschen mitentscheiden können, deswegen senken wir das aktive Wahlalter.«', 'S. 27'],
+    gruene: ['dafür', '»Nach der Absenkung des Wahlalters für die Europawahlen wollen wir in einem nächsten Schritt, dass junge Menschen ab 16 Jahren auch bei Bundestagswahlen mitentscheiden dürfen.«', 'S. 85'],
+    fdp: ['keine Aussage', 'Das Programm enthält keine Aussage zum Wahlalter bei Bundestagswahlen.', '–'],
+    afd: ['dagegen', '»Quotierungen der Wählerschaft nach Geschlecht oder anderen Eigenschaften lehnen wir als Eingriffe in das Prinzip ‚Ein Mensch, eine Stimme‘ ab. Ebenso die Absenkung des Wahlalters unter 18 Jahre.«', 'S. 135'],
+    linke: ['dafür', '»Das Wahlalter soll auf 16 Jahre abgesenkt werden …«', 'S. 17'],
+    bsw: ['keine Aussage', 'Das Programm enthält keine Aussage zum Wahlalter.', '–'] } },
+  { id: 'wehrpflicht', frage: 'Soll die Wehrpflicht wieder eingeführt werden?', stufe: 2, kategorien: ['dafür', 'dagegen', 'keine Aussage'], pos: {
+    cdu: ['dafür', '»Wir führen eine aufwachsende Wehrpflicht ein. Das ist notwendig für Frieden und Sicherheit unseres Landes.«', 'S. 8'],
+    csu: ['dafür', 'wie CDU (gemeinsames Programm)', 'S. 8'],
+    spd: ['dagegen', '»Der neue Wehrdienst soll auf Freiwilligkeit basieren und sich dabei am Bedarf der Bundeswehr orientieren.«', 'S. 58'],
+    gruene: ['dagegen', '»Statt den aus guten Gründen seit 2011 ausgesetzten allgemeinen Grundwehrdienst wieder einzuführen, wollen wir den freiwilligen Wehrdienst und die Reserve für eine breite Zielgruppe attraktiver machen …«', 'S. 154'],
+    fdp: ['dagegen', '»Die Wiedereinsetzung der allgemeinen Wehrpflicht lehnen wir ab.«', 'S. 48'],
+    afd: ['dafür', '»Daher wollen wir die Wehrpflicht wieder einsetzen. Diese beinhaltet gemäß aktueller Gesetzeslage auch den Ersatzdienst.«', 'S. 89'],
+    linke: ['dagegen', '»Wir stellen uns gegen eine Militarisierung der Gesellschaft: keine Wiedereinführung der Wehrpflicht …«', 'S. 23'],
+    bsw: ['keine Aussage', 'Das Programm enthält keine Aussage zur Wehrpflicht.', '–'] } },
+  { id: 'miete', frage: 'Soll die Mietpreisbremse bleiben oder sogar verschärft werden?', stufe: 2, kategorien: ['dafür', 'dagegen', 'keine Aussage'], pos: {
+    cdu: ['keine Aussage', '»Wir stehen für einen wirksamen und angemessenen Mieterschutz – dazu gehören auch die Regeln zur Miethöhe.« Die Mietpreisbremse wird nicht genannt.', 'S. 8'],
+    csu: ['keine Aussage', 'wie CDU (gemeinsames Programm)', 'S. 8'],
+    spd: ['dafür', '»Die Mietpreisbremse soll unbefristet und auch für Immobilien, die bis 2019 bezogen wurden, gelten …«', 'S. 21'],
+    gruene: ['dafür', '»Wir werden die Mietpreisbremse verlängern und sie durch die Abschaffung von Ausnahmen verschärfen.«', 'S. 69'],
+    fdp: ['dagegen', '»Die Mietpreisbremse ist nachweislich eine Investitionsbremse. Deshalb lassen wir sie auslaufen.«', 'S. 44'],
+    afd: ['dagegen', '»Die AfD steht für ein ausgewogenes Mietrecht und lehnt staatliche Überregulierungen sowie Investitionshemmnisse wie die Mietpreisbremse oder den Mietendeckel ab.«', 'S. 39'],
+    linke: ['dafür', 'Fordert mehr als die Bremse: »Deswegen wollen wir einen bundesweiten Mietendeckel durchsetzen.«', 'S. 4'],
+    bsw: ['dafür', 'Fordert mehr als die Bremse: »Wir fordern einen bundesweiten Mietendeckel statt einer wirkungslosen Mietpreisbremse.«', 'S. 28'] } },
+  { id: 'kernkraft', frage: 'Soll Deutschland zur Kernkraft zurückkehren?', stufe: 2, kategorien: ['dafür', 'dagegen', 'keine Aussage'], pos: {
+    cdu: ['dafür', '»Wir halten an der Option Kernenergie fest. […] Die Wiederaufnahme des Betriebs der zuletzt abgeschalteten Kernkraftwerke prüfen wir.«', 'S. 4'],
+    csu: ['dafür', 'wie CDU (gemeinsames Programm)', 'S. 4'],
+    spd: ['dagegen', '»Die Atomkraft in Deutschland ist stillgelegt und das ist gut so.«', 'S. 53'],
+    gruene: ['dagegen', '»Eine Rückkehr zur Hochrisikotechnologie Atomkraft ist weder für das Erreichen der Klimaziele noch für die Versorgungssicherheit notwendig und für uns […] keine Option.«', 'S. 43'],
+    fdp: ['dafür', '»Wir Freie Demokraten wollen die Nutzung klimafreundlicher Zukunftstechnologien wie Kernfusion und sicherer Kernkraftwerke ohne Subventionen ermöglichen.«', 'S. 18'],
+    afd: ['dafür', '»Neben dem kurzfristig notwendigen Ausbau von Kohlekraftwerken planen wir den Wiedereinstieg in die Kernenergie.«', 'S. 42'],
+    linke: ['dagegen', '»Wir wollen uns dafür einsetzen, dass die positive Bewertung von Atomkraft und Gas in der sogenannten Taxonomie der EU gestrichen wird.«', 'S. 33'],
+    bsw: ['dagegen', '»Den Neubau konventioneller Atomkraftwerke lehnen wir ab. Dasselbe gilt derzeit für Mini-Kraftwerke (SMR) …«', 'S. 11'] } },
+  { id: 'grenze', frage: 'Sollen Asylsuchende an den deutschen Grenzen zurückgewiesen werden?', stufe: 3, kategorien: ['dafür', 'dagegen', 'keine Aussage'], pos: {
+    cdu: ['dafür', '»Wir setzen einen faktischen Aufnahmestopp sofort durch. Dazu weisen wir diejenigen an den deutschen Grenzen zurück, die aus einem anderen Mitgliedstaat der EU oder dem Schengen-Raum nach Deutschland einreisen und bei uns einen Asylantrag stellen wollen.«', 'S. 42–43'],
+    csu: ['dafür', 'wie CDU (gemeinsames Programm)', 'S. 42–43'],
+    spd: ['dagegen', '»Grenzschließungen und Pauschalzurückweisungen an den Binnengrenzen widersprechen dem Geist eines gemeinsamen Raums der Freiheit, der Sicherheit und des Rechts.«', 'S. 55'],
+    gruene: ['dagegen', '»Dauerhafte stationäre Binnengrenzkontrollen lehnen wir deshalb ab. […] Daher sind rechtsstaatliche Kontrollen an den Außengrenzen und eine zuverlässige Registrierung der Menschen unabdingbar.«', 'S. 132'],
+    fdp: ['dafür', '»Als Freie Demokraten unterstützen wir die modellhafte Erprobung von Zurückweisungen an den deutschen Außengrenzen …«', 'S. 28'],
+    afd: ['dafür', '»… um illegale Einreisen wirksam zu unterbinden und illegal einreisende Personen konsequent an der Grenze zurückweisen zu können.«', 'S. 104'],
+    linke: ['dagegen', '»Systematische Binnengrenzkontrollen und Zurückweisungen von Schutzsuchenden an den Grenzen sind unzulässig.«', 'S. 53'],
+    bsw: ['keine Aussage', 'Keine Aussage zu Zurückweisungen an der Grenze. Zum Aufenthalt: »Wer aus einem sicheren Drittstaat einreist, hat kein Recht auf Aufenthalt.«', 'S. 36'] } },
+  { id: 'eu', frage: 'Soll die EU mehr oder weniger gemeinsam entscheiden?', stufe: 3, kategorien: ['mehr gemeinsam', 'weniger gemeinsam', 'keine Aussage'], pos: {
+    cdu: ['mehr gemeinsam', '»Handlungsfähigkeit der Europäischen Union substanziell stärken. […] Mehr Europa nur dort, wo Europa einen Mehrwert für alle schafft.«', 'S. 51'],
+    csu: ['mehr gemeinsam', 'wie CDU (gemeinsames Programm)', 'S. 51'],
+    spd: ['mehr gemeinsam', '»Wir stehen für eine handlungsfähige und wertebasierte EU.« / »Wir wollen den Europäischen Binnenmarkt weiter vertiefen …«', 'S. 59 / S. 9'],
+    gruene: ['mehr gemeinsam', '»Parallel werden wir die EU reformieren, um sie handlungsfähiger zu machen. Und wir müssen die europäische Demokratie mit ihrem klaren Wertefundament wehrhaft machen.«', 'S. 143'],
+    fdp: ['mehr gemeinsam', '»Wir Freie Demokraten setzen uns insbesondere für eine Verkleinerung der Kommission, ein Initiativrecht des Europäischen Parlaments sowie qualifizierte Mehrheitsentscheidungen in der gemeinsamen EU-Außen- und Sicherheitspolitik ein.«', 'S. 50'],
+    afd: ['weniger gemeinsam', '»Daher streben wir einen ‚Bund europäischer Nationen‘ an, eine neu zu gründende europäische Wirtschafts- und Interessengemeinschaft, in der die Souveränität der Mitgliedstaaten gewahrt ist … Der Übergang von der Europäischen Union in den Bund europäischer Nationen soll entschlossen und planvoll erfolgen.«', 'S. 140'],
+    linke: ['mehr gemeinsam', '»Wir streben deshalb neue Verträge an, die die Logik des Neoliberalismus hinter sich lassen.« / »Wir wollen EU-weite Volksbegehren und Volksentscheide ermöglichen.«', 'S. 24'],
+    bsw: ['weniger gemeinsam', '»Wir stehen für eine enge Zusammenarbeit der europäischen Staaten, aber nicht für eine immer tiefer gehende Integration in Richtung eines europäischen Bundesstaats.«', 'S. 8'] } }
+];
+
+/* Stimmzettel Wahlkreis 260 Böblingen, Bundestagswahl 23.02.2025 (Reihenfolge wie auf dem amtlichen Stimmzettel). */
+PW.wahlkreis = {
+  nummer: 260, name: 'Böblingen', wahlberechtigte: 243100, waehlende: 204946, beteiligung: 84.3,
+  kandidierende: [
+    { nr: 1, name: 'Marc Biadacz', partei: 'CDU', pid: 'cdu', erst: 37.3, hinweis: 'Direktmandat gewonnen' },
+    { nr: 2, name: 'Jasmina Hostert', partei: 'SPD', pid: 'spd', erst: 16.8, hinweis: 'über Landesliste in den Bundestag' },
+    { nr: 3, name: 'Tobias Bacherle', partei: 'GRÜNE', pid: 'gruene', erst: 13.5, hinweis: 'nicht mehr im Bundestag' },
+    { nr: 4, name: 'Dr. Florian Toncar', partei: 'FDP', pid: 'fdp', erst: 6.1, hinweis: 'nicht mehr im Bundestag' },
+    { nr: 5, name: 'Markus Frohnmaier', partei: 'AfD', pid: 'afd', erst: 17.1, hinweis: 'über Landesliste in den Bundestag' },
+    { nr: 6, name: 'Thomas Walz', partei: 'Die Linke', pid: 'linke', erst: 4.9, hinweis: '' },
+    { nr: 8, name: 'Dr. Norbert Volz', partei: 'FREIE WÄHLER', pid: 'fw', erst: 3.0, hinweis: '' },
+    { nr: 11, name: 'Hasso Kraus', partei: 'Volt', pid: 'volt', erst: 0.9, hinweis: '' },
+    { nr: 14, name: 'Johanna Jäckh-Vermeulen', partei: 'MLPD', pid: 'mlpd', erst: 0.1, hinweis: '' },
+    { nr: 17, name: 'Friedhild Miller', partei: 'Einzelbewerberin', pid: 'eb', erst: 0.3, hinweis: '' }
+  ],
+  listen: [
+    { nr: 1, pid: 'cdu', name: 'CDU', zweit: 33.2 }, { nr: 2, pid: 'spd', name: 'SPD', zweit: 14.4 }, { nr: 3, pid: 'gruene', name: 'GRÜNE', zweit: 13.9 },
+    { nr: 4, pid: 'fdp', name: 'FDP', zweit: 7.0 }, { nr: 5, pid: 'afd', name: 'AfD', zweit: 17.5 }, { nr: 6, pid: 'linke', name: 'Die Linke', zweit: 6.0 },
+    { nr: 7, pid: 'basis', name: 'dieBasis', zweit: 0.2 }, { nr: 8, pid: 'fw', name: 'FREIE WÄHLER', zweit: 1.5 }, { nr: 9, pid: 'tier', name: 'Tierschutzpartei', zweit: 0.7 },
+    { nr: 10, pid: 'partei', name: 'Die PARTEI', zweit: 0.4 }, { nr: 11, pid: 'volt', name: 'Volt', zweit: 0.6 }, { nr: 12, pid: 'oedp', name: 'ÖDP', zweit: 0.2 },
+    { nr: 13, pid: 'bc', name: 'Bündnis C', zweit: 0.2 }, { nr: 14, pid: 'mlpd', name: 'MLPD', zweit: 0.1 }, { nr: 15, pid: 'bd', name: 'BÜNDNIS DEUTSCHLAND', zweit: 0.1 }, { nr: 16, pid: 'bsw', name: 'BSW', zweit: 4.0 }
+  ]
+};
+
+/* Ergebnisse zum Vergleich (Zweitstimmen in %). null = noch offen. */
+PW.ergebnisse = {
+  bund:      { titel: 'Deutschland', beteiligung: 82.5, werte: { cdu: 22.6, csu: 6.0, spd: 16.4, gruene: 11.6, fdp: 4.3, afd: 20.8, linke: 8.8, bsw: 4.98 } },
+  wahlkreis: { titel: 'Wahlkreis 260 Böblingen', beteiligung: 84.3, werte: { cdu: 33.2, csu: null, spd: 14.4, gruene: 13.9, fdp: 7.0, afd: 17.5, linke: 6.0, bsw: 4.0 } },
+  herrenberg:{ titel: 'Stadt Herrenberg', beteiligung: 85.5, werte: { cdu: 32.8, csu: null, spd: 14.7, gruene: 17.3, fdp: 6.7, afd: 15.4, linke: 6.3, bsw: 3.1 } },
+  land:      { titel: 'Baden-Württemberg', beteiligung: 83.4, werte: { cdu: 31.6, csu: null, spd: 14.2, gruene: 13.6, fdp: 5.6, afd: 19.8, linke: 6.8, bsw: null } }
+};
+PW.herrenbergErst = { biadacz: 36.5, bacherle: 17.0 };
+
+/* Repräsentative Wahlstatistik 2025 (Zweitstimmen in %) */
+PW.alter = {
+  gruppen: ['18–24', '25–34', '35–44', '45–59', '60–69', '70+'],
+  werte: {
+    'CDU/CSU': [13.0, 16.1, 22.7, 28.7, 31.6, 41.4],
+    'AfD': [19.0, 20.8, 27.1, 25.7, 21.0, 11.5],
+    'SPD': [11.3, 11.0, 11.2, 13.7, 19.5, 24.9],
+    'Grüne': [11.8, 15.9, 14.4, 12.2, 11.0, 7.0],
+    'Linke': [27.3, 17.6, 8.7, 5.9, 5.1, 4.5],
+    'BSW': [5.7, 5.7, 5.6, 5.0, 4.9, 3.9],
+    'FDP': [5.6, 5.2, 4.1, 4.0, 3.7, 4.5]
+  }
+};
+PW.geschlecht1824 = {
+  hinweis: 'Zweitstimmen der 18- bis 24-Jährigen in %; »Männer« schließt in der amtlichen Statistik auch »divers« und »ohne Angabe« ein.',
+  werte: { 'Linke': [37.1, 17.6], 'AfD': [12.6, 25.2], 'CDU/CSU': [10.4, 15.5], 'Grüne': [12.5, 11.1], 'SPD': [11.4, 11.2], 'FDP': [3.8, 7.5] },
+  spalten: ['Frauen', 'Männer']
+};
+PW.geschlechtAlle = { 'AfD': [16.7, 25.1], 'SPD': [17.9, 14.9], 'Linke': [10.2, 7.3], 'Grüne': [12.5, 10.7], 'CDU/CSU': [28.2, 28.9], 'FDP': [3.8, 4.8] };
+PW.brexit = { gruppen: ['18–24', '25–34', '35–44', '45–54', '55–64', '65+'], verbleib: [73, 62, 52, 44, 43, 40], austritt: [27, 38, 48, 56, 57, 60], quelle: 'Lord Ashcroft Polls, Nachwahlbefragung am 23.06.2016, über 12.000 Befragte' };
+PW.shell = [
+  '50 Prozent der jungen Menschen bezeichnen sich als politisch interessiert (2002: 34 Prozent).',
+  'Seit 2019 ist vor allem der Anteil männlicher Jugendlicher gestiegen, die sich als »eher rechts« oder »rechts« einordnen: jeder vierte (2019: weniger als jeder fünfte). Bei den weiblichen Jugendlichen sind es 11 Prozent, ohne Anstieg.',
+  'Junge Frauen vertreten häufiger postmaterialistische Werte als junge Männer, etwa bei Feminismus oder Gendern.'
+];
+/* Reichstag nach der Wahl vom 31. Juli 1932: 608 Sitze (Quelle: Statistik des Deutschen Reichs, Bd. 434; LeMO). Kleine Parteien (CSVD, Landvolk, Bauernpartei, Wirtschaftspartei u. a.) als »weitere« zusammengefasst – Einzelwerte vor Einsatz prüfen. */
+PW.reichstag1932 = { gesamt: 608, sitze: [['NSDAP', 230], ['SPD', 133], ['KPD', 89], ['Zentrum', 75], ['DNVP', 37], ['BVP', 22], ['DVP', 7], ['DStP', 4], ['weitere Kleinparteien', 11]], gegenRepublik: ['NSDAP', 'KPD'] };
+/* Fachbegriffe für die Wendekarten (Wortlaut wie auf der Zusammenfassung) */
+PW.begriffe = [
+  { b: 'Art. 21 GG', d: 'Parteien »wirken bei der politischen Willensbildung des Volkes mit« – kein Monopol. Gründung frei, innere Ordnung demokratisch, Rechenschaft über Finanzen.', bsp: 'Verbände und Medien wirken ebenfalls an der Willensbildung mit.' },
+  { b: 'Parteiverbot', d: 'Nur das Bundesverfassungsgericht kann eine Partei verbieten (Art. 21 Abs. 4 GG). Der Verfassungsschutz beobachtet und stuft ein, verbietet nicht.', bsp: 'Einstufung der AfD durch das BfV 2025 – kein Verbot, ein Verfahren vor Gericht.' },
+  { b: 'Vier Aufgaben', d: 'Politikformulierung · Politikimplementation · Politikkontrolle · Personalrekrutierung – das muss jede Demokratie erledigen; Parteien übernehmen Funktionen dabei.', bsp: 'Eine Kleine Anfrage der Opposition gehört zur Politikkontrolle.' },
+  { b: 'Erststimme', d: 'Stimme für eine Person im Wahlkreis (299 Wahlkreise). Die Erststimme entscheidet, wer das Direktmandat gewinnt – soweit die Zweitstimmen der Partei reichen.', bsp: 'Wahlkreis 260 Böblingen: 10 Kandidierende 2025.' },
+  { b: 'Zweitstimme', d: 'Stimme für die Landesliste einer Partei. Sie entscheidet über die Sitzverteilung im Bundestag (personalisierte Verhältniswahl).', bsp: '16 Landeslisten standen 2025 im Wahlkreis 260 auf dem Zettel.' },
+  { b: '5-%-Hürde', d: 'Eine Partei bekommt nur Sitze, wenn sie bundesweit mindestens 5 % der Zweitstimmen erhält – oder drei Direktmandate (Grundmandatsklausel). Die Minderheitenpartei SSW ist befreit.', bsp: 'FDP (4,3 %) und BSW (4,98 %) blieben 2025 draußen.' },
+  { b: 'Zweitstimmendeckung', d: 'Seit 2025 zählen Direktmandate nur, soweit die Zweitstimmen der Partei reichen. Keine Überhang- und Ausgleichsmandate mehr; der Bundestag hat fest 630 Sitze.', bsp: '2025 blieben 23 Wahlkreise ohne Direktmandat.' },
+  { b: 'Sainte-Laguë/Schepers', d: 'Das Rechenverfahren, das Zweitstimmen in Sitze umrechnet: Die Stimmen werden durch 0,5, 1,5, 2,5 … geteilt; die 630 höchsten Zahlen bekommen je einen Sitz.', bsp: 'Der Sitzrechner in Station 4 rechnet genau so.' },
+  { b: 'Koalition', d: 'Ein Bündnis mehrerer Fraktionen, das zusammen die Mehrheit hat (316 von 630) und eine Regierung trägt; Grundlage ist ein Koalitionsvertrag.', bsp: 'Union und SPD seit Mai 2025: 328 Sitze.' },
+  { b: 'Opposition', d: 'Die Fraktionen, die nicht die Regierung tragen. Sie kontrollieren die Regierung – mit Anfragen, Untersuchungsausschüssen, Gegenvorschlägen.', bsp: 'AfD, Grüne und Linke seit 2025.' },
+  { b: 'Sachurteil', d: 'Eine Aussage, die sich mit Belegen prüfen lässt: Was ist der Fall, welche Folgen hat etwas?', bsp: '»Ohne 5-%-Hürde hätten Union und SPD 2025 keine Mehrheit« – prüfbar im Sitzrechner.' },
+  { b: 'Werturteil', d: 'Eine Bewertung nach offengelegten Maßstäben: Was ist wichtiger – Vielfalt im Parlament oder stabile Mehrheiten?', bsp: '»Die Hürde sollte auf 3 % sinken« – ein Werturteil, das Gründe braucht.' }
+];
+/* Zeitstrahl: Parteien und Parteienrecht 1863–2024 (Quellen: bpb, LeMO, Bundesverfassungsgericht; Daten vor Einsatz prüfen) */
+PW.zeitstrahl = [
+  { j: 1863, t: 'Gründung des ADAV in Leipzig – die erste Arbeiterpartei, Vorläufer der SPD.', art: 'gruendung' },
+  { j: 1875, t: 'Vereinigung zur Sozialistischen Arbeiterpartei in Gotha; seit 1890 Name SPD.', art: 'gruendung' },
+  { j: 1933, t: 'Gesetz gegen die Neubildung von Parteien (14. Juli): Nur die NSDAP bleibt erlaubt – das Ende des Mehrparteiensystems.', art: 'bruch' },
+  { j: 1945, t: 'Neugründungen nach dem Krieg: CDU (regional, Bundespartei 1950) und CSU (Oktober 1945).', art: 'gruendung' },
+  { j: 1948, t: 'Gründung der FDP in Heppenheim (Dezember).', art: 'gruendung' },
+  { j: 1949, t: 'Grundgesetz (23. Mai) mit Art. 21: Parteien wirken an der Willensbildung mit; Sperrklausel im Wahlgesetz.', art: 'recht' },
+  { j: 1952, t: 'Verbot der SRP durch das Bundesverfassungsgericht (23. Oktober) – das erste Parteiverbot.', art: 'recht' },
+  { j: 1956, t: 'Verbot der KPD durch das Bundesverfassungsgericht (17. August).', art: 'recht' },
+  { j: 1980, t: 'Gründung der Grünen in Karlsruhe (Januar).', art: 'gruendung' },
+  { j: 1990, t: 'Aus der SED wird die PDS (Umbenennung 1989/90) – Vorläuferin der Linken.', art: 'gruendung' },
+  { j: 1993, t: 'Vereinigung von Bündnis 90 und Die Grünen (Mai).', art: 'gruendung' },
+  { j: 2007, t: 'Zusammenschluss von Linkspartei.PDS und WASG zur Partei Die Linke (16. Juni).', art: 'gruendung' },
+  { j: 2013, t: 'Gründung der AfD (Februar).', art: 'gruendung' },
+  { j: 2017, t: 'Das Bundesverfassungsgericht verbietet die NPD nicht (17. Januar): verfassungsfeindlich, aber zu unbedeutend.', art: 'recht' },
+  { j: 2024, t: 'Gründung des BSW (8. Januar); Grundmandatsklausel durch das Bundesverfassungsgericht wieder eingesetzt (30. Juli).', art: 'gruendung' },
+  { j: 2025, t: 'Erste Bundestagswahl mit 630 festen Sitzen und Zweitstimmendeckung (23. Februar).', art: 'recht' }
+];
+PW.weimar1932 = { datum: '31. Juli 1932', nsdap: 37.3, kpd: 14.3, hinweis: 'Reichstagswahl; NSDAP und KPD wollten die parlamentarische Republik abschaffen. Zusammen hatten sie mehr als die Hälfte der Stimmen: Keine demokratische Mehrheit war mehr möglich.' };
+
+PW.quellen = [
+  ['Bundeswahlleiterin, Ergebnisse Wahlkreis 260 Böblingen (endgültig)', 'https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-8/wahlkreis-260.html'],
+  ['Bundeswahlleiterin, Ergebnis Deutschland (endgültig)', 'https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99.html'],
+  ['SWR, Ergebnis der Bundestagswahl 2025 für Herrenberg (Zweitstimmen, Wahlberechtigte 22.928, Wählende 19.612, gültig 19.532)', 'https://bundestagswahl-2025-bw.swr.de/public/ec/ergebnis-herrenberg.html'],
+  ['Stadt Herrenberg, Ergebnisse der Bundestagswahl (26.02.2025)', 'https://www.herrenberg.de/de/Rathaus/Aktuelles-Presse/Stadtnachrichten/Nachricht?view=publish&item=article&id=6261'],
+  ['Stuttgarter Zeitung, Die Wahl in Herrenberg (24.02.2025)', 'https://www.stuttgarter-zeitung.de/artikel/bundestagswahl-2025-herrenberg-wahlergebnis-baden-wuerttemberg-78860063.html'],
+  ['Stuttgarter Zeitung, Wahlkreis Böblingen (24.02.2025)', 'https://www.stuttgarter-zeitung.de/artikel/bundestagswahl-2025-wahlkreis-boeblingen-wahlergebnis-baden-wuerttemberg-78866686.html'],
+  ['Kandidierende: amtlicher Stimmzettel Wahlkreis 260 (Landratsamt Böblingen) und wen-waehlen.de', 'https://www.wen-waehlen.de/btw25/kandidaten/53852-norbert-volz.html'],
+  ['Repräsentative Wahlstatistik 2025 (Bundeswahlleiterin/Destatis), Aufbereitung: PolitikCheck', 'https://www.politikcheck-deutschland.de/wer-waehlt-wen'],
+  ['Konrad-Adenauer-Stiftung, Monitor: Wahlverhalten nach Alter und Geschlecht (2025)', 'https://www.kas.de/documents/252038/40211523/Wahlverhalten+nach+Alter+und+Geschlecht.pdf'],
+  ['Shell Jugendstudie 2024 (Zusammenfassung)', 'https://kja.de/export/sites/kja/.content/.galleries/downloads/_service/shell-jugendstudie-2024-zusammenfassung.pdf'],
+  ['ZDFheute, AfD-Gutachten des Verfassungsschutzes (14.05.2025)', 'https://www.zdfheute.de/politik/deutschland/afd-verfassungsschutz-gutachten-rechtsextremistisch-100.html'],
+  ['ZDFheute, VG Köln zur AfD-Einstufung (26.02.2026)', 'https://www.zdfheute.de/politik/deutschland/afd-gericht-einstufung-rechtsextrem-100.html'],
+  ['Correctiv, Was im AfD-Gutachten steht (15.05.2025)', 'https://correctiv.org/aktuelles/neue-rechte/2025/05/15/was-im-afd-gutachten-steht-und-was-nicht/'],
+  ['Correctiv, Rechtliche Auseinandersetzungen um »Geheimplan gegen Deutschland« (23.04.2026)', 'https://correctiv.org/in-eigener-sache/2026/04/23/rechtliche-auseinandersetzungen-um-geheimplan-gegen-deutschland-eine-einordnung/'],
+  ['Wahlprogramme 2025 von CDU/CSU, SPD, Bündnis 90/Die Grünen, FDP, AfD, Die Linke, BSW (PDF-Fassungen der Parteien; Seitenzahlen beziehen sich auf die PDF-Datei)', ''],
+  ['Deutsches Historisches Museum, LeMO: Reichstagswahl Juli 1932', 'https://www.dhm.de/lemo/kapitel/weimarer-republik/'],
+  ['Parteivorsitze: ZDFheute 30.05.2026 (FDP), 20.06.2026 (Linke), 04.07.2026 (AfD), 06.12.2025 (BSW); Bundestag, Datenhandbuch Kap. 5.7', ''],
+  ['Lord Ashcroft Polls, How the United Kingdom voted on Thursday… and why (24.06.2016)', 'https://lordashcroftpolls.com/2016/06/how-the-united-kingdom-voted-and-why/']
+];
+
+/* v7 · Organizer (Muster AA): der Weg durch die Einheit, fünf Stationen bis zum Urteil.
+   Leitfragen wörtlich aus den Stationen; Caja nur dort, wo sie in der Station auftritt. */
+PW.einheit = [
+  { nr: 1, name: 'Grundlagen', url: 'parteien-wahlen/station1.html', ton: 'warm', ziel: 1,
+    frage: 'Warum braucht eine Demokratie Parteien, und was genau leisten sie?',
+    caja: 'Caja wünscht sich 15 Euro Mindestlohn.',
+    begriffe: ['Art. 21 GG', 'vier Aufgaben der Politik', 'elf Funktionen'],
+    mit: 'Die elf Funktionen mit eigenem Beispiel' },
+  { nr: 2, name: 'Erkennen', url: 'parteien-wahlen/station2.html', ton: 'blau', ziel: 1,
+    frage: 'Welche Funktion erfüllt eine Partei hier gerade?',
+    caja: '',
+    begriffe: ['Politikformulierung', 'Politikkontrolle', 'Personalrekrutierung'],
+    mit: 'Eine Funktion am Fall erkennen und begründen' },
+  { nr: 3, name: 'Positionen', url: 'parteien-wahlen/station3.html', ton: 'gruen', ziel: 2,
+    frage: 'Wie würde Partei X entscheiden, und woher weiß man das?',
+    caja: 'Caja darf zum ersten Mal wählen.',
+    begriffe: ['Wahlprogramm', 'wörtlicher Beleg', 'Streitfrage'],
+    mit: 'Eine Position mit Zitat und Seitenzahl belegen' },
+  { nr: 4, name: 'Wählen', url: 'parteien-wahlen/station4.html', ton: 'blau', ziel: 3,
+    frage: 'Wie wird aus Stimmen ein Bundestag, und was ändert die 5-%-Hürde?',
+    caja: 'Caja steht in der Wahlkabine: zwei Kreuze.',
+    begriffe: ['Erst- und Zweitstimme', '5-%-Hürde', 'Sitzverteilung', 'Koalition'],
+    mit: 'Aus Stimmen Sitze machen und eine Mehrheit finden' },
+  { nr: 5, name: 'Warum so?', url: 'parteien-wahlen/station5.html', ton: 'lila', ziel: 4,
+    frage: 'Wählen Junge anders als Alte, Frauen anders als Männer – und was folgt daraus?',
+    caja: 'Caja und ihre Großmutter: anders gewählt?',
+    begriffe: ['Wahlstatistik', 'Sachurteil', 'Werturteil'],
+    mit: 'Ein begründetes Urteil zur 5-%-Hürde' },
+  { nr: 6, name: 'Europa wählt', url: 'parteien-wahlen/station6.html', ton: 'gelb', ziel: 5,
+    frage: 'Wie wird das Europäische Parlament gewählt – und was ist anders als bei der Bundestagswahl?',
+    caja: 'Caja durfte mit 17 Europa wählen.',
+    begriffe: ['Europäisches Parlament', 'degressive Proportionalität', 'Fraktion', 'Sperrklausel'],
+    mit: 'Bundestags- und Europawahl vergleichen und die Hürde beurteilen' }
+];
+
+/* v7 · Zeitstrahl in Bahnen (Vertiefung, Entwurf aus Claude Design »Zeitstrahl Parteien 1863–2025«).
+   Bahnen: heutige Bundestagsparteien und knapp gescheiterte; Sitze nach der Wahl 2025 (Bundeswahlleiterin). */
+PW.zeitBahnen = [
+  { id: 'spd', name: 'SPD', seit: 'seit 1863 (als ADAV)', von: [[1863, 1933], [1945, 2025]], farbe: 'var(--partei-spd)', sitze: 120 },
+  { id: 'cdu', name: 'CDU/CSU', seit: 'seit 1945', von: [[1945, 2025]], farbe: 'var(--partei-cdu)', sitze: 208 },
+  { id: 'fdp', name: 'FDP', seit: 'seit 1948', von: [[1948, 2025]], farbe: 'var(--partei-fdp)', sitze: 0 },
+  { id: 'gruene', name: 'Grüne', seit: 'seit 1980', von: [[1980, 2025]], farbe: 'var(--partei-gruene)', sitze: 85 },
+  { id: 'linke', name: 'Die Linke', seit: 'seit 2007 (PDS seit 1990)', von: [[1990, 2025]], farbe: 'var(--partei-linke)', sitze: 64 },
+  { id: 'afd', name: 'AfD', seit: 'seit 2013', von: [[2013, 2025]], farbe: 'var(--partei-afd)', sitze: 152 },
+  { id: 'bsw', name: 'BSW', seit: 'seit 2024', von: [[2024, 2025]], farbe: 'var(--partei-bsw)', sitze: 0 }
+];
+PW.zeitEreignisse = [
+  { j: 1863, bahn: 'spd', t: 'ADAV gegründet (23. Mai, Leipzig)', d: 'Der Allgemeine Deutsche Arbeiterverein ist die erste Arbeiterpartei – der Vorläufer der SPD.' },
+  { j: 1875, bahn: 'spd', t: 'Vereinigung in Gotha', d: 'Die Sozialistische Arbeiterpartei Deutschlands entsteht; seit 1890 heißt sie SPD.' },
+  { j: 1890, bahn: 'spd', t: 'Der Name SPD', d: 'Die Partei nennt sich Sozialdemokratische Partei Deutschlands.' },
+  { j: 1933, bahn: 'recht', reihe: 0, t: 'Gesetz gegen die Neubildung von Parteien (14. Juli)', d: 'Nur die NSDAP bleibt erlaubt – das Ende des Mehrparteiensystems.' },
+  { j: 1945, bahn: 'cdu', t: 'Neugründungen nach dem Krieg', d: 'CDU (zuerst regional, Bundespartei 1950) und CSU entstehen; die SPD gründet sich neu.' },
+  { j: 1948, bahn: 'fdp', t: 'FDP gegründet (Dezember, Heppenheim)', d: 'Liberale Gruppen aus den Westzonen schließen sich zusammen.' },
+  { j: 1949, bahn: 'recht', reihe: 0, t: 'Grundgesetz (23. Mai)', d: 'Art. 21: Parteien wirken bei der politischen Willensbildung des Volkes mit. Am 14. August folgt die erste Bundestagswahl.' },
+  { j: 1952, bahn: 'recht', reihe: 1, t: 'SRP-Verbot (23. Oktober)', d: 'Das Bundesverfassungsgericht verbietet zum ersten Mal eine Partei.' },
+  { j: 1956, bahn: 'recht', reihe: 2, t: 'KPD-Verbot (17. August)', d: 'Das zweite Parteiverbot durch das Bundesverfassungsgericht.' },
+  { j: 1980, bahn: 'gruene', t: 'Die Grünen gegründet (Januar, Karlsruhe)', d: 'Aus Umwelt- und Friedensbewegung entsteht eine neue Partei.' },
+  { j: 1990, bahn: 'linke', t: 'Aus der SED wird die PDS', d: 'Umbenennung 1989/90 – die Vorläuferin der Linken.' },
+  { j: 1993, bahn: 'gruene', t: 'Bündnis 90/Die Grünen (Mai)', d: 'Die Grünen vereinigen sich mit dem ostdeutschen Bündnis 90.' },
+  { j: 2007, bahn: 'linke', t: 'Die Linke (16. Juni)', d: 'Linkspartei.PDS und WASG schließen sich zusammen.' },
+  { j: 2013, bahn: 'afd', t: 'AfD gegründet (Februar)', d: 'Zuerst als Partei gegen die Euro-Rettungspolitik.' },
+  { j: 2017, bahn: 'recht', reihe: 0, t: 'NPD-Urteil (17. Januar)', d: 'Verfassungsfeindlich, aber zu unbedeutend für ein Verbot.' },
+  { j: 2024, bahn: 'bsw', t: 'BSW gegründet (8. Januar)', d: 'Im Juli setzt das Bundesverfassungsgericht die Grundmandatsklausel wieder ein.' },
+  { j: 2025, bahn: 'recht', reihe: 1, t: 'Bundestagswahl (23. Februar)', d: 'Erstmals 630 feste Sitze und Zweitstimmendeckung.' }
+];
+
+/* v8 · Muster AF »Erst erinnern«: drei Fragen zur vorigen Station, zuerst ohne Gerät beantworten (Abruf; Papierprobe »Was bleibt ohne Gerät?«). */
+PW.abruf = {
+  2: [
+    ['Was sagt Art. 21 Abs. 1 GG über Parteien? Ein Satz genügt.', 'Parteien wirken bei der politischen Willensbildung des Volkes mit. Ihre Gründung ist frei, ihre innere Ordnung muss demokratisch sein, und sie legen öffentlich Rechenschaft über ihre Mittel ab.'],
+    ['Nenne die vier Aufgaben der Politik.', 'Politikformulierung, Politikimplementation, Politikkontrolle, Personalrekrutierung.'],
+    ['Eine Partei schreibt einen Wunsch vieler Menschen in ihr Programm. Welche Funktion ist das?', 'Interessenartikulation – Wünsche und Bedürfnisse ausdrücken.']
+  ],
+  3: [
+    ['Die Opposition stellt eine Kleine Anfrage. Welche Funktion erfüllt sie?', 'Die Kontrollfunktion – sie kontrolliert die Regierung (Aufgabe: Politikkontrolle).'],
+    ['Was ist der Unterschied zwischen Artikulation und Aggregation?', 'Artikulation: Interessen ausdrücken. Aggregation: verschiedene Interessen bündeln und gewichten, bis eine gemeinsame Linie steht.'],
+    ['Zu welcher Aufgabe der Politik gehört die Rekrutierung?', 'Zur Personalrekrutierung – Personal für Ämter und Mandate auswählen.']
+  ],
+  4: [
+    ['Woran erkennst du, dass eine Aussage über eine Partei belegt ist?', 'An einem wörtlichen Zitat aus dem Wahlprogramm mit Seitenzahl – nicht an einer Zusammenfassung oder einem Eindruck.'],
+    ['Wie unterscheiden sich SPD und CDU/CSU beim Mindestlohn?', 'SPD: Er muss spätestens ab 2026 bei 15 Euro liegen (S. 23). CDU/CSU: Lohnfindung ist Sache der Sozialpartner, einen »politischen Mindestlohn« lehnen sie ab (S. 32). Strittig ist also, wer über die Höhe entscheidet.'],
+    ['Warum gibt dir die Werkstatt keine Wahlempfehlung?', 'Weil du selbst urteilen sollst (Überwältigungsverbot). Die Seite zeigt Positionen mit Beleg, die Entscheidung bleibt bei dir.']
+  ],
+  5: [
+    ['Wofür ist die Zweitstimme da?', 'Sie entscheidet, wie viele Sitze jede Partei im Bundestag bekommt.'],
+    ['Was bedeutet die 5-%-Hürde?', 'Eine Partei unter 5 % der Zweitstimmen bekommt keine Sitze nach Zweitstimmen. Ausnahmen: drei Direktmandate (Grundmandatsklausel) und Parteien nationaler Minderheiten wie der SSW.'],
+    ['Ab wie vielen Sitzen hat eine Koalition 2025 die Mehrheit?', 'Ab 316 von 630 Sitzen.']
+  ],
+  6: [
+    ['Welche Partei lag 2025 bei den 18- bis 24-Jährigen vorn, welche bei den über 70-Jährigen?', 'Bei den 18- bis 24-Jährigen Die Linke (27,3 %), bei den über 70-Jährigen CDU/CSU (41,4 %).'],
+    ['Was meint »Political Gender Gap«?', 'Junge Frauen und junge Männer wählen und denken politisch unterschiedlich – 2025 etwa Linke 37,1 % zu 17,6 %, AfD 12,6 % zu 25,2 %.'],
+    ['Was ist der Unterschied zwischen Sachurteil und Werturteil?', 'Das Sachurteil prüft, was zutrifft und was folgt (mit Belegen). Das Werturteil sagt, was man selbst für richtig hält – und nach welchem Wert.']
+  ]
+};
