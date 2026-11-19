@@ -14,7 +14,7 @@ window.GK_HEFTER = {
     "meta": "drei Blätter · Demokratie, direkte Demokratie, Rechtsstaat",
     "art": "blatt",
     "bild": {
-     "datei": "media/platzhalter.svg",
+     "datei": "media/g-autobahn.jpg",
      "alt": "Luftbild: eine Autobahn führt durch einen Wald.",
      "status": "aus dem Material (Politik_Halbjahr_1, S. 11, Fall »Welches Recht schränken Sie ein?«); Urheber dort nicht genannt – noch offen"
     }
@@ -25,7 +25,7 @@ window.GK_HEFTER = {
     "meta": "Auftakt und sechs Stationen · zwei Doppelstunden",
     "art": "blatt",
     "bild": {
-     "datei": "media/platzhalter.svg",
+     "datei": "media/m1-bundestag.jpg",
      "alt": "Schaubild: Sitzverteilung im 21. Deutschen Bundestag mit 630 Sitzen, nach Fraktionen und mit Frauenanteil.",
      "status": "aus dem Material (Politik_Halbjahr_1, S. 22); Urheber dort nicht genannt – noch offen"
     }
@@ -58,7 +58,7 @@ window.GK_HEFTER = {
     "meta": "eine Stunde",
     "art": "geplant",
     "bild": {
-     "datei": "media/platzhalter.svg",
+     "datei": "media/m3-netz.jpg",
      "alt": "Illustration: Gesichter in Kreisen, verbunden zu einem Netz vor einer Weltkugel.",
      "status": "aus dem Material (Politik_Halbjahr_1, S. 65, »Echokammern und Filterblasen«); Urheber dort nicht genannt – noch offen"
     }
@@ -69,7 +69,7 @@ window.GK_HEFTER = {
     "meta": "drei Stunden",
     "art": "geplant",
     "bild": {
-     "datei": "media/platzhalter.svg",
+     "datei": "media/m4-gewalten.jpg",
      "ganz": true,
      "alt": "Schaubild: drei Felder Legislative, Exekutive und Judikative mit Paragrafenzeichen, Handschellen und Waage.",
      "status": "aus dem Material (Politik_Halbjahr_1, S. 66, »Gewaltenteilung«); Urheber dort nicht genannt – noch offen"
@@ -81,7 +81,7 @@ window.GK_HEFTER = {
     "meta": "zwei Stunden",
     "art": "geplant",
     "bild": {
-     "datei": "media/platzhalter.svg",
+     "datei": "media/m5-karte.jpg",
      "alt": "Weltkarte »Autokratie gegen Demokratie«: Staaten eingefärbt nach Regierungsform.",
      "status": "aus dem Material (Politik_Halbjahr_1, S. 49); im Bild: katapult-magazin.de"
     }

@@ -151,3 +151,13 @@
   window.GKBlatt = { platz, stand, melde, vergiss, sichern, laden, werkzeuge, dateiKnoepfe, beamer, einheit: E, esc };
 })();
 /* ===== Ende des gemeinsamen Kerns ===== */
+
+/* Öffentliche Fassung: Fehlt eine Bilddatei unter media/ (Bilder aus dem Unterrichtsmaterial liegen nur im Moodle-Kurs), steht dort ein gekennzeichneter Platzhalter. */
+(function () {
+  "use strict";
+  var wurzel = (document.currentScript && document.currentScript.src || "").replace(/assets\/blatt\/ab\.js.*$/, "");
+  function ersatz(img) { if (img.getAttribute("data-ersatz") || !/media\//.test(img.getAttribute("src") || "")) return; img.setAttribute("data-ersatz", "1"); img.src = wurzel + "media/platzhalter.svg"; }
+  document.addEventListener("error", function (ev) { if (ev.target && ev.target.tagName === "IMG") ersatz(ev.target); }, true);
+  function pruef() { [].forEach.call(document.images, function (i) { if (i.complete && i.naturalWidth === 0) ersatz(i); }); }
+  pruef(); window.addEventListener("load", pruef);
+})();
