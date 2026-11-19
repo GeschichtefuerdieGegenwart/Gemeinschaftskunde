@@ -12,6 +12,17 @@
 <link rel="stylesheet" href="assets/blatt/werkstatt-blatt.css">
 <link rel="stylesheet" href="assets/blatt/druck-blatt.css">
 <link rel="stylesheet" href="assets/blatt/blatt.css">
+<style>
+.zf-tab{width:100%;table-layout:fixed}
+@media print{.zf-lang .zf-tab{font-size:8.4pt;line-height:1.22;margin:3pt 0}.zf-lang .zf-tab td,.zf-lang .zf-tab th{padding:1.5pt 3pt}.zf-lang .zf-teil{margin-bottom:5pt}.zf-lang p{margin:0 0 3pt}}
+@media print{.zf-lang .zf-teil{break-inside:auto}.zf-lang h2,.zf-lang h3{break-after:avoid}.zf-lang tr,.zf-lang figure,.zf-lang .zf-zwei>div,.zf-lang .zf-abw,.zf-lang .zf-treppe,.zf-lang p{break-inside:avoid}}
+.zf-tab td,.zf-tab th{vertical-align:top;overflow-wrap:anywhere;hyphens:auto}
+.zf-zwei{display:grid;grid-template-columns:1fr 1fr;gap:8pt 14pt;margin-top:6pt}
+.zf-zwei h3{margin:0 0 3pt;font-size:1em}
+.zf-zwei ul{margin:0;padding-left:1.1em}
+.zf-zwei li{margin:0 0 2pt}
+@media screen and (max-width:820px){.zf-zwei{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <header class="ab-kopf"><div class="ab-kopf-in" id="abkopf"><span class="ab-reiter">KA</span><div class="ab-ktitel">Fit für die Klassenarbeit<small>GK-Labor · Arbeitsblatt</small></div><a class="btn" href="index.html">← Hefter</a></div></header>
@@ -89,7 +100,7 @@
     <div id="wdh-ende-liste" aria-live="polite"></div>
     <ol class="wdh-plan">
       <li><a class="knopf knopf--akzent" href="#i">Ich-kann-Liste (1 Seite)</a><span>Kreuze an, was du sicher kannst – die Liste zeigt dir, wo du noch üben solltest.</span></li>
-      <li><a class="knopf knopf--akzent" href="#z">Zusammenfassung (2 Seiten)</a><span>Mit Schaubildern: Das musst du wissen · Das musst du können. Sie öffnet, wenn du alle fünf Bereiche bearbeitet hast.</span></li>
+      <li><a class="knopf knopf--akzent" href="#z">Zusammenfassung (5 Seiten)</a><span>Mit Schaubildern: Das musst du wissen · Das musst du können. Sie öffnet, wenn du alle fünf Bereiche bearbeitet hast.</span></li>
       <li><a class="knopf knopf--voll" href="#p">Probeklausur (2 Seiten)</a><span>90 Minuten, 40 Punkte, ohne Hilfsmittel – wie in der Klassenarbeit.</span></li>
     </ol>
     <p class="klein">Mehr Übung zu Parteien und Wahlen: <a href="../klausurtraining.html">Klausurtraining zu Modul 1</a> · <a href="../zusammenfassung.html">Zusammenfassung Modul 1</a>. Deine Antworten bleiben nur auf diesem Gerät.</p>
@@ -212,12 +223,11 @@
   <section class="ab-teil gkz blatt" data-ton="blau" data-seite="z" aria-label="Zusammenfassung: Zusammenfassung für die Klassenarbeit">
     <noscript><h2>Z · Zusammenfassung für die Klassenarbeit</h2></noscript>
     <p class="nodruck"><button type="button" class="btn" onclick="window.print()">Drucken oder als PDF sichern</button></p>
-    <section class="seite zf-schutz">
+    <section class="seite zf-schutz zf-lang">
   <div class="zf-kopf">
-    <p class="hinweis">Seite 1: Das musst du wissen · Seite 2: Das musst du können · <a href="#i">Ich-kann-Liste</a></p>
+    <p class="hinweis">Seiten 1 bis 4: Das musst du wissen (Demokratie · Grundrechte · Parteien · Bundestagswahl · Europawahl) · Seite 5: Das musst du können · <a href="#i">Ich-kann-Liste</a></p>
   </div>
-
-  <div class="zf-teil" style="--zt:var(--z-blau-t);--ztt:var(--z-blau-t)">
+<div class="zf-teil" style="--zt:var(--z-blau-t);--ztt:var(--z-blau-t)">
     <h2>1 · Demokratie und Regierungssysteme (AB1 · Repubblica Nova)</h2>
     <p><b>Alle Demokratien:</b> Volkssouveränität, freie Wahlen auf Zeit, Gewaltenteilung, Grundrechte, Minderheitenschutz, Pluralismus. <b>Direkt:</b> Das Volk entscheidet Sachfragen selbst (Schweiz: starke direkte Elemente). <b>Indirekt:</b> Gewählte entscheiden – in drei Formen:</p>
     <div class="zf-drei">
@@ -260,64 +270,8 @@
         <figcaption><b>Semipräsidentiell (Mischform) · Frankreich</b>Starker, direkt gewählter Präsident und eine Regierung, die vom Parlament abhängt.</figcaption>
       </figure>
     </div>
-  </div>
-
-  <div class="zf-teil" style="--zt:var(--z-gelb-t);--ztt:var(--z-gelb-t)">
-    <h2>2 · Parteien: vier Aufgaben, elf Funktionen (Stationen 1 und 2)</h2>
-    <p><b>Art. 21 GG:</b> Parteien wirken bei der Willensbildung mit; Gründung frei, innere Ordnung demokratisch. Verbieten kann nur das Bundesverfassungsgericht; der Verfassungsschutz beobachtet und stuft ein.</p>
-    <div class="zf-fn" role="group" aria-label="Die vier Aufgaben der Politik mit den Funktionen von Parteien, die dazu gehören">
-      <div><h3>Politikformulierung <small>· entscheiden · neun Funktionen</small></h3>
-        <ul>
-          <li><b>Artikulation:</b> Interessen aussprechen</li>
-          <li><b>Aggregation:</b> Interessen bündeln und gewichten</li>
-          <li><b>Transmission:</b> in Entscheidungen einbringen</li>
-          <li><b>Partizipation:</b> Engagement ermöglichen</li>
-          <li><b>Information:</b> sachlich aufklären</li>
-          <li><b>Mobilisierung:</b> Menschen gewinnen</li>
-          <li><b>Sozialisation:</b> in Politik einführen</li>
-          <li><b>Legitimation:</b> Rückhalt für das System schaffen</li>
-          <li><b>Herrschaft:</b> verbindlich entscheiden</li>
-        </ul></div>
-      <div class="leer"><h3>Politikimplementation <small>· umsetzen</small></h3>keine Funktion von Parteien: Umsetzen tun vor allem Regierung und Verwaltung.</div>
-      <div><h3>Politikkontrolle <small>· prüfen</small></h3><b>Kontrolle:</b> Regierung und Verwaltung prüfen – vor allem die Opposition.</div>
-      <div><h3>Personalrekrutierung <small>· Personal finden</small></h3><b>Rekrutierung:</b> Personal für Ämter und Mandate auswählen.</div>
-    </div>
-    <p class="hinweis">In der Klassenarbeit: Funktion nennen → am Beispiel erklären → der Aufgabe zuordnen.</p>
-  </div>
-
-  <div class="zf-teil" style="--zt:var(--z-warm-t);--ztt:var(--z-warm-t)">
-    <h2>3 · Bundestagswahl und Europawahl (Stationen 3 bis 6)</h2>
-    <table class="zf-wahl">
-      <thead><tr><th scope="col"></th>
-        <th scope="col"><svg viewBox="0 0 44 30" aria-hidden="true"><rect x="1" y="1" width="42" height="28" fill="#fff" stroke="#7A2E1F"/><line x1="22" y1="1" x2="22" y2="29" stroke="#7A2E1F"/><circle cx="11" cy="15" r="5" fill="none" stroke="#7A2E1F"/><path d="M8 12l6 6M14 12l-6 6" stroke="#7A2E1F" stroke-width="1.5"/><circle cx="33" cy="15" r="5" fill="none" stroke="#7A2E1F"/><path d="M30 12l6 6M36 12l-6 6" stroke="#7A2E1F" stroke-width="1.5"/></svg>Bundestag</th>
-        <th scope="col"><svg viewBox="0 0 44 30" aria-hidden="true"><rect x="1" y="1" width="42" height="28" fill="#fff" stroke="#4A2A66"/><circle cx="22" cy="15" r="5" fill="none" stroke="#4A2A66"/><path d="M19 12l6 6M25 12l-6 6" stroke="#4A2A66" stroke-width="1.5"/></svg>Europäisches Parlament</th></tr></thead>
-      <tbody>
-        <tr><th scope="row">Stimmen</th><td>Erststimme (Person im Wahlkreis), <b>Zweitstimme</b> (Landesliste) – sie verteilt die Sitze</td><td>eine Stimme für eine Bundes- oder Landesliste</td></tr>
-        <tr><th scope="row">Sitze</th><td>630; ein Wahlkreissieg zählt nur mit Zweitstimmendeckung</td><td>96 der 720; je Land 6 bis 96 Sitze (degressive Proportionalität)</td></tr>
-        <tr><th scope="row">Hürde</th><td>5 % oder drei Direktmandate (Grundmandatsklausel); SSW befreit</td><td>in Deutschland keine (BVerfG 2011, 2014); EU-Hürde ab 2 % beschlossen, nicht in Kraft</td></tr>
-        <tr><th scope="row">Wahlalter · Wahlperiode</th><td>ab 18 · alle vier Jahre</td><td>ab 16 · alle fünf Jahre</td></tr>
-        <tr><th scope="row">Danach</th><td>wählt die Kanzlerin oder den Kanzler (Mehrheit 316) – meist mit Koalition</td><td>wählt die Kommissionspräsidentin auf Vorschlag des Europäischen Rates; Gesetze und Haushalt mit dem Rat, kein Initiativrecht; Fraktionen nach Richtung (Mehrheit 361)</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-</section>
-    <section class="seite zf-schutz">
-  <div class="zf-teil" style="--zt:#333;--ztt:#111">
-    <h2>So ist die Klassenarbeit aufgebaut: drei Aufgaben, drei Anforderungsbereiche</h2>
-    <div class="zf-afb">
-      <div class="i"><h3>I · Wiedergeben</h3><b>nennen, beschreiben, darstellen:</b> geordnet und mit Fachbegriffen wiedergeben – ohne eigene Bewertung.</div>
-      <div class="ii"><h3>II · Einordnen</h3><b>erklären, erläutern, analysieren:</b> in einen Zusammenhang stellen, begründen, mit Beispiel oder Material belegen.</div>
-      <div class="iii"><h3>III · Urteilen</h3><b>beurteilen</b> = Sachurteil: Was bewirkt es, stimmt es? – <b>bewerten, Stellung nehmen</b> = Werturteil: Was ist mir wichtiger, und warum? Immer mit Gegenargument.</div>
-    </div>
-    <div class="zf-zeit" role="img" aria-label="90 Minuten: 10 Minuten lesen, 15 Minuten Aufgabe 1, 30 Minuten Aufgabe 2, 30 Minuten Aufgabe 3, 5 Minuten durchlesen.">
-      <span class="l" style="flex:10">Lesen 10′</span><span class="z1" style="flex:15">Aufgabe 1 · 15′</span><span class="z2" style="flex:30">Aufgabe 2 · 30′</span><span class="z3" style="flex:30">Aufgabe 3 · 30′</span><span class="d" style="flex:5">5′</span>
-    </div>
-    <p class="hinweis">90 Minuten: erst alles lesen, dann der Reihe nach; am Ende 5 Minuten durchlesen. Bewertet wird die Qualität deiner Begründung, nicht deine Meinung.</p>
-  </div>
-
-  <div class="zf-teil" style="--zt:var(--z-gruen-t);--ztt:var(--z-gruen-t)">
-    <h2>Grundrechte: einen Eingriff prüfen mit der Prüftreppe</h2>
+  </div><div class="zf-teil" style="--zt:var(--z-gruen-t);--ztt:var(--z-gruen-t)">
+    <h2>2 · Grundrechte: einen Eingriff prüfen mit der Prüftreppe (Rechtsstaat und Grundrechte)</h2>
     <p>Grundrechte sind <b>Abwehrrechte</b> gegen den Staat; <b>Menschenrechte</b> gelten für alle (»Jeder …«), <b>Bürgerrechte</b> für Deutsche (»Alle Deutschen …«). Gegen Eingriffe kann man vor Gericht gehen (<b>Rechtsweggarantie</b>, Art. 19 Abs. 4). Ob ein Eingriff erlaubt ist, prüfst du Stufe für Stufe:</p>
     <ol class="zf-treppe" aria-label="Sieben Stufen der Prüfung">
       <li style="min-height:30pt"><b>1</b>Schutzbereich: welches Grundrecht?</li>
@@ -343,8 +297,80 @@
       </div>
     </div>
   </div>
+  <div class="zf-teil" style="--zt:var(--z-gelb-t);--ztt:var(--z-gelb-t)">
+    <h2>3 · Parteien: Grundgesetz, vier Aufgaben, elf Funktionen (Stationen 1 und 2)</h2>
+    <p><b>Art. 21 GG:</b> Parteien »wirken bei der politischen Willensbildung des Volkes mit« – kein Monopol: Verbände und Medien wirken ebenfalls mit. Gründung frei, innere Ordnung demokratisch, Rechenschaft über Finanzen. <b>Parteiverbot:</b> Nur das Bundesverfassungsgericht kann eine Partei verbieten (Art. 21 Abs. 4 GG). Der Verfassungsschutz beobachtet und stuft ein, verbietet nicht.</p>
+    <p><b>Vier Aufgaben der Politik</b> – das muss jede Demokratie erledigen; Parteien übernehmen Funktionen dabei: <b>Politikformulierung</b> (Entscheidungen müssen diskutiert und getroffen werden) · <b>Politikimplementation</b> (getroffene Entscheidungen müssen umgesetzt werden – keine Funktion von Parteien: Umsetzen tun vor allem Regierung und Verwaltung) · <b>Politikkontrolle</b> (der politische Prozess muss kontrolliert werden) · <b>Personalrekrutierung</b> (für die Ämter braucht es Personal).</p>
+    <table class="zf-wahl zf-tab"><colgroup><col style="width:22%"><col style="width:29%"><col style="width:31%"><col style="width:18%"></colgroup><thead><tr><th scope="col">Funktion</th><th scope="col">Was die Partei tut</th><th scope="col">Beispiel</th><th scope="col">Aufgabe</th></tr></thead><tbody><tr><th scope="row">Interessenartikulation</th><td>Wünsche und Bedürfnisse von Mitgliedern und Wählern ausdrücken.</td><td>Eine Partei fordert in ihrem Programm einen höheren Mindestlohn.</td><td>Politikformulierung</td></tr><tr><th scope="row">Interessenaggregation</th><td>Verschiedene Interessen bündeln und gewichten.</td><td>Flügel einer Partei einigen sich auf eine gemeinsame Linie; Koalitionspartner schließen einen Vertrag.</td><td>Politikformulierung</td></tr><tr><th scope="row">Interessentransmission</th><td>Interessen direkt in Entscheidungen einbringen.</td><td>Eine Regierungspartei setzt eine Forderung aus ihrem Programm als Gesetz um.</td><td>Politikformulierung</td></tr><tr><th scope="row">Partizipation</th><td>Bürgerinnen und Bürgern politisches Engagement ermöglichen.</td><td>Mitglieder stimmen über ein Programm ab; ein Ortsverband lädt zum Bürgerdialog.</td><td>Politikformulierung</td></tr><tr><th scope="row">Informationsvermittlung</th><td>Sachliche Informationen über Politik vermitteln.</td><td>Eine Partei erklärt auf ihrer Website, wie ein Gesetz wirkt.</td><td>Politikformulierung</td></tr><tr><th scope="row">Mobilisierung</th><td>Bürgerinnen und Bürger für die Partei und ihre Ziele gewinnen.</td><td>Wahlkampf mit Plakaten und Social-Media-Videos.</td><td>Politikformulierung</td></tr><tr><th scope="row">Sozialisation</th><td>Menschen in politische Prozesse einführen und prägen.</td><td>Neumitglieder lernen, wie Anträge und Parteitage funktionieren.</td><td>Politikformulierung</td></tr><tr><th scope="row">Legitimation</th><td>Unterstützung für das demokratische System schaffen.</td><td>Parteien bringen Menschen dazu, Entscheidungen zu akzeptieren, auch wenn sie unterlegen sind.</td><td>Politikformulierung</td></tr><tr><th scope="row">Herrschaftsfunktion</th><td>Verbindliche Entscheidungen treffen, also Herrschaft ausüben.</td><td>Die Regierungsfraktionen beschließen ein Gesetz.</td><td>Politikformulierung</td></tr><tr><th scope="row">Kontrollfunktion</th><td>Regierung und Verwaltung kontrollieren, vor allem aus der Opposition.</td><td>Kleine Anfragen, Untersuchungsausschuss.</td><td>Politikkontrolle</td></tr><tr><th scope="row">Rekrutierung</th><td>Personal für Ämter und Mandate auswählen.</td><td>Eine Partei nominiert ihre Kandidatin für das Direktmandat.</td><td>Personalrekrutierung</td></tr></tbody></table>
+    <p class="hinweis">In der Klassenarbeit: Funktion nennen → am Beispiel erklären → der Aufgabe zuordnen. Oft passt mehr als eine Funktion – entscheidend ist die Begründung.</p>
+  </div>
+
+  <div class="zf-teil" style="--zt:var(--z-gelb-t);--ztt:var(--z-gelb-t)">
+    <h2>4 · Parteien im Bundestag 2025 und ihre Positionen (Station 3)</h2>
+    <table class="zf-wahl zf-tab"><colgroup><col style="width:14%"><col style="width:14%"><col style="width:12%"><col style="width:60%"></colgroup><thead><tr><th scope="col">Partei</th><th scope="col">Zweitstimmen</th><th scope="col">Sitze (630)</th><th scope="col">Rolle seit Mai 2025</th></tr></thead><tbody><tr><th scope="row">CDU</th><td>22,6 %</td><td>164</td><td>Regierung (Kanzlerpartei)</td></tr><tr><th scope="row">CSU</th><td>6,0 %</td><td>44</td><td>Regierung; tritt nur in Bayern an, Fraktionsgemeinschaft mit der CDU</td></tr><tr><th scope="row">SPD</th><td>16,4 %</td><td>120</td><td>Regierung (Koalitionspartner)</td></tr><tr><th scope="row">AfD</th><td>20,8 %</td><td>152</td><td>Opposition (größte Oppositionsfraktion)</td></tr><tr><th scope="row">GRÜNE</th><td>11,6 %</td><td>85</td><td>Opposition</td></tr><tr><th scope="row">Die Linke</th><td>8,8 %</td><td>64</td><td>Opposition</td></tr><tr><th scope="row">BSW</th><td>4,98 %</td><td>0</td><td>nicht im Bundestag (9.529 Stimmen unter der Hürde)</td></tr><tr><th scope="row">FDP</th><td>4,3 %</td><td>0</td><td>nicht im Bundestag (unter 5 %)</td></tr></tbody></table>
+    <p><b>Koalition:</b> Bündnis mehrerer Fraktionen, das zusammen die Mehrheit hat (316 von 630) und eine Regierung trägt; Grundlage ist ein Koalitionsvertrag – Union und SPD: 328 Sitze. <b>Opposition:</b> die Fraktionen, die nicht die Regierung tragen; sie kontrollieren mit Anfragen, Untersuchungsausschüssen, Gegenvorschlägen. Der SSW hat als Minderheitenpartei 1 Sitz.</p>
+    <p><b>Positionen belegen:</b> immer mit Beleg – Partei, Wahlprogramm 2025, Seite. Beispiel Tempolimit: SPD, Grüne, Linke dafür; CDU/CSU, FDP, AfD dagegen; BSW keine Aussage. <b>Zwei Ebenen trennen:</b> Selbstdarstellung der Partei (Programm) und Einordnung Dritter (Gerichte, Verfassungsschutz, Recherchen) – immer mit Datum und Quelle. <b>Vergleichen:</b> Gemeinsamkeiten, Unterschiede, dahinterliegende Grundwerte (Freiheit/Gleichheit, Staat/Markt, Sicherheit/Offenheit).</p>
+  </div>
 
   <div class="zf-teil" style="--zt:var(--z-warm-t);--ztt:var(--z-warm-t)">
+    <h2>5 · Bundestagswahl: das Wahlrecht seit 2025 (Station 4)</h2>
+    <table class="zf-wahl zf-tab"><colgroup><col style="width:20%"><col style="width:47%"><col style="width:33%"></colgroup><thead><tr><th scope="col">Begriff</th><th scope="col">Erklärung</th><th scope="col">Beispiel 2025</th></tr></thead><tbody><tr><th scope="row">Erststimme</th><td>Stimme für eine Person im Wahlkreis (299 Wahlkreise). Sie entscheidet, wer das Direktmandat gewinnt – soweit die Zweitstimmen der Partei reichen.</td><td>Wahlkreis 260 Böblingen: Direktmandat Marc Biadacz (CDU, 37,3 % der Erststimmen)</td></tr><tr><th scope="row">Zweitstimme</th><td>Stimme für die Landesliste einer Partei. Sie entscheidet über die Sitzverteilung im Bundestag (personalisierte Verhältniswahl).</td><td>Bund: CDU 22,6 · AfD 20,8 · SPD 16,4 · Grüne 11,6 · Linke 8,8 · CSU 6,0 %</td></tr><tr><th scope="row">Zweitstimmendeckung</th><td>Direktmandate zählen nur, soweit die Zweitstimmen der Partei reichen. Keine Überhang- und Ausgleichsmandate mehr; der Bundestag hat fest 630 Sitze.</td><td>23 Wahlkreise blieben ohne Direktmandat</td></tr><tr><th scope="row">5-%-Hürde</th><td>Sitze nur mit bundesweit mindestens 5 % der Zweitstimmen – oder drei Direktmandaten (Grundmandatsklausel; BVerfG 2024). Die Minderheitenpartei SSW ist befreit.</td><td>FDP (4,3 %) und BSW (4,98 %) blieben draußen</td></tr><tr><th scope="row">Sainte-Laguë/Schepers</th><td>Rechenverfahren, das Zweitstimmen in Sitze umrechnet: Die Stimmen werden durch 0,5, 1,5, 2,5 … geteilt; die 630 höchsten Zahlen bekommen je einen Sitz.</td><td>Sitze: CDU 164, CSU 44, AfD 152, SPD 120, Grüne 85, Linke 64, SSW 1</td></tr><tr><th scope="row">Mehrheit</th><td>Eine Regierung braucht die Mehrheit der Abgeordneten: 316 von 630. Rechnerisch möglich heißt nicht, dass ein Bündnis zustande kommt (inhaltliche Nähe, öffentliche Aussagen).</td><td>Union + SPD = 328; Wahlbeteiligung 82,5 %</td></tr></tbody></table>
+    <p class="hinweis">Wahlkreis 260 Böblingen, Zweitstimmen: CDU 33,2 · AfD 17,5 · SPD 14,4 · Grüne 13,9 · FDP 7,0 · Linke 6,0 · BSW 4,0 %; Beteiligung 84,3 %. Weimar 1932: NSDAP 37,3 % + KPD 14,3 % = 51,6 % gegen die Republik; viele Kleinparteien. Daraus folgte 1949 die Sperrklausel.</p>
+  </div>
+
+  <div class="zf-teil" style="--zt:var(--z-lila-t);--ztt:var(--z-lila-t)">
+    <h2>6 · Wahlverhalten 2025: Alter und Geschlecht (Station 5 · Repräsentative Wahlstatistik)</h2>
+    <table class="zf-wahl zf-tab"><colgroup><col style="width:28%"><col style="width:72%"></colgroup><thead><tr><th scope="col">Gruppe</th><th scope="col">Zweitstimmen</th></tr></thead><tbody><tr><th scope="row">18–24 Jahre</th><td>Linke 27,3 · AfD 19,0 · CDU/CSU 13,0 · Grüne 11,8 · SPD 11,3 %</td></tr><tr><th scope="row">70 Jahre und älter</th><td>CDU/CSU 41,4 · SPD 24,9 · AfD 11,5 %</td></tr><tr><th scope="row">Junge Frauen / junge Männer</th><td>Linke 37,1 / 17,6 % · AfD 12,6 / 25,2 %</td></tr><tr><th scope="row">Alle Altersgruppen</th><td>AfD: Frauen 16,7 % / Männer 25,1 %</td></tr></tbody></table>
+    <p>Erklärungen sind <b>Hypothesen</b> (Mediennutzung, Bildung/Arbeit, Themen wie Gleichstellung, Migration). Shell 2024: jeder vierte männliche Jugendliche ordnet sich rechts ein, 11 % der weiblichen. <b>Brexit 2016:</b> 51,9 % für »Leave« – die Jungen wollten mehrheitlich bleiben, die Alten mehrheitlich gehen.</p>
+  </div>
+
+  <div class="zf-teil" style="--zt:var(--z-warm-t);--ztt:var(--z-warm-t)">
+    <h2>7 · Die 5-%-Hürde beurteilen (Station 5)</h2>
+    <p>2025 erhielten BSW (4,98 %) und FDP (4,3 %) zusammen über 4,5 Millionen Zweitstimmen und keinen Sitz. Mit der Hürde hatten Union und SPD eine Mehrheit; ohne Hürde nicht.</p>
+    <table class="zf-wahl zf-tab"><colgroup><col style="width:18%"><col style="width:36%"><col style="width:46%"></colgroup><thead><tr><th scope="col">Kriterium</th><th scope="col">Prüffrage</th><th scope="col">Beleg</th></tr></thead><tbody><tr><th scope="row">Effektivität</th><td>Kann ein Parlament stabile Mehrheiten bilden?</td><td>Weimar 1932; Koalitionsrechner mit und ohne Hürde</td></tr><tr><th scope="row">Repräsentation</th><td>Wie viele Stimmen bleiben ohne Sitz?</td><td>2025 über 13 % der Zweitstimmen (BSW, FDP, Sonstige)</td></tr><tr><th scope="row">Gleichheit der Wahl</th><td>Zählt jede Stimme gleich?</td><td>Art. 38 GG; Grundmandatsklausel; Ausnahme SSW</td></tr><tr><th scope="row">Alternativen</th><td>Welche Folgen hätte jede Variante?</td><td>3-%-Hürde, Ersatzstimme, keine Hürde</td></tr></tbody></table>
+    <div class="zf-zwei"><div><h3>Für die Hürde wird angeführt</h3><ul><li><b>Stabile Mehrheiten:</b> Weniger Fraktionen machen es leichter, eine Regierung mit eigener Mehrheit zu bilden.</li><li><b>Lehre aus Weimar:</b> Ohne Sperrklausel zogen viele kleine Parteien ins Parlament. Umstritten: NSDAP und KPD wären auch mit einer Hürde eingezogen.</li><li><b>Arbeitsfähiges Parlament:</b> Das BVerfG hält die Sperrklausel beim Bundestag für zulässig, weil er eine Regierung wählen und tragen muss (Urteil vom 30. Juli 2024).</li><li><b>Klare Verantwortung:</b> leichter zu erkennen, wer regiert.</li></ul></div>
+    <div><h3>Gegen die Hürde wird angeführt</h3><ul><li><b>Viele Stimmen ohne Sitz:</b> Wer eine Partei unter 5 % wählt, ist im Bundestag nicht vertreten.</li><li><b>Gleichheit der Wahl:</b> Jede Stimme soll den gleichen Erfolg haben können (Art. 38 Abs. 1 GG).</li><li><b>Es geht auch ohne:</b> Für die Europawahl hat das BVerfG Hürden gekippt (2011, 2014) – für den Bundestag gilt das ausdrücklich nicht.</li><li><b>Neue Parteien haben es schwer:</b> Sorge um eine »verschenkte Stimme«; Alternative in der Debatte: Ersatzstimme.</li></ul></div></div>
+  </div>
+
+  <div class="zf-teil" style="--zt:var(--z-lila-t);--ztt:var(--z-lila-t)">
+    <h2>8 · Europawahl: Regeln im Vergleich (Station 6)</h2>
+    <table class="zf-wahl zf-tab"><thead><tr><th scope="col">Merkmal</th><th scope="col">Bundestagswahl 2025</th><th scope="col">Europawahl 2024 in Deutschland</th></tr></thead><tbody><tr><th scope="row">Wahltag · Wahlperiode</th><td>23. Februar 2025 · 4 Jahre</td><td>9. Juni 2024 (EU-weit 6. bis 9. Juni) · 5 Jahre</td></tr><tr><th scope="row">Wählen ab</th><td>18 Jahren</td><td>16 Jahren (erstmals 2024)</td></tr><tr><th scope="row">Stimmen</th><td>zwei: Erststimme und Zweitstimme</td><td>eine Stimme für eine Liste (Bundesliste oder Landesliste einer Partei)</td></tr><tr><th scope="row">Sitze</th><td>630</td><td>96 der 720 Sitze; je Land 6 bis 96 (degressive Proportionalität)</td></tr><tr><th scope="row">Verteilung</th><td>Sainte-Laguë/Schepers</td><td>Sainte-Laguë/Schepers, bundesweit</td></tr><tr><th scope="row">Sperrklausel</th><td>5 % (oder drei Direktmandate)</td><td>keine – das Bundesverfassungsgericht hat 5 % (2011) und 3 % (2014) gekippt</td></tr><tr><th scope="row">Wahlbeteiligung</th><td>82,5 %</td><td>64,7 %</td></tr><tr><th scope="row">Wer regiert danach?</th><td>Der Bundestag wählt die Kanzlerin oder den Kanzler.</td><td>Das EP wählt die Präsidentin oder den Präsidenten der Kommission – auf Vorschlag des Europäischen Rates (Art. 17 Abs. 7 EUV).</td></tr></tbody></table>
+    <p class="hinweis">Die Regeln für die Wahl legt jedes Land selbst fest, im Rahmen des EU-Direktwahlakts – deshalb gelten in anderen Ländern zum Teil andere Wahlalter und Hürden.</p>
+  </div>
+
+  <div class="zf-teil" style="--zt:var(--z-lila-t);--ztt:var(--z-lila-t)">
+    <h2>9 · Ergebnis 2024, Fraktionen und was das Parlament tut</h2>
+    <p><b>Deutschland 2024 (96 Sitze, 15 Parteien):</b> CDU 23,7 % (23 Sitze) · AfD 15,9 % (15) · SPD 13,9 % (14) · GRÜNE 11,9 % (12) · CSU 6,3 % (6) · BSW 6,2 % (6) · FDP 5,2 % (5) · Die Linke 2,7 % (3) · FREIE WÄHLER 2,7 % (3) · Volt 2,6 % (3) · Die PARTEI 1,9 % (2) · Tierschutzpartei, ÖDP, FAMILIE, PdF je 1 Sitz.</p>
+    <p><b>Fraktionen:</b> Im EP sitzen die Abgeordneten nicht nach Ländern, sondern in Fraktionen – Parteien aus vielen Ländern mit ähnlichen Zielen. EVP 188 (CDU, CSU) · S&amp;D 136 (SPD) · PfE 84 · EKR 78 · Renew 77 (FDP, FREIE WÄHLER) · Grüne/EFA 53 (GRÜNE, Volt) · Die Linke 46 · ESN 25 (AfD) · fraktionslos 33 (u. a. BSW). Mehrheit der Mitglieder: <b>361 von 720</b>; Ursula von der Leyen wurde am 18. Juli 2024 mit 401 Stimmen gewählt.</p>
+    <table class="zf-wahl zf-tab"><thead><tr><th scope="col">Das Parlament …</th><th scope="col">Was das heißt</th></tr></thead><tbody><tr><th scope="row">beschließt Gesetze</th><td>Im ordentlichen Gesetzgebungsverfahren entscheidet das EP gleichberechtigt mit dem Rat der EU (den Ministerinnen und Ministern der Länder). Den Vorschlag macht die Kommission; das EP kann sie dazu auffordern (Art. 225 AEUV).</td></tr><tr><th scope="row">beschließt den Haushalt</th><td>den jährlichen Haushalt der EU, gemeinsam mit dem Rat</td></tr><tr><th scope="row">wählt und kontrolliert die Kommission</th><td>Es wählt die Präsidentin oder den Präsidenten der Kommission, stimmt der ganzen Kommission zu und kann ihr mit Zweidrittelmehrheit das Misstrauen aussprechen.</td></tr><tr><th scope="row">kann nicht</th><td>Anders als der Bundestag kann das EP keine eigenen Gesetzentwürfe einbringen. Und es gibt keine Regierung, die von einer festen Koalition im Parlament getragen wird.</td></tr></tbody></table>
+  </div>
+
+  <div class="zf-teil" style="--zt:var(--z-lila-t);--ztt:var(--z-lila-t)">
+    <h2>10 · Braucht die Europawahl in Deutschland eine Hürde?</h2>
+    <div class="zf-zwei"><div><h3>Dafür wird angeführt</h3><ul><li>Viele Kleinstparteien erschweren die Arbeit im Parlament und in den Fraktionen.</li><li>Die EU selbst hat 2018 eine Hürde von mindestens 2 % für große Länder beschlossen (noch nicht in Kraft; ob sie 2029 gilt, ist offen – Stand November 2026).</li><li>Auch das EP muss Mehrheiten finden, etwa für die Wahl der Kommission.</li></ul></div>
+    <div><h3>Dagegen wird angeführt</h3><ul><li>Jede Stimme soll gleich zählen (Wahlgleichheit, Chancengleichheit der Parteien).</li><li>Das Bundesverfassungsgericht (2011, 2014): Anders als der Bundestag muss das EP keine stabile Regierung tragen.</li><li>Mit 5 % hätten 2024 acht Parteien ihre Sitze verloren – gewählt von rund 13 % der Wählerinnen und Wähler.</li></ul></div></div>
+  </div>
+</section>
+    <section class="seite zf-schutz">
+<div class="zf-teil" style="--zt:#333;--ztt:#111">
+    <h2>So ist die Klassenarbeit aufgebaut: drei Aufgaben, drei Anforderungsbereiche</h2>
+    <div class="zf-afb">
+      <div class="i"><h3>I · Wiedergeben</h3><b>nennen, beschreiben, darstellen:</b> geordnet und mit Fachbegriffen wiedergeben – ohne eigene Bewertung.</div>
+      <div class="ii"><h3>II · Einordnen</h3><b>erklären, erläutern, analysieren:</b> in einen Zusammenhang stellen, begründen, mit Beispiel oder Material belegen.</div>
+      <div class="iii"><h3>III · Urteilen</h3><b>beurteilen</b> = Sachurteil: Was bewirkt es, stimmt es? – <b>bewerten, Stellung nehmen</b> = Werturteil: Was ist mir wichtiger, und warum? Immer mit Gegenargument.</div>
+    </div>
+    <div class="zf-zeit" role="img" aria-label="90 Minuten: 10 Minuten lesen, 15 Minuten Aufgabe 1, 30 Minuten Aufgabe 2, 30 Minuten Aufgabe 3, 5 Minuten durchlesen.">
+      <span class="l" style="flex:10">Lesen 10′</span><span class="z1" style="flex:15">Aufgabe 1 · 15′</span><span class="z2" style="flex:30">Aufgabe 2 · 30′</span><span class="z3" style="flex:30">Aufgabe 3 · 30′</span><span class="d" style="flex:5">5′</span>
+    </div>
+    <p class="hinweis">90 Minuten: erst alles lesen, dann der Reihe nach; am Ende 5 Minuten durchlesen. Bewertet wird die Qualität deiner Begründung, nicht deine Meinung.</p>
+  </div>
+  <div class="zf-teil" style="--zt:var(--z-blau-t);--ztt:var(--z-blau-t)">
+    <h2>Sachurteil und Werturteil trennen</h2>
+    <p><b>Sachurteil:</b> eine Aussage, die sich mit Belegen prüfen lässt – was ist der Fall, welche Folgen hat etwas? Wirkung an Kriterien prüfen (Effektivität, Repräsentation, Gleichheit der Wahl, Legitimität). Beispiel: »Ohne 5-%-Hürde hätten Union und SPD 2025 keine Mehrheit.« <b>Werturteil:</b> eine Bewertung nach offengelegten Maßstäben – Kriterien gewichten und begründen, was wichtiger sein soll. Beispiel: »Die Hürde sollte auf 3 % sinken« – braucht Gründe.</p>
+    <p><b>Immer:</b> Behauptung → Beleg (Zahl, Artikel, Programmseite) → Erklärung → Gegenargument → Abwägung.</p>
+    <p class="hinweis"><b>Satzbausteine:</b> Sachurteil: »Gemessen am Kriterium … wirkt die Hürde …, wie das Beispiel … zeigt (Beleg).« · Abwägung: »Dem steht gegenüber, dass … Daher wiegt … schwerer, weil …« · Werturteil: »Ich halte die Hürde für …, weil mir … wichtiger ist als …; eine Alternative wäre …«</p>
+  </div>
+<div class="zf-teil" style="--zt:var(--z-warm-t);--ztt:var(--z-warm-t)">
     <h2>Eine begründete Wahlentscheidung treffen</h2>
     <ol class="zf-weg" aria-label="Fünf Schritte zur begründeten Wahlentscheidung">
       <li><b>1 Kriterien</b>zwei oder drei Themen oder Werte, die dir wichtig sind – und warum</li>
@@ -354,9 +380,7 @@
       <li><b>5 Fazit</b>Entscheidung, die aus der Abwägung folgt</li>
     </ol>
     <p class="zf-vermerk"><b>Hinweis:</b> Alle zur Wahl zugelassenen Parteien sind wählbar. Die AfD ist vom Bundesamt für Verfassungsschutz als rechtsextremistischer Verdachtsfall eingestuft (Stand: November 2026). Bewertet wird nur die Qualität deiner Argumentation – nicht, welche Partei du wählst.</p>
-  </div>
-
-  <div class="zf-teil" style="--zt:#999;--ztt:#111">
+  </div><div class="zf-teil" style="--zt:#999;--ztt:#111">
     <h2>Typische Fehler</h2>
     <ul class="zf-fehler">
       <li>Bei »beschreiben« schon bewerten – oder bei »Stellung nehmen« nur beschreiben.</li>
@@ -366,9 +390,8 @@
       <li>Ein Urteil ohne Gegenargument – oder ein Fazit, das nicht aus der Abwägung folgt.</li>
       <li>Zu lange an einer Aufgabe bleiben: Zeitvorschlag im Blick behalten.</li>
     </ul>
-    <p class="hinweis"><b>Dein Plan:</b> <a href="#i">Ich-kann-Liste</a> ankreuzen → Lücken in der <a href="#a1">Wiederholung</a> üben → <a href="#p">Probeklausur</a> in 90 Minuten → erst dann mit dem Erwartungshorizont vergleichen.</p>
-  </div>
-</section>
+    <p class="hinweis"><b>Dein Plan:</b> <a href="#i">Ich-kann-Liste</a> ankreuzen → Lücken in der <a href="#a1">Wiederholung</a> üben → <a href="#p">Probeklausur</a> in 90 Minuten → danach mit deiner Lehrkraft vergleichen.</p>
+  </div></section>
   </section>
   <div id="abtuer"></div>
   <div class="ab-fuss nodruck" id="abfuss"></div>
@@ -530,7 +553,7 @@ PW.wdhEnde(document.getElementById('wdh-ende-liste'));
   "extra": true,
   "kicker": "Zusammenfassung",
   "regform": "zum Abheften",
-  "form": "Zum Abheften · 2 Seiten A4",
+  "form": "Zum Abheften · 5 Seiten A4",
   "frei": "wenn",
   "wenn": "KAALLE",
   "wennKurz": "öffnet nach den fünf Bereichen",
