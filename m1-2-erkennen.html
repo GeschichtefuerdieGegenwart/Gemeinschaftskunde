@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="de" data-einheit="gk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>M1.2 · Funktionen erkennen · GK-Labor</title>
+<!-- Erzeugt aus parteien-wahlen/station2.html (GK-Labor v18) mit tools/umbau.py – Inhalte dort, Rahmen in assets/blatt/. -->
+<script>document.documentElement.className += " js";</script>
+<link rel="stylesheet" href="assets/blatt/basis.css">
+<link rel="stylesheet" href="assets/blatt/ab.css">
+<link rel="stylesheet" href="assets/blatt/werkstatt-blatt.css">
+<link rel="stylesheet" href="assets/blatt/druck-blatt.css">
+<link rel="stylesheet" href="assets/blatt/blatt.css">
+</head>
+<body>
+<header class="ab-kopf"><div class="ab-kopf-in" id="abkopf"><span class="ab-reiter">M1.2</span><div class="ab-ktitel">Funktionen erkennen<small>GK-Labor · Arbeitsblatt</small></div><a class="btn" href="index.html">← Hefter</a></div></header>
+<div class="ab-rahmen"><nav class="ab-reg" id="abreg" aria-label="Alle Arbeitsaufträge"></nav>
+<main id="main" tabindex="-1">
+  <div id="abblattkopf"></div>
+  <section class="ab-teil ab-start" data-seite="start" aria-label="Deckblatt">
+    <div class="ab-deck"><div class="ab-deck__text">
+      <p class="ab-kicker">M1.2 · Station 2 von 6 · 20 Minuten</p>
+      <h1>Funktionen erkennen</h1>
+      <p class="ab-leitfrage">Welche Funktion erfüllt eine Partei hier gerade?</p>
+      <div class="ab-reihe nodruck" data-deck="knoepfe"></div></div>
+    <figure class="ab-titelbild"><img src="media/m1-bundestag.jpg" alt="Schaubild: Sitzverteilung im 21. Deutschen Bundestag mit 630 Sitzen, nach Fraktionen und mit Frauenanteil." width="1260" height="540"><figcaption>Titelbild des Moduls M1: aus dem Material (Politik_Halbjahr_1, S. 22); Urheber dort nicht genannt – noch offen.</figcaption></figure></div>
+    <div class="ab-paar"><div><h3>Darum geht es</h3><p>Zwölf Beispiele aus dem Wahljahr 2025 im Fächer, zufällige Reihenfolge. Oft passt mehr als eine Funktion; du bekommst eine Begründung, keine Punkte. Die Funktionen stehen im Merkzettel oben rechts.</p></div>
+    <div><h3>So arbeitest du mit diesem Blatt</h3><ul><li>Links stehen alle Arbeitsaufträge. Du siehst immer, wo du bist und was noch kommt.</li><li>Jeder Auftrag ist ein Blatt. Du scrollst von oben nach unten.</li><li>Oben rechts sicherst du deinen Stand als Datei. So geht nichts verloren, auch wenn du das Gerät wechselst.</li></ul></div></div>
+    <h3 class="ab-deck-h">So läuft dieses Blatt</h3>
+    <div data-deck="ablauf"></div>
+    <div class="gkw ab-deckteil" data-ton="blau">
+      <div class="kz"><div><b>12</b><span>Beispiele</span></div><div><b>11</b><span>Funktionen zur Wahl</span></div><div><b>0</b><span>Punkte – nur Begründungen</span></div></div>
+      <p class="hinweis">Operator <em>erläutern</em> (AFB II): Nenne die Funktion und erkläre am Beispiel, warum sie passt. Die Beispiele sind vereinfacht, aber nicht erfunden: Die Programmaussagen stehen in Station 3 wörtlich mit Seitenzahl.</p>
+    </div>
+  </section>
+  <section class="ab-teil gkw" data-ton="blau" data-seite="a1" aria-label="Auftrag 1: Erst erinnern">
+    <noscript><h2>1 · Erst erinnern</h2></noscript>
+  <section class="karte karte--leise abruf" id="abruf"><noscript><p>Erst erinnern: Was weißt du noch aus der letzten Station?</p></noscript></section>
+  </section>
+  <section class="ab-teil gkw" data-ton="blau" data-seite="a2" aria-label="Auftrag 2: Erst grob: Zu welcher Aufgabe gehört das Beispiel?">
+    <noscript><h2>2 · Erst grob: Zu welcher Aufgabe gehört das Beispiel?</h2></noscript>
+  <section class="karte" id="sortieren-karte">
+    <p class="stimme-frage" style="font-size:1.25rem;margin:0 0 8px">Wird hier etwas beschlossen, umgesetzt, geprüft – oder geht es um Personen?</p>
+    <p>Zieh jedes Beispiel auf eines der vier Felder – mit dem Finger, der Maus oder per Tippen (Beispiel wählen, dann »Hierhin«). Sobald fünf Karten liegen, kannst du einen <strong>Zwischenstand prüfen</strong>. Falsch gelegte legst du mit einem Knopf zurück und versuchst es neu; passende bleiben liegen. Dein Stand bleibt auf diesem Gerät gespeichert. Danach bestimmst du unten zu jedem Beispiel die genaue Funktion.</p>
+    <div id="sortieren"></div>
+  </section>
+  </section>
+  <section class="ab-teil gkw" data-ton="blau" data-seite="a3" aria-label="Auftrag 3: Dann genau: Welche Funktion?">
+    <noscript><h2>3 · Dann genau: Welche Funktion?</h2></noscript>
+  <div class="faecher" data-label="Zwölf Beispiele" id="beispiele-faecher" data-manuell><ul class="faecher-spur" id="beispiele"></ul></div>
+  </section>
+  <section class="ab-teil gkw" data-ton="blau" data-seite="s" aria-label="Nur für dich: Dein Zwischenstand">
+    <noscript><h2>S · Dein Zwischenstand</h2></noscript>
+  <section class="karte karte--leise">
+    <div id="lernstand"></div>
+  </section>
+  </section>
+  <section class="ab-teil gkw" data-ton="blau" data-seite="a4" aria-label="Auftrag 4: Sicherung">
+    <noscript><h2>4 · Sicherung</h2></noscript>
+    <div class="ab-auftrag"><span class="form">Partner, dann Plenum</span><p>Welche Funktion kam am häufigsten vor? Welche fällt dir im Alltag am seltensten auf, und woran könnte das liegen? Notiere zwei Sätze.</p></div>
+  <section class="karte karte--leise">
+  </section>
+  </section>
+  <div id="abtuer"></div>
+  <div class="ab-fuss nodruck" id="abfuss"></div>
+</main></div>
+<div class="ab-unten" id="abunten"></div>
+<div class="gkw" hidden><div class="kopf-innen"></div><div class="fuss-innen"></div></div>
+<div class="gkw" data-ton="blau" id="gkw-fest"></div>
+<noscript><p style="padding:1rem 2rem;max-width:44rem;margin:auto">Ohne JavaScript stehen alle Aufträge untereinander; die Bausteine zum Antippen brauchen JavaScript.</p></noscript>
+<script src="assets/js/daten.js"></script>
+<script src="assets/js/werkstatt.js"></script>
+<script src="assets/js/figuren.js"></script>
+<script src="assets/js/motion.js"></script>
+<script src="assets/js/faecher.js"></script>
+<script src="assets/js/merkzettel.js"></script>
+<script src="assets/js/abruf.js"></script>
+<script src="assets/js/lernstand.js"></script>
+<script src="assets/js/hilfen.js"></script>
+<script src="assets/js/bausteine.js"></script>
+<script src="assets/blatt/links.js"></script>
+<script src="assets/blatt/alt.js"></script>
+<script>
+PW.rahmen('st2', '../'); PW.abrufZeigen(document.getElementById('abruf'), 2); PW.merkzettel('../');
+(function () {
+  if (PW.sortieren) PW.sortieren(document.getElementById('sortieren'), PW.beispiele, PW.aufgaben, PW.funktionen, { schluessel: 'st2-sortierung', danach: function () { document.getElementById('beispiele-faecher').scrollIntoView({ behavior: PW.wenigerBewegung() ? 'auto' : 'smooth', block: 'start' }); } });
+  var box = document.getElementById('beispiele');
+  var name = function (id) { return PW.funktionen.filter(function (f) { return f.id === id; })[0].name; };
+  PW.mischen(PW.beispiele).forEach(function (b, i) {
+    var li = PW.el('li'); var f = PW.el('fieldset', { 'class': 'karte', style: 'margin:0;height:100%' }); li.appendChild(f);
+    f.appendChild(PW.el('legend', { style: 'padding:0 8px;font-family:var(--schrift-titel);font-weight:700;font-size:1.25rem', text: 'Beispiel ' + (i + 1) + ' von 12' }));
+    f.appendChild(PW.el('p', { text: b.text }));
+    f.appendChild(PW.el('p', { 'class': 'klein', text: 'Wähle eine Funktion. Danach kannst du eine zweite prüfen.' }));
+    var ul = PW.el('ul', { 'class': 'optionen', style: 'grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px' });
+    var r = PW.el('div', { 'class': 'rueck', 'aria-live': 'polite' });
+    PW.funktionen.forEach(function (fn) {
+      var inp = PW.el('input', { type: 'checkbox', name: 'b' + i, value: fn.id });
+      var lab = PW.el('label', { 'class': 'opt', style: 'min-height:46px;grid-template-columns:32px 1fr;padding:4px 10px' }, [inp, PW.el('span', { 'class': 'kreis', 'aria-hidden': 'true', style: 'width:26px;height:26px' }), PW.el('span', { 'class': 'klein', text: fn.name })]);
+      inp.addEventListener('change', function () {
+        if (!inp.checked) { lab.classList.remove('ist-richtig', 'ist-falsch'); return; }
+        if (b.richtig.indexOf(fn.id) >= 0) { lab.classList.add('ist-richtig'); r.className = 'rueck rueck--gut'; r.innerHTML = '<strong>Passt.</strong> ' + b.warum + (b.richtig.length > 1 ? ' Hier passen zwei Funktionen: ' + b.richtig.map(name).join(' und ') + '.' : ''); }
+        else if (b.auch.indexOf(fn.id) >= 0) { lab.classList.add('ist-auch'); r.className = 'rueck rueck--auch'; r.innerHTML = '<strong>Passt auch.</strong> ' + fn.name + ' lässt sich begründen. Am deutlichsten ist aber: ' + b.warum; }
+        else { lab.classList.add('ist-falsch'); r.className = 'rueck rueck--nein'; r.innerHTML = '<strong>Passt nicht.</strong> ' + fn.name + ' heißt: ' + fn.kurz + ' Frag dich: Wer tut hier was, und wozu?'; }
+        PW.notiere(2, 'bsp-' + i, b.richtig.indexOf(fn.id) >= 0 || b.auch.indexOf(fn.id) >= 0, 'Funktion erkennen: ' + b.richtig.map(name).join(' und '));
+      });
+      ul.appendChild(lab);
+    });
+    f.appendChild(ul); f.appendChild(r);
+    PW.hilfen(f, [
+      function () {
+        var kand = b.richtig.concat(b.auch); PW.mischen(PW.funktionen).forEach(function (fn) { if (kand.length < 3 && kand.indexOf(fn.id) < 0) kand.push(fn.id); });
+        var ul2 = PW.el('ul'); PW.mischen(kand).forEach(function (id) { var fn = PW.funktionen.filter(function (x) { return x.id === id; })[0]; ul2.appendChild(PW.el('li', { html: '<strong>' + fn.name + '</strong>: ' + fn.kurz })); });
+        var d = PW.el('div'); d.appendChild(PW.el('p', { text: 'Drei Funktionen kommen in Frage – lies ihre Kurzdefinitionen:' })); d.appendChild(ul2); return d;
+      },
+      function () { var fn = PW.funktionen.filter(function (x) { return x.id === b.richtig[0]; })[0]; var auf = PW.aufgaben.filter(function (x) { return x.id === fn.aufgabe; })[0]; return '<p>Die gesuchte Funktion gehört zur Aufgabe <strong>' + auf.name + '</strong> (' + auf.text + ') Frag dich: Wer tut hier was – und wozu?</p>'; },
+      function () { var t = b.warum; PW.funktionen.forEach(function (fn) { t = t.split(fn.name).join('…'); }); return '<p>Die Begründung, ohne den Namen der Funktion: ' + t + '</p><p>Welche Funktion heißt so? Lege dich fest.</p>'; }
+    ], { station: 2, id: 'bsp-' + i });
+    box.appendChild(li);
+  });
+  PW.faecher(document.getElementById('beispiele-faecher'));
+  PW.lernstandAnzeigen(2);
+})();
+</script>
+<script src="assets/blatt/hefter-daten.js"></script>
+<script src="assets/blatt/ab.js"></script>
+<script src="assets/blatt/blatt.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var FERTIG = {};
+  var ALT = function () { return !!(PW.lies('fertig', {}) || {})['st2']; };   /* wer die Station in v18 abgeschlossen hat, hat das Blatt fertig */
+  var WENN = {};
+  var AUF = [
+ {
+  "kurz": "Erst erinnern",
+  "name": "Erst erinnern",
+  "form": "Ohne Gerät",
+  "id": "a1",
+  "nr": "1"
+ },
+ {
+  "kurz": "Erst grob",
+  "name": "Erst grob: Zu welcher Aufgabe gehört das Beispiel?",
+  "form": "Partner, dann Plenum",
+  "id": "a2",
+  "nr": "2"
+ },
+ {
+  "kurz": "Dann genau",
+  "name": "Dann genau: Welche Funktion?",
+  "form": "Partner, dann Plenum",
+  "id": "a3",
+  "nr": "3"
+ },
+ {
+  "kurz": "Zwischenstand",
+  "name": "Dein Zwischenstand",
+  "nr": "S",
+  "extra": true,
+  "kicker": "Nur für dich",
+  "regform": "nur für dich",
+  "id": "s",
+  "min": 0,
+  "form": "Nur für dich"
+ },
+ {
+  "kurz": "Sicherung",
+  "name": "Sicherung",
+  "form": "Partner, dann Plenum",
+  "id": "a4",
+  "nr": "4"
+ }
+];
+  AUF.forEach(function (a) { a.fertig = FERTIG[a.id] || (typeof ALT === "function" && !a.extra ? ALT : null); if (a.wenn) a.wenn = WENN[a.wenn]; });
+  window.BLATT = GKSeite({ nr: "M1.2", titel: "Funktionen erkennen", minuten: 20, auftraege: AUF, merkzettel: true, schluessel: "^$", loesch: {"modul": "m1", "blaetter": ["M1", "M1.1", "M1.2", "M1.3", "M1.4", "M1.5", "M1.6"], "text": "Alle Antworten in Modul 1 (Auftakt und Stationen 1 bis 6) werden auf diesem Gerät entfernt – die Stationen teilen sich Lernstand und Merkzettel. Klassenergebnisse (Klassenwahl, Wahlarchiv, Klassenbild) und die anderen Module bleiben."}, lizenz: "© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt" });
+  /* Die Station gilt wie bisher als erledigt (pw:fertig), wenn alle Aufträge fertig sind */
+  var pruef = function () { if (AUF.filter(function (a) { return !a.extra; }).every(function (a) { return BLATT.erledigt(a.id); })) PW.stationFertig(2); };
+  document.addEventListener('click', function () { setTimeout(pruef, 0); }); pruef();
+})();
+</script>
+</body>
+</html>

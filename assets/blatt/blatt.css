@@ -1,0 +1,153 @@
+/* GK-Labor · Arbeitsblatt · was die Bausteine der Stunden (unter .gkw) im Blatt brauchen. Der Rahmen steht in ab.css. */
+:where(.ab-start,.ab-zu,.ab-fenster,.ab-unten,#abblattkopf) :where(*){margin:0;padding:0}
+.ab-start ul{padding-left:1.3em;display:grid;gap:6px}
+.ab-paar p + p{margin-top:12px}
+.ab-paar h3,.ab-deck-h{font-family:var(--schrift-titel);font-weight:600}
+.ab-deck-h{margin-top:8px}
+/* Auftragskasten wie k-kasten im Vorbild: Raster mit 12 px Abstand, Kopfzeile 700 1rem/1.3 */
+.ab-auftrag{display:grid;gap:12px}
+.ab-auftrag > *{margin:0}
+.ab-auftrag .form{color:var(--farbplatte);font:700 1rem/1.3 var(--schrift-text);margin:0}
+.ab-auftrag p{margin:0;max-width:var(--zeilenlaenge)}
+.ab-auftrag strong{color:inherit}
+.gkw{color:var(--tinte)}
+.gkw > p,.gkw > ul,.gkw > ol,.gkw > dl{max-width:var(--zeilenlaenge)}
+.gkw > :first-child{margin-top:0}
+.gkw h3{margin-top:1.6em}
+.gkw .ab-auftrag{margin:0 0 24px}
+html:not(.js) .ab-fuss,html:not(.js) #abtuer{display:none}
+html:not(.js) #main > section{margin-bottom:48px}
+
+/* ---------- Zusammenfassung im Blatt (.gkz, aus assets/css/druck.css): am Bildschirm in der Schrift des Blatts, im Druck zwei Seiten A4 wie bisher ---------- */
+.gkz{font-family:var(--schrift-text);font-size:1rem;line-height:1.45;color:var(--tinte)}
+.gkz .seite{width:auto;min-height:0;margin:0 0 24px;padding:0;background:transparent;box-shadow:none}
+.gkz .seite + .seite{border-top:2px dashed var(--stahl);padding-top:24px}
+.gkz > .nodruck{margin:0 0 16px}
+@media print{
+  .gkz{font:10.5pt/1.38 Arial,Helvetica,sans-serif}
+  .gkz .seite{margin:0;padding:0;border:0;break-after:page}
+  .gkz .seite + .seite{border:0;padding-top:0}
+  .gkz .seite:last-child{break-after:auto}
+  .nodruck{display:none!important}
+}
+.ab-deck__text{justify-items:stretch}   /* wie k-deckblatt__text im Vorbild */
+
+/* ---------- Übertragung der übrigen Module (Schritt 5): Abschnitte der alten Seiten im Blatt ---------- */
+.gkw[hidden]{display:none}
+.ab-teil.gkw > .karte,.ab-teil.gkw > .schritt,.ab-teil.gkw > section{border:0;padding:0;margin:0;background:none;box-shadow:none;max-width:none}
+.ab-teil.gkw > .karte::before,.ab-teil.gkw > .karte::after{content:none}
+.ab-teil.gkw > .abruf > h2:first-child{display:none}        /* »Erst erinnern« steht im Auftragskopf */
+.ab-teil.gkw > * > :first-child{margin-top:0}
+.ab-deckteil{margin-top:28px;display:grid;gap:20px}
+.ab-deckteil > *{margin:0}
+.ab-deckteil .kz{display:flex;flex-wrap:wrap;gap:12px 28px}
+.ab-teil .btn{text-decoration:none}
+@media (min-width:1024px){body.merk-auf .ab-rahmen{margin-right:440px}}
+body.detail-auf{overflow:hidden}
+#gkw-lose .merk{z-index:60}
+.gkw input[type=number],.gkw input[type=text],.gkw select{min-height:44px}   /* Zielgröße 44 px auch für Zahlenfelder */
+#gkw-fest:empty{display:none}
+
+/* ---------- Modul G: neu gebaute Blätter (.gkg) – Material, Tabellen, Felder ---------- */
+.gkg{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;color:var(--tinte)}
+.gkg > *{margin:0;min-width:0}
+.gkg > p,.gkg > ul,.gkg > ol{max-width:var(--zeilenlaenge)}
+.gkg h2{font:600 clamp(1.25rem,1.12rem + .5vw,1.55rem)/1.22 var(--schrift-titel);margin-top:14px;text-wrap:balance}
+.gkg ul,.gkg ol{padding-left:1.3em;display:grid;gap:6px}
+.gkg .ab-auftrag{margin:0 0 6px}
+.ab-lab{display:block;font-weight:700;margin-top:6px}
+.gkg .ab-linien{margin-top:0}
+.ab-tabroll{overflow-x:auto;max-width:100%}
+.ab-tab{width:100%;border-collapse:collapse;font-size:1rem;line-height:1.45}
+.ab-tab th,.ab-tab td{border:2px solid var(--stahl);padding:8px 10px;vertical-align:top;text-align:left}
+.ab-tab thead th,.ab-tab thead td{background:var(--hauch);font-weight:700}
+.ab-tab tbody th{font-weight:700;background:var(--hell)}
+.ab-tab p{margin:0}
+.ab-tab p + p{margin-top:6px}
+.ab-tab--feld td{min-width:9rem;padding:4px 6px}
+.ab-tab--feld .ab-linien{border-left:0;min-height:calc(var(--zeile) * 2)}
+.ab-tab .ab-wahl{min-width:4.5rem}
+.ab-mat{display:grid;gap:10px;border:2px solid var(--tinte);border-radius:4px;background:var(--hell);padding:16px 18px;box-shadow:5px 5px 0 0 var(--karton)}
+.ab-mat > *{margin:0;max-width:var(--zeilenlaenge)}
+.ab-mat > .ab-tabroll{max-width:none}
+.ab-fall{border:2px solid var(--tinte);border-radius:4px;background:var(--blatt)}
+.ab-fall > summary{cursor:pointer;min-height:48px;padding:10px 14px;font:600 1.12rem/1.3 var(--schrift-titel);display:flex;align-items:center;gap:8px}
+.ab-fall[open] > summary{border-bottom:2px solid var(--stahl)}
+.ab-fall > :not(summary){margin:12px 14px;max-width:var(--zeilenlaenge)}
+.ab-fall > .ab-tabroll{max-width:none}
+.ab-karten{display:grid;grid-template-columns:repeat(auto-fill,minmax(17rem,1fr));gap:12px}
+.ab-karte{border:2px solid var(--tinte);border-radius:4px;background:var(--blatt);box-shadow:4px 4px 0 0 var(--farbplatte)}
+.ab-karte > summary{cursor:pointer;min-height:56px;padding:10px 14px;font:600 1.12rem/1.25 var(--schrift-titel);display:flex;align-items:center}
+.ab-karte > p{margin:0;padding:10px 14px 14px;border-top:2px solid var(--stahl)}
+.ab-linie{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px 10px}
+.ab-linie legend{font-weight:700;padding:0;margin-bottom:8px}
+.ab-linie label{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:4px 14px;border:2px solid var(--stahl);border-radius:4px;background:var(--blatt);cursor:pointer}
+.ab-linie label:has(input:checked){border-color:var(--tinte);background:var(--hauch);font-weight:700}
+.ab-linie input,.ab-check input{width:22px;height:22px;accent-color:var(--tief);flex:none}
+.ab-check{list-style:none;padding:0!important}
+.ab-check label{display:flex;gap:10px;align-items:flex-start;min-height:44px;padding:6px 0;cursor:pointer}
+.ab-saetze{display:grid;gap:18px}
+.ab-saetze li{display:grid;gap:8px}
+.ab-saetze p{margin:0}
+.ab-frage{font:italic 600 clamp(1.3rem,1.1rem + .8vw,1.7rem)/1.25 var(--schrift-stimme);color:var(--tief);text-wrap:balance}
+.ab-treppe{list-style:none;padding:0!important;display:grid;gap:8px}
+.ab-treppe li{border-left:6px solid var(--tief);background:var(--hell);padding:10px 14px}
+.ab-treppe li:nth-child(2){margin-left:1.5rem}.ab-treppe li:nth-child(3){margin-left:3rem}
+.ab-treppe strong{display:block}
+.ab-vier{margin:10px 0 0;padding-left:1.3em;display:grid;gap:6px}
+.ab-scan{margin:0}
+.ab-scan img{display:block;width:100%;height:auto;border:2px solid var(--tinte);background:#FFFFFF}
+.ab-scan figcaption,.ab-qr figcaption{font-size:1rem;line-height:1.45;color:var(--leise);margin-top:6px}
+.ab-qr{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center}
+.ab-qr img{width:180px;height:180px;border:2px solid var(--tinte);background:#FFFFFF}
+.ab-offen{border:2px dashed var(--stahl);border-radius:4px;padding:10px 14px;font-size:1rem;line-height:1.45;max-width:var(--zeilenlaenge)}
+.gkg .ab-zwei{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@container (max-width:36rem){.gkg .ab-zwei{grid-template-columns:1fr}.ab-treppe li:nth-child(n){margin-left:0}}
+[data-deck=ablauf]{overflow-x:auto}
+.gkw input[type=range]{min-height:44px}
+@media print{body:has(#main > section.eigenkopf:not([hidden])) #abblattkopf{display:none}}   /* Probeklausur: Sie bringt ihren eigenen Kopf mit (Name, Klasse, Datum) */
+.ab-tabroll{position:relative}
+/* Druckblätter (.gkz: Zusammenfassungen, Ich-kann-Liste): im Druck nur die Überschrift, damit die Seitenzahl der Vorlage hält */
+@media print{
+  body:has(#main > section.gkz:not([hidden])) #abblattkopf .ab-zeile,
+  body:has(#main > section.gkz:not([hidden])) .ab-akopf .ab-nr,
+  body:has(#main > section.gkz:not([hidden])) .ab-akopf .ab-kicker,
+  body:has(#main > section.gkz:not([hidden])) .ab-akopf .ab-meta{display:none}
+  body:has(#main > section.gkz:not([hidden])) .ab-akopf{margin:0 0 4pt;padding:0;border:0;display:block}
+  body:has(#main > section.gkz:not([hidden])) .ab-akopf .ab-titel{font:700 15pt/1.2 Arial,Helvetica,sans-serif;margin:0}
+}
+
+/* ---------- Reiter der Blätter eines Moduls im Register (M1: 1 · 1.1 … 1.6), zum Auf- und Zuklappen ---------- */
+.ab-mod{display:grid;gap:6px}
+.ab-modblatt{border:2px solid var(--stahl);border-radius:4px;background:transparent}
+.ab-modblatt.ich{border-color:var(--tinte);background:rgba(255,255,255,.35)}
+.ab-modblatt h2{margin:0;font:inherit}
+.ab-modtab{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;min-height:48px;padding:6px 10px;border:0;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer;touch-action:manipulation}
+.ab-modnr{min-width:2.5rem;text-align:center;background:var(--tief);color:#FFFFFF;font:700 1rem/1 var(--schrift-titel);padding:7px 6px;border-radius:4px}
+.ab-modblatt.fertig:not(.ich) .ab-modnr{background:var(--ok)}
+.ab-modname{display:grid;gap:1px;min-width:0}
+.ab-modname b{font-size:1.02rem;line-height:1.25}
+.ab-modname .ab-st{font-size:1rem;line-height:1.2;color:var(--leise)}
+.ab-modblatt.fertig .ab-modname .ab-st{color:#1F4A24;font-weight:700}
+.ab-modpfeil{font:700 1.4rem/1 var(--schrift-titel);width:1.4rem;text-align:center}
+.ab-modblatt > ol{padding:2px 4px 6px!important;border-top:2px solid var(--stahl)}
+.ab-modblatt.ich > ol{border-top-color:var(--tinte)}
+.ab-modlink{display:grid;grid-template-columns:38px minmax(0,1fr);gap:10px;align-items:center;min-height:48px;padding:5px 10px;border:2px solid transparent;border-radius:4px;color:inherit;text-decoration:none;line-height:1.25;touch-action:manipulation}
+.ab-modlink .ab-nr{background:transparent;box-shadow:inset 0 0 0 2px var(--stahl)}
+@media (hover:hover) and (pointer:fine){.ab-modlink:hover,.ab-modtab:hover{background:rgba(255,255,255,.5)}}
+@media (max-width:980px){
+  .ab-mod{display:flex;gap:6px;align-items:center}
+  .ab-modblatt{flex:none;display:flex;align-items:center;border-width:2px}
+  .ab-modtab{grid-template-columns:auto;min-height:48px;padding:5px 6px}
+  .ab-modname,.ab-modpfeil{display:none}
+  .ab-modblatt > ol{border-top:0;border-left:2px solid var(--stahl);padding:0 4px!important}
+  .ab-modlink{grid-template-columns:34px;padding:5px 6px}
+  .ab-modlink > span:last-child{display:none}
+}
+@media (min-width:981px){
+  .ab-rahmen.schmal .ab-modname,.ab-rahmen.schmal .ab-modpfeil,.ab-rahmen.schmal .ab-modlink > span:last-child{display:none}
+  .ab-rahmen.schmal .ab-modtab{grid-template-columns:auto;justify-content:center;padding:6px 2px}
+  .ab-rahmen.schmal .ab-modnr{min-width:2.2rem;padding:7px 3px}
+  .ab-rahmen.schmal .ab-modlink{grid-template-columns:38px;justify-content:center;padding:5px 2px}
+  .ab-rahmen.schmal .ab-modblatt > ol{padding:2px 0 6px!important}
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="de" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GK-Labor · Gemeinschaftskunde J1</title>
+<meta name="description" content="GK-Labor für Gemeinschaftskunde J1 (BPE 2.1/2.2): Parteien und Wahlen, Verbände, Medien, Entscheidung und Kontrolle in Deutschland und der EU, Gefährdungen der Demokratie.">
+<script>try{var a=localStorage.getItem("pw:ansicht");if(a){a=JSON.parse(a);if(a==="hell"||a==="dunkel"||a==="beamer")document.documentElement.setAttribute("data-ansicht",a)}}catch(e){}</script>
+<link rel="stylesheet" href="assets/css/werkstatt.css">
+</head>
+<body data-ton="warm" class="labor-seite">
+<header class="kopf"><div class="kopf-innen"></div></header>
+<main id="inhalt" class="start">
+  <section class="auftakt hs-kopf">
+    <p class="hs-dach">GK-Labor · Gemeinschaftskunde J1 · 1. Halbjahr</p>
+    <h1 class="grundfrage">Was braucht eine Demokratie, <span class="akzent">um nicht zu scheitern?</span></h1>
+  </section>
+
+  <div id="halbjahr" class="hj"></div>
+  <noscript>
+    <ul class="hj-ohne">
+      <li>Grundlagen – drei Stunden auf Papier</li>
+      <li><a href="parteien.html">Modul 1 · Parteien und Wahlen</a></li>
+      <li><a href="klassenarbeit/index.html">Klassenarbeit · Wiederholung</a></li>
+      <li><a href="verbaende.html">Modul 2 · Verbände und Lobbyismus</a></li>
+      <li>Modul 3 · Medien · Modul 4 · Deutschland und die EU · Modul 5 · Gefährdungen der Demokratie · Bilanz – geplant</li>
+      <li><a href="zusammenfassungen.html">Zusammenfassungen</a></li>
+    </ul>
+  </noscript>
+
+  <p class="hs-fuss">Nach dem Bildungsplan, BPE 2.1 und 2.2. Im zweiten Halbjahr prüft ihr eure Antworten an der Weimarer Republik.</p>
+
+  <details class="hs-hypo">
+    <summary>Eure Antwort sammeln: Was braucht eine Demokratie?</summary>
+    <label class="klein vh-label" for="hypo">Je Zeile eine Bedingung – nach jeder Einheit eine neue. Bleibt auf diesem Gerät.</label>
+    <textarea id="hypo" class="schreibfeld" rows="4" placeholder="Zum Beispiel: Parteien, die Interessen bündeln …"></textarea>
+    <p class="hs-hypo-akt"><button type="button" class="knopf knopf--leise" id="hypo-datei">Als Textdatei sichern</button> <span class="klein" id="hypo-status" aria-live="polite"></span></p>
+  </details>
+</main>
+<footer class="fuss"><div class="fuss-innen"></div>
+    <p class="urheberzeile" style="font-size:1rem;opacity:.72;margin-top:1.5rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></footer>
+<script src="assets/js/daten.js"></script>
+<script src="assets/js/werkstatt.js"></script>
+<script src="assets/js/figuren.js"></script>
+<script src="assets/js/motion.js"></script>
+<script src="assets/js/merkzettel.js"></script>
+<script src="assets/js/lernstand.js"></script>
+<script src="assets/js/halbjahr.js"></script>
+<script>
+document.documentElement.classList.add('js'); document.documentElement.classList.remove('no-js');
+PW.rahmen('labor', ''); PW.merkzettel('');
+HJ.karte(document.getElementById('halbjahr'), '');
+(function () {
+  var t = document.getElementById('hypo'), st = document.getElementById('hypo-status');
+  t.value = PW.lies('hypothesen', '') || '';
+  t.addEventListener('input', function () { PW.merke('hypothesen', t.value); });
+  document.getElementById('hypo-datei').addEventListener('click', function () {
+    var text = 'GK-Labor · ' + HJ.leitfrage + '\n\n' + (t.value || '').trim() + '\n';
+    try {
+      var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
+      a.download = 'GK-Labor_Was-braucht-eine-Demokratie.txt'; document.body.appendChild(a); a.click(); a.remove();
+      st.textContent = 'Gesichert als Textdatei.';
+    } catch (e) { st.textContent = 'Sichern ging nicht – kopiere den Text.'; }
+  });
+})()
+</script>
+</body>
+</html>
